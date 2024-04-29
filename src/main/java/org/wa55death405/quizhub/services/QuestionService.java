@@ -4,11 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.MultipleChoiceAlgorithmeType;
-import org.wa55death405.quizhub.repositories.AnswerAttemptRepository;
-import org.wa55death405.quizhub.repositories.ChoiceAttemptRepository;
-import org.wa55death405.quizhub.repositories.QuestionAttemptRepository;
+import org.wa55death405.quizhub.repositories.*;
 
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Set;
 
 @Service
@@ -17,11 +15,14 @@ public class QuestionService {
     private final AnswerAttemptRepository answerAttemptRepository;
     private final QuestionAttemptRepository questionAttemptRepository;
     private final ChoiceAttemptRepository choiceAttemptRepository;
+    private final OrderedOptionAttemptRepository orderedOptionAttemptRepository;
+    private final OptionMatchAttemptRepository optionMatchAttemptRepository;
 
     // this method is called when a user attempts a question
     // its core responsibility is to determine if the user's answer is correct
     // therefor it sets the correctness percentage of the question attempt
-    // additionally it sets fields for the attempt(s) of the question
+    // additionally it sets the correctness of the various answer attempts
+    // wherever the answer be [ChoiceAttempt, OrderedOptionAttempt,AnswerAttempt...]
     public void handleQuestionAttempt(QuestionAttempt questionAttempt) {
         switch (questionAttempt.getQuestion().getQuestionType()) {
             case MULTIPLE_CHOICE:
@@ -29,6 +30,12 @@ public class QuestionService {
                 break;
             case TRUE_FALSE,FILL_IN_THE_BLANK,SINGLE_CHOICE,NUMERIC,SHORT_ANSWER:
                 general_comparison(questionAttempt);
+                break;
+            case OPTION_ORDERING:
+                handle_OPTION_ORDERING(questionAttempt);
+                break;
+            case OPTION_MATCHING:
+                handle_OPTION_MATCHING(questionAttempt);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid question type");
@@ -68,7 +75,63 @@ public class QuestionService {
         choiceAttemptRepository.saveAll(answerAttempts);
     }
 
-   private void general_comparison(QuestionAttempt questionAttempt) {
+    private void handle_OPTION_ORDERING(QuestionAttempt questionAttempt) {
+        Set<OrderedOptionAttempt> orderedOptionAttempts = questionAttempt.getOrderedOptionAttempts();
+        Set<OrderedOption> orderedOptions = questionAttempt.getQuestion().getOrderedOptions();
+
+        boolean atLeastOneWrong = false;
+        for (OrderedOptionAttempt orderedOptionAttempt : orderedOptionAttempts) {
+            if (!orderedOptions.contains(orderedOptionAttempt.getSortedOption())) {
+                throw new IllegalArgumentException("OrderedOption with id " + orderedOptionAttempt.getSortedOption().getId() + " is not part of the question");
+            }
+            if(!orderedOptionAttempt.validate()){
+                atLeastOneWrong = true;
+            }
+        }
+
+        if (atLeastOneWrong){
+            questionAttempt.setCorrectnessPercentage(0F);
+        }else {
+            questionAttempt.setCorrectnessPercentage(100F);
+        }
+
+        questionAttemptRepository.save(questionAttempt);
+        orderedOptionAttemptRepository.saveAll(orderedOptionAttempts);
+    }
+
+    private void handle_OPTION_MATCHING(QuestionAttempt questionAttempt) {
+        // this code i just wrote is one of the shittiest code i have ever written
+        // its so bad may god forgive me and not let me anyone see this
+        // rip cpu, rip memory, rip query performance, rip everything
+        // ~ Wassim Rached (27/08/2003 - 29/04/2024)
+        Set<OptionMatchAttempt> optionMatchAttempts = questionAttempt.getOptionMatchAttempts();
+        Set<CorrectOptionMatch> correctOptionMatches = questionAttempt.getQuestion().getCorrectOptionMatches();
+
+        int correctMatches = 0;
+        for (CorrectOptionMatch correctOptionMatch : correctOptionMatches) {
+                for (OptionMatchAttempt optionMatchAttempt : optionMatchAttempts) {
+                    if (correctOptionMatch.verifyAttempt(optionMatchAttempt)) {
+                        correctMatches++;
+                        optionMatchAttempt.setIsCorrect(true);
+                        break;
+                    }
+                    if(optionMatchAttempt.getIsCorrect() == null){
+                        optionMatchAttempt.setIsCorrect(false);
+                    }
+                }
+        }
+        int totalMatches = correctOptionMatches.size();
+        if (correctMatches == totalMatches && optionMatchAttempts.size() == totalMatches) {
+            questionAttempt.setCorrectnessPercentage(100F);
+        } else {
+            questionAttempt.setCorrectnessPercentage(0F);
+        }
+
+        questionAttemptRepository.save(questionAttempt);
+        optionMatchAttemptRepository.saveAll(optionMatchAttempts);
+    }
+
+    private void general_comparison(QuestionAttempt questionAttempt) {
         AnswerAttempt attempt = questionAttempt.getAnswerAttempt();
         Answer answer = questionAttempt.getQuestion().getAnswer();
         
@@ -84,6 +147,8 @@ public class QuestionService {
     }
 
     private Float calculate_score_for_MULTIPLE_CHOICE(MultipleChoiceAlgorithmeType type, int correctAnswers, int wrongAnswers, int totalChoices, int totalCorrectChoices) {
+        // this might be needed when diffrent algorithmes are implemented
+        // for calculating the score of a multiple choice question
         return switch (type) {
             case PERCENTAGE_OF_CORRECT_ANSWERS_FROM_ALL_CHOICES, PERCENTAGE_OF_CORRECT_ANSWERS_FROM_CORRECT_CHOICES ->
                     // currently not implemented

@@ -8,6 +8,5 @@ public enum QuestionType {
     NUMERIC,
     FILL_IN_THE_BLANK,
     OPTION_MATCHING,
-    ORDERING
-
+    OPTION_ORDERING
 }

@@ -7,9 +7,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.QuestionType;
-import org.wa55death405.quizhub.repositories.AnswerAttemptRepository;
-import org.wa55death405.quizhub.repositories.ChoiceAttemptRepository;
-import org.wa55death405.quizhub.repositories.QuestionAttemptRepository;
+import org.wa55death405.quizhub.repositories.*;
+
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Set;
@@ -23,6 +22,10 @@ class QuestionServiceTest {
     private QuestionAttemptRepository questionAttemptRepository;
     @Mock
     private ChoiceAttemptRepository choiceAttemptRepository;
+    @Mock
+    private OrderedOptionAttemptRepository orderedOptionAttemptRepository;
+    @Mock
+    private OptionMatchAttemptRepository optionMatchAttemptRepository;
     @InjectMocks
     private QuestionService questionService;
 
@@ -254,6 +257,207 @@ class QuestionServiceTest {
         verify(answerAttemptRepository).save(any());
     }
 
+    @Test
+    public void testHandleQuestionAttempt_OPTION_ORDERING_1() {
+        Question question = Question.builder()
+                .id(1)
+                .questionType(QuestionType.OPTION_ORDERING)
+                .question("put the following numbers in ascending order from top to bottom")
+                .orderedOptions(
+                        Set.of(
+                                OrderedOption.builder().id(1).option("100").correctPosition(0).build(),
+                                OrderedOption.builder().id(2).option("200").correctPosition(1).build(),
+                                OrderedOption.builder().id(3).option("300").correctPosition(2).build()
+                        )
+                )
+                .build();
+
+        QuestionAttempt questionAttempt = QuestionAttempt.builder()
+                .id(1)
+                .question(question)
+                .orderedOptionAttempts(
+                        Set.of(
+                                OrderedOptionAttempt.builder().id(1).sortedOption(OrderedOption.builder().id(1).option("100").correctPosition(0).build()).position(1).build(),
+                                OrderedOptionAttempt.builder().id(2).sortedOption(OrderedOption.builder().id(2).option("200").correctPosition(1).build()).position(0).build(),
+                                OrderedOptionAttempt.builder().id(3).sortedOption(OrderedOption.builder().id(3).option("300").correctPosition(2).build()).position(2).build()
+                        )
+                )
+                .build();
+
+        // Mock behavior
+        when(questionAttemptRepository.save(any())).thenReturn(questionAttempt);
+        when(orderedOptionAttemptRepository.saveAll(any())).thenReturn(questionAttempt.getOrderedOptionAttempts().stream().toList());
+
+        // Call method
+        questionService.handleQuestionAttempt(questionAttempt);
+
+        // Assert correctnessPercentage is calculated
+        var orderedOptionAttempts = questionAttempt.getOrderedOptionAttempts().stream().toList();
+        assertEquals(1,orderedOptionAttempts.stream().filter(OrderedOptionAttempt::getIsCorrect).count());
+        assertEquals(2,orderedOptionAttempts.stream().filter(choiceAttempt -> !choiceAttempt.getIsCorrect()).count());
+        assertEquals(0F, questionAttempt.getCorrectnessPercentage());
+
+        // Verify correctnessPercentage is calculated
+        verify(questionAttemptRepository).save(any());
+        verify(orderedOptionAttemptRepository).saveAll(any());
+    }
+
+    @Test
+    void testHandleQuestionAttempt_OPTION_ORDERING_2() {
+        Question question = Question.builder()
+                .id(1)
+                .questionType(QuestionType.OPTION_ORDERING)
+                .question("put the following numbers in ascending order from top to bottom")
+                .orderedOptions(
+                        Set.of(
+                                OrderedOption.builder().id(1).option("100").correctPosition(0).build(),
+                                OrderedOption.builder().id(2).option("200").correctPosition(1).build(),
+                                OrderedOption.builder().id(3).option("300").correctPosition(2).build()
+                        )
+                )
+                .build();
+
+        QuestionAttempt questionAttempt = QuestionAttempt.builder()
+                .id(1)
+                .question(question)
+                .orderedOptionAttempts(
+                        Set.of(
+                                OrderedOptionAttempt.builder().id(1).sortedOption(OrderedOption.builder().id(1).option("100").correctPosition(0).build()).position(0).build(),
+                                OrderedOptionAttempt.builder().id(2).sortedOption(OrderedOption.builder().id(2).option("200").correctPosition(1).build()).position(1).build(),
+                                OrderedOptionAttempt.builder().id(3).sortedOption(OrderedOption.builder().id(3).option("300").correctPosition(2).build()).position(2).build()
+                        )
+                )
+                .build();
+
+        // Mock behavior
+        when(questionAttemptRepository.save(any())).thenReturn(questionAttempt);
+        when(orderedOptionAttemptRepository.saveAll(any())).thenReturn(questionAttempt.getOrderedOptionAttempts().stream().toList());
+
+        // Call method
+        questionService.handleQuestionAttempt(questionAttempt);
+
+        // Assert correctnessPercentage is calculated
+        var orderedOptionAttempts = questionAttempt.getOrderedOptionAttempts().stream().toList();
+        assertEquals(3,orderedOptionAttempts.stream().filter(OrderedOptionAttempt::getIsCorrect).count());
+        assertEquals(0,orderedOptionAttempts.stream().filter(choiceAttempt -> !choiceAttempt.getIsCorrect()).count());
+        assertEquals(100F, questionAttempt.getCorrectnessPercentage());
+
+        // Verify correctnessPercentage is calculated
+        verify(questionAttemptRepository).save(any());
+        verify(orderedOptionAttemptRepository).saveAll(any());
+    }
+
+    @Test
+    void testHandleQuestionAttempt_OPTION_MATCHING_1() {
+        // Options
+        Option option_tunisia = Option.builder().id(1).option("Tunisia").build();
+        Option option_france = Option.builder().id(2).option("France").build();
+        Option option_usa = Option.builder().id(3).option("USA").build();
+        // Matches
+        Match match_tunis = Match.builder().id(1).match("Tunis").build();
+        Match match_paris = Match.builder().id(2).match("Paris").build();
+        Match match_washington = Match.builder().id(3).match("Washington").build();
+
+        // question
+        Question question = Question.builder()
+                .id(1)
+                .questionType(QuestionType.OPTION_MATCHING)
+                .question("match the following countries with their capitals")
+                .correctOptionMatches(
+                        Set.of(
+                                CorrectOptionMatch.builder().id(1).option(option_tunisia).match(match_tunis).build(),
+                                CorrectOptionMatch.builder().id(2).option(option_france).match(match_paris).build(),
+                                CorrectOptionMatch.builder().id(3).option(option_usa).match(match_washington).build()
+                        )
+                )
+                .build();
+
+        // attempt
+        QuestionAttempt questionAttempt = QuestionAttempt.builder()
+                .id(1)
+                .question(question)
+                .optionMatchAttempts(
+                        Set.of(
+                                OptionMatchAttempt.builder().id(1).option(option_tunisia).match(match_tunis).build(),
+                                OptionMatchAttempt.builder().id(2).option(option_france).match(match_paris).build(),
+                                OptionMatchAttempt.builder().id(3).option(option_usa).match(match_washington).build()
+                        )
+                )
+                .build();
+
+        // Mock behavior
+        when(questionAttemptRepository.save(any())).thenReturn(questionAttempt);
+        when(optionMatchAttemptRepository.saveAll(any())).thenReturn(questionAttempt.getOptionMatchAttempts().stream().toList());
+
+        // Call method
+        questionService.handleQuestionAttempt(questionAttempt);
+
+        // Assert correctnessPercentage is calculated
+        var optionMatchAttempts = questionAttempt.getOptionMatchAttempts().stream().toList();
+        assertEquals(3,optionMatchAttempts.stream().filter(OptionMatchAttempt::getIsCorrect).count());
+        assertEquals(0,optionMatchAttempts.stream().filter(choiceAttempt -> !choiceAttempt.getIsCorrect()).count());
+        assertEquals(100F, questionAttempt.getCorrectnessPercentage());
+
+        // Verify correctnessPercentage is calculated
+        verify(questionAttemptRepository).save(any());
+        verify(optionMatchAttemptRepository).saveAll(any());
+    }
+
+    @Test
+    void testHandleQuestionAttempt_OPTION_MATCHING_2() {
+        // Options
+        Option option_tunisia = Option.builder().id(1).option("Tunisia").build();
+        Option option_france = Option.builder().id(2).option("France").build();
+        Option option_usa = Option.builder().id(3).option("USA").build();
+        // Matches
+        Match match_tunis = Match.builder().id(1).match("Tunis").build();
+        Match match_paris = Match.builder().id(2).match("Paris").build();
+        Match match_washington = Match.builder().id(3).match("Washington").build();
+
+        // question
+        Question question = Question.builder()
+                .id(1)
+                .questionType(QuestionType.OPTION_MATCHING)
+                .question("match the following countries with their capitals")
+                .correctOptionMatches(
+                        Set.of(
+                                CorrectOptionMatch.builder().id(1).option(option_tunisia).match(match_tunis).build(),
+                                CorrectOptionMatch.builder().id(2).option(option_france).match(match_paris).build(),
+                                CorrectOptionMatch.builder().id(3).option(option_usa).match(match_washington).build()
+                        )
+                )
+                .build();
+
+        // attempt
+        QuestionAttempt questionAttempt = QuestionAttempt.builder()
+                .id(1)
+                .question(question)
+                .optionMatchAttempts(
+                        Set.of(
+                                OptionMatchAttempt.builder().id(1).option(option_tunisia).match(match_tunis).build(),
+                                OptionMatchAttempt.builder().id(2).option(option_tunisia).match(match_paris).build(),
+                                OptionMatchAttempt.builder().id(3).option(option_usa).match(match_washington).build()
+                        )
+                )
+                .build();
+
+        // Mock behavior
+        when(questionAttemptRepository.save(any())).thenReturn(questionAttempt);
+        when(optionMatchAttemptRepository.saveAll(any())).thenReturn(questionAttempt.getOptionMatchAttempts().stream().toList());
+
+        // Call method
+        questionService.handleQuestionAttempt(questionAttempt);
+
+        // Assert correctnessPercentage is calculated
+        var optionMatchAttempts = questionAttempt.getOptionMatchAttempts().stream().toList();
+        assertEquals(2,optionMatchAttempts.stream().filter(OptionMatchAttempt::getIsCorrect).count());
+        assertEquals(1,optionMatchAttempts.stream().filter(choiceAttempt -> !choiceAttempt.getIsCorrect()).count());
+        assertEquals(0F, questionAttempt.getCorrectnessPercentage());
+
+        // Verify correctnessPercentage is calculated
+        verify(questionAttemptRepository).save(any());
+        verify(optionMatchAttemptRepository).saveAll(any());
+    }
     /*
         [*] helper methods
     */
@@ -271,6 +475,4 @@ class QuestionServiceTest {
                 .choiceAttempts(choiceAttempts)
                 .build();
     }
-
-
 }

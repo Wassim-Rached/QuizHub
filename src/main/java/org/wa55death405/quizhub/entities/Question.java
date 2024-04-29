@@ -23,11 +23,26 @@ public class Question {
 
     @ManyToOne
     private Quiz quiz;
-    @OneToOne(mappedBy = "question")
+
+    // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
+    @OneToOne(mappedBy = "question",fetch = FetchType.LAZY)
     private Answer answer;
+
+    // for MULTIPLE_CHOICE, SINGLE_CHOICE
     @OneToMany(mappedBy = "question")
     private Set<Choice> choices = Set.of();
 
+    // for OPTION_ORDERING
+    @OneToMany(mappedBy = "question")
+    private Set<OrderedOption> orderedOptions = Set.of();
+
+    // for MATCHING_OPTION
+    @OneToMany(mappedBy = "question")
+    private Set<Match> matches = Set.of();
+    @OneToMany(mappedBy = "question")
+    private Set<Option> options = Set.of();
+    @OneToMany(mappedBy = "question")
+    private Set<CorrectOptionMatch> correctOptionMatches = Set.of();
 
     @Override
     public int hashCode() {
