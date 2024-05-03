@@ -3,6 +3,8 @@ package org.wa55death405.quizhub.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,20 +26,20 @@ public class QuestionAttempt {
     private QuizAttempt quizAttempt;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
-    @OneToOne(mappedBy = "questionAttempt",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "questionAttempt",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private AnswerAttempt answerAttempt;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    @OneToMany(mappedBy = "questionAttempt")
-    private Set<ChoiceAttempt> choiceAttempts = Set.of();
+    @OneToMany(mappedBy = "questionAttempt",cascade = CascadeType.ALL)
+    private List<ChoiceAttempt> choiceAttempts = new ArrayList<>();
 
     // for OPTION_ORDERING
-    @OneToMany(mappedBy = "questionAttempt")
-    private Set<OrderedOptionAttempt> orderedOptionAttempts = Set.of();
+    @OneToMany(mappedBy = "questionAttempt",cascade = CascadeType.ALL)
+    private List<OrderedOptionAttempt> orderedOptionAttempts = new ArrayList<>();
 
     // for OPTION_MATCHING
-    @OneToMany(mappedBy = "questionAttempt")
-    private Set<OptionMatchAttempt> optionMatchAttempts = Set.of();
+    @OneToMany(mappedBy = "questionAttempt",cascade = CascadeType.ALL)
+    private List<OptionMatchAttempt> optionMatchAttempts = new ArrayList<>();
 
     public Float calculateScore() {
         return correctnessPercentage * question.getCoefficient();

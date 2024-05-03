@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.wa55death405.quizhub.enums.QuestionType;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,20 +31,20 @@ public class Question {
     private Answer answer;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    @OneToMany(mappedBy = "question")
-    private Set<Choice> choices = Set.of();
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    private List<Choice> choices = new ArrayList<>();
 
     // for OPTION_ORDERING
-    @OneToMany(mappedBy = "question")
-    private Set<OrderedOption> orderedOptions = Set.of();
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    private List<OrderedOption> orderedOptions = new ArrayList<>();
 
     // for MATCHING_OPTION
-    @OneToMany(mappedBy = "question")
-    private Set<Match> matches = Set.of();
-    @OneToMany(mappedBy = "question")
-    private Set<Option> options = Set.of();
-    @OneToMany(mappedBy = "question")
-    private Set<CorrectOptionMatch> correctOptionMatches = Set.of();
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    private List<Match> matches = new ArrayList<>();
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    private List<Option> options = new ArrayList<>();
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    private List<CorrectOptionMatch> correctOptionMatches = new ArrayList<>();
 
     @Override
     public int hashCode() {

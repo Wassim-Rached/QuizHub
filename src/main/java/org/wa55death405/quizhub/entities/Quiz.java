@@ -3,6 +3,7 @@ package org.wa55death405.quizhub.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,9 +20,9 @@ public class Quiz {
     private String title;
 
     @OneToMany(mappedBy = "quiz")
-    private Set<Question> questions = Set.of();
+    private List<Question> questions = List.of();
     @OneToMany(mappedBy = "quiz")
-    private Set<QuizAttempt> attempts = Set.of();
+    private List<QuizAttempt> attempts = List.of();
 
     @Override
     public int hashCode() {

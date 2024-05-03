@@ -1,14 +1,17 @@
 package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class QuizAttempt {
     @Id
@@ -19,7 +22,7 @@ public class QuizAttempt {
     @ManyToOne
     private Quiz quiz;
     @OneToMany(mappedBy = "quizAttempt")
-    private Set<QuestionAttempt> questionAttempts;
+    private List<QuestionAttempt> questionAttempts;
 
     public static Float calculateScore(QuizAttempt quizAttempt) {
         float score = 0f;
@@ -28,9 +31,11 @@ public class QuizAttempt {
             score += questionAttempt.calculateScore();
             totalCoefficients += questionAttempt.getQuestion().getCoefficient();
         }
+        if (totalCoefficients == 0) {
+            return 0f;
+        }
         return score / totalCoefficients;
     }
-
 
     @Override
     public int hashCode() {

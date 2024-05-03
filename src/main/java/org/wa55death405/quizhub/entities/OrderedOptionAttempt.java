@@ -20,12 +20,12 @@ public class OrderedOptionAttempt {
     private Boolean isCorrect;
 
     @ManyToOne
-    private OrderedOption sortedOption;
+    private OrderedOption orderedOption;
     @ManyToOne
     private QuestionAttempt questionAttempt;
 
     public boolean validate() {
-        boolean is_valid = this.sortedOption.getCorrectPosition().equals(this.position);
+        boolean is_valid = this.orderedOption.getCorrectPosition().equals(this.position);
         this.isCorrect = is_valid;
         return is_valid;
     }
