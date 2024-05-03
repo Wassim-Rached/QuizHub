@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
+import java.util.Comparator;
+
 @Entity
 @Data
 @ToString
@@ -22,6 +24,8 @@ public class Match {
     @ManyToOne
     private Question question;
 
+    public static Comparator<Match> matchComparator = Comparator.comparing(Match::getMatch);
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -30,7 +34,8 @@ public class Match {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Match match = (Match) obj;
-        return id.equals(match.id);
+        Match comparedMatch = (Match) obj;
+        return id.equals(comparedMatch.id);
     }
+
 }
