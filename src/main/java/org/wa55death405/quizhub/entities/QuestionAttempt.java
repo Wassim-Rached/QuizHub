@@ -6,7 +6,6 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Data
@@ -14,6 +13,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"question_id", "quiz_attempt_id"}))
 public class QuestionAttempt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,7 +48,15 @@ public class QuestionAttempt {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, correctnessPercentage);
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        QuestionAttempt that = (QuestionAttempt) obj;
+        return Objects.equals(id, that.id);
     }
 
 }

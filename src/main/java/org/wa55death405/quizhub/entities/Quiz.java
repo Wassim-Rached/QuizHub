@@ -3,9 +3,9 @@ package org.wa55death405.quizhub.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Data
@@ -20,9 +20,9 @@ public class Quiz {
     private String title;
 
     @OneToMany(mappedBy = "quiz")
-    private List<Question> questions = List.of();
+    private List<Question> questions = new ArrayList<>();
     @OneToMany(mappedBy = "quiz")
-    private List<QuizAttempt> attempts = List.of();
+    private List<QuizAttempt> attempts = new ArrayList<>();
 
     @Override
     public int hashCode() {

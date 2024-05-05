@@ -220,7 +220,4 @@ public class FakeDataUtils {
             questionRepository.save(question1);
     }
 
-
-
-
 }
