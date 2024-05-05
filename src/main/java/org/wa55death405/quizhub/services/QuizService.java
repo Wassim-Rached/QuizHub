@@ -7,6 +7,7 @@ import org.wa55death405.quizhub.dto.*;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.exceptions.InvalidQuestionResponseException;
 import org.wa55death405.quizhub.repositories.*;
+import org.wa55death405.quizhub.utils.DBErrorExtractorUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,30 +52,49 @@ public class QuizService {
         }
 
         var quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
-                () -> new InvalidQuestionResponseException("Quiz attempt with id " + quizAttemptId + " not found")
+                () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
 
-        List<QuestionAttempt> questionAttempts = new ArrayList<>();
-        for (var questionAttemptTaking : questionAttemptTakings) {
-            var questionAttempt = questionAttemptTaking.toQuestionAttempt();
+        if (quizAttempt.getScore() != null){
+            throw new InvalidQuestionResponseException("Quiz attempt already finished");
+        }
 
-            if (questionAttempt.getQuizAttempt() == null || questionAttempt.getQuizAttempt().getId() == null){
+        List<QuestionAttempt> oldQuestionAttemptsWillBeRemoved = new ArrayList<>();
+        List<QuestionAttempt> questionAttemptsWillBeSaved = new ArrayList<>();
+        List<QuestionAttempt> oldQuestionAttempts = new ArrayList<>(quizAttempt.getQuestionAttempts());
+        for (var questionAttemptTaking : questionAttemptTakings) {
+            var newQuestionAttempt = questionAttemptTaking.toQuestionAttempt(quizAttemptId);
+
+            if (newQuestionAttempt.getQuizAttempt() == null || newQuestionAttempt.getQuizAttempt().getId() == null){
                 throw new InvalidQuestionResponseException("Quiz attempt id is required");
             }
 
-            // this if statement is comparing two input values
-            // sent by the client ,kinda useless...
-            // the client can't send other question attempts
-            // only those same as the one in the url parameter (perspective of controller)
-            if (!questionAttempt.getQuizAttempt().getId().equals(quizAttemptId)){
-                throw new InvalidQuestionResponseException("Question attempt with id " + questionAttempt.getId() + " does not belong to quiz attempt with id " + quizAttemptId);
-            }
+            // find if the question attempt is already in the database
+            // and put it in a list to be removed
+            var oldQuestionAttempt = oldQuestionAttempts.stream().filter(oqa -> oqa.getQuestion().getId().equals(newQuestionAttempt.getQuestion().getId())).findFirst();
+            oldQuestionAttempt.ifPresent(oldQuestionAttemptsWillBeRemoved::add);
 
-            questionAttempt.setQuizAttempt(quizAttempt);
-            questionAttempts.add(questionAttempt);
+            newQuestionAttempt.setQuizAttempt(quizAttempt);
+            questionAttemptsWillBeSaved.add(newQuestionAttempt);
         }
 
-        questionAttemptRepository.saveAll(questionAttempts);
+        // remove old question attempts
+        questionAttemptRepository.deleteAll(oldQuestionAttemptsWillBeRemoved);
+
+        try {
+            // save new question attempts
+            questionAttemptRepository.saveAll(questionAttemptsWillBeSaved);
+        }catch (Exception e){
+            var errorDetails = DBErrorExtractorUtils.extractSQLErrorDetails(e.getMessage());
+            if (errorDetails.allFieldsPresent()){
+                throw new EntityNotFoundException(errorDetails.getTableName() + " with id " + errorDetails.getEntityId() + " not found");
+            }else{
+                throw new InvalidQuestionResponseException("Invalid question response data provided");
+            }
+
+        }
+
+
     }
 
     public Float finishQuizAttempt(Integer quizAttemptId) {
