@@ -27,7 +27,7 @@ public class Question {
     private Quiz quiz;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
-    @OneToOne(mappedBy = "question",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "question",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Answer answer;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE

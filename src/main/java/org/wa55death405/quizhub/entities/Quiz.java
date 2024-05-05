@@ -19,7 +19,7 @@ public class Quiz {
     private Integer id;
     private String title;
 
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
     @OneToMany(mappedBy = "quiz")
     private List<QuizAttempt> attempts = new ArrayList<>();
