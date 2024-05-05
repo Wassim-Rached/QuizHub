@@ -26,15 +26,14 @@ public class QuizAttempt {
 
     public static Float calculateScore(QuizAttempt quizAttempt) {
         float score = 0f;
-        float totalCoefficients = 0f;
+        float totalCoefficients = quizAttempt.getQuiz().getQuestions().stream().map(Question::getCoefficient).reduce(0f, Float::sum);
         for (QuestionAttempt questionAttempt : quizAttempt.getQuestionAttempts()) {
             score += questionAttempt.calculateScore();
-            totalCoefficients += questionAttempt.getQuestion().getCoefficient();
         }
         if (totalCoefficients == 0) {
             return 0f;
         }
-        return score / totalCoefficients;
+        return (float) Math.round(score / totalCoefficients * 100) / 100;
     }
 
     @Override
