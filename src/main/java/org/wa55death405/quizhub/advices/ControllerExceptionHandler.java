@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.wa55death405.quizhub.dto.StandardApiResponse;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
-import org.wa55death405.quizhub.exceptions.InvalidQuestionResponseException;
+import org.wa55death405.quizhub.exceptions.InputValidationException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(InvalidQuestionResponseException.class)
-    public ResponseEntity<StandardApiResponse<Void>> handleInvalidQuestionResponseException(InvalidQuestionResponseException e) {
+    @ExceptionHandler(InputValidationException.class)
+    public ResponseEntity<StandardApiResponse<Void>> handleInvalidQuestionResponseException(InputValidationException e) {
         return ResponseEntity.badRequest().body(new StandardApiResponse<>(StandardApiStatus.FAILURE, e.getMessage()));
     }
 
