@@ -18,9 +18,6 @@ public class QuestionLogicService {
     private final OrderedOptionAttemptRepository orderedOptionAttemptRepository;
     private final OptionMatchAttemptRepository optionMatchAttemptRepository;
 
-//    private final Logger logger = (Logger) LoggerFactory.getLogger(QuestionLogicService.class);
-
-
     // this method is called when a user attempts a question
     // its core responsibility is to determine if the user's answer is correct
     // therefor it sets the correctness percentage of the question attempt
@@ -28,7 +25,7 @@ public class QuestionLogicService {
     // wherever the answer be [ChoiceAttempt, OrderedOptionAttempt,AnswerAttempt...]
     public void handleQuestionAttempt(QuestionAttempt questionAttempt) {
         switch (questionAttempt.getQuestion().getQuestionType()) {
-            // MULTIPLE_CHOICE and SINGLE_CHOICE are handled differently
+            // "MULTIPLE_CHOICE" and "SINGLE_CHOICE" are handled differently
             // for performance reasons ,but they still share the same logic
             case MULTIPLE_CHOICE:
                 handle_MULTIPLE_CHOICE(questionAttempt);
@@ -167,8 +164,8 @@ public class QuestionLogicService {
     }
 
     private void handle_OPTION_MATCHING(QuestionAttempt questionAttempt) {
-        // this code i just wrote is one of the shittiest code i have ever written
-        // its so bad may god forgive me and not let me anyone see this
+        // this code I just wrote is one of the shittiest code I have ever written
+        // its so bad may god forgive me and not let anyone see this crap
         // rip cpu, rip memory, rip query performance, rip everything
         // ~ Wassim Rached (27/08/2003 - 29/04/2024)
         List<OptionMatchAttempt> optionMatchAttempts = questionAttempt.getOptionMatchAttempts();
