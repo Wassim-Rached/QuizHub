@@ -9,9 +9,7 @@ import java.util.List;
 
 @Data
 public class QuestionAttemptSubmissionDTO {
-
     private Integer question;
-    private Integer quizAttempt;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK
     private String answerAttempt;
@@ -25,7 +23,7 @@ public class QuestionAttemptSubmissionDTO {
     // for OPTION_MATCHING
     private HashMap<Integer,List<Integer>> optionMatchAttempts = new HashMap<>();
 
-    public QuestionAttempt toQuestionAttempt() {
+    public QuestionAttempt toQuestionAttempt(Integer quizAttempt) {
         List<ChoiceAttempt> choiceAttemptsObjs = new ArrayList<>();
         List<OrderedOptionAttempt> orderedOptionAttemptsObjs = new ArrayList<>();
         List<OptionMatchAttempt> optionMatchAttemptsObjs = new ArrayList<>();
