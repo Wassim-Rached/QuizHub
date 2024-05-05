@@ -2,10 +2,11 @@ package org.wa55death405.quizhub.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.dto.*;
 import org.wa55death405.quizhub.entities.*;
-import org.wa55death405.quizhub.exceptions.InvalidQuestionResponseException;
+import org.wa55death405.quizhub.exceptions.InputValidationException;
 import org.wa55death405.quizhub.repositories.*;
 import org.wa55death405.quizhub.utils.DBErrorExtractorUtils;
 
@@ -20,8 +21,9 @@ public class QuizService {
     private final QuestionAttemptRepository questionAttemptRepository;
     private final QuestionLogicService questionLogicService;
     private final QuizRepository quizRepository;
+    private final ModelMapper modelMapper;
 
-    public QuizAttempt processQuizAttempt(QuizAttempt quizAttempt) {
+    private QuizAttempt processQuizAttempt(QuizAttempt quizAttempt) {
         if (quizAttempt == null) return null;
 
         List<QuestionAttempt> questionAttempts = quizAttempt.getQuestionAttempts();
@@ -48,7 +50,7 @@ public class QuizService {
 
     public void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptTakings, Integer quizAttemptId) {
         if (questionAttemptTakings == null || questionAttemptTakings.isEmpty()) {
-            throw new InvalidQuestionResponseException("No question attempts to submit");
+            throw new InputValidationException("No question attempts to submit");
         }
 
         var quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
@@ -56,17 +58,19 @@ public class QuizService {
         );
 
         if (quizAttempt.getScore() != null){
-            throw new InvalidQuestionResponseException("Quiz attempt already finished");
+            throw new InputValidationException("Quiz attempt already finished");
         }
 
+        List<Question> questions = quizAttempt.getQuiz().getQuestions();
         List<QuestionAttempt> oldQuestionAttemptsWillBeRemoved = new ArrayList<>();
         List<QuestionAttempt> questionAttemptsWillBeSaved = new ArrayList<>();
         List<QuestionAttempt> oldQuestionAttempts = new ArrayList<>(quizAttempt.getQuestionAttempts());
         for (var questionAttemptTaking : questionAttemptTakings) {
             var newQuestionAttempt = questionAttemptTaking.toQuestionAttempt(quizAttemptId);
 
-            if (newQuestionAttempt.getQuizAttempt() == null || newQuestionAttempt.getQuizAttempt().getId() == null){
-                throw new InvalidQuestionResponseException("Quiz attempt id is required");
+            Quiz quiz = quizAttempt.getQuiz();
+            if (questions.stream().noneMatch(q -> q.getId().equals(newQuestionAttempt.getQuestion().getId()))){
+                throw new InputValidationException("Question with id " + newQuestionAttempt.getQuestion().getId() + " does not belong to quiz with id " + quiz.getId());
             }
 
             // find if the question attempt is already in the database
@@ -89,7 +93,7 @@ public class QuizService {
             if (errorDetails.allFieldsPresent()){
                 throw new EntityNotFoundException(errorDetails.getTableName() + " with id " + errorDetails.getEntityId() + " not found");
             }else{
-                throw new InvalidQuestionResponseException("Invalid question response data provided");
+                throw new InputValidationException("Invalid question response data provided");
             }
 
         }
@@ -103,6 +107,12 @@ public class QuizService {
         );
         quizAttempt = processQuizAttempt(quizAttempt);
         return quizAttempt.getScore();
+    }
+
+    public Integer createQuiz(QuizCreationDTO quizCreationDTO) {
+        Quiz quiz = quizCreationDTO.toEntity(null);
+        quizRepository.save(quiz);
+        return quiz.getId();
     }
 
 }
