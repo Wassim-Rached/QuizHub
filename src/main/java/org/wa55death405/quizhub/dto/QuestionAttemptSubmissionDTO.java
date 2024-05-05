@@ -2,6 +2,7 @@ package org.wa55death405.quizhub.dto;
 
 import lombok.Data;
 import org.wa55death405.quizhub.entities.*;
+import org.wa55death405.quizhub.exceptions.InputValidationException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,8 @@ public class QuestionAttemptSubmissionDTO {
     private HashMap<Integer,List<Integer>> optionMatchAttempts = new HashMap<>();
 
     public QuestionAttempt toQuestionAttempt(Integer quizAttempt) {
+        if (question == null) throw new InputValidationException("Question id is required");
+
         List<ChoiceAttempt> choiceAttemptsObjs = new ArrayList<>();
         List<OrderedOptionAttempt> orderedOptionAttemptsObjs = new ArrayList<>();
         List<OptionMatchAttempt> optionMatchAttemptsObjs = new ArrayList<>();
