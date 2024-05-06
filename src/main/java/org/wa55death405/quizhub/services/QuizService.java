@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.dto.*;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
+import org.wa55death405.quizhub.interfaces.services.IQuestionLogicService;
+import org.wa55death405.quizhub.interfaces.services.IQuizLogicService;
+import org.wa55death405.quizhub.interfaces.services.IQuizService;
 import org.wa55death405.quizhub.repositories.*;
 import org.wa55death405.quizhub.utils.DBErrorExtractorUtils;
 
@@ -15,29 +18,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class QuizService {
-
+public class QuizService implements IQuizService{
     private final QuizAttemptRepository quizAttemptRepository;
     private final QuestionAttemptRepository questionAttemptRepository;
-    private final QuestionLogicService questionLogicService;
     private final QuizRepository quizRepository;
-    private final ModelMapper modelMapper;
+    private final IQuizLogicService quizLogicService;
 
-    private QuizAttempt processQuizAttempt(QuizAttempt quizAttempt) {
-        if (quizAttempt == null) return null;
-
-        List<QuestionAttempt> questionAttempts = quizAttempt.getQuestionAttempts();
-        for (QuestionAttempt questionAttempt : questionAttempts){
-            questionLogicService.handleQuestionAttempt(questionAttempt);
-        }
-
-        float score = QuizAttempt.calculateScore(quizAttempt);
-        quizAttempt.setScore(score);
-        quizAttemptRepository.save(quizAttempt);
-
-        return quizAttempt;
-    }
-
+    @Override
     public Integer startQuizAttempt(Integer quizId) {
         Quiz quiz = quizRepository.findById(quizId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz with id " + quizId + " not found")
@@ -48,6 +35,7 @@ public class QuizService {
         return quizAttempt.getId();
     }
 
+    @Override
     public void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptTakings, Integer quizAttemptId) {
         if (questionAttemptTakings == null || questionAttemptTakings.isEmpty()) {
             throw new InputValidationException("No question attempts to submit");
@@ -95,20 +83,19 @@ public class QuizService {
             }else{
                 throw new InputValidationException("Invalid question response data provided");
             }
-
         }
-
-
     }
 
+    @Override
     public Float finishQuizAttempt(Integer quizAttemptId) {
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
-        quizAttempt = processQuizAttempt(quizAttempt);
+        quizLogicService.processQuizAttempt(quizAttempt);
         return quizAttempt.getScore();
     }
 
+    @Override
     public Integer createQuiz(QuizCreationDTO quizCreationDTO) {
         Quiz quiz = quizCreationDTO.toEntity(null);
         quizRepository.save(quiz);

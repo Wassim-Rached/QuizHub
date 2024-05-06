@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.MultipleChoiceAlgorithmeType;
+import org.wa55death405.quizhub.interfaces.services.IQuestionLogicService;
 import org.wa55death405.quizhub.repositories.*;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class QuestionLogicService {
+public class QuestionLogicServiceImpl implements IQuestionLogicService {
     private final AnswerAttemptRepository answerAttemptRepository;
     private final QuestionAttemptRepository questionAttemptRepository;
     private final ChoiceAttemptRepository choiceAttemptRepository;
@@ -23,6 +24,7 @@ public class QuestionLogicService {
     // therefor it sets the correctness percentage of the question attempt
     // additionally it sets the correctness of the various answer attempts
     // wherever the answer be [ChoiceAttempt, OrderedOptionAttempt,AnswerAttempt...]
+    @Override
     public void handleQuestionAttempt(QuestionAttempt questionAttempt) {
         switch (questionAttempt.getQuestion().getQuestionType()) {
             // "MULTIPLE_CHOICE" and "SINGLE_CHOICE" are handled differently
@@ -47,7 +49,7 @@ public class QuestionLogicService {
         }
     }
 
-    public void handle_SINGLE_CHOICE(QuestionAttempt questionAttempt) {
+    private void handle_SINGLE_CHOICE(QuestionAttempt questionAttempt) {
         List<ChoiceAttempt> choiceAttempts = questionAttempt.getChoiceAttempts() == null ? new ArrayList<>() : questionAttempt.getChoiceAttempts();
         ChoiceAttempt choiceAttempt = choiceAttempts.stream().findFirst().orElse(null);
 

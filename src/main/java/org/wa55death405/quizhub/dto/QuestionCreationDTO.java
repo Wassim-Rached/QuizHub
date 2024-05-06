@@ -4,7 +4,7 @@ import lombok.Data;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.QuestionType;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
-import org.wa55death405.quizhub.interfaces.EntityDTO;
+import org.wa55death405.quizhub.interfaces.dto.EntityDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;

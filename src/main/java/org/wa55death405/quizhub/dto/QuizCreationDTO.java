@@ -2,7 +2,7 @@ package org.wa55death405.quizhub.dto;
 
 import lombok.Data;
 import org.wa55death405.quizhub.entities.Quiz;
-import org.wa55death405.quizhub.interfaces.EntityDTO;
+import org.wa55death405.quizhub.interfaces.dto.EntityDTO;
 
 import java.util.List;
 
