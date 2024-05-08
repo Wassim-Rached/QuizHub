@@ -4,12 +4,12 @@ import lombok.Data;
 import org.wa55death405.quizhub.entities.OrderedOptionAttempt;
 
 @Data
-public class OrderedOptionAttemptResult {
+public class OrderedOptionAttemptResultDTO {
     private Integer id;
     private Integer position;
     private Boolean isCorrect;
 
-    public OrderedOptionAttemptResult(OrderedOptionAttempt orderedOptionAttempt) {
+    public OrderedOptionAttemptResultDTO(OrderedOptionAttempt orderedOptionAttempt) {
         this.id = orderedOptionAttempt.getId();
         this.position = orderedOptionAttempt.getPosition();
         this.isCorrect = orderedOptionAttempt.getIsCorrect();

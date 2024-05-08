@@ -4,7 +4,7 @@ import lombok.Data;
 import org.wa55death405.quizhub.dto.answerAttempt.AnswerAttemptResultDTO;
 import org.wa55death405.quizhub.dto.choiceAttempt.ChoiceAttemptResultDTO;
 import org.wa55death405.quizhub.dto.optionMatchAttempt.OptionMatchAttemptResult;
-import org.wa55death405.quizhub.dto.orderedOptionAttempt.OrderedOptionAttemptResult;
+import org.wa55death405.quizhub.dto.orderedOptionAttempt.OrderedOptionAttemptResultDTO;
 import org.wa55death405.quizhub.entities.*;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Data
 public class QuestionAttemptResultDTO {
-    private Integer id;
+//    private Integer id;
     private Float correctnessPercentage;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
@@ -22,13 +22,13 @@ public class QuestionAttemptResultDTO {
     private List<ChoiceAttemptResultDTO> choiceAttempts = new ArrayList<>();
 
     // for OPTION_ORDERING
-    private List<OrderedOptionAttemptResult> orderedOptionAttempts = new ArrayList<>();
+    private List<OrderedOptionAttemptResultDTO> orderedOptionAttempts = new ArrayList<>();
 
     // for OPTION_MATCHING
     private List<OptionMatchAttemptResult> optionMatchAttempts = new ArrayList<>();
 
     public QuestionAttemptResultDTO(QuestionAttempt questionAttempt){
-        this.id = questionAttempt.getId();
+//        this.id = questionAttempt.getId();
         this.correctnessPercentage = questionAttempt.getCorrectnessPercentage();
         if (questionAttempt.getAnswerAttempt() != null){
             this.answerAttempt = new AnswerAttemptResultDTO(questionAttempt.getAnswerAttempt());
@@ -40,7 +40,7 @@ public class QuestionAttemptResultDTO {
         }
         if(questionAttempt.getOrderedOptionAttempts() != null){
             for(OrderedOptionAttempt orderedOptionAttempt : questionAttempt.getOrderedOptionAttempts()){
-                orderedOptionAttempts.add(new OrderedOptionAttemptResult(orderedOptionAttempt));
+                orderedOptionAttempts.add(new OrderedOptionAttemptResultDTO(orderedOptionAttempt));
             }
         }
         if(questionAttempt.getOptionMatchAttempts() != null){

@@ -6,11 +6,11 @@ import org.wa55death405.quizhub.entities.ChoiceAttempt;
 
 @Data
 public class ChoiceAttemptTakingDTO {
-    private Integer id;
+//    private Integer id;
     private ChoiceGeneralDTO choice;
 
     public ChoiceAttemptTakingDTO(ChoiceAttempt choiceAttempt) {
-        this.id = choiceAttempt.getId();
+//        this.id = choiceAttempt.getId();
         this.choice = new ChoiceGeneralDTO(choiceAttempt.getChoice());
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 
 @Data
 public class QuestionAttemptTakingDTO {
-    private Integer id;
+//    private Integer id;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
     private AnswerAttemptTakingDTO answerAttempt;
@@ -32,7 +32,7 @@ public class QuestionAttemptTakingDTO {
     private List<OptionMatchAttemptTakingDTO> optionMatchAttempts = List.of();
 
     public QuestionAttemptTakingDTO(QuestionAttempt questionAttempt){
-        this.id = questionAttempt.getId();
+//        this.id = questionAttempt.getId();
         if (questionAttempt.getAnswerAttempt() != null){
             this.answerAttempt = new AnswerAttemptTakingDTO(questionAttempt.getAnswerAttempt());
         }
