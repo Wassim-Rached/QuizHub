@@ -1,4 +1,4 @@
-package org.wa55death405.quizhub.dto;
+package org.wa55death405.quizhub.dto.question;
 
 import lombok.Data;
 import org.wa55death405.quizhub.entities.*;
@@ -10,8 +10,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/*
+    * DTO for creating a 'question'
+    * This DTO is used to create a question
+*/
 @Data
-public class QuestionCreationDTO implements EntityDTO<Question,Quiz> {
+public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
     private String question;
     private QuestionType questionType;
     private Float coefficient;

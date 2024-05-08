@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.QuestionType;
-import org.wa55death405.quizhub.interfaces.services.IQuestionLogicService;
 import org.wa55death405.quizhub.repositories.*;
 
 import static org.mockito.Mockito.*;
@@ -19,7 +18,6 @@ import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class QuestionLogicServiceTest {
-
     @Mock
     private AnswerAttemptRepository answerAttemptRepository;
     @Mock
