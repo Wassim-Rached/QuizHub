@@ -91,7 +91,7 @@ public class QuizService implements IQuizService{
 
     @Override
     public void cancelQuizAttempt(Integer quizAttemptId) {
-
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override

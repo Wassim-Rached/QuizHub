@@ -5,7 +5,6 @@ import org.wa55death405.quizhub.dto.answerAttempt.AnswerAttemptResultDTO;
 import org.wa55death405.quizhub.dto.choiceAttempt.ChoiceAttemptResultDTO;
 import org.wa55death405.quizhub.dto.optionMatchAttempt.OptionMatchAttemptResult;
 import org.wa55death405.quizhub.dto.orderedOptionAttempt.OrderedOptionAttemptResult;
-import org.wa55death405.quizhub.dto.question.QuestionResultDTO;
 import org.wa55death405.quizhub.entities.*;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import java.util.List;
 public class QuestionAttemptResultDTO {
     private Integer id;
     private Float correctnessPercentage;
-//    private QuestionResultDTO question;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
     private AnswerAttemptResultDTO answerAttempt;
@@ -32,7 +30,6 @@ public class QuestionAttemptResultDTO {
     public QuestionAttemptResultDTO(QuestionAttempt questionAttempt){
         this.id = questionAttempt.getId();
         this.correctnessPercentage = questionAttempt.getCorrectnessPercentage();
-//        this.question = new QuestionResultDTO(questionAttempt.getQuestion());
         if (questionAttempt.getAnswerAttempt() != null){
             this.answerAttempt = new AnswerAttemptResultDTO(questionAttempt.getAnswerAttempt());
         }

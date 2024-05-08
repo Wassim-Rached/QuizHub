@@ -18,7 +18,6 @@ import java.util.List;
 @Data
 public class QuestionAttemptTakingDTO {
     private Integer id;
-    private QuestionTakingDTO question;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
     private AnswerAttemptTakingDTO answerAttempt;
@@ -34,7 +33,6 @@ public class QuestionAttemptTakingDTO {
 
     public QuestionAttemptTakingDTO(QuestionAttempt questionAttempt){
         this.id = questionAttempt.getId();
-        this.question = new QuestionTakingDTO(questionAttempt.getQuestion());
         if (questionAttempt.getAnswerAttempt() != null){
             this.answerAttempt = new AnswerAttemptTakingDTO(questionAttempt.getAnswerAttempt());
         }

@@ -5,7 +5,9 @@ import org.wa55death405.quizhub.dto.choice.ChoiceGeneralDTO;
 import org.wa55death405.quizhub.dto.match.MatchGeneralDTO;
 import org.wa55death405.quizhub.dto.option.OptionGeneralDTO;
 import org.wa55death405.quizhub.dto.orderedOption.OrderedOptionGeneralDTO;
+import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptTakingDTO;
 import org.wa55death405.quizhub.entities.Question;
+import org.wa55death405.quizhub.entities.QuestionAttempt;
 import org.wa55death405.quizhub.enums.QuestionType;
 
 import java.util.ArrayList;
@@ -34,11 +36,17 @@ public class QuestionTakingDTO {
     private List<MatchGeneralDTO> matches = new ArrayList<>();
     private List<OptionGeneralDTO> options = new ArrayList<>();
 
-    public QuestionTakingDTO(Question question){
+    // For previous attempts
+    private QuestionAttemptTakingDTO questionAttempt;
+
+    public QuestionTakingDTO(Question question, QuestionAttempt questionAttempt){
         this.id = question.getId();
         this.question = question.getQuestion();
         this.coefficient = question.getCoefficient();
         this.questionType = question.getQuestionType();
+        if (questionAttempt != null){
+            this.questionAttempt = new QuestionAttemptTakingDTO(questionAttempt);
+        }
         this.choices = question.getChoices().stream()
                 .map(ChoiceGeneralDTO::new)
                 .toList();

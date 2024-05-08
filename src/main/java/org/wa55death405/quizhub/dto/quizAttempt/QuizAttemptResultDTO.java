@@ -14,18 +14,15 @@ public class QuizAttemptResultDTO {
     private Integer id;
     private Float score;
     private QuizGeneralInfoDTO quiz;
-//    private List<QuestionAttemptResultDTO> questionAttempts;
     private List<QuestionResultDTO> questions;
 
     public QuizAttemptResultDTO(QuizAttempt quizAttempt) {
         this.id = quizAttempt.getId();
         this.score = quizAttempt.getScore();
-//        this.questions = quizAttempt.getQuestionAttempts().stream().map(qa -> new QuestionResultDTO(qa.getQuestion(), qa)).collect(Collectors.toList());
         this.questions = quizAttempt.getQuiz().getQuestions().stream().map(q ->{
             var qa = quizAttempt.getQuestionAttempts().stream().filter(qa1 -> qa1.getQuestion().getId().equals(q.getId())).findFirst().orElse(null);
             return new QuestionResultDTO(q, qa);
         }).collect(Collectors.toList());
-//        this.questionAttempts = quizAttempt.getQuestionAttempts().stream().map(QuestionAttemptResultDTO::new).collect(Collectors.toList());
         this.quiz = new QuizGeneralInfoDTO(quizAttempt.getQuiz());
     }
 }

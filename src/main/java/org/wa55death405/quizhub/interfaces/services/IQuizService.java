@@ -11,7 +11,6 @@ import java.util.List;
 public interface IQuizService {
     Integer createQuiz(QuizCreationDTO quizCreationDTO);
     Integer startQuizAttempt(Integer quizId);
-//    QuizTakingDTO getQuizTaking(Integer quizId);
     void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptTakings, Integer quizAttemptId);
     void cancelQuizAttempt(Integer quizAttemptId);
     QuizAttemptTakingDTO getQuizAttemptTaking(Integer quizAttemptId);
