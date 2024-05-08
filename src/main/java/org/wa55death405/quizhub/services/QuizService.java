@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
+import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptTakingDTO;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
 import org.wa55death405.quizhub.interfaces.services.IQuizLogicService;
@@ -91,6 +92,14 @@ public class QuizService implements IQuizService{
     @Override
     public void cancelQuizAttempt(Integer quizAttemptId) {
 
+    }
+
+    @Override
+    public QuizAttemptTakingDTO getQuizAttemptTaking(Integer quizAttemptId) {
+        QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
+                () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
+        );
+        return new QuizAttemptTakingDTO(quizAttempt);
     }
 
     @Override

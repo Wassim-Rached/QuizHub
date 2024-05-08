@@ -2,7 +2,7 @@ package org.wa55death405.quizhub.dto.questionAttempt;
 
 import lombok.Data;
 import org.wa55death405.quizhub.dto.answerAttempt.AnswerAttemptResultDTO;
-import org.wa55death405.quizhub.dto.choiceAttempt.ChoiceAttemptResult;
+import org.wa55death405.quizhub.dto.choiceAttempt.ChoiceAttemptResultDTO;
 import org.wa55death405.quizhub.dto.optionMatchAttempt.OptionMatchAttemptResult;
 import org.wa55death405.quizhub.dto.orderedOptionAttempt.OrderedOptionAttemptResult;
 import org.wa55death405.quizhub.dto.question.QuestionResultDTO;
@@ -21,7 +21,7 @@ public class QuestionAttemptResultDTO {
     private AnswerAttemptResultDTO answerAttempt;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    private List<ChoiceAttemptResult> choiceAttempts = new ArrayList<>();
+    private List<ChoiceAttemptResultDTO> choiceAttempts = new ArrayList<>();
 
     // for OPTION_ORDERING
     private List<OrderedOptionAttemptResult> orderedOptionAttempts = new ArrayList<>();
@@ -38,7 +38,7 @@ public class QuestionAttemptResultDTO {
         }
         if(questionAttempt.getChoiceAttempts() != null){
             for(ChoiceAttempt choiceAttempt : questionAttempt.getChoiceAttempts()){
-                choiceAttempts.add(new ChoiceAttemptResult(choiceAttempt));
+                choiceAttempts.add(new ChoiceAttemptResultDTO(choiceAttempt));
             }
         }
         if(questionAttempt.getOrderedOptionAttempts() != null){

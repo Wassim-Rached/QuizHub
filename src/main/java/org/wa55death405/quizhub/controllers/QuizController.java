@@ -8,6 +8,7 @@ import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.StandardApiResponse;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
+import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptTakingDTO;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.interfaces.services.IQuizService;
 import org.wa55death405.quizhub.services.QuizService;
@@ -44,10 +45,21 @@ public class QuizController {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz created successfully",quizService.createQuiz(body)), HttpStatus.CREATED);
     }
 
+    /*
+        this api is used to get the needed information to
+        be able to play the quiz, such as the questions
+        and the previous submitted non-finished attempts
+     */
+    @GetMapping("/attempt/{quizAttemptId}/taking")
+    public ResponseEntity<StandardApiResponse<QuizAttemptTakingDTO>> isQuizAttemptTakingPlace(@PathVariable Integer quizAttemptId) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt taking fetched successfully",quizService.getQuizAttemptTaking(quizAttemptId)), HttpStatus.OK);
+    }
+
     @GetMapping("/attempt/{quizAttemptId}/result")
     public ResponseEntity<StandardApiResponse<QuizAttemptResultDTO>> getQuizAttemptResult(@PathVariable Integer quizAttemptId) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt result fetched successfully",quizService.getQuizAttemptResult(quizAttemptId)), HttpStatus.OK);
     }
+
 
 
 }

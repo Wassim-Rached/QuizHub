@@ -1,6 +1,10 @@
 package org.wa55death405.quizhub.dto.questionAttempt;
 
 import lombok.Data;
+import org.wa55death405.quizhub.dto.answerAttempt.AnswerAttemptTakingDTO;
+import org.wa55death405.quizhub.dto.choiceAttempt.ChoiceAttemptTakingDTO;
+import org.wa55death405.quizhub.dto.optionMatchAttempt.OptionMatchAttemptTakingDTO;
+import org.wa55death405.quizhub.dto.orderedOptionAttempt.OrderedOptionAttemptTakingDTO;
 import org.wa55death405.quizhub.dto.question.QuestionTakingDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptTakingDTO;
 import org.wa55death405.quizhub.entities.*;
@@ -14,20 +18,34 @@ import java.util.List;
 @Data
 public class QuestionAttemptTakingDTO {
     private Integer id;
-//    private Float correctnessPercentage;
     private QuestionTakingDTO question;
-    private QuizAttemptTakingDTO quizAttempt;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
-    private AnswerAttempt answerAttempt;
+    private AnswerAttemptTakingDTO answerAttempt;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    private List<ChoiceAttempt> choiceAttempts = List.of();
+    private List<ChoiceAttemptTakingDTO> choiceAttempts = List.of();
 
     // for OPTION_ORDERING
-    private List<OrderedOptionAttempt> orderedOptionAttempts = List.of();
+    private List<OrderedOptionAttemptTakingDTO> orderedOptionAttempts = List.of();
 
     // for OPTION_MATCHING
-    private List<OptionMatchAttempt> optionMatchAttempts = List.of();
+    private List<OptionMatchAttemptTakingDTO> optionMatchAttempts = List.of();
 
+    public QuestionAttemptTakingDTO(QuestionAttempt questionAttempt){
+        this.id = questionAttempt.getId();
+        this.question = new QuestionTakingDTO(questionAttempt.getQuestion());
+        if (questionAttempt.getAnswerAttempt() != null){
+            this.answerAttempt = new AnswerAttemptTakingDTO(questionAttempt.getAnswerAttempt());
+        }
+        this.choiceAttempts = questionAttempt.getChoiceAttempts().stream()
+                .map(ChoiceAttemptTakingDTO::new)
+                .toList();
+        this.orderedOptionAttempts = questionAttempt.getOrderedOptionAttempts().stream()
+                .map(OrderedOptionAttemptTakingDTO::new)
+                .toList();
+        this.optionMatchAttempts = questionAttempt.getOptionMatchAttempts().stream()
+                .map(OptionMatchAttemptTakingDTO::new)
+                .toList();
+    }
 }
