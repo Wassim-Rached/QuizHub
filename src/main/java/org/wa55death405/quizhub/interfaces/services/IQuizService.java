@@ -1,12 +1,16 @@
 package org.wa55death405.quizhub.interfaces.services;
 
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
-import org.wa55death405.quizhub.dto.quiz.QuizTakingDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptTakingDTO;
 
 import java.util.List;
+
+/*
+    this interface contains all the methods
+    that the api will need related to the quiz
+*/
 
 public interface IQuizService {
     Integer createQuiz(QuizCreationDTO quizCreationDTO);

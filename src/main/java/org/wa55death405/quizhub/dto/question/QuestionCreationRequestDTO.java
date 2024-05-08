@@ -10,10 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/*
-    * DTO for creating a 'question'
-    * This DTO is used to create a question
-*/
 @Data
 public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
     private String question;

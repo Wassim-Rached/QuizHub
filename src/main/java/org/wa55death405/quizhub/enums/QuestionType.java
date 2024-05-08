@@ -2,6 +2,7 @@ package org.wa55death405.quizhub.enums;
 
 import lombok.Getter;
 
+
 @Getter
 public enum QuestionType {
     TRUE_FALSE("TRUE_FALSE"),

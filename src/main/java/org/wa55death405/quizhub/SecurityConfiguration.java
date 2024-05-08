@@ -2,6 +2,12 @@ package org.wa55death405.quizhub;
 
 import org.springframework.context.annotation.Configuration;
 
+/*
+    * This configuration class is responsible for
+    * setting up the security of the application
+    * using Spring Security
+ */
+
 @Configuration
 public class SecurityConfiguration {
 

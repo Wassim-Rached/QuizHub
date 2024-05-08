@@ -9,6 +9,12 @@ import org.wa55death405.quizhub.dto.StandardApiResponse;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
 
+
+/*
+    this class is the controller advice
+    it is used to handle the exceptions thrown by the controllers
+ */
+
 @ControllerAdvice
 public class ControllerExceptionHandler {
 

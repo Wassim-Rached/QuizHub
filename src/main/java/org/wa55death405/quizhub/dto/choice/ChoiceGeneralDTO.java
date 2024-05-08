@@ -3,10 +3,6 @@ package org.wa55death405.quizhub.dto.choice;
 import lombok.Data;
 import org.wa55death405.quizhub.entities.Choice;
 
-/*
-    * DTO for 'choice' entity
-    * it is used to only return the core information of a choice
- */
 @Data
 public class ChoiceGeneralDTO {
     private Integer id;

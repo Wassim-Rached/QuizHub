@@ -10,6 +10,15 @@ import org.wa55death405.quizhub.repositories.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    * This class is responsible for handling the logic of a question
+    * It determines if the user's answer is correct or not
+    * It sets the correctness percentage of the question attempt
+    * It sets the correctness of the various answer attempts
+    * Wherever the answer be [ChoiceAttempt, OrderedOptionAttempt,AnswerAttempt...]
+    * And lastly it saves the changes to the database
+ */
+
 @Service
 @RequiredArgsConstructor
 public class QuestionLogicServiceImpl implements IQuestionLogicService {

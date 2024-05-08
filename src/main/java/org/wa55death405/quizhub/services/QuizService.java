@@ -18,6 +18,12 @@ import org.wa55death405.quizhub.utils.DBErrorExtractorUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    * This class is responsible for providing
+    * the api with all the logic it needs
+    * that is related to the quiz
+ */
+
 @Service
 @RequiredArgsConstructor
 public class QuizService implements IQuizService{

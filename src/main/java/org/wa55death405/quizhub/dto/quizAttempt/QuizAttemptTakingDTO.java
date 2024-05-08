@@ -1,13 +1,10 @@
 package org.wa55death405.quizhub.dto.quizAttempt;
 
 import lombok.Data;
-import org.wa55death405.quizhub.dto.question.QuestionResultDTO;
 import org.wa55death405.quizhub.dto.question.QuestionTakingDTO;
-import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptTakingDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.entities.QuizAttempt;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

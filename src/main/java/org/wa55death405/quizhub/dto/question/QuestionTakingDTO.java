@@ -14,10 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-    * DTO for taking a question
-    * This DTO is used to take a question
-    * It only returns the necessary information for taking a question
-    * Without any correct answers
+     * This class represents the taking of a question.
+     * 'Taking' means the correct answer is not provided.
  */
 @Data
 public class QuestionTakingDTO {

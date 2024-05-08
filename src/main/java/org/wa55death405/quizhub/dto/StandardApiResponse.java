@@ -1,6 +1,5 @@
 package org.wa55death405.quizhub.dto;
 
-import lombok.Builder;
 import lombok.Data;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 
