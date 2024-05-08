@@ -97,7 +97,13 @@ public class QuizService implements IQuizService{
 
     @Override
     public void cancelQuizAttempt(Integer quizAttemptId) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
+                () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
+        );
+        if (quizAttempt.getScore() != null){
+            throw new InputValidationException("Quiz attempt already finished");
+        }
+        quizAttemptRepository.delete(quizAttempt);
     }
 
     @Override

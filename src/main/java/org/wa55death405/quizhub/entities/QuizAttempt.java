@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Data
@@ -21,7 +20,7 @@ public class QuizAttempt {
 
     @ManyToOne
     private Quiz quiz;
-    @OneToMany(mappedBy = "quizAttempt")
+    @OneToMany(mappedBy = "quizAttempt",cascade = CascadeType.ALL)
     private List<QuestionAttempt> questionAttempts;
 
     public static Float calculateScore(QuizAttempt quizAttempt) {

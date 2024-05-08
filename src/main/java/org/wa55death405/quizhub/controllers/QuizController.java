@@ -87,6 +87,16 @@ public class QuizController {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt result fetched successfully",quizService.getQuizAttemptResult(quizAttemptId)), HttpStatus.OK);
     }
 
+    /*
+        this api is used to cancel a quiz attempt
+        it is used when the user wants to cancel the quiz
+        before finishing it
+     */
+    @DeleteMapping("/attempt/{quizAttemptId}/cancel")
+    public ResponseEntity<StandardApiResponse<Void>> cancelQuizAttempt(@PathVariable Integer quizAttemptId) {
+        quizService.cancelQuizAttempt(quizAttemptId);
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt canceled successfully"), HttpStatus.OK);
+    }
 
 
 }
