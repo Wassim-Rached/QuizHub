@@ -7,6 +7,7 @@ import org.wa55death405.quizhub.dto.correctOptionMatch.CorrectOptionMatchResultD
 import org.wa55death405.quizhub.dto.match.MatchGeneralDTO;
 import org.wa55death405.quizhub.dto.option.OptionGeneralDTO;
 import org.wa55death405.quizhub.dto.orderedOption.OrderedOptionResultDTO;
+import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptResultDTO;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.QuestionType;
 
@@ -38,11 +39,18 @@ public class QuestionResultDTO {
     private List<OptionGeneralDTO> options = new ArrayList<>();
     private List<CorrectOptionMatchResultDTO> correctOptionMatches = new ArrayList<>();
 
-    public QuestionResultDTO(Question question) {
+    // to show the play's attempt
+    private QuestionAttemptResultDTO questionAttempt;
+
+    public QuestionResultDTO(Question question,QuestionAttempt questionAttempt) {
         this.id = question.getId();
         this.question = question.getQuestion();
         this.coefficient = question.getCoefficient();
         this.questionType = question.getQuestionType();
+        // I know this is ugly, but I have to do this
+        if (questionAttempt != null){
+            this.questionAttempt = new QuestionAttemptResultDTO(questionAttempt);
+        }
         if (question.getAnswer() != null){
             this.answer = new AnswerResultDTO(question.getAnswer());
         }

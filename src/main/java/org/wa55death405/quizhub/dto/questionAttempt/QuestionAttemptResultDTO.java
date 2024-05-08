@@ -15,7 +15,7 @@ import java.util.List;
 public class QuestionAttemptResultDTO {
     private Integer id;
     private Float correctnessPercentage;
-    private QuestionResultDTO question;
+//    private QuestionResultDTO question;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
     private AnswerAttemptResultDTO answerAttempt;
@@ -32,7 +32,7 @@ public class QuestionAttemptResultDTO {
     public QuestionAttemptResultDTO(QuestionAttempt questionAttempt){
         this.id = questionAttempt.getId();
         this.correctnessPercentage = questionAttempt.getCorrectnessPercentage();
-        this.question = new QuestionResultDTO(questionAttempt.getQuestion());
+//        this.question = new QuestionResultDTO(questionAttempt.getQuestion());
         if (questionAttempt.getAnswerAttempt() != null){
             this.answerAttempt = new AnswerAttemptResultDTO(questionAttempt.getAnswerAttempt());
         }
