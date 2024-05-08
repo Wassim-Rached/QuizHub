@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.wa55death405.quizhub.dto.QuestionAttemptSubmissionDTO;
-import org.wa55death405.quizhub.dto.QuizCreationDTO;
+import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
+import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.StandardApiResponse;
+import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
+import org.wa55death405.quizhub.interfaces.services.IQuizService;
 import org.wa55death405.quizhub.services.QuizService;
 
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.List;
 @RequestMapping("/api/quiz")
 public class QuizController {
 
-    private final QuizService quizService;
+    private final IQuizService quizService;
 
     // core api's
     @PostMapping("/{quizId}/start")
@@ -40,6 +42,11 @@ public class QuizController {
     @PostMapping
     public ResponseEntity<StandardApiResponse<Integer>> createQuiz(@RequestBody QuizCreationDTO body) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz created successfully",quizService.createQuiz(body)), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/attempt/{quizAttemptId}/result")
+    public ResponseEntity<StandardApiResponse<QuizAttemptResultDTO>> getQuizAttemptResult(@PathVariable Integer quizAttemptId) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt result fetched successfully",quizService.getQuizAttemptResult(quizAttemptId)), HttpStatus.OK);
     }
 
 

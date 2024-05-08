@@ -4,10 +4,11 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.wa55death405.quizhub.dto.*;
+import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
+import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
+import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
-import org.wa55death405.quizhub.interfaces.services.IQuestionLogicService;
 import org.wa55death405.quizhub.interfaces.services.IQuizLogicService;
 import org.wa55death405.quizhub.interfaces.services.IQuizService;
 import org.wa55death405.quizhub.repositories.*;
@@ -23,6 +24,7 @@ public class QuizService implements IQuizService{
     private final QuestionAttemptRepository questionAttemptRepository;
     private final QuizRepository quizRepository;
     private final IQuizLogicService quizLogicService;
+    private final ModelMapper modelMapper;
 
     @Override
     public Integer startQuizAttempt(Integer quizId) {
@@ -54,7 +56,7 @@ public class QuizService implements IQuizService{
         List<QuestionAttempt> questionAttemptsWillBeSaved = new ArrayList<>();
         List<QuestionAttempt> oldQuestionAttempts = new ArrayList<>(quizAttempt.getQuestionAttempts());
         for (var questionAttemptTaking : questionAttemptTakings) {
-            var newQuestionAttempt = questionAttemptTaking.toQuestionAttempt(quizAttemptId);
+            var newQuestionAttempt = questionAttemptTaking.toEntity(quizAttemptId);
 
             Quiz quiz = quizAttempt.getQuiz();
             if (questions.stream().noneMatch(q -> q.getId().equals(newQuestionAttempt.getQuestion().getId()))){
@@ -87,6 +89,11 @@ public class QuizService implements IQuizService{
     }
 
     @Override
+    public void cancelQuizAttempt(Integer quizAttemptId) {
+
+    }
+
+    @Override
     public Float finishQuizAttempt(Integer quizAttemptId) {
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
@@ -102,4 +109,11 @@ public class QuizService implements IQuizService{
         return quiz.getId();
     }
 
+    @Override
+    public QuizAttemptResultDTO getQuizAttemptResult(Integer quizAttemptId) {
+        QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
+                () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
+        );
+        return new QuizAttemptResultDTO(quizAttempt);
+    }
 }
