@@ -16,10 +16,10 @@ public class OptionMatchAttempt{
     private Integer id;
     private Boolean isCorrect;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "match_id")
     private Match match;
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "option_id")
     private Option option;
 

@@ -23,7 +23,7 @@ public class Question {
     private Float coefficient = 1f;
     private QuestionType questionType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Quiz quiz;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,

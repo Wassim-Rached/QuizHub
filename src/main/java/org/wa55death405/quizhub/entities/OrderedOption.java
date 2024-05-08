@@ -13,10 +13,12 @@ public class OrderedOption {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(nullable = false)
     private String option;
+    @Column(nullable = false)
     private Integer correctPosition;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Question question;
 
 }

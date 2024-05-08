@@ -1,10 +1,7 @@
 package org.wa55death405.quizhub.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Comparator;
@@ -19,9 +16,10 @@ public class Match {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(nullable = false)
     private String match;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Question question;
 
     public static Comparator<Match> matchComparator = Comparator.comparing(Match::getMatch);

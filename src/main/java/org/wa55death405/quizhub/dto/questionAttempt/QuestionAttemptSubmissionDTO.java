@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Data
 public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,Integer> {
+//    TODO rename question to questionId
     private Integer question;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK

@@ -22,7 +22,7 @@ import java.util.List;
     * This class is responsible for providing
     * the api with all the logic it needs
     * that is related to the quiz
- */
+*/
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +31,6 @@ public class QuizService implements IQuizService{
     private final QuestionAttemptRepository questionAttemptRepository;
     private final QuizRepository quizRepository;
     private final IQuizLogicService quizLogicService;
-    private final ModelMapper modelMapper;
 
     @Override
     public Integer startQuizAttempt(Integer quizId) {
@@ -44,52 +43,59 @@ public class QuizService implements IQuizService{
         return quizAttempt.getId();
     }
 
+    // TODO : there is a problem with sending new attempts to replace old attempts
     @Override
-    public void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptTakings, Integer quizAttemptId) {
-        if (questionAttemptTakings == null || questionAttemptTakings.isEmpty()) {
-            throw new InputValidationException("No question attempts to submit");
+    public void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptSubmissions, Integer quizAttemptId) {
+        if (questionAttemptSubmissions == null || questionAttemptSubmissions.isEmpty()) {
+            System.out.println("No question attempts to submit");
+            return;
         }
 
         var quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
 
-        if (quizAttempt.getScore() != null){
+        if (quizAttempt.isFinished()){
             throw new InputValidationException("Quiz attempt already finished");
         }
 
-        List<Question> questions = quizAttempt.getQuiz().getQuestions();
-        List<QuestionAttempt> oldQuestionAttemptsWillBeRemoved = new ArrayList<>();
+        List<Question> questions = new ArrayList<>(quizAttempt.getQuiz().getQuestions());
+        List<QuestionAttempt> oldQuestionAttemptsToBeRemoved = new ArrayList<>();
         List<QuestionAttempt> questionAttemptsWillBeSaved = new ArrayList<>();
-        List<QuestionAttempt> oldQuestionAttempts = new ArrayList<>(quizAttempt.getQuestionAttempts());
-        for (var questionAttemptTaking : questionAttemptTakings) {
-            var newQuestionAttempt = questionAttemptTaking.toEntity(quizAttemptId);
-
-            Quiz quiz = quizAttempt.getQuiz();
-            if (questions.stream().noneMatch(q -> q.getId().equals(newQuestionAttempt.getQuestion().getId()))){
-                throw new InputValidationException("Question with id " + newQuestionAttempt.getQuestion().getId() + " does not belong to quiz with id " + quiz.getId());
+        System.out.println("questionAttemptTakings:" + questionAttemptSubmissions.size());
+        for (var questionAttemptTaking : questionAttemptSubmissions) {
+            boolean isAttemptRelated = questions.removeIf(q -> q.getId().equals(questionAttemptTaking.getQuestion()));
+            if (!isAttemptRelated){
+                throw new InputValidationException("Question with id " + questionAttemptTaking.getQuestion() + " does not belong to quiz with id " + quizAttempt.getQuiz().getId());
             }
+
+            QuestionAttempt newQuestionAttempt = questionAttemptTaking.toEntity(quizAttemptId);
 
             // find if the question attempt is already in the database
             // and put it in a list to be removed
-            var oldQuestionAttempt = oldQuestionAttempts.stream().filter(oqa -> oqa.getQuestion().getId().equals(newQuestionAttempt.getQuestion().getId())).findFirst();
-            oldQuestionAttempt.ifPresent(oldQuestionAttemptsWillBeRemoved::add);
+            var oldQuestionAttempt = quizAttempt.getQuestionAttempts().stream()
+                    .filter(qa -> qa.getQuestion().getId().equals(questionAttemptTaking.getQuestion()))
+                    .findFirst();
 
-            newQuestionAttempt.setQuizAttempt(quizAttempt);
+            oldQuestionAttempt.ifPresent(questionAttempt -> System.out.println("1-oldQuestionAttempt:" + questionAttempt.getId()));
+            oldQuestionAttempt.ifPresent(questionAttemptRepository::delete);
+            oldQuestionAttempt.ifPresent(questionAttempt -> System.out.println("2-oldQuestionAttempt:" + questionAttempt.getId()));
+
             questionAttemptsWillBeSaved.add(newQuestionAttempt);
         }
 
-        // remove old question attempts
-        questionAttemptRepository.deleteAll(oldQuestionAttemptsWillBeRemoved);
 
         try {
             // save new question attempts
             questionAttemptRepository.saveAll(questionAttemptsWillBeSaved);
         }catch (Exception e){
+            // this catch is mostly for the case when
+            // some id provided in the request is not valid
             var errorDetails = DBErrorExtractorUtils.extractSQLErrorDetails(e.getMessage());
             if (errorDetails.allFieldsPresent()){
                 throw new EntityNotFoundException(errorDetails.getTableName() + " with id " + errorDetails.getEntityId() + " not found");
             }else{
+                System.out.println(e.getMessage());
                 throw new InputValidationException("Invalid question response data provided");
             }
         }

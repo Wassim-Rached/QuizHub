@@ -16,9 +16,10 @@ public class AnswerAttempt {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Boolean isCorrect;
+    @Column(nullable = false)
     private String answer;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     private QuestionAttempt questionAttempt;
 
     @Override

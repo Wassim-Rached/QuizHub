@@ -1,9 +1,6 @@
 package org.wa55death405.quizhub.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -16,12 +13,13 @@ public class OrderedOptionAttempt {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(nullable = false)
     private Integer position;
     private Boolean isCorrect;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private OrderedOption orderedOption;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private QuestionAttempt questionAttempt;
 
     public boolean validate() {

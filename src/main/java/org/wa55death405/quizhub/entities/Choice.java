@@ -17,10 +17,12 @@ public class Choice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(nullable = false)
     private String choice;
+    @Column(nullable = false)
     private Boolean isCorrect;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Question question;
 
     @Override

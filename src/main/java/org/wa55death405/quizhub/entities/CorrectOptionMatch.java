@@ -16,14 +16,14 @@ public class CorrectOptionMatch {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,optional = false)
     @JoinColumn(name = "match_id")
     private Match match;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,optional = false)
     @JoinColumn(name = "option_id")
     private Option option;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Question question;
 
     public boolean verifyAttempt(OptionMatchAttempt optionMatchAttempt) {

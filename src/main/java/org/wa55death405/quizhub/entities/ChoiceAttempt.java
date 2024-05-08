@@ -18,9 +18,9 @@ public class ChoiceAttempt {
     private Integer id;
     private Boolean isCorrect;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Choice choice;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private QuestionAttempt questionAttempt;
 
     @Override

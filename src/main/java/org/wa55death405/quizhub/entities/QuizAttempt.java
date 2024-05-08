@@ -18,7 +18,7 @@ public class QuizAttempt {
     private Integer id;
     private Float score = null;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Quiz quiz;
     @OneToMany(mappedBy = "quizAttempt",cascade = CascadeType.ALL)
     private List<QuestionAttempt> questionAttempts;
@@ -38,5 +38,9 @@ public class QuizAttempt {
     @Override
     public int hashCode() {
         return Objects.hash(id, score);
+    }
+
+    public boolean isFinished() {
+        return score != null;
     }
 }
