@@ -2,11 +2,14 @@ package org.wa55death405.quizhub.utils;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.QuestionType;
+import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
 import org.wa55death405.quizhub.repositories.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +17,32 @@ public class FakeDataUtils {
     private final QuizRepository quizRepository;
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
+
+    public static QuestionAttemptSubmissionDTO getPerfectScoreQuestionAttemptSubmissionDTO(Question question) {
+        /*
+            I don't know what tf did I just wrote, but it works
+            it returns a QuestionAttemptSubmissionDTO
+            with all the correct answers for the given question
+         */
+        QuestionAttemptSubmissionDTO questionAttemptSubmissionDTO = new QuestionAttemptSubmissionDTO();
+        questionAttemptSubmissionDTO.setQuestion(question.getId());
+        switch (question.getQuestionType()){
+            case TRUE_FALSE,NUMERIC,SHORT_ANSWER,FILL_IN_THE_BLANK -> questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswer().getAnswer());
+            case MULTIPLE_CHOICE,SINGLE_CHOICE -> questionAttemptSubmissionDTO.setChoiceAttempts(question.getCorrectChoices().stream().map(Choice::getId).toList());
+            case OPTION_ORDERING -> questionAttemptSubmissionDTO.setOrderedOptionAttempts((HashMap<Integer, Integer>) question.getOrderedOptions().stream()
+                    .collect(Collectors.toMap(OrderedOption::getId, OrderedOption::getCorrectPosition)));
+            case OPTION_MATCHING -> questionAttemptSubmissionDTO.setOptionMatchAttempts((HashMap<Integer, List<Integer>>) question.getCorrectOptionMatches().stream()
+                    .collect(Collectors.toMap(o -> o.getOption().getId(), correctOptionMatch -> List.of(correctOptionMatch.getMatch().getId()))));
+            default -> {
+                throw new IrregularBehaviorException("Unexpected questionType value: " + question.getQuestionType());
+            }
+        }
+        return questionAttemptSubmissionDTO;
+    }
+
+    public static List<QuestionAttemptSubmissionDTO> getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(Quiz quiz) {
+        return quiz.getQuestions().stream().map(FakeDataUtils::getPerfectScoreQuestionAttemptSubmissionDTO).toList();
+    }
 
     public Quiz fillFakeQuizData() {
         // create quiz

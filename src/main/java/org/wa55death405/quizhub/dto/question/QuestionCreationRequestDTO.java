@@ -16,9 +16,9 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
     private QuestionType questionType;
     private Float coefficient;
     private String answer;
-    private HashMap<String,Boolean> choices;
-    private HashMap<Integer,String> orderedOptions;
-    private HashMap<String,List<String>> optionMatches;
+    private HashMap<String,Boolean> choices = new HashMap<>();
+    private HashMap<Integer,String> orderedOptions = new HashMap<>();
+    private HashMap<String,List<String>> optionMatches = new HashMap<>();
 
     @Override
     public Question toEntity(Quiz quiz) {

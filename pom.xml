@@ -61,6 +61,15 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
+<!--	faker	-->
+		<dependency>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>1.0.2</version>
+<!--			<scope>test</scope> &lt;!&ndash; Make sure to include it as a test dependency &ndash;&gt;-->
+		</dependency>
+
 	</dependencies>
 
 	<build>

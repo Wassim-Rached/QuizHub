@@ -59,12 +59,12 @@ public class QuizService implements IQuizService{
             throw new InputValidationException("Quiz attempt already finished");
         }
 
-        List<Question> questions = new ArrayList<>(quizAttempt.getQuiz().getQuestions());
-        List<QuestionAttempt> oldQuestionAttemptsToBeRemoved = new ArrayList<>();
+        List<Question> questions = quizAttempt.getQuiz().getQuestions();
+//        List<QuestionAttempt> oldQuestionAttemptsToBeRemoved = new ArrayList<>();
         List<QuestionAttempt> questionAttemptsWillBeSaved = new ArrayList<>();
         System.out.println("questionAttemptTakings:" + questionAttemptSubmissions.size());
         for (var questionAttemptTaking : questionAttemptSubmissions) {
-            boolean isAttemptRelated = questions.removeIf(q -> q.getId().equals(questionAttemptTaking.getQuestion()));
+            boolean isAttemptRelated = questions.stream().anyMatch(q -> q.getId().equals(questionAttemptTaking.getQuestion()));
             if (!isAttemptRelated){
                 throw new InputValidationException("Question with id " + questionAttemptTaking.getQuestion() + " does not belong to quiz with id " + quizAttempt.getQuiz().getId());
             }

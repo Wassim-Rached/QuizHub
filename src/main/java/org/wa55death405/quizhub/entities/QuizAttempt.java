@@ -3,6 +3,7 @@ package org.wa55death405.quizhub.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,8 +21,9 @@ public class QuizAttempt {
 
     @ManyToOne(optional = false)
     private Quiz quiz;
-    @OneToMany(mappedBy = "quizAttempt",cascade = CascadeType.ALL)
-    private List<QuestionAttempt> questionAttempts;
+    // TODO : change the fetch to lazy
+    @OneToMany(mappedBy = "quizAttempt",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<QuestionAttempt> questionAttempts = new ArrayList<>();
 
     public static Float calculateScore(QuizAttempt quizAttempt) {
         float score = 0f;

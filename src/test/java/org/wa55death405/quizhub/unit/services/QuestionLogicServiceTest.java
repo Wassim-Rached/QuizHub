@@ -1,4 +1,4 @@
-package org.wa55death405.quizhub.services;
+package org.wa55death405.quizhub.unit.services;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.QuestionType;
 import org.wa55death405.quizhub.repositories.*;
+import org.wa55death405.quizhub.services.QuestionLogicServiceImpl;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;

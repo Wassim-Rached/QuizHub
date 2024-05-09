@@ -50,4 +50,9 @@ public class Question {
     public int hashCode() {
         return Objects.hash(id, question,coefficient);
     }
+
+    public List<Choice> getCorrectChoices() {
+        return choices.stream().filter(Choice::getIsCorrect).toList();
+    }
+
 }

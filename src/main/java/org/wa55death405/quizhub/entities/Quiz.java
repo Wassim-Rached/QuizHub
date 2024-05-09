@@ -20,7 +20,8 @@ public class Quiz {
     @Column(nullable = false)
     private String title;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    // TODO : change the fetch to lazy
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Question> questions = new ArrayList<>();
     @OneToMany(mappedBy = "quiz")
     private List<QuizAttempt> attempts = new ArrayList<>();
