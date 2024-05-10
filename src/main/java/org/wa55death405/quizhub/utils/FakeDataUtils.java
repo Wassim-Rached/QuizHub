@@ -40,12 +40,15 @@ public class FakeDataUtils {
             case OPTION_MATCHING:
                 HashMap<Integer,List<Integer>> optionMatchAttempts = new HashMap<>();
                 question.getCorrectOptionMatches().forEach(correctOptionMatch -> {
-                    if (optionMatchAttempts.containsKey(correctOptionMatch.getOption().getId())) {
-                        optionMatchAttempts.get(correctOptionMatch.getOption().getId()).add(correctOptionMatch.getMatch().getId());
+                    Integer optionId = correctOptionMatch.getOption().getId();
+                    Integer matchId = correctOptionMatch.getMatch().getId();
+                    if (optionMatchAttempts.containsKey(matchId)) {
+                        optionMatchAttempts.get(matchId).add(optionId);
                     } else {
-                        optionMatchAttempts.put(correctOptionMatch.getOption().getId(), new ArrayList<Integer>(correctOptionMatch.getMatch().getId()));
+                        optionMatchAttempts.put(matchId, List.of(optionId));
                     }
                 });
+                questionAttemptSubmissionDTO.setOptionMatchAttempts(optionMatchAttempts);
             break;
             default: {
                 throw new IrregularBehaviorException("Invalid Question Type");

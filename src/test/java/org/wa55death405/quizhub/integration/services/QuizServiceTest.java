@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
-import org.wa55death405.quizhub.entities.QuestionAttempt;
 import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.entities.QuizAttempt;
 import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
@@ -17,8 +16,6 @@ import org.wa55death405.quizhub.repositories.QuizRepository;
 import org.wa55death405.quizhub.services.QuizService;
 import org.wa55death405.quizhub.utils.FakeDataGenerator;
 import org.wa55death405.quizhub.utils.FakeDataUtils;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
