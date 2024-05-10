@@ -34,7 +34,7 @@ public class QuizController {
      */
     @PostMapping("/{quizId}/start")
     public ResponseEntity<StandardApiResponse<Integer>> startQuizAttempt(@PathVariable Integer quizId) {
-        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt started successfully",quizService.startQuizAttempt(quizId)), HttpStatus.CREATED);
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt started successfully",quizService.startQuizAttempt(quizId).getId()), HttpStatus.CREATED);
     }
 
     /*
@@ -55,7 +55,7 @@ public class QuizController {
      */
     @PostMapping("/attempt/{quizAttemptId}/finish")
     public ResponseEntity<StandardApiResponse<Float>> finishQuizAttempt(@PathVariable Integer quizAttemptId) {
-    return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt finished and processed successfully",quizService.finishQuizAttempt(quizAttemptId)), HttpStatus.OK);
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt finished and processed successfully",quizService.finishQuizAttempt(quizAttemptId).getScore()), HttpStatus.OK);
     }
 
     /*
@@ -65,7 +65,7 @@ public class QuizController {
      */
     @PostMapping
     public ResponseEntity<StandardApiResponse<Integer>> createQuiz(@RequestBody QuizCreationDTO body) {
-        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz created successfully",quizService.createQuiz(body)), HttpStatus.CREATED);
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz created successfully",quizService.createQuiz(body).getId()), HttpStatus.CREATED);
     }
 
     /*

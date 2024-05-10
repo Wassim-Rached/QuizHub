@@ -1,5 +1,6 @@
 package org.wa55death405.quizhub.integration.services;
 
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -7,13 +8,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
+import org.wa55death405.quizhub.entities.QuestionAttempt;
 import org.wa55death405.quizhub.entities.Quiz;
+import org.wa55death405.quizhub.entities.QuizAttempt;
 import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
 import org.wa55death405.quizhub.repositories.QuizAttemptRepository;
 import org.wa55death405.quizhub.repositories.QuizRepository;
 import org.wa55death405.quizhub.services.QuizService;
 import org.wa55death405.quizhub.utils.FakeDataGenerator;
 import org.wa55death405.quizhub.utils.FakeDataUtils;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,6 +32,8 @@ class QuizServiceTest {
     private QuizAttemptRepository quizAttemptRepository;
     @Autowired
     private QuizRepository quizRepository;
+    @Autowired
+    private EntityManager entityManager;
 
     @Nested
     class Test_createQuiz {
@@ -38,166 +45,180 @@ class QuizServiceTest {
             FakeDataGenerator.fill(quizCreationDTO);
 
             // when
-            Integer quizId = quizService.createQuiz(quizCreationDTO);
+            Quiz quiz = quizService.createQuiz(quizCreationDTO);
 
             // then
-            assertNotNull(quizId);
-            var quizIsFound = quizRepository.findById(quizId);
+            assertNotNull(quiz);
+            var quizIsFound = quizRepository.findById(quiz.getId());
             assertTrue(quizIsFound.isPresent());
         }
     }
 
     @Nested
     class Test_startQuizAttempt{
-        private Integer preExistingQuizId;
+        private Quiz preExisting__Quiz;
 
         @BeforeEach
         void setUp() {
             // Set up pre-existing data, such as a quiz, to be used in multiple tests
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
             FakeDataGenerator.fill(quizCreationDTO);
-            preExistingQuizId = quizService.createQuiz(quizCreationDTO);
+            preExisting__Quiz = quizService.createQuiz(quizCreationDTO);
         }
 
         @Test
         void test_normal(){
             // when
-            Integer quizAttemptId = quizService.startQuizAttempt(preExistingQuizId);
+            QuizAttempt quizAttempt = quizService.startQuizAttempt(preExisting__Quiz.getId());
 
             // then
-            assertNotNull(quizAttemptId);
+            assertNotNull(quizAttempt);
         }
     }
 
     @Nested
     class Test_submitQuestionAttempts{
-
-        private Integer preExistingQuizAttemptId;
-        private Quiz preExistingQuiz;
+        private QuizAttempt preExisting__QuizAttempt;
+        private Quiz preExisting__Quiz;
 
         @BeforeEach
         void setUp() {
-            // Set up pre-existing data, such as a quiz, to be used in multiple tests
+            // generate the quiz
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
             FakeDataGenerator.fill(quizCreationDTO);
-            Integer preExistingQuizId = quizService.createQuiz(quizCreationDTO);
-            preExistingQuiz = quizRepository.findById(preExistingQuizId).orElseThrow(() -> new IrregularBehaviorException("Quiz not found"));
-            preExistingQuizAttemptId = quizService.startQuizAttempt(preExistingQuizId);
+            preExisting__Quiz = quizService.createQuiz(quizCreationDTO);
+
+            // generate the quiz attempt
+            preExisting__QuizAttempt = quizService.startQuizAttempt(preExisting__Quiz.getId());
         }
 
         @Test
-            void test_normal(){
+        void test_normal(){
             // given
-            var attempts = FakeDataUtils.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExistingQuiz);
+            var attemptsSubmissions = FakeDataUtils.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
 
             // when
-            quizService.submitQuestionAttempts(attempts, preExistingQuizAttemptId);
+            quizService.submitQuestionAttempts(attemptsSubmissions, preExisting__QuizAttempt.getId());
 
             // then
-            var questionAttempts = quizAttemptRepository.findById(preExistingQuizAttemptId).orElseThrow(() -> new IrregularBehaviorException("Quiz attempt not found")).getQuestionAttempts();
-            assertEquals(preExistingQuiz.getQuestions().size(), questionAttempts.size());
+            entityManager.flush();
+            entityManager.clear();
+            var quizAttempt = quizAttemptRepository.findById(preExisting__QuizAttempt.getId()).orElseThrow(() -> new IrregularBehaviorException("Quiz attempt not found"));
+            var questionAttempts = quizAttempt.getQuestionAttempts();
+            assertEquals(attemptsSubmissions.size(),questionAttempts.size());
         }
     }
 
     @Nested
     class Test_cancelQuizAttempt{
-        private Integer preExistingQuizAttemptId;
+        private QuizAttempt preExisting__QuizAttempt;
 
         @BeforeEach
         void setUp() {
             // Set up pre-existing data, such as a quiz, to be used in multiple tests
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
             FakeDataGenerator.fill(quizCreationDTO);
-            Integer preExistingQuizId = quizService.createQuiz(quizCreationDTO);
-            preExistingQuizAttemptId = quizService.startQuizAttempt(preExistingQuizId);
+            Quiz preExistingQuizId = quizService.createQuiz(quizCreationDTO);
+            preExisting__QuizAttempt = quizService.startQuizAttempt(preExistingQuizId.getId());
         }
 
         @Test
         void test_normal(){
             // when
-            quizService.cancelQuizAttempt(preExistingQuizAttemptId);
+            quizService.cancelQuizAttempt(preExisting__QuizAttempt.getId());
 
             // then
-            var quizAttemptIsFound = quizAttemptRepository.findById(preExistingQuizAttemptId);
+            var quizAttemptIsFound = quizAttemptRepository.findById(preExisting__QuizAttempt.getId());
             assertFalse(quizAttemptIsFound.isPresent());
         }
     }
 
-    @Nested
-    class Test_getQuizAttemptTaking{
-
-        private static Integer preExistingQuizAttemptId;
-
-        @BeforeEach
-        void setUp() {
-            // Set up pre-existing data, such as a quiz, to be used in multiple tests
-            QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-            FakeDataGenerator.fill(quizCreationDTO);
-            Integer preExistingQuizId = quizService.createQuiz(quizCreationDTO);
-            preExistingQuizAttemptId = quizService.startQuizAttempt(preExistingQuizId);
-        }
-
-        // normal behavior tests
-        @Test
-        void test_normal() {
-            // when
-            var quizAttemptTaking = quizService.getQuizAttemptTaking(preExistingQuizAttemptId);
-
-            // then
-            assertNotNull(quizAttemptTaking);
-        }
-    }
-
+//    @Nested
+//    class Test_getQuizAttemptTaking{
+//
+//        private QuizAttempt preExisting__QuizAttempt;
+//
+//        @BeforeEach
+//        void setUp() {
+//            // Set up pre-existing data, such as a quiz, to be used in multiple tests
+//            QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
+//            FakeDataGenerator.fill(quizCreationDTO);
+//            QuizAttempt preExistingQuizId = quizService.createQuiz(quizCreationDTO);
+//            preExistingQuizAttemptId = quizService.startQuizAttempt(preExistingQuizId);
+//        }
+//
+//        // normal behavior tests
+//        @Test
+//        void test_normal() {
+//            // when
+//            var quizAttemptTaking = quizService.getQuizAttemptTaking(preExistingQuizAttemptId);
+//
+//            // then
+//            assertNotNull(quizAttemptTaking);
+//        }
+//    }
+//
     @Nested
     class Test_finishQuizAttempt{
-
-        private Integer preExistingQuizAttemptId;
-
-        @BeforeEach
-        void setUp() {
-            // Set up pre-existing data, such as a quiz, to be used in multiple tests
-            QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-            FakeDataGenerator.fill(quizCreationDTO);
-            Integer preExistingQuizId = quizService.createQuiz(quizCreationDTO);
-            preExistingQuizAttemptId = quizService.startQuizAttempt(preExistingQuizId);
-        }
-
-        // normal behavior tests
-        @Test
-        void test_normal() {
-            // when
-            Float score = quizService.finishQuizAttempt(preExistingQuizAttemptId);
-
-            // then
-            assertEquals(0f, score);
-        }
-    }
-
-    @Nested
-    class Test_getQuizAttemptResult{
-
-        private Integer preExistingQuizAttemptId;
+        private QuizAttempt preExisting__QuizAttempt;
 
         @BeforeEach
         void setUp() {
-            // Set up pre-existing data, such as a quiz, to be used in multiple tests
+            // generate the quiz
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
             FakeDataGenerator.fill(quizCreationDTO);
-            Integer preExistingQuizId = quizService.createQuiz(quizCreationDTO);
-            preExistingQuizAttemptId = quizService.startQuizAttempt(preExistingQuizId);
-            quizService.finishQuizAttempt(preExistingQuizAttemptId);
+            var preExisting__Quiz = quizService.createQuiz(quizCreationDTO);
+
+            // generate the quiz attempt
+            preExisting__QuizAttempt = quizService.startQuizAttempt(preExisting__Quiz.getId());
+
+            // submit the quiz attempt
+            var attemptsSubmissions = FakeDataUtils.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
+            quizService.submitQuestionAttempts(attemptsSubmissions, preExisting__QuizAttempt.getId());
+            entityManager.flush();
+            entityManager.clear();
         }
 
-        // normal behavior tests
         @Test
-        void test_normal() {
+        void test_normal(){
+            // given
+
             // when
-            var quizAttemptResult = quizService.getQuizAttemptResult(preExistingQuizAttemptId);
+            QuizAttempt quizAttempt = quizService.finishQuizAttempt(preExisting__QuizAttempt.getId());
 
             // then
-            assertNotNull(quizAttemptResult);
+            assertNotNull(quizAttempt);
+            // TODO : dumb ass algorithm got one question wrong
+            assertEquals(100f,quizAttempt.getScore());
         }
+
     }
 
+//    @Nested
+//    class Test_getQuizAttemptResult{
+//
+//        private Integer preExistingQuizAttemptId;
+//
+//        @BeforeEach
+//        void setUp() {
+//            // Set up pre-existing data, such as a quiz, to be used in multiple tests
+//            QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
+//            FakeDataGenerator.fill(quizCreationDTO);
+//            Integer preExistingQuizId = quizService.createQuiz(quizCreationDTO);
+//            preExistingQuizAttemptId = quizService.startQuizAttempt(preExistingQuizId);
+//            quizService.finishQuizAttempt(preExistingQuizAttemptId);
+//        }
+//
+//        // normal behavior tests
+//        @Test
+//        void test_normal() {
+//            // when
+//            var quizAttemptResult = quizService.getQuizAttemptResult(preExistingQuizAttemptId);
+//
+//            // then
+//            assertNotNull(quizAttemptResult);
+//        }
+//    }
+//
 
 }

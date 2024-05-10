@@ -19,6 +19,7 @@ public class FakeDataUtils {
     private final AnswerRepository answerRepository;
 
     public static QuestionAttemptSubmissionDTO getPerfectScoreQuestionAttemptSubmissionDTO(Question question) {
+        System.out.println(question.getQuestion());
         /*
             I don't know what tf did I just wrote, but it works
             it returns a QuestionAttemptSubmissionDTO
@@ -27,14 +28,27 @@ public class FakeDataUtils {
         QuestionAttemptSubmissionDTO questionAttemptSubmissionDTO = new QuestionAttemptSubmissionDTO();
         questionAttemptSubmissionDTO.setQuestion(question.getId());
         switch (question.getQuestionType()){
-            case TRUE_FALSE,NUMERIC,SHORT_ANSWER,FILL_IN_THE_BLANK -> questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswer().getAnswer());
-            case MULTIPLE_CHOICE,SINGLE_CHOICE -> questionAttemptSubmissionDTO.setChoiceAttempts(question.getCorrectChoices().stream().map(Choice::getId).toList());
-            case OPTION_ORDERING -> questionAttemptSubmissionDTO.setOrderedOptionAttempts((HashMap<Integer, Integer>) question.getOrderedOptions().stream()
-                    .collect(Collectors.toMap(OrderedOption::getId, OrderedOption::getCorrectPosition)));
-            case OPTION_MATCHING -> questionAttemptSubmissionDTO.setOptionMatchAttempts((HashMap<Integer, List<Integer>>) question.getCorrectOptionMatches().stream()
-                    .collect(Collectors.toMap(o -> o.getOption().getId(), correctOptionMatch -> List.of(correctOptionMatch.getMatch().getId()))));
-            default -> {
-                throw new IrregularBehaviorException("Unexpected questionType value: " + question.getQuestionType());
+            case TRUE_FALSE,NUMERIC,SHORT_ANSWER,FILL_IN_THE_BLANK:
+                questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswer().getAnswer());
+                break;
+            case MULTIPLE_CHOICE,SINGLE_CHOICE:
+                questionAttemptSubmissionDTO.setChoiceAttempts(question.getCorrectChoices().stream().map(Choice::getId).toList());
+                break;
+            case OPTION_ORDERING: questionAttemptSubmissionDTO.setOrderedOptionAttempts((HashMap<Integer, Integer>) question.getOrderedOptions().stream()
+                    .collect(Collectors.toMap(OrderedOption::getCorrectPosition,OrderedOption::getId)));
+            break;
+            case OPTION_MATCHING:
+                HashMap<Integer,List<Integer>> optionMatchAttempts = new HashMap<>();
+                question.getCorrectOptionMatches().forEach(correctOptionMatch -> {
+                    if (optionMatchAttempts.containsKey(correctOptionMatch.getOption().getId())) {
+                        optionMatchAttempts.get(correctOptionMatch.getOption().getId()).add(correctOptionMatch.getMatch().getId());
+                    } else {
+                        optionMatchAttempts.put(correctOptionMatch.getOption().getId(), new ArrayList<Integer>(correctOptionMatch.getMatch().getId()));
+                    }
+                });
+            break;
+            default: {
+                throw new IrregularBehaviorException("Invalid Question Type");
             }
         }
         return questionAttemptSubmissionDTO;
@@ -55,39 +69,36 @@ public class FakeDataUtils {
          */
 
         //   TRUE_FALSE
-        createFakeQuestion_general_comparison(QuestionType.TRUE_FALSE,quiz,"Is Russia The Biggest Country In The World?","true",1);
+        var q1 = createFakeQuestion_general_comparison(QuestionType.TRUE_FALSE,quiz,"Is Russia The Biggest Country In The World?","true",1);
         //    SHORT_ANSWER
-        createFakeQuestion_general_comparison(QuestionType.SHORT_ANSWER,quiz, "What is the capital of France?", "Paris",1);
+        var q2 = createFakeQuestion_general_comparison(QuestionType.SHORT_ANSWER,quiz, "What is the capital of France?", "Paris",1);
         //    NUMERIC
-        createFakeQuestion_general_comparison(QuestionType.NUMERIC,quiz, "How many countries are there in the world?", "195",1);
+        var q3 = createFakeQuestion_general_comparison(QuestionType.NUMERIC,quiz, "How many countries are there in the world?", "195",1);
         //    FILL_IN_THE_BLANK
-        createFakeQuestion_general_comparison(QuestionType.FILL_IN_THE_BLANK,quiz, "The capital of Italy is [asser],and the capital of France is [asser].", "Rome;Paris",1);
+        var q4 = createFakeQuestion_general_comparison(QuestionType.FILL_IN_THE_BLANK,quiz, "The capital of Italy is [asser],and the capital of France is [asser].", "Rome;Paris",1);
 
         //    MULTIPLE_CHOICE,
-        createFakeQuestion_MULTIPLE_CHOICE(quiz, "which of the following are european countries?", List.of("USA","Canada"),List.of("France","Germany"),1);
+        var q5 = createFakeQuestion_MULTIPLE_CHOICE(quiz, "which of the following are european countries?", List.of("USA","Canada"),List.of("France","Germany"),1);
         //    SINGLE_CHOICE,
-        createFakeQuestion_SINGLE_CHOICE(quiz, "which of the following is a country in Africa?", List.of("USA","Canada","France"),"Nigeria",1);
+        var q6 = createFakeQuestion_SINGLE_CHOICE(quiz, "which of the following is a country in Africa?", List.of("USA","Canada","France"),"Nigeria",1);
 
         //    OPTION_ORDERING
-        createFakeQuestion_OPTION_ORDERING(quiz, "Arrange the following countries in order of their population", List.of("China","India","USA","Indonesia"),1);
+        var q7 = createFakeQuestion_OPTION_ORDERING(quiz, "Arrange the following countries in order of their population", List.of("China","India","USA","Indonesia"),1);
 
         //    OPTION_MATCHING
-        createFakeQuestion_OPTION_MATCHING(quiz,"match countries with they're local languages",new HashMap<>(){{
+        var q8 = createFakeQuestion_OPTION_MATCHING(quiz,"match countries with they're local languages",new HashMap<>(){{
             put("USA",List.of("English"));
             put("Canada",List.of("English","French"));
             put("France",List.of("French"));
         }},List.of("Arabic"),1);
 
-
+        quiz.setQuestions(new ArrayList<>(List.of(q1,q2,q3,q4,q5,q6,q7,q8)));
         quiz = quizRepository.save(quiz);
         return quiz;
     }
 
-    // FILL_IN_THE_BLANK,
-    // SHORT_ANSWER,
-    // TRUE_FALSE,
-    // NUMERIC
-    private void createFakeQuestion_general_comparison(QuestionType type,Quiz quiz, String question, String answer, float coefficient) {
+    // FILL_IN_THE_BLANK,SHORT_ANSWER,TRUE_FALSE,NUMERIC
+    private Question createFakeQuestion_general_comparison(QuestionType type,Quiz quiz, String question, String answer, float coefficient) {
         Question question1 = new Question();
         question1.setQuestion(question);
         question1.setQuestionType(type);
@@ -100,10 +111,11 @@ public class FakeDataUtils {
         answer1.setAnswer(answer);
         answer1.setQuestion(question1);
         answerRepository.save(answer1);
+        return question1;
     }
 
     // MULTIPLE_CHOICE,
-    private void createFakeQuestion_MULTIPLE_CHOICE(Quiz quiz, String question,List<String> wrongChoices, List<String> correctChoices, float coefficient) {
+    private Question createFakeQuestion_MULTIPLE_CHOICE(Quiz quiz, String question,List<String> wrongChoices, List<String> correctChoices, float coefficient) {
         List<Choice> choices = new ArrayList<>();
 
         Question question1 = Question.builder()
@@ -132,10 +144,11 @@ public class FakeDataUtils {
         }
 
         questionRepository.save(question1);
+        return question1;
     }
 
     // SINGLE_CHOICE
-    private void createFakeQuestion_SINGLE_CHOICE(Quiz quiz,String question,List<String> wrongChoices, String correctChoice, float coefficient) {
+    private Question createFakeQuestion_SINGLE_CHOICE(Quiz quiz,String question,List<String> wrongChoices, String correctChoice, float coefficient) {
         List<Choice> choices = new ArrayList<>();
 
         Question question1 = Question.builder()
@@ -163,10 +176,11 @@ public class FakeDataUtils {
 
 
         questionRepository.save(question1);
+        return question1;
     }
 
     // OPTION_MATCHING
-    private void createFakeQuestion_OPTION_MATCHING(Quiz quiz, String question, HashMap<String,List<String>> optionsWithMatches, List<String> extraMatches, float coefficient) {
+    private Question createFakeQuestion_OPTION_MATCHING(Quiz quiz, String question, HashMap<String,List<String>> optionsWithMatches, List<String> extraMatches, float coefficient) {
         HashMap<String,Match> matches = new HashMap<String,Match>();
         List<Option> options = new ArrayList<>();
         List<CorrectOptionMatch> correctOptionMatches = new ArrayList<>();
@@ -222,10 +236,11 @@ public class FakeDataUtils {
         question1.setMatches(new ArrayList<>(matches.values()));
 
         questionRepository.save(question1);
+        return question1;
     }
 
     // OPTION_ORDERING
-    private void createFakeQuestion_OPTION_ORDERING(Quiz quiz, String question, List<String> orderedOptions,  float coefficient) {
+    private Question createFakeQuestion_OPTION_ORDERING(Quiz quiz, String question, List<String> orderedOptions,  float coefficient) {
             List<OrderedOption> orderedOptions1 = new ArrayList<>();
 
             Question question1 = Question.builder()
@@ -247,6 +262,7 @@ public class FakeDataUtils {
             }
 
             questionRepository.save(question1);
+            return question1;
     }
 
 }

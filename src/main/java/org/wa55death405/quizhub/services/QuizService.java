@@ -33,14 +33,14 @@ public class QuizService implements IQuizService{
     private final IQuizLogicService quizLogicService;
 
     @Override
-    public Integer startQuizAttempt(Integer quizId) {
+    public QuizAttempt startQuizAttempt(Integer quizId) {
         Quiz quiz = quizRepository.findById(quizId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz with id " + quizId + " not found")
         );
         QuizAttempt quizAttempt = new QuizAttempt();
         quizAttempt.setQuiz(quiz);
         quizAttemptRepository.save(quizAttempt);
-        return quizAttempt.getId();
+        return quizAttempt;
     }
 
     // TODO : there is a problem with sending new attempts to replace old attempts
@@ -121,19 +121,19 @@ public class QuizService implements IQuizService{
     }
 
     @Override
-    public Float finishQuizAttempt(Integer quizAttemptId) {
+    public QuizAttempt finishQuizAttempt(Integer quizAttemptId) {
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
         quizLogicService.processQuizAttempt(quizAttempt);
-        return quizAttempt.getScore();
+        return quizAttempt;
     }
 
     @Override
-    public Integer createQuiz(QuizCreationDTO quizCreationDTO) {
+    public Quiz createQuiz(QuizCreationDTO quizCreationDTO) {
         Quiz quiz = quizCreationDTO.toEntity(null);
         quizRepository.save(quiz);
-        return quiz.getId();
+        return quiz;
     }
 
     @Override
