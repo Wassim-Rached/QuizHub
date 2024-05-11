@@ -3,6 +3,7 @@ package org.wa55death405.quizhub.dto.quiz;
 import lombok.Data;
 import org.wa55death405.quizhub.dto.question.QuestionCreationRequestDTO;
 import org.wa55death405.quizhub.entities.Quiz;
+import org.wa55death405.quizhub.exceptions.InputValidationException;
 import org.wa55death405.quizhub.interfaces.dto.EntityDTO;
 
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ public class QuizCreationDTO implements EntityDTO<Quiz,Void> {
 
     @Override
     public Quiz toEntity(Void aVoid) {
+        if (title == null || title.isBlank()) {
+            throw new InputValidationException("Quiz 'title' is required");
+        }
         Quiz quiz = Quiz.builder()
                 .title(title)
                 .build();
