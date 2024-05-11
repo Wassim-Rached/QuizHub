@@ -1,6 +1,8 @@
 package org.wa55death405.quizhub.services;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,7 @@ public class QuizService implements IQuizService{
     private final QuestionAttemptRepository questionAttemptRepository;
     private final QuizRepository quizRepository;
     private final IQuizLogicService quizLogicService;
+    private final EntityManager entityManager;
 
     @Override
     public QuizAttempt startQuizAttempt(Integer quizId) {
@@ -43,8 +46,8 @@ public class QuizService implements IQuizService{
         return quizAttempt;
     }
 
-    // TODO : there is a problem with sending new attempts to replace old attempts
     @Override
+    @Transactional
     public void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptSubmissions, Integer quizAttemptId) {
         if (questionAttemptSubmissions == null || questionAttemptSubmissions.isEmpty()) {
             System.out.println("No question attempts to submit");
@@ -60,9 +63,6 @@ public class QuizService implements IQuizService{
         }
 
         List<Question> questions = quizAttempt.getQuiz().getQuestions();
-//        List<QuestionAttempt> oldQuestionAttemptsToBeRemoved = new ArrayList<>();
-        List<QuestionAttempt> questionAttemptsWillBeSaved = new ArrayList<>();
-        System.out.println("questionAttemptTakings:" + questionAttemptSubmissions.size());
         for (var questionAttemptTaking : questionAttemptSubmissions) {
             boolean isAttemptRelated = questions.stream().anyMatch(q -> q.getId().equals(questionAttemptTaking.getQuestion()));
             if (!isAttemptRelated){
@@ -71,23 +71,20 @@ public class QuizService implements IQuizService{
 
             QuestionAttempt newQuestionAttempt = questionAttemptTaking.toEntity(quizAttemptId);
 
-            // find if the question attempt is already in the database
-            // and put it in a list to be removed
             var oldQuestionAttempt = quizAttempt.getQuestionAttempts().stream()
                     .filter(qa -> qa.getQuestion().getId().equals(questionAttemptTaking.getQuestion()))
                     .findFirst();
-
-            oldQuestionAttempt.ifPresent(questionAttempt -> System.out.println("1-oldQuestionAttempt:" + questionAttempt.getId()));
-            oldQuestionAttempt.ifPresent(questionAttemptRepository::delete);
-            oldQuestionAttempt.ifPresent(questionAttempt -> System.out.println("2-oldQuestionAttempt:" + questionAttempt.getId()));
-
-            questionAttemptsWillBeSaved.add(newQuestionAttempt);
+            oldQuestionAttempt.ifPresent(qa -> {
+                quizAttempt.getQuestionAttempts().remove(qa);
+                questionAttemptRepository.delete(qa);
+                entityManager.flush();
+            });
+            quizAttempt.getQuestionAttempts().add(newQuestionAttempt);
         }
 
 
         try {
-            // save new question attempts
-            questionAttemptRepository.saveAll(questionAttemptsWillBeSaved);
+            quizAttemptRepository.save(quizAttempt);
         }catch (Exception e){
             // this catch is mostly for the case when
             // some id provided in the request is not valid
@@ -117,6 +114,9 @@ public class QuizService implements IQuizService{
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
+        if (quizAttempt.isFinished()){
+            throw new InputValidationException("Quiz attempt with id " + quizAttemptId + " already finished");
+        }
         return new QuizAttemptTakingDTO(quizAttempt);
     }
 
@@ -141,6 +141,9 @@ public class QuizService implements IQuizService{
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
+        if (!quizAttempt.isFinished()){
+            throw new InputValidationException("Quiz attempt with id " + quizAttemptId + " is not finished yet");
+        }
         return new QuizAttemptResultDTO(quizAttempt);
     }
 }
