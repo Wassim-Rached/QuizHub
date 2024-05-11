@@ -1,4 +1,4 @@
-package org.wa55death405.quizhub;
+package org.wa55death405.quizhub.configurations;
 
 import org.springframework.context.annotation.Configuration;
 
