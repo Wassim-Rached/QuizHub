@@ -16,6 +16,7 @@ public class Option {
     @Column(nullable = false)
     private String option;
 
+    // TODO : option and question should be unique together
     @ManyToOne(optional = false)
     private Question question;
 

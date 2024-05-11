@@ -12,11 +12,10 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChoiceAttempt {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private Boolean isCorrect;
+    private Boolean isCorrect = null;
 
     @ManyToOne(optional = false)
     private Choice choice;

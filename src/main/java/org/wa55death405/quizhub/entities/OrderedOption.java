@@ -18,6 +18,8 @@ public class OrderedOption {
     @Column(nullable = false)
     private Integer correctPosition;
 
+    // TODO : option and question should be unique together
+    // TODO : question and correctPosition should be unique together
     @ManyToOne(optional = false)
     private Question question;
 

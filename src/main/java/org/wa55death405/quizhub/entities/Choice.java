@@ -13,7 +13,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Choice {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

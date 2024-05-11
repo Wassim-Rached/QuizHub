@@ -15,7 +15,7 @@ public class AnswerAttempt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private Boolean isCorrect;
+    private Boolean isCorrect = null;
     @Column(nullable = false)
     private String answer;
 

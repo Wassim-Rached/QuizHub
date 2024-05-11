@@ -15,8 +15,10 @@ public class OrderedOptionAttempt {
     private Integer id;
     @Column(nullable = false)
     private Integer position;
-    private Boolean isCorrect;
+    private Boolean isCorrect = null;
 
+    // TODO : questionAttempt and orderedOption should be unique together
+    // TODO : questionAttempt and position should be unique together
     @ManyToOne(optional = false)
     private OrderedOption orderedOption;
     @ManyToOne(optional = false)

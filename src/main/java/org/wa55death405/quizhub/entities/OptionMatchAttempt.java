@@ -16,6 +16,7 @@ public class OptionMatchAttempt{
     private Integer id;
     private Boolean isCorrect;
 
+    // TODO : match and option should be unique together
     @ManyToOne(optional = false)
     @JoinColumn(name = "match_id")
     private Match match;

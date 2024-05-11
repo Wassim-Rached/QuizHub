@@ -19,6 +19,7 @@ public class Match {
     @Column(nullable = false)
     private String match;
 
+    // TODO : match and question should be unique together
     @ManyToOne(optional = false)
     private Question question;
 

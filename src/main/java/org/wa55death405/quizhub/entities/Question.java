@@ -19,8 +19,11 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(nullable = false)
     private String question;
+    @Column(nullable = false)
     private Float coefficient = 1f;
+    @Column(nullable = false)
     private QuestionType questionType;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
