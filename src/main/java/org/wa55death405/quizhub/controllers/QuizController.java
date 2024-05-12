@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.StandardApiResponse;
+import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptTakingDTO;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
@@ -26,6 +27,16 @@ import java.util.List;
 public class QuizController {
 
     private final IQuizService quizService;
+
+    /*
+        this api is used to get search for quizzes
+        it takes the title of the quiz as a query parameter
+        and returns a list of quizzes that match the title
+     */
+    @GetMapping("/search")
+    public ResponseEntity<StandardApiResponse<List<QuizGeneralInfoDTO>>> searchQuizzes(@RequestParam(required = false,defaultValue = "") String title) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quizzes fetched successfully",quizService.searchQuizzes(title)), HttpStatus.OK);
+    }
 
     /*
         this api is used to start taking a quiz
@@ -97,6 +108,4 @@ public class QuizController {
         quizService.cancelQuizAttempt(quizAttemptId);
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt canceled successfully"), HttpStatus.OK);
     }
-
-
 }
