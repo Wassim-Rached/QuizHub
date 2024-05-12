@@ -1,16 +1,5 @@
 spring:
   application:
     name: quiz-hub
-#  datasource:
-#    url: jdbc:postgresql://172.17.0.1:5432/quizhub
-#    username: postgres
-#    password: password
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
-#    show-sql: false
-  profiles:
-    active: dev
+#  profiles:
+#    active: dev
