@@ -47,11 +47,8 @@ public class FakeDataLogicalUtils {
                 question.getCorrectOptionMatches().forEach(correctOptionMatch -> {
                     Integer optionId = correctOptionMatch.getOption().getId();
                     Integer matchId = correctOptionMatch.getMatch().getId();
-                    if (optionMatchAttempts.containsKey(matchId)) {
-                        optionMatchAttempts.get(matchId).add(optionId);
-                    } else {
-                        optionMatchAttempts.put(matchId, List.of(optionId));
-                    }
+                    var optionMatchAttempt = optionMatchAttempts.computeIfAbsent(optionId, k -> new ArrayList<>());
+                    optionMatchAttempt.add(matchId);
                 });
                 questionAttemptSubmissionDTO.setOptionMatchAttempts(optionMatchAttempts);
             break;
