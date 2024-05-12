@@ -27,7 +27,7 @@ public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,I
     // for OPTION_ORDERING
     private HashMap<Integer,Integer> orderedOptionAttempts = new HashMap<>();
 
-    // for OPTION_MATCHING
+    // for OPTION_MATCHING : <optionId, List<matchId>>
     private HashMap<Integer,List<Integer>> optionMatchAttempts = new HashMap<>();
 
     @Override

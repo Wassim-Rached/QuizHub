@@ -9,6 +9,7 @@ public class OrderedOptionAttemptResultDTO {
     private Integer position;
     private Boolean isCorrect;
 
+    // TODO : i think something is worng here where is the option id ? and who's this id
     public OrderedOptionAttemptResultDTO(OrderedOptionAttempt orderedOptionAttempt) {
         this.id = orderedOptionAttempt.getId();
         this.position = orderedOptionAttempt.getPosition();
