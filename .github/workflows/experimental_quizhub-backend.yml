@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'quizhub-backend'
           slot-name: 'Production'
-          package: '*.war'
+          package: '*.jar'
           
