@@ -11,7 +11,7 @@ import org.wa55death405.quizhub.entities.Feedback;
 import org.wa55death405.quizhub.repositories.FeedbackRepository;
 
 @RestController
-@RequestMapping("/feedback")
+@RequestMapping("/api/feedback")
 @RequiredArgsConstructor
 public class FeedbackController {
     private final FeedbackRepository feedbackRepository;
