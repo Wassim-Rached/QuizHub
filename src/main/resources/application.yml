@@ -1,5 +1,5 @@
 spring:
   application:
     name: quiz-hub
-#  profiles:
-#    active: dev
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
