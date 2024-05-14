@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.wa55death405.quizhub.dto.StandardApiResponse;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
+import org.wa55death405.quizhub.exceptions.RateLimitReachedException;
 
 
 /*
@@ -26,6 +27,11 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<StandardApiResponse<Void>> handleEntityNotFoundException(EntityNotFoundException e) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RateLimitReachedException.class)
+    public ResponseEntity<StandardApiResponse<Void>> handleRateLimitReachedException(RateLimitReachedException e) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, e.getMessage()), HttpStatus.TOO_MANY_REQUESTS);
     }
 
 }
