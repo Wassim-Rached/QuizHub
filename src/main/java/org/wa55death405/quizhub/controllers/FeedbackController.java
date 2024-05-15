@@ -11,12 +11,12 @@ import org.wa55death405.quizhub.entities.Feedback;
 import org.wa55death405.quizhub.repositories.FeedbackRepository;
 
 @RestController
-@RequestMapping("/feedback")
+@RequestMapping("/api/feedback")
 @RequiredArgsConstructor
 public class FeedbackController {
     private final FeedbackRepository feedbackRepository;
 
-    // create feedback
+//     create feedback
     @PostMapping
     public ResponseEntity<StandardApiResponse<Void>> createFeedback(@RequestBody CreateFeedbackRequest request) {
         Feedback feedback = new Feedback();
@@ -27,6 +27,5 @@ public class FeedbackController {
         return ResponseEntity.noContent().build();
     }
 
-    public record CreateFeedbackRequest(String content, Integer rating, String email) {
-    }
+    public record CreateFeedbackRequest(String content, Integer rating, String email) { }
 }

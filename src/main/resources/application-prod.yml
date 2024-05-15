@@ -1,0 +1,7 @@
+rate:
+  limit: 3
+time:
+  duration:
+    in:
+      minutes: 1
+# TODO : Add the configuration for the production environment (database)

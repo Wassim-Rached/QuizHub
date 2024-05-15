@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://172.17.0.1:5432/quizhub-dev
+    url: jdbc:postgresql://172.17.0.1:5432/quizhub-exp
     username: postgres
     password: password
   jpa:
@@ -10,3 +10,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
+rate:
+  limit: 3
+time:
+  duration:
+    in:
+      minutes: 1
