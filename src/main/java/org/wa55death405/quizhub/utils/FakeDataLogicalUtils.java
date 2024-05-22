@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
-import org.wa55death405.quizhub.repositories.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,9 +19,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class FakeDataLogicalUtils {
-    private final QuizRepository quizRepository;
-    private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
 
     public static QuestionAttemptSubmissionDTO getPerfectScoreQuestionAttemptSubmissionDTO(Question question) {
         /*
