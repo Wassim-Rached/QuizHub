@@ -21,8 +21,13 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
       
-    - name: generate jar
-      run: mvn clean package
+    - name: Unit Tests
+      run: mvn -B test --file pom.xml
+
+    - name: Build the application
+      run: |
+        mvn clean
+        mvn -B package --file pom.xml
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
