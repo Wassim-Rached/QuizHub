@@ -274,14 +274,11 @@ class QuizServiceTest {
 
         @Test
         void test_normal(){
-            // given
-
             // when
             QuizAttempt quizAttempt = quizService.finishQuizAttempt(preExisting__QuizAttempt.getId());
 
             // then
             assertNotNull(quizAttempt);
-            // TODO : dumb ass algorithm got one question wrong
             assertEquals(100f,quizAttempt.getScore());
         }
 
