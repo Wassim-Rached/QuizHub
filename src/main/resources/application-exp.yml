@@ -11,8 +11,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
 rate:
-  limit: 3
+  limit: ${RATE_LIMIT:10}
 time:
   duration:
     in:
-      minutes: 1
+      minutes: ${TIME_DURATION_IN_MINUTES:5}

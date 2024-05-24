@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: password
       PGDATA: /var/lib/postgresql/data
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./volumes/data:/var/lib/postgresql/data
     ports:
       - "172.17.0.1:5432:5432"
 
@@ -26,4 +26,4 @@ services:
     ports:
       - "172.17.0.1:7777:7777"
     volumes:
-      - ./servers.json:/pgadmin4/servers.json
+      - ./volumes/servers.json:/pgadmin4/servers.json
