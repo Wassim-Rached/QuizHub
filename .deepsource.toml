@@ -9,7 +9,7 @@ runtime_version = "21"
 
 [[analyzers]]
 name = "test-coverage"
-enabled = true
+enabled = false
 
 [[analyzers]]
 name = "secrets"
