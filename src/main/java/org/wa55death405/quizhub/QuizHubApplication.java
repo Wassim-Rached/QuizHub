@@ -12,4 +12,5 @@ public class QuizHubApplication{
 	public static void main(String[] args) {
 		SpringApplication.run(QuizHubApplication.class, args);
 	}
+
 }
