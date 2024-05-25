@@ -1,18 +1,14 @@
 name: Continuous Integration
-run-name: CI
-concurrency: docker-build
+run-name: CI Pipeline
+concurrency: CI-${{ github.repository }}-${{ github.ref }}
 
 on:
-    push:
-        branches:
-          - staging
     pull_request:
         branches:
           - dev
-          - staging
 
 jobs:
-    build:
+    build-test:
       name: Build and Test
       runs-on: ubuntu-latest
       steps:
