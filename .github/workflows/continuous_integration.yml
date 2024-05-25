@@ -5,6 +5,7 @@ concurrency: CI-${{ github.repository }}-${{ github.ref }}
 on:
     pull_request:
         branches:
+          - staging
           - dev
 
 jobs:
