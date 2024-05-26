@@ -85,7 +85,7 @@ public class QuizController {
         and the previous submitted non-finished attempts
      */
     @GetMapping("/attempt/{quizAttemptId}/taking")
-    public ResponseEntity<StandardApiResponse<QuizAttemptTakingDTO>> isQuizAttemptTakingPlace(@PathVariable Integer quizAttemptId) {
+    public ResponseEntity<StandardApiResponse<QuizAttemptTakingDTO>> getQuizAttemptTaking(@PathVariable Integer quizAttemptId) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt taking fetched successfully",quizService.getQuizAttemptTaking(quizAttemptId)), HttpStatus.OK);
     }
 
