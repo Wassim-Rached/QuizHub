@@ -10,6 +10,8 @@ import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
 import org.wa55death405.quizhub.exceptions.RateLimitReachedException;
 
+import java.io.FileNotFoundException;
+
 
 /*
     this class is the controller advice
@@ -34,4 +36,8 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, e.getMessage()), HttpStatus.TOO_MANY_REQUESTS);
     }
 
+    @ExceptionHandler(FileNotFoundException.class)
+    public ResponseEntity<StandardApiResponse<Void>> handleFileNotFoundException(FileNotFoundException e) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, "File not found"), HttpStatus.NOT_FOUND);
+    }
 }
