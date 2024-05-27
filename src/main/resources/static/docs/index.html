@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.15">
+<title>QuizHub Backend Server API Documentation</title>
+<style>
+span{
+    background: none !important;
+}
+
+/* Override Bootstrap defaults */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* HTTP Request and Response Sections */
+.http-request, .http-response {
+    background-color: #fff;
+    border: 1px solid #ced4da; /* Light gray border */
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Code Blocks */
+pre {
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 1rem;
+    border-radius: 0.25rem;
+    overflow-x: auto;
+    border: 1px solid #ced4da; /* Light gray border */
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+th, td {
+    border: 1px solid #ced4da; /* Light gray border */
+    padding: 0.75rem;
+}
+
+th {
+    background-color: #f2f2f2; /* Light gray background for table headers */
+}
+
+/* Links */
+a {
+    color: #007bff; /* Blue links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3; /* Darker blue on hover */
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="book">
+<div id="header">
+<h1>QuizHub Backend Server API Documentation</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Welcome to the QuizHub Backend Server API Documentation. This document provides comprehensive information about the various endpoints available in the QuizHub application.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a><a class="link" href="#_overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The QuizHub Backend Server provides RESTful APIs for managing quizzes, users, and scores. Below you will find the detailed documentation of the available endpoints.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_api_endpoints"><a class="anchor" href="#_api_endpoints"></a><a class="link" href="#_api_endpoints">API Endpoints</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_search_quizzes"><a class="anchor" href="#_search_quizzes"></a><a class="link" href="#_search_quizzes">Search Quizzes</a></h3>
+<div class="paragraph">
+<div class="title">Search for quizzes by title</div>
+<p>Unresolved directive in index.adoc - include::{snippets}/quiz/search-quizzes/http-request.adoc[]
+Unresolved directive in index.adoc - include::{snippets}/quiz/search-quizzes/http-response.adoc[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_quiz"><a class="anchor" href="#_create_quiz"></a><a class="link" href="#_create_quiz">Create Quiz</a></h3>
+<div class="paragraph">
+<div class="title">Create a new quiz</div>
+<p>Unresolved directive in index.adoc - include::{snippets}/quiz/create-quiz/http-request.adoc[]
+Unresolved directive in index.adoc - include::{snippets}/quiz/create-quiz/http-response.adoc[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_start_quiz_attempt"><a class="anchor" href="#_start_quiz_attempt"></a><a class="link" href="#_start_quiz_attempt">Start Quiz Attempt</a></h3>
+<div class="paragraph">
+<div class="title">Start a new quiz attempt</div>
+<p>Unresolved directive in index.adoc - include::{snippets}/quiz/start-quiz-attempt/http-request.adoc[]
+Unresolved directive in index.adoc - include::{snippets}/quiz/start-quiz-attempt/http-response.adoc[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_submit_question_attempts"><a class="anchor" href="#_submit_question_attempts"></a><a class="link" href="#_submit_question_attempts">Submit Question Attempts</a></h3>
+<div class="paragraph">
+<div class="title">Submit answers for a quiz attempt</div>
+<p>Unresolved directive in index.adoc - include::{snippets}/quiz/submit-question-attempts/http-request.adoc[]
+Unresolved directive in index.adoc - include::{snippets}/quiz/submit-question-attempts/http-response.adoc[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_quiz_attempt_taking"><a class="anchor" href="#_get_quiz_attempt_taking"></a><a class="link" href="#_get_quiz_attempt_taking">Get Quiz Attempt Taking</a></h3>
+<div class="paragraph">
+<div class="title">Get the details of an ongoing quiz attempt</div>
+<p>Unresolved directive in index.adoc - include::{snippets}/quiz/get-quiz-attempt-taking/http-request.adoc[]
+Unresolved directive in index.adoc - include::{snippets}/quiz/get-quiz-attempt-taking/http-response.adoc[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cancel_quiz_attempt"><a class="anchor" href="#_cancel_quiz_attempt"></a><a class="link" href="#_cancel_quiz_attempt">Cancel Quiz Attempt</a></h3>
+<div class="paragraph">
+<div class="title">Cancel an ongoing quiz attempt</div>
+<p>Unresolved directive in index.adoc - include::{snippets}/quiz/cancel-quiz-attempt/http-request.adoc[]
+Unresolved directive in index.adoc - include::{snippets}/quiz/cancel-quiz-attempt/http-response.adoc[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_finish_quiz_attempt"><a class="anchor" href="#_finish_quiz_attempt"></a><a class="link" href="#_finish_quiz_attempt">Finish Quiz Attempt</a></h3>
+<div class="paragraph">
+<div class="title">Finish and submit a quiz attempt</div>
+<p>Unresolved directive in index.adoc - include::{snippets}/quiz/finish-quiz-attempt/http-request.adoc[]
+Unresolved directive in index.adoc - include::{snippets}/quiz/finish-quiz-attempt/http-response.adoc[]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_quiz_attempt_result"><a class="anchor" href="#_get_quiz_attempt_result"></a><a class="link" href="#_get_quiz_attempt_result">Get Quiz Attempt Result</a></h3>
+<div class="paragraph">
+<div class="title">Get the results of a completed quiz attempt</div>
+<p>Unresolved directive in index.adoc - include::{snippets}/quiz/get-quiz-attempt-result/http-request.adoc[]
+Unresolved directive in index.adoc - include::{snippets}/quiz/get-quiz-attempt-result/http-response.adoc[]</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2024-05-27 17:57:06 +0200
+</div>
+</div>
+</body>
+</html>
