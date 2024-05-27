@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
     * this class is used to generate fake data
     that requires logical generations
  */
+// TODO: name should be changed to 'FakeDataLogicalGenerator'
 @Service
 @RequiredArgsConstructor
 public class FakeDataLogicalUtils {
@@ -87,11 +88,11 @@ public class FakeDataLogicalUtils {
             case OPTION_ORDERING:{
                 var randomizedOrderedOptions = new ArrayList<>(question.getOrderedOptions().stream().map(OrderedOption::getId).toList());
                 Collections.shuffle(randomizedOrderedOptions);
-                questionAttemptSubmissionDTO.setOrderedOptionAttempts(new HashMap<>(){{
-                    for (int i = 0; i < randomizedOrderedOptions.size(); i++) {
-                        put(i,randomizedOrderedOptions.get(i));
-                    }
-                }});
+                var orderedOptionAttempts = new HashMap<Integer,Integer>();
+                for (int i = 0; i < randomizedOrderedOptions.size(); i++) {
+                    orderedOptionAttempts.put(i,randomizedOrderedOptions.get(i));
+                }
+                questionAttemptSubmissionDTO.setOrderedOptionAttempts(orderedOptionAttempts);
                 break;
             }
             case OPTION_MATCHING:{
@@ -134,6 +135,14 @@ public class FakeDataLogicalUtils {
 
     public static List<QuestionAttemptSubmissionDTO> getRandomQuestionAttemptSubmissionDTOsForQuiz(Quiz quiz) {
         return quiz.getQuestions().stream().map(FakeDataLogicalUtils::getRandomQuestionAttemptSubmissionDTO).toList();
+    }
+
+    public static QuizAttempt generate_QuizAttempt(Quiz quiz){
+        var attempts = FakeDataLogicalUtils.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
+        var quizAttempt = QuizAttempt.builder().quiz(quiz).build();
+        List<QuestionAttempt> questionAttempts = attempts.stream().map(a->a.toEntity(quizAttempt.getId())).toList();
+        quizAttempt.setQuestionAttempts(questionAttempts);
+        return quizAttempt;
     }
 
 }
