@@ -1,4 +1,4 @@
-name: Build & Deploy QuizHub-staging Docker Image
+name: Build & Push 'staging' Docker Image
 
 on:
   workflow_dispatch:

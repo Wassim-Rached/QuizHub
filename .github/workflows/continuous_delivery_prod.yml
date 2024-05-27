@@ -1,4 +1,4 @@
-name: Build & Deploy QuizHub Docker Image
+name: Build & Push release Docker Image
 
 on:
   workflow_dispatch:
