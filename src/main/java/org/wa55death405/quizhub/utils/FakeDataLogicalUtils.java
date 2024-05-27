@@ -88,11 +88,11 @@ public class FakeDataLogicalUtils {
             case OPTION_ORDERING:{
                 var randomizedOrderedOptions = new ArrayList<>(question.getOrderedOptions().stream().map(OrderedOption::getId).toList());
                 Collections.shuffle(randomizedOrderedOptions);
-                questionAttemptSubmissionDTO.setOrderedOptionAttempts(new HashMap<>(){{
-                    for (int i = 0; i < randomizedOrderedOptions.size(); i++) {
-                        put(i,randomizedOrderedOptions.get(i));
-                    }
-                }});
+                var orderedOptionAttempts = new HashMap<Integer,Integer>();
+                for (int i = 0; i < randomizedOrderedOptions.size(); i++) {
+                    orderedOptionAttempts.put(i,randomizedOrderedOptions.get(i));
+                }
+                questionAttemptSubmissionDTO.setOrderedOptionAttempts(orderedOptionAttempts);
                 break;
             }
             case OPTION_MATCHING:{
