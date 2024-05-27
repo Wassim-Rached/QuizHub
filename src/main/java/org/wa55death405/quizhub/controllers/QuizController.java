@@ -85,17 +85,8 @@ public class QuizController {
         and the previous submitted non-finished attempts
      */
     @GetMapping("/attempt/{quizAttemptId}/taking")
-    public ResponseEntity<StandardApiResponse<QuizAttemptTakingDTO>> isQuizAttemptTakingPlace(@PathVariable Integer quizAttemptId) {
+    public ResponseEntity<StandardApiResponse<QuizAttemptTakingDTO>> getQuizAttemptTaking(@PathVariable Integer quizAttemptId) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt taking fetched successfully",quizService.getQuizAttemptTaking(quizAttemptId)), HttpStatus.OK);
-    }
-
-    /*
-        this api is used to get the result of a finished quiz attempt
-        it contains the questions, the attempts, the correct answers
-     */
-    @GetMapping("/attempt/{quizAttemptId}/result")
-    public ResponseEntity<StandardApiResponse<QuizAttemptResultDTO>> getQuizAttemptResult(@PathVariable Integer quizAttemptId) {
-        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt result fetched successfully",quizService.getQuizAttemptResult(quizAttemptId)), HttpStatus.OK);
     }
 
     /*
@@ -108,4 +99,14 @@ public class QuizController {
         quizService.cancelQuizAttempt(quizAttemptId);
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt canceled successfully"), HttpStatus.OK);
     }
+
+    /*
+        this api is used to get the result of a finished quiz attempt
+        it contains the questions, the attempts, the correct answers
+     */
+    @GetMapping("/attempt/{quizAttemptId}/result")
+    public ResponseEntity<StandardApiResponse<QuizAttemptResultDTO>> getQuizAttemptResult(@PathVariable Integer quizAttemptId) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt result fetched successfully",quizService.getQuizAttemptResult(quizAttemptId)), HttpStatus.OK);
+    }
+
 }
