@@ -3,11 +3,14 @@ package org.wa55death405.quizhub.utils;
 import com.github.javafaker.Faker;
 import org.wa55death405.quizhub.dto.question.QuestionCreationRequestDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
+import org.wa55death405.quizhub.entities.Quiz;
+import org.wa55death405.quizhub.entities.QuizAttempt;
 import org.wa55death405.quizhub.enums.QuestionType;
 
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+// TODO: name should be changed to 'FakeDataRandomGenerator'
 public class FakeDataGenerator {
 
     private static final Faker faker = new Faker();
@@ -89,6 +92,13 @@ public class FakeDataGenerator {
             default:
                 throw new IllegalArgumentException("Unknown question type: " + questionType);
         }
+    }
+
+    // TODO : looks weird should be changed
+    public static Quiz generate_Quiz(){
+        QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
+        FakeDataGenerator.fill(quizCreationDTO);
+        return quizCreationDTO.toEntity(null);
     }
 
 }
