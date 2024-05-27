@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 import org.wa55death405.quizhub.dto.question.QuestionCreationRequestDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.entities.Quiz;
-import org.wa55death405.quizhub.entities.QuizAttempt;
 import org.wa55death405.quizhub.enums.QuestionType;
 
 import java.util.ArrayList;
