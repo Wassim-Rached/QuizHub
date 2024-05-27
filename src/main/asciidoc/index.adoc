@@ -1,0 +1,56 @@
+= QuizHub Backend Server API Documentation
+:toc: macro
+:toc-title: Table of Contents
+:doctype: book
+:icons: font
+:sectanchors:
+:sectlinks:
+:stylesheet: docs.css
+
+Welcome to the QuizHub Backend Server API Documentation. This document provides comprehensive information about the various endpoints available in the QuizHub application.
+
+== Overview
+
+The QuizHub Backend Server provides RESTful APIs for managing quizzes, users, and scores. Below you will find the detailed documentation of the available endpoints.
+
+== API Endpoints
+
+=== Search Quizzes
+.Search for quizzes by title
+include::{snippets}/quiz/search-quizzes/http-request.adoc[]
+include::{snippets}/quiz/search-quizzes/http-response.adoc[]
+
+=== Create Quiz
+.Create a new quiz
+include::{snippets}/quiz/create-quiz/http-request.adoc[]
+include::{snippets}/quiz/create-quiz/http-response.adoc[]
+
+=== Start Quiz Attempt
+.Start a new quiz attempt
+include::{snippets}/quiz/start-quiz-attempt/http-request.adoc[]
+include::{snippets}/quiz/start-quiz-attempt/http-response.adoc[]
+
+=== Submit Question Attempts
+.Submit answers for a quiz attempt
+include::{snippets}/quiz/submit-question-attempts/http-request.adoc[]
+include::{snippets}/quiz/submit-question-attempts/http-response.adoc[]
+
+=== Get Quiz Attempt Taking
+.Get the details of an ongoing quiz attempt
+include::{snippets}/quiz/get-quiz-attempt-taking/http-request.adoc[]
+include::{snippets}/quiz/get-quiz-attempt-taking/http-response.adoc[]
+
+=== Cancel Quiz Attempt
+.Cancel an ongoing quiz attempt
+include::{snippets}/quiz/cancel-quiz-attempt/http-request.adoc[]
+include::{snippets}/quiz/cancel-quiz-attempt/http-response.adoc[]
+
+=== Finish Quiz Attempt
+.Finish and submit a quiz attempt
+include::{snippets}/quiz/finish-quiz-attempt/http-request.adoc[]
+include::{snippets}/quiz/finish-quiz-attempt/http-response.adoc[]
+
+=== Get Quiz Attempt Result
+.Get the results of a completed quiz attempt
+include::{snippets}/quiz/get-quiz-attempt-result/http-request.adoc[]
+include::{snippets}/quiz/get-quiz-attempt-result/http-response.adoc[]
