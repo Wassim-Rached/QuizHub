@@ -1,18 +1,17 @@
-package org.wa55death405.quizhub.controllers;
+package org.wa55death405.quizhub.integration.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.wa55death405.quizhub.configurations.MainConfiguration;
+import org.wa55death405.quizhub.controllers.QuizController;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
@@ -43,6 +42,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 @AutoConfigureMockMvc
 @Import({FakeDataRandomGeneratorImpl.class, FakeDataLogicalGeneratorImpl.class, Faker.class})
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets/quiz")
+@ActiveProfiles("test")
 class QuizControllerTest {
 
     @Autowired

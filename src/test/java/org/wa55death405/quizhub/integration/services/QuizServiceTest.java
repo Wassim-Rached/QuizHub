@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.entities.QuizAttempt;
@@ -25,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(properties = "spring.config.location=classpath:application-test.yml")
 @Transactional // using @Transactional to enable lazy loading of collections
+@ActiveProfiles("test")
 class QuizServiceTest {
 
     @Autowired
