@@ -43,7 +43,7 @@ public class ApplicationE2ETests {
     @LocalServerPort
     private int port;
 
-    public String getBaseUrl() {
+    private String getBaseUrl() {
         return "http://localhost:" + port + "/api";
     }
 
