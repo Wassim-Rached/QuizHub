@@ -112,18 +112,19 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                 Collections.shuffle(randomizedOptionsIds);
                 Collections.shuffle(randomizedMatchesIds);
 
+                // <optionId, List<matchId>>
                 var randomOptionMatchesAttempts = new HashMap<Integer,List<Integer>>();
 
                 // loop through the number of option matches to make
                 for (int i = 0; i < numberOfOptionMatchesToMake; i++) {
                     // get a random option and match
-                    var optionId = randomizedOptionsIds.get(Faker.instance().random().nextInt(0,numberOfOptions));
-                    var matchId = randomizedMatchesIds.get(Faker.instance().random().nextInt(0,numberOfMatches));
+                    var optionId = randomizedOptionsIds.get(Faker.instance().random().nextInt(numberOfOptions-1));
+                    var matchId = randomizedMatchesIds.get(Faker.instance().random().nextInt(numberOfMatches-1));
                     // connect the option to the match
-                    if (randomOptionMatchesAttempts.containsKey(matchId)) {
-                        randomOptionMatchesAttempts.get(matchId).add(optionId);
+                    if (randomOptionMatchesAttempts.containsKey(optionId)) {
+                        randomOptionMatchesAttempts.get(optionId).add(matchId);
                     } else {
-                        randomOptionMatchesAttempts.put(matchId, List.of(optionId));
+                        randomOptionMatchesAttempts.put(optionId, new ArrayList<>(List.of(matchId)));
                     }
                 }
                 // set the option matches
