@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
     * this class is used to generate fake data
     that requires logical generations
  */
-// TODO: name should be changed to 'FakeDataLogicalGenerator'
 @Service
 @RequiredArgsConstructor
 public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {

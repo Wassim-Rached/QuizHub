@@ -13,7 +13,6 @@ import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-// TODO: name should be changed to 'FakeDataRandomGenerator'
 @Service
 @RequiredArgsConstructor
 public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
