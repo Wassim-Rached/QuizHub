@@ -20,6 +20,7 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
 
     private final Faker faker;
 
+    @Override
     public void fill(QuizCreationDTO quizCreationDTO) {
         quizCreationDTO.setTitle(faker.lorem().sentence());
         // Generate one instance for all types of questions
@@ -30,6 +31,7 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
         }
     }
 
+    @Override
     public void fill(QuestionCreationRequestDTO questionCreationRequestDTO, QuestionType questionType) {
         questionCreationRequestDTO.setQuestionType(questionType);
         questionCreationRequestDTO.setQuestion(faker.lorem().sentence());
@@ -100,6 +102,7 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
     }
 
     // TODO : looks weird should be changed
+    @Override
     public Quiz generate_Quiz(){
         QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
         this.fill(quizCreationDTO);
