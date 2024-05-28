@@ -18,4 +18,8 @@ public class MainConfiguration {
         return new ModelMapper();
     }
 
+    @Bean
+    public Faker faker() {
+        return new Faker();
+    }
 }

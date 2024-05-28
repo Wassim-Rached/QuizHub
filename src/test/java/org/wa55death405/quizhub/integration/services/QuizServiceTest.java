@@ -13,11 +13,11 @@ import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.entities.QuizAttempt;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
 import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
+import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
+import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
 import org.wa55death405.quizhub.repositories.QuizAttemptRepository;
 import org.wa55death405.quizhub.repositories.QuizRepository;
 import org.wa55death405.quizhub.services.QuizService;
-import org.wa55death405.quizhub.utils.FakeDataGenerator;
-import org.wa55death405.quizhub.utils.FakeDataLogicalUtils;
 
 import java.util.List;
 
@@ -35,6 +35,10 @@ class QuizServiceTest {
     private QuizRepository quizRepository;
     @Autowired
     private EntityManager entityManager;
+    @Autowired
+    private IFakeDataRandomGenerator fakeDataRandomGenerator;
+    @Autowired
+    private IFakeDataLogicalGenerator fakeDataLogicalGenerator;
 
     @Nested
     class Test_createQuiz {
@@ -43,7 +47,7 @@ class QuizServiceTest {
         void test_normal() {
             // given
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-            FakeDataGenerator.fill(quizCreationDTO);
+            fakeDataRandomGenerator.fill(quizCreationDTO);
 
             // when
             Quiz quiz = quizService.createQuiz(quizCreationDTO);
@@ -72,7 +76,7 @@ class QuizServiceTest {
         void setUp() {
             // Set up pre-existing data, such as a quiz, to be used in multiple tests
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-            FakeDataGenerator.fill(quizCreationDTO);
+            fakeDataRandomGenerator.fill(quizCreationDTO);
             preExisting__Quiz = quizService.createQuiz(quizCreationDTO);
         }
 
@@ -95,7 +99,7 @@ class QuizServiceTest {
         void setUp() {
             // generate the quiz
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-            FakeDataGenerator.fill(quizCreationDTO);
+            fakeDataRandomGenerator.fill(quizCreationDTO);
             preExisting__Quiz = quizService.createQuiz(quizCreationDTO);
 
             // generate the quiz attempt
@@ -105,7 +109,7 @@ class QuizServiceTest {
         @Test
         void test_normal(){
             // given
-            var attemptsSubmissions = FakeDataLogicalUtils.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
+            var attemptsSubmissions = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
 
             // when
             quizService.submitQuestionAttempts(attemptsSubmissions, preExisting__QuizAttempt.getId());
@@ -122,7 +126,7 @@ class QuizServiceTest {
         void test_quiz_attempt_already_finished(){
             // given
             quizService.finishQuizAttempt(preExisting__QuizAttempt.getId());
-            var attemptsSubmissions = FakeDataLogicalUtils.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
+            var attemptsSubmissions = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
 
             // when
             assertThrows(InputValidationException.class, () -> quizService.submitQuestionAttempts(attemptsSubmissions, preExisting__QuizAttempt.getId()));
@@ -131,7 +135,7 @@ class QuizServiceTest {
         @Test
         void test_quiz_attempt_not_found(){
             // given
-            var attemptsSubmissions = FakeDataLogicalUtils.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
+            var attemptsSubmissions = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
 
             // when
             assertThrows(EntityNotFoundException.class, () -> quizService.submitQuestionAttempts(attemptsSubmissions, -1));
@@ -141,10 +145,10 @@ class QuizServiceTest {
         void test_unrelated_question_attempt(){
             // given
             var quizCreationDTO = new QuizCreationDTO();
-            FakeDataGenerator.fill(quizCreationDTO);
+            fakeDataRandomGenerator.fill(quizCreationDTO);
             var anotherQuiz = quizService.createQuiz(quizCreationDTO);
             var anotherQuizQuestion = anotherQuiz.getQuestions().get(0);
-            var attemptsSubmissions = FakeDataLogicalUtils.getRandomQuestionAttemptSubmissionDTO(anotherQuizQuestion);
+            var attemptsSubmissions = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTO(anotherQuizQuestion);
 
             // when
             var ex = assertThrows(InputValidationException.class,
@@ -156,8 +160,8 @@ class QuizServiceTest {
         @Test
         void test_overlapping_question_attempts(){
             // given
-            var attemptsSubmissions_random = FakeDataLogicalUtils.getRandomQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
-            var attemptsSubmissions_perfectScore = FakeDataLogicalUtils.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
+            var attemptsSubmissions_random = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
+            var attemptsSubmissions_perfectScore = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
             quizService.submitQuestionAttempts(attemptsSubmissions_random, preExisting__QuizAttempt.getId());
 
             // when
@@ -179,7 +183,7 @@ class QuizServiceTest {
         void setUp() {
             // create the quiz
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-            FakeDataGenerator.fill(quizCreationDTO);
+            fakeDataRandomGenerator.fill(quizCreationDTO);
             Quiz preExistingQuizId = quizService.createQuiz(quizCreationDTO);
             // start the quiz attempt
             preExisting__QuizAttempt = quizService.startQuizAttempt(preExistingQuizId.getId());
@@ -198,7 +202,7 @@ class QuizServiceTest {
         @Test
         void test_with_attempts(){
             //given
-            var attempts = FakeDataLogicalUtils.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__QuizAttempt.getQuiz());
+            var attempts = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__QuizAttempt.getQuiz());
             quizService.submitQuestionAttempts(attempts, preExisting__QuizAttempt.getId());
 
             // when
@@ -220,7 +224,7 @@ class QuizServiceTest {
         void setUp() {
             // Set up pre-existing data, such as a quiz, to be used in multiple tests
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-            FakeDataGenerator.fill(quizCreationDTO);
+            fakeDataRandomGenerator.fill(quizCreationDTO);
             Quiz preExisting__Quiz = quizService.createQuiz(quizCreationDTO);
             preExisting__QuizAttempt = quizService.startQuizAttempt(preExisting__Quiz.getId());
         }
@@ -259,14 +263,14 @@ class QuizServiceTest {
         void setUp() {
             // generate the quiz
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-            FakeDataGenerator.fill(quizCreationDTO);
+            fakeDataRandomGenerator.fill(quizCreationDTO);
             var preExisting__Quiz = quizService.createQuiz(quizCreationDTO);
 
             // generate the quiz attempt
             preExisting__QuizAttempt = quizService.startQuizAttempt(preExisting__Quiz.getId());
 
             // submit the quiz attempt
-            var attemptsSubmissions = FakeDataLogicalUtils.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
+            var attemptsSubmissions = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
             quizService.submitQuestionAttempts(attemptsSubmissions, preExisting__QuizAttempt.getId());
             entityManager.flush();
             entityManager.clear();
@@ -293,7 +297,7 @@ class QuizServiceTest {
         void setUp() {
             // Set up pre-existing data, such as a quiz, to be used in multiple tests
             QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-            FakeDataGenerator.fill(quizCreationDTO);
+            fakeDataRandomGenerator.fill(quizCreationDTO);
             preExisting__Quiz = quizService.createQuiz(quizCreationDTO);
             preExisting__QuizAttempt = quizService.startQuizAttempt(preExisting__Quiz.getId());
         }
@@ -302,7 +306,7 @@ class QuizServiceTest {
         @Test
         void test_with_attempts() {
             // given
-            var attempts = FakeDataLogicalUtils.getRandomQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
+            var attempts = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
             quizService.submitQuestionAttempts(attempts,preExisting__QuizAttempt.getId());
             quizService.finishQuizAttempt(preExisting__QuizAttempt.getId());
             entityManager.flush();
