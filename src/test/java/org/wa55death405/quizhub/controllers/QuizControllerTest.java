@@ -1,13 +1,18 @@
 package org.wa55death405.quizhub.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
+import org.wa55death405.quizhub.configurations.MainConfiguration;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
@@ -16,8 +21,10 @@ import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.entities.QuizAttempt;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.interfaces.services.IQuizService;
-import org.wa55death405.quizhub.utils.FakeDataGenerator;
-import org.wa55death405.quizhub.utils.FakeDataLogicalUtils;
+import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
+import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
+import org.wa55death405.quizhub.utils.FakeDataLogicalGeneratorImpl;
+import org.wa55death405.quizhub.utils.FakeDataRandomGeneratorImpl;
 
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -34,6 +41,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 
 @WebMvcTest(QuizController.class)
 @AutoConfigureMockMvc
+@Import({FakeDataRandomGeneratorImpl.class, FakeDataLogicalGeneratorImpl.class, Faker.class})
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets/quiz")
 class QuizControllerTest {
 
@@ -42,7 +50,10 @@ class QuizControllerTest {
     @MockBean
     private IQuizService quizService;
     private final ObjectMapper objectMapper = new ObjectMapper();
-
+    @Autowired
+    private IFakeDataRandomGenerator fakeDataRandomGenerator;
+    @Autowired
+    private IFakeDataLogicalGenerator fakeDataLogicalGenerator;
 
     @Test
     void searchQuizzes() throws Exception {
@@ -71,7 +82,7 @@ class QuizControllerTest {
     void createQuiz() throws Exception {
         // arrange
         QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-        FakeDataGenerator.fill(quizCreationDTO);
+        fakeDataRandomGenerator.fill(quizCreationDTO);
         Quiz quiz = quizCreationDTO.toEntity(null);
         quiz.setId(1);
         when(quizService.createQuiz(quizCreationDTO)).thenReturn(quiz);
@@ -116,9 +127,9 @@ class QuizControllerTest {
     void submitQuestionAttempts() throws Exception {
         // arrange
         var quizCreationDTO = new QuizCreationDTO();
-        FakeDataGenerator.fill(quizCreationDTO);
+        fakeDataRandomGenerator.fill(quizCreationDTO);
         Quiz quiz = quizCreationDTO.toEntity(null);
-        var attempts = FakeDataLogicalUtils.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
+        var attempts = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
         var requestJson = this.objectMapper.writeValueAsString(attempts);
 
         // act and assert
@@ -137,12 +148,12 @@ class QuizControllerTest {
     @Test
     void getQuizAttemptTaking() throws Exception {
         // arrange
-        Quiz quiz = FakeDataGenerator.generate_Quiz();
+        Quiz quiz = fakeDataRandomGenerator.generate_Quiz();
         int index = 0;
         for (var question : quiz.getQuestions()) {
             question.setId(index++);
         }
-        var quizAttempt = FakeDataLogicalUtils.generate_QuizAttempt(quiz);
+        var quizAttempt = fakeDataLogicalGenerator.generate_QuizAttempt(quiz);
         quizAttempt.setId(1);
 
         var attempt = new QuizAttemptTakingDTO(quizAttempt);
@@ -200,12 +211,12 @@ class QuizControllerTest {
     @Test
     void getQuizAttemptResult() throws Exception {
         // arrange
-        Quiz quiz = FakeDataGenerator.generate_Quiz();
+        Quiz quiz = fakeDataRandomGenerator.generate_Quiz();
         int index = 0;
         for (var question : quiz.getQuestions()) {
             question.setId(index++);
         }
-        var quizAttempt = FakeDataLogicalUtils.generate_QuizAttempt(quiz);
+        var quizAttempt = fakeDataLogicalGenerator.generate_QuizAttempt(quiz);
         quizAttempt.setId(1);
 
         var attempt = new QuizAttemptResultDTO(quizAttempt);

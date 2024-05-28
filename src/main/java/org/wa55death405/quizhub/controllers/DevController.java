@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
+import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
 import org.wa55death405.quizhub.repositories.QuizAttemptRepository;
 import org.wa55death405.quizhub.services.QuizService;
-import org.wa55death405.quizhub.utils.FakeDataLogicalUtils;
 
 import java.util.List;
 
@@ -25,6 +25,7 @@ import java.util.List;
 public class DevController {
     private final QuizService quizService;
     private final QuizAttemptRepository quizAttemptRepository;
+    private final IFakeDataLogicalGenerator fakeDataLogicalGenerator;
 
     /*
         this api is used to submit the perfect score for a quiz attempt
@@ -39,7 +40,7 @@ public class DevController {
             return;
         }
         var quiz = quizAttempt.get().getQuiz();
-        List<QuestionAttemptSubmissionDTO> attempts = FakeDataLogicalUtils.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(quiz);
+        List<QuestionAttemptSubmissionDTO> attempts = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(quiz);
         quizService.submitQuestionAttempts(attempts,quizAttemptId);
     }
 }
