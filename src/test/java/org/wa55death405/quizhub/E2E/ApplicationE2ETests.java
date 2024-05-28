@@ -42,8 +42,6 @@ public class ApplicationE2ETests {
 
     @LocalServerPort
     private int port;
-    @Autowired
-    private QuizAttemptRepository quizAttemptRepository;
 
     public String getBaseUrl() {
         return "http://localhost:" + port + "/api";
@@ -62,7 +60,7 @@ public class ApplicationE2ETests {
     */
     @Test
     @Transactional
-    public void testQuizLifecycle() throws JsonProcessingException {
+    void testQuizLifecycle() throws JsonProcessingException {
         // Create a quiz
         QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
         fakeDataRandomGenerator.fill(quizCreationDTO);
