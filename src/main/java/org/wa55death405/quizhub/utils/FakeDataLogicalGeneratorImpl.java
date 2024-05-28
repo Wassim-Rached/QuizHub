@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
+import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,9 +20,10 @@ import java.util.stream.Collectors;
 // TODO: name should be changed to 'FakeDataLogicalGenerator'
 @Service
 @RequiredArgsConstructor
-public class FakeDataLogicalUtils {
+public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
 
-    public static QuestionAttemptSubmissionDTO getPerfectScoreQuestionAttemptSubmissionDTO(Question question) {
+    @Override
+    public QuestionAttemptSubmissionDTO getPerfectScoreQuestionAttemptSubmissionDTO(Question question) {
         /*
             I don't know what tf did I just wrote, but it works
             it returns a QuestionAttemptSubmissionDTO
@@ -56,12 +58,14 @@ public class FakeDataLogicalUtils {
         return questionAttemptSubmissionDTO;
     }
 
-    public static List<QuestionAttemptSubmissionDTO> getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(Quiz quiz) {
-        return quiz.getQuestions().stream().map(FakeDataLogicalUtils::getPerfectScoreQuestionAttemptSubmissionDTO).toList();
+    @Override
+    public List<QuestionAttemptSubmissionDTO> getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(Quiz quiz) {
+        return quiz.getQuestions().stream().map(this::getPerfectScoreQuestionAttemptSubmissionDTO).toList();
     }
 
     // TODO : the logic might not be the best here
-    public static QuestionAttemptSubmissionDTO getRandomQuestionAttemptSubmissionDTO(Question question) {
+    @Override
+    public QuestionAttemptSubmissionDTO getRandomQuestionAttemptSubmissionDTO(Question question) {
         QuestionAttemptSubmissionDTO questionAttemptSubmissionDTO = new QuestionAttemptSubmissionDTO();
         questionAttemptSubmissionDTO.setQuestion(question.getId());
         switch (question.getQuestionType()) {
@@ -133,12 +137,14 @@ public class FakeDataLogicalUtils {
         return questionAttemptSubmissionDTO;
     }
 
-    public static List<QuestionAttemptSubmissionDTO> getRandomQuestionAttemptSubmissionDTOsForQuiz(Quiz quiz) {
-        return quiz.getQuestions().stream().map(FakeDataLogicalUtils::getRandomQuestionAttemptSubmissionDTO).toList();
+    @Override
+    public List<QuestionAttemptSubmissionDTO> getRandomQuestionAttemptSubmissionDTOsForQuiz(Quiz quiz) {
+        return quiz.getQuestions().stream().map(this::getRandomQuestionAttemptSubmissionDTO).toList();
     }
 
-    public static QuizAttempt generate_QuizAttempt(Quiz quiz){
-        var attempts = FakeDataLogicalUtils.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
+    @Override
+    public QuizAttempt generate_QuizAttempt(Quiz quiz){
+        var attempts = this.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
         var quizAttempt = QuizAttempt.builder().quiz(quiz).build();
         List<QuestionAttempt> questionAttempts = attempts.stream().map(a->a.toEntity(quizAttempt.getId())).toList();
         quizAttempt.setQuestionAttempts(questionAttempts);
