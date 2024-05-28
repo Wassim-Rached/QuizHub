@@ -7,12 +7,18 @@ import org.wa55death405.quizhub.dto.question.QuestionCreationRequestDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.enums.QuestionType;
-import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
 
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+/*
+    * This class is responsible for generating fake data
+    not to be mistaken with 'FakeDataLogicalGeneratorImpl'
+    * this class is used to generate fake data
+    that requires random generations
+
+ */
 @Service
 @RequiredArgsConstructor
 public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {

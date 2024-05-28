@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 /*
     * This class is responsible for generating fake data
-    not to be mistaken with FakeDataGenerator
+    not to be mistaken with 'FakeDataRandomGeneratorImpl'
     * this class is used to generate fake data
     that requires logical generations
  */
