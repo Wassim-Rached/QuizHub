@@ -442,9 +442,9 @@ class QuestionLogicServiceTest {
         // normal behavior tests
         @Test
         public void testHandleQuestionAttempt__normal() {
-            var orderedOption1 = OrderedOption.builder().id(1).option("100").correctPosition(0).build();
-            var orderedOption2 = OrderedOption.builder().id(2).option("200").correctPosition(1).build();
-            var orderedOption3 = OrderedOption.builder().id(3).option("300").correctPosition(2).build();
+            var orderedOption1 = OrderedOption.builder().id(UUID.randomUUID()).option("100").correctPosition(0).build();
+            var orderedOption2 = OrderedOption.builder().id(UUID.randomUUID()).option("200").correctPosition(1).build();
+            var orderedOption3 = OrderedOption.builder().id(UUID.randomUUID()).option("300").correctPosition(2).build();
 
             Question question = Question.builder()
                     .id(1)
@@ -485,9 +485,9 @@ class QuestionLogicServiceTest {
 
         @Test
         void testHandleQuestionAttempt__failure() {
-            var orderedOption1 = OrderedOption.builder().id(1).option("100").correctPosition(0).build();
-            var orderedOption2 = OrderedOption.builder().id(2).option("200").correctPosition(1).build();
-            var orderedOption3 = OrderedOption.builder().id(3).option("300").correctPosition(2).build();
+            var orderedOption1 = OrderedOption.builder().id(UUID.randomUUID()).option("100").correctPosition(0).build();
+            var orderedOption2 = OrderedOption.builder().id(UUID.randomUUID()).option("200").correctPosition(1).build();
+            var orderedOption3 = OrderedOption.builder().id(UUID.randomUUID()).option("300").correctPosition(2).build();
 
             Question question = Question.builder()
                     .id(1)
@@ -535,9 +535,9 @@ class QuestionLogicServiceTest {
                     .question("put the following numbers in ascending order from top to bottom")
                     .orderedOptions(
                             List.of(
-                                    OrderedOption.builder().id(1).option("100").correctPosition(0).build(),
-                                    OrderedOption.builder().id(2).option("200").correctPosition(1).build(),
-                                    OrderedOption.builder().id(3).option("300").correctPosition(2).build()
+                                    OrderedOption.builder().id(UUID.randomUUID()).option("100").correctPosition(0).build(),
+                                    OrderedOption.builder().id(UUID.randomUUID()).option("200").correctPosition(1).build(),
+                                    OrderedOption.builder().id(UUID.randomUUID()).option("300").correctPosition(2).build()
                             )
                     )
                     .build();
@@ -572,9 +572,9 @@ class QuestionLogicServiceTest {
                     .question("put the following numbers in ascending order from top to bottom")
                     .orderedOptions(
                             List.of(
-                                    OrderedOption.builder().id(1).option("100").correctPosition(0).build(),
-                                    OrderedOption.builder().id(2).option("200").correctPosition(1).build(),
-                                    OrderedOption.builder().id(3).option("300").correctPosition(2).build()
+                                    OrderedOption.builder().id(UUID.randomUUID()).option("100").correctPosition(0).build(),
+                                    OrderedOption.builder().id(UUID.randomUUID()).option("200").correctPosition(1).build(),
+                                    OrderedOption.builder().id(UUID.randomUUID()).option("300").correctPosition(2).build()
                             )
                     )
                     .build();
@@ -603,9 +603,9 @@ class QuestionLogicServiceTest {
 
         @Test
         void testHandleQuestionAttempt__overflow() {
-            var orderedOption1 = OrderedOption.builder().id(1).option("100").correctPosition(0).build();
-            var orderedOption2 = OrderedOption.builder().id(2).option("200").correctPosition(1).build();
-            var orderedOption3 = OrderedOption.builder().id(3).option("300").correctPosition(2).build();
+            var orderedOption1 = OrderedOption.builder().id(UUID.randomUUID()).option("100").correctPosition(0).build();
+            var orderedOption2 = OrderedOption.builder().id(UUID.randomUUID()).option("200").correctPosition(1).build();
+            var orderedOption3 = OrderedOption.builder().id(UUID.randomUUID()).option("300").correctPosition(2).build();
 
             Question question = Question.builder()
                     .id(1)
@@ -649,10 +649,10 @@ class QuestionLogicServiceTest {
 
         @Test
         void testHandleQuestionAttempt__unrelated_orderedOption() {
-            var orderedOption1 = OrderedOption.builder().id(1).option("100").correctPosition(0).build();
-            var orderedOption2 = OrderedOption.builder().id(2).option("200").correctPosition(1).build();
-            var orderedOption3 = OrderedOption.builder().id(3).option("300").correctPosition(2).build();
-            var orderedOption4 = OrderedOption.builder().id(36).option("world war 2").correctPosition(3).build();
+            var orderedOption1 = OrderedOption.builder().id(UUID.randomUUID()).option("100").correctPosition(0).build();
+            var orderedOption2 = OrderedOption.builder().id(UUID.randomUUID()).option("200").correctPosition(1).build();
+            var orderedOption3 = OrderedOption.builder().id(UUID.randomUUID()).option("300").correctPosition(2).build();
+            var orderedOption4 = OrderedOption.builder().id(UUID.randomUUID()).option("world war 2").correctPosition(3).build();
 
             Question question = Question.builder()
                     .id(1)
