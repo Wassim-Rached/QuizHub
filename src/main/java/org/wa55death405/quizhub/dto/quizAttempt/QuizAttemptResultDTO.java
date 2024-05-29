@@ -2,7 +2,6 @@ package org.wa55death405.quizhub.dto.quizAttempt;
 
 import lombok.Data;
 import org.wa55death405.quizhub.dto.question.QuestionResultDTO;
-import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptResultDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.entities.QuizAttempt;
 
