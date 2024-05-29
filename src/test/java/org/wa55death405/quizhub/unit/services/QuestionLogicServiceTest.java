@@ -6,7 +6,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.ActiveProfiles;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.QuestionType;
 import org.wa55death405.quizhub.repositories.*;
@@ -718,8 +717,8 @@ class QuestionLogicServiceTest {
                 .id(1)
                 .question(question)
                 .choiceAttempts(List.of(
-                        ChoiceAttempt.builder().id(1).choice(choice1).build(),
-                        ChoiceAttempt.builder().id(2).choice(choice2).build())
+                        ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build(),
+                        ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice2).build())
                     )
                 .build();
 
@@ -759,8 +758,8 @@ class QuestionLogicServiceTest {
                     .id(1)
                     .question(question)
                     .choiceAttempts(List.of(
-                            ChoiceAttempt.builder().id(1).choice(choice1).build(),
-                            ChoiceAttempt.builder().id(2).choice(choice3).build())
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build(),
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice3).build())
                     )
                     .build();
 
@@ -802,8 +801,8 @@ class QuestionLogicServiceTest {
                     .id(1)
                     .question(question)
                     .choiceAttempts(List.of(
-                            ChoiceAttempt.builder().id(1).choice(choice3).build(),
-                            ChoiceAttempt.builder().id(2).choice(choice4).build())
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice3).build(),
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice4).build())
                     )
                     .build();
 
@@ -916,11 +915,11 @@ class QuestionLogicServiceTest {
                     .id(1)
                     .question(question)
                     .choiceAttempts(List.of(
-                            ChoiceAttempt.builder().id(1).choice(choice1).build(),
-                            ChoiceAttempt.builder().id(2).choice(choice2).build(),
-                            ChoiceAttempt.builder().id(3).choice(choice3).build(),
-                            ChoiceAttempt.builder().id(4).choice(choice4).build(),
-                            ChoiceAttempt.builder().id(5).choice(choice4).build()
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build(),
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice2).build(),
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice3).build(),
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice4).build(),
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice4).build()
                     ))
                     .build();
 
@@ -960,8 +959,8 @@ class QuestionLogicServiceTest {
                     .id(1)
                     .question(question)
                     .choiceAttempts(List.of(
-                            ChoiceAttempt.builder().id(1).choice(choice1).build(),
-                            ChoiceAttempt.builder().id(2).choice(choice5).build()
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build(),
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice5).build()
                     ))
                     .build();
 
@@ -1002,7 +1001,7 @@ class QuestionLogicServiceTest {
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
                     .id(1)
                     .question(question)
-                    .choiceAttempts(List.of(ChoiceAttempt.builder().id(1).choice(choice1).build()))
+                    .choiceAttempts(List.of(ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build()))
                     .build();
 
             // Mock behavior
@@ -1039,7 +1038,7 @@ class QuestionLogicServiceTest {
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
                     .id(1)
                     .question(question)
-                    .choiceAttempts(List.of(ChoiceAttempt.builder().id(2).choice(choice2).build()))
+                    .choiceAttempts(List.of(ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice2).build()))
                     .build();
 
             // Mock behavior
@@ -1151,8 +1150,8 @@ class QuestionLogicServiceTest {
                     .id(1)
                     .question(question)
                     .choiceAttempts(List.of(
-                            ChoiceAttempt.builder().id(1).choice(choice1).build(),
-                            ChoiceAttempt.builder().id(2).choice(choice2).build()
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build(),
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice2).build()
                     ))
                     .build();
 
@@ -1190,7 +1189,7 @@ class QuestionLogicServiceTest {
                     .id(1)
                     .question(question)
                     .choiceAttempts(List.of(
-                            ChoiceAttempt.builder().id(2).choice(choice5).build()
+                            ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice5).build()
                     ))
                     .build();
 
