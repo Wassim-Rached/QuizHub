@@ -23,13 +23,13 @@ public interface IQuizService {
 
     QuizAttempt startQuizAttempt(UUID quizId);
 
-    QuizAttemptTakingDTO getQuizAttemptTaking(Integer quizAttemptId);
+    QuizAttemptTakingDTO getQuizAttemptTaking(UUID quizAttemptId);
 
-    void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptTakings, Integer quizAttemptId);
+    void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptTakings, UUID quizAttemptId);
 
-    void cancelQuizAttempt(Integer quizAttemptId);
+    void cancelQuizAttempt(UUID quizAttemptId);
 
-    QuizAttempt finishQuizAttempt(Integer quizAttemptId);
+    QuizAttempt finishQuizAttempt(UUID quizAttemptId);
 
-    QuizAttemptResultDTO getQuizAttemptResult(Integer quizAttemptId);
+    QuizAttemptResultDTO getQuizAttemptResult(UUID quizAttemptId);
 }

@@ -15,7 +15,7 @@ import java.util.UUID;
     * This class is used to convert the incoming JSON request to 'QuestionAttempt' entity
  */
 @Data
-public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,Integer> {
+public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,UUID> {
 //    TODO rename question to questionId
     private UUID question;
 
@@ -32,7 +32,7 @@ public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,I
     private HashMap<UUID,List<UUID>> optionMatchAttempts = new HashMap<>();
 
     @Override
-    public QuestionAttempt toEntity(Integer quizAttempt) {
+    public QuestionAttempt toEntity(UUID quizAttempt) {
         if (question == null) throw new InputValidationException("Question id is required");
 
         List<ChoiceAttempt> choiceAttemptsObjs = new ArrayList<>();
