@@ -54,9 +54,9 @@ class QuestionLogicServiceTest {
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
                             List.of(
-                                    CorrectOptionMatch.builder().id(1).option(option_tunisia).match(match_tunis).build(),
-                                    CorrectOptionMatch.builder().id(2).option(option_france).match(match_paris).build(),
-                                    CorrectOptionMatch.builder().id(3).option(option_usa).match(match_washington).build()
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_tunis).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_france).match(match_paris).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build()
                             )
                     )
                     .options(List.of(option_tunisia, option_france, option_usa))
@@ -112,9 +112,9 @@ class QuestionLogicServiceTest {
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
                             List.of(
-                                    CorrectOptionMatch.builder().id(1).option(option_tunisia).match(match_tunis).build(),
-                                    CorrectOptionMatch.builder().id(2).option(option_france).match(match_paris).build(),
-                                    CorrectOptionMatch.builder().id(3).option(option_usa).match(match_washington).build()
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_tunis).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_france).match(match_paris).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build()
                             )
                     )
                     .options(List.of(option_tunisia, option_france, option_usa))
@@ -170,9 +170,9 @@ class QuestionLogicServiceTest {
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
                             List.of(
-                                    CorrectOptionMatch.builder().id(1).option(option_tunisia).match(match_tunis).build(),
-                                    CorrectOptionMatch.builder().id(2).option(option_france).match(match_paris).build(),
-                                    CorrectOptionMatch.builder().id(3).option(option_usa).match(match_washington).build()
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_tunis).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_france).match(match_paris).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build()
                             )
                     )
                     .options(List.of(option_tunisia, option_france, option_usa))
@@ -231,9 +231,9 @@ class QuestionLogicServiceTest {
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
                             List.of(
-                                    CorrectOptionMatch.builder().id(1).option(option_tunisia).match(match_tunis).build(),
-                                    CorrectOptionMatch.builder().id(2).option(option_france).match(match_paris).build(),
-                                    CorrectOptionMatch.builder().id(3).option(option_usa).match(match_washington).build()
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_tunis).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_france).match(match_paris).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build()
                             )
                     )
                     .options(List.of(option_tunisia, option_france, option_usa))
@@ -286,9 +286,9 @@ class QuestionLogicServiceTest {
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
                             List.of(
-                                    CorrectOptionMatch.builder().id(1).option(option_tunisia).match(match_tunis).build(),
-                                    CorrectOptionMatch.builder().id(2).option(option_france).match(match_paris).build(),
-                                    CorrectOptionMatch.builder().id(3).option(option_usa).match(match_washington).build()
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_tunis).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_france).match(match_paris).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build()
                             )
                     )
                     .options(List.of(option_tunisia, option_france, option_usa))
@@ -353,9 +353,9 @@ class QuestionLogicServiceTest {
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
                             List.of(
-                                    CorrectOptionMatch.builder().id(1).option(option_tunisia).match(match_tunis).build(),
-                                    CorrectOptionMatch.builder().id(2).option(option_france).match(match_paris).build(),
-                                    CorrectOptionMatch.builder().id(3).option(option_usa).match(match_washington).build()
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_tunis).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_france).match(match_paris).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build()
                             )
                     )
                     .options(List.of(option_tunisia, option_france, option_usa))
@@ -403,9 +403,9 @@ class QuestionLogicServiceTest {
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
                             List.of(
-                                    CorrectOptionMatch.builder().id(1).option(option_tunisia).match(match_tunis).build(),
-                                    CorrectOptionMatch.builder().id(2).option(option_france).match(match_paris).build(),
-                                    CorrectOptionMatch.builder().id(3).option(option_usa).match(match_washington).build()
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_tunis).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_france).match(match_paris).build(),
+                                    CorrectOptionMatch.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build()
                             )
                     )
                     .options(List.of(option_tunisia, option_france, option_usa))
