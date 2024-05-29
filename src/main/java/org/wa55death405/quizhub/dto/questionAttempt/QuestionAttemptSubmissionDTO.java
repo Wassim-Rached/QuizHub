@@ -29,7 +29,7 @@ public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,I
     private HashMap<Integer,Integer> orderedOptionAttempts = new HashMap<>();
 
     // for OPTION_MATCHING: <optionId, List<matchId>>
-    private HashMap<UUID,List<Integer>> optionMatchAttempts = new HashMap<>();
+    private HashMap<UUID,List<UUID>> optionMatchAttempts = new HashMap<>();
 
     @Override
     public QuestionAttempt toEntity(Integer quizAttempt) {
