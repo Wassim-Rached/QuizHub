@@ -43,9 +43,9 @@ class QuestionLogicServiceTest {
             Option option_france = Option.builder().id(UUID.randomUUID()).option("France").build();
             Option option_usa = Option.builder().id(UUID.randomUUID()).option("USA").build();
             // Matches
-            Match match_tunis = Match.builder().id(1).match("Tunis").build();
-            Match match_paris = Match.builder().id(2).match("Paris").build();
-            Match match_washington = Match.builder().id(3).match("Washington").build();
+            Match match_tunis = Match.builder().id(UUID.randomUUID()).match("Tunis").build();
+            Match match_paris = Match.builder().id(UUID.randomUUID()).match("Paris").build();
+            Match match_washington = Match.builder().id(UUID.randomUUID()).match("Washington").build();
 
             // question
             Question question = Question.builder()
@@ -101,9 +101,9 @@ class QuestionLogicServiceTest {
             Option option_france = Option.builder().id(UUID.randomUUID()).option("France").build();
             Option option_usa = Option.builder().id(UUID.randomUUID()).option("USA").build();
             // Matches
-            Match match_tunis = Match.builder().id(1).match("Tunis").build();
-            Match match_paris = Match.builder().id(2).match("Paris").build();
-            Match match_washington = Match.builder().id(3).match("Washington").build();
+            Match match_tunis = Match.builder().id(UUID.randomUUID()).match("Tunis").build();
+            Match match_paris = Match.builder().id(UUID.randomUUID()).match("Paris").build();
+            Match match_washington = Match.builder().id(UUID.randomUUID()).match("Washington").build();
 
             // question
             Question question = Question.builder()
@@ -159,9 +159,9 @@ class QuestionLogicServiceTest {
             Option option_france = Option.builder().id(UUID.randomUUID()).option("France").build();
             Option option_usa = Option.builder().id(UUID.randomUUID()).option("USA").build();
             // Matches
-            Match match_tunis = Match.builder().id(1).match("Tunis").build();
-            Match match_paris = Match.builder().id(2).match("Paris").build();
-            Match match_washington = Match.builder().id(3).match("Washington").build();
+            Match match_tunis = Match.builder().id(UUID.randomUUID()).match("Tunis").build();
+            Match match_paris = Match.builder().id(UUID.randomUUID()).match("Paris").build();
+            Match match_washington = Match.builder().id(UUID.randomUUID()).match("Washington").build();
 
             // question
             Question question = Question.builder()
@@ -219,10 +219,10 @@ class QuestionLogicServiceTest {
             Option option_usa = Option.builder().id(UUID.randomUUID()).option("USA").build();
             Option option_tomato = Option.builder().id(UUID.randomUUID()).option("Tomato").build();
             // Matches
-            Match match_tunis = Match.builder().id(1).match("Tunis").build();
-            Match match_paris = Match.builder().id(2).match("Paris").build();
-            Match match_washington = Match.builder().id(3).match("Washington").build();
-            Match match_fruit = Match.builder().id(44).match("Fruit").build();
+            Match match_tunis = Match.builder().id(UUID.randomUUID()).match("Tunis").build();
+            Match match_paris = Match.builder().id(UUID.randomUUID()).match("Paris").build();
+            Match match_washington = Match.builder().id(UUID.randomUUID()).match("Washington").build();
+            Match match_fruit = Match.builder().id(UUID.randomUUID()).match("Fruit").build();
 
             // question
             Question question = Question.builder()
@@ -275,9 +275,9 @@ class QuestionLogicServiceTest {
             Option option_france = Option.builder().id(UUID.randomUUID()).option("France").build();
             Option option_usa = Option.builder().id(UUID.randomUUID()).option("USA").build();
             // Matches
-            Match match_tunis = Match.builder().id(1).match("Tunis").build();
-            Match match_paris = Match.builder().id(2).match("Paris").build();
-            Match match_washington = Match.builder().id(3).match("Washington").build();
+            Match match_tunis = Match.builder().id(UUID.randomUUID()).match("Tunis").build();
+            Match match_paris = Match.builder().id(UUID.randomUUID()).match("Paris").build();
+            Match match_washington = Match.builder().id(UUID.randomUUID()).match("Washington").build();
 
             // question
             Question question = Question.builder()
@@ -342,9 +342,9 @@ class QuestionLogicServiceTest {
             Option option_france = Option.builder().id(UUID.randomUUID()).option("France").build();
             Option option_usa = Option.builder().id(UUID.randomUUID()).option("USA").build();
             // Matches
-            Match match_tunis = Match.builder().id(1).match("Tunis").build();
-            Match match_paris = Match.builder().id(2).match("Paris").build();
-            Match match_washington = Match.builder().id(3).match("Washington").build();
+            Match match_tunis = Match.builder().id(UUID.randomUUID()).match("Tunis").build();
+            Match match_paris = Match.builder().id(UUID.randomUUID()).match("Paris").build();
+            Match match_washington = Match.builder().id(UUID.randomUUID()).match("Washington").build();
 
             // question
             Question question = Question.builder()
@@ -392,9 +392,9 @@ class QuestionLogicServiceTest {
             Option option_france = Option.builder().id(UUID.randomUUID()).option("France").build();
             Option option_usa = Option.builder().id(UUID.randomUUID()).option("USA").build();
             // Matches
-            Match match_tunis = Match.builder().id(1).match("Tunis").build();
-            Match match_paris = Match.builder().id(2).match("Paris").build();
-            Match match_washington = Match.builder().id(3).match("Washington").build();
+            Match match_tunis = Match.builder().id(UUID.randomUUID()).match("Tunis").build();
+            Match match_paris = Match.builder().id(UUID.randomUUID()).match("Paris").build();
+            Match match_washington = Match.builder().id(UUID.randomUUID()).match("Washington").build();
 
             // question
             Question question = Question.builder()
