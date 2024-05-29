@@ -458,9 +458,9 @@ class QuestionLogicServiceTest {
                     .question(question)
                     .orderedOptionAttempts(
                             List.of(
-                                    OrderedOptionAttempt.builder().id(1).orderedOption(orderedOption1).position(1).build(),
-                                    OrderedOptionAttempt.builder().id(2).orderedOption(orderedOption2).position(0).build(),
-                                    OrderedOptionAttempt.builder().id(3).orderedOption(orderedOption3).position(2).build()
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption1).position(1).build(),
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption2).position(0).build(),
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption3).position(2).build()
                             )
                     )
                     .build();
@@ -501,9 +501,9 @@ class QuestionLogicServiceTest {
                     .question(question)
                     .orderedOptionAttempts(
                             List.of(
-                                    OrderedOptionAttempt.builder().id(1).orderedOption(orderedOption1).position(0).build(),
-                                    OrderedOptionAttempt.builder().id(2).orderedOption(orderedOption3).position(1).build(),
-                                    OrderedOptionAttempt.builder().id(3).orderedOption(orderedOption2).position(2).build()
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption1).position(0).build(),
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption3).position(1).build(),
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption2).position(2).build()
                             )
                     )
                     .build();
@@ -623,10 +623,10 @@ class QuestionLogicServiceTest {
                     .question(question)
                     .orderedOptionAttempts(
                             List.of(
-                                    OrderedOptionAttempt.builder().id(1).orderedOption(orderedOption1).position(0).build(),
-                                    OrderedOptionAttempt.builder().id(2).orderedOption(orderedOption2).position(1).build(),
-                                    OrderedOptionAttempt.builder().id(3).orderedOption(orderedOption3).position(2).build(),
-                                    OrderedOptionAttempt.builder().id(3).orderedOption(orderedOption3).position(2).build()
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption1).position(0).build(),
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption2).position(1).build(),
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption3).position(2).build(),
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption3).position(2).build()
                             )
                     )
                     .build();
@@ -670,10 +670,10 @@ class QuestionLogicServiceTest {
                     .question(question)
                     .orderedOptionAttempts(
                             List.of(
-                                    OrderedOptionAttempt.builder().id(1).orderedOption(orderedOption1).position(0).build(),
-                                    OrderedOptionAttempt.builder().id(2).orderedOption(orderedOption2).position(1).build(),
-                                    OrderedOptionAttempt.builder().id(3).orderedOption(orderedOption3).position(2).build(),
-                                    OrderedOptionAttempt.builder().id(4).orderedOption(orderedOption4).position(3).build()
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption1).position(0).build(),
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption2).position(1).build(),
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption3).position(2).build(),
+                                    OrderedOptionAttempt.builder().id(UUID.randomUUID()).orderedOption(orderedOption4).position(3).build()
                             )
                     )
                     .build();
