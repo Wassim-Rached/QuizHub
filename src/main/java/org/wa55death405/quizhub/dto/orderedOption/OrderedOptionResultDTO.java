@@ -3,9 +3,11 @@ package org.wa55death405.quizhub.dto.orderedOption;
 import lombok.Data;
 import org.wa55death405.quizhub.entities.OrderedOption;
 
+import java.util.UUID;
+
 @Data
 public class OrderedOptionResultDTO {
-    private Integer id;
+    private UUID id;
     private String option;
     private Integer correctPosition;
 

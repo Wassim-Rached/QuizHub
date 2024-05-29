@@ -14,6 +14,7 @@ import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.interfaces.services.IQuizService;
 
 import java.util.List;
+import java.util.UUID;
 
 /*
     this class is the controller of the quiz
@@ -44,7 +45,7 @@ public class QuizController {
         and returns the quiz attempt id
      */
     @PostMapping("/{quizId}/start")
-    public ResponseEntity<StandardApiResponse<Integer>> startQuizAttempt(@PathVariable Integer quizId) {
+    public ResponseEntity<StandardApiResponse<UUID>> startQuizAttempt(@PathVariable UUID quizId) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt started successfully",quizService.startQuizAttempt(quizId).getId()), HttpStatus.CREATED);
     }
 
@@ -55,7 +56,7 @@ public class QuizController {
         and the quiz attempt id as a path variable
      */
     @PostMapping("/attempt/{quizAttemptId}/submit")
-    public ResponseEntity<StandardApiResponse<Void>> submitQuestionAttempts(@RequestBody List<QuestionAttemptSubmissionDTO> body, @PathVariable Integer quizAttemptId) {
+    public ResponseEntity<StandardApiResponse<Void>> submitQuestionAttempts(@RequestBody List<QuestionAttemptSubmissionDTO> body, @PathVariable UUID quizAttemptId) {
         quizService.submitQuestionAttempts(body, quizAttemptId);
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Question attempts submitted successfully",null), HttpStatus.ACCEPTED);
     }
@@ -65,17 +66,17 @@ public class QuizController {
         it calculates the score and returns it
      */
     @PostMapping("/attempt/{quizAttemptId}/finish")
-    public ResponseEntity<StandardApiResponse<Float>> finishQuizAttempt(@PathVariable Integer quizAttemptId) {
+    public ResponseEntity<StandardApiResponse<Float>> finishQuizAttempt(@PathVariable UUID quizAttemptId) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt finished and processed successfully",quizService.finishQuizAttempt(quizAttemptId).getScore()), HttpStatus.OK);
     }
 
     /*
         this api is used to create a new quiz
         it takes the quiz creation dto as a body
-        and returns the id of the created quiz
+        and returns id of the created quiz
      */
     @PostMapping
-    public ResponseEntity<StandardApiResponse<Integer>> createQuiz(@RequestBody QuizCreationDTO body) {
+    public ResponseEntity<StandardApiResponse<UUID>> createQuiz(@RequestBody QuizCreationDTO body) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz created successfully",quizService.createQuiz(body).getId()), HttpStatus.CREATED);
     }
 
@@ -85,7 +86,7 @@ public class QuizController {
         and the previous submitted non-finished attempts
      */
     @GetMapping("/attempt/{quizAttemptId}/taking")
-    public ResponseEntity<StandardApiResponse<QuizAttemptTakingDTO>> getQuizAttemptTaking(@PathVariable Integer quizAttemptId) {
+    public ResponseEntity<StandardApiResponse<QuizAttemptTakingDTO>> getQuizAttemptTaking(@PathVariable UUID quizAttemptId) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt taking fetched successfully",quizService.getQuizAttemptTaking(quizAttemptId)), HttpStatus.OK);
     }
 
@@ -95,7 +96,7 @@ public class QuizController {
         before finishing it
      */
     @DeleteMapping("/attempt/{quizAttemptId}/cancel")
-    public ResponseEntity<StandardApiResponse<Void>> cancelQuizAttempt(@PathVariable Integer quizAttemptId) {
+    public ResponseEntity<StandardApiResponse<Void>> cancelQuizAttempt(@PathVariable UUID quizAttemptId) {
         quizService.cancelQuizAttempt(quizAttemptId);
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt canceled successfully"), HttpStatus.OK);
     }
@@ -105,7 +106,7 @@ public class QuizController {
         it contains the questions, the attempts, the correct answers
      */
     @GetMapping("/attempt/{quizAttemptId}/result")
-    public ResponseEntity<StandardApiResponse<QuizAttemptResultDTO>> getQuizAttemptResult(@PathVariable Integer quizAttemptId) {
+    public ResponseEntity<StandardApiResponse<QuizAttemptResultDTO>> getQuizAttemptResult(@PathVariable UUID quizAttemptId) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt result fetched successfully",quizService.getQuizAttemptResult(quizAttemptId)), HttpStatus.OK);
     }
 

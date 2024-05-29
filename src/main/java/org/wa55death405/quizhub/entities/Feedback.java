@@ -7,13 +7,14 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 @Data
 @Entity
 public class Feedback {
     @Id
     @GeneratedValue
-    private Integer id;
+    private UUID id;
     @Column(columnDefinition = "TEXT")
     private String content;
     private Integer rating;

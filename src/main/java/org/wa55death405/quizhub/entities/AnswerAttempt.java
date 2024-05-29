@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -13,8 +14,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class AnswerAttempt {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private Boolean isCorrect = null;
     @Column(nullable = false)
     private String answer;

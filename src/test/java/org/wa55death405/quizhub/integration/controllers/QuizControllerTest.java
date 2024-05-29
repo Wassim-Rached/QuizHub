@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -60,8 +61,9 @@ class QuizControllerTest {
         // arrange
         List<QuizGeneralInfoDTO> expectedQuizzes = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
+            UUID id = UUID.randomUUID();
             var quiz = Quiz.builder()
-                    .id(i)
+                    .id(id)
                     .title("Quiz " + i)
                     .build();
             expectedQuizzes.add(new QuizGeneralInfoDTO(quiz));
@@ -84,7 +86,7 @@ class QuizControllerTest {
         QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
         fakeDataRandomGenerator.fill(quizCreationDTO);
         Quiz quiz = quizCreationDTO.toEntity(null);
-        quiz.setId(1);
+        quiz.setId(UUID.randomUUID());
         when(quizService.createQuiz(quizCreationDTO)).thenReturn(quiz);
         var requestBodyJson = this.objectMapper.writeValueAsString(quizCreationDTO);
 
@@ -94,7 +96,7 @@ class QuizControllerTest {
                 .content(requestBodyJson))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
-                .andExpect(jsonPath("$.data").value(quiz.getId()))
+                .andExpect(jsonPath("$.data").value(quiz.getId().toString()))
                 .andDo(
                         document("create-quiz",
                                 preprocessRequest(prettyPrint()),
@@ -106,16 +108,16 @@ class QuizControllerTest {
     @Test
     void startQuizAttempt() throws Exception {
         // arrange
-        Integer quizId = 1;
+        UUID quizId = UUID.randomUUID();
         QuizAttempt quizAttempt = new QuizAttempt();
-        quizAttempt.setId(1);
+        quizAttempt.setId(UUID.randomUUID());
         when(quizService.startQuizAttempt(quizId)).thenReturn(quizAttempt);
 
         // act and assert
          this.mockMvc.perform(post("/api/quiz/{quizId}/start", quizId))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
-                .andExpect(jsonPath("$.data").value(quizAttempt.getId()))
+                .andExpect(jsonPath("$.data").value(quizAttempt.getId().toString()))
                 .andDo(document(
                         "start-quiz-attempt",
                         preprocessRequest(prettyPrint()),
@@ -133,7 +135,7 @@ class QuizControllerTest {
         var requestJson = this.objectMapper.writeValueAsString(attempts);
 
         // act and assert
-        this.mockMvc.perform(post("/api/quiz/attempt/{quizAttemptId}/submit", 1)
+        this.mockMvc.perform(post("/api/quiz/attempt/{quizAttemptId}/submit", UUID.randomUUID())
                 .contentType("application/json")
                 .content(requestJson))
                 .andExpect(status().isAccepted())
@@ -149,12 +151,11 @@ class QuizControllerTest {
     void getQuizAttemptTaking() throws Exception {
         // arrange
         Quiz quiz = fakeDataRandomGenerator.generate_Quiz();
-        int index = 0;
         for (var question : quiz.getQuestions()) {
-            question.setId(index++);
+            question.setId(UUID.randomUUID());
         }
         var quizAttempt = fakeDataLogicalGenerator.generate_QuizAttempt(quiz);
-        quizAttempt.setId(1);
+        quizAttempt.setId(UUID.randomUUID());
 
         var attempt = new QuizAttemptTakingDTO(quizAttempt);
         when(quizService.getQuizAttemptTaking(quizAttempt.getId())).thenReturn(attempt);
@@ -174,7 +175,7 @@ class QuizControllerTest {
     @Test
     void cancelQuizAttempt() throws Exception {
         // arrange
-        Integer quizAttemptId = 1;
+        UUID quizAttemptId = UUID.randomUUID();
 
         // act and assert
         this.mockMvc.perform(delete("/api/quiz/attempt/{quizAttemptId}/cancel", quizAttemptId))
@@ -190,7 +191,7 @@ class QuizControllerTest {
     @Test
     void finishQuizAttempt() throws Exception {
         // arrange
-        Integer quizAttemptId = 1;
+        UUID quizAttemptId = UUID.randomUUID();
         QuizAttempt quizAttempt = new QuizAttempt();
         quizAttempt.setId(quizAttemptId);
         quizAttempt.setScore(50.0f);
@@ -212,12 +213,11 @@ class QuizControllerTest {
     void getQuizAttemptResult() throws Exception {
         // arrange
         Quiz quiz = fakeDataRandomGenerator.generate_Quiz();
-        int index = 0;
         for (var question : quiz.getQuestions()) {
-            question.setId(index++);
+            question.setId(UUID.randomUUID());
         }
         var quizAttempt = fakeDataLogicalGenerator.generate_QuizAttempt(quiz);
-        quizAttempt.setId(1);
+        quizAttempt.setId(UUID.randomUUID());
 
         var attempt = new QuizAttemptResultDTO(quizAttempt);
         when(quizService.getQuizAttemptResult(quizAttempt.getId())).thenReturn(attempt);

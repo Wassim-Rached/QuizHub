@@ -8,30 +8,31 @@ import org.wa55death405.quizhub.interfaces.dto.EntityDTO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /*
     * DTO class for 'QuestionAttempt' entity
     * This class is used to convert the incoming JSON request to 'QuestionAttempt' entity
  */
 @Data
-public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,Integer> {
+public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,UUID> {
 //    TODO rename question to questionId
-    private Integer question;
+    private UUID question;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK
     private String answerAttempt;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    private List<Integer> choiceAttempts = new ArrayList<>();
+    private List<UUID> choiceAttempts = new ArrayList<>();
 
     // for OPTION_ORDERING
-    private HashMap<Integer,Integer> orderedOptionAttempts = new HashMap<>();
+    private HashMap<Integer,UUID> orderedOptionAttempts = new HashMap<>();
 
-    // for OPTION_MATCHING : <optionId, List<matchId>>
-    private HashMap<Integer,List<Integer>> optionMatchAttempts = new HashMap<>();
+    // for OPTION_MATCHING: <optionId, List<matchId>>
+    private HashMap<UUID,List<UUID>> optionMatchAttempts = new HashMap<>();
 
     @Override
-    public QuestionAttempt toEntity(Integer quizAttempt) {
+    public QuestionAttempt toEntity(UUID quizAttempt) {
         if (question == null) throw new InputValidationException("Question id is required");
 
         List<ChoiceAttempt> choiceAttemptsObjs = new ArrayList<>();

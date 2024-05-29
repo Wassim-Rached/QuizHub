@@ -2,16 +2,16 @@ package org.wa55death405.quizhub.dto.quizAttempt;
 
 import lombok.Data;
 import org.wa55death405.quizhub.dto.question.QuestionResultDTO;
-import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptResultDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.entities.QuizAttempt;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Data
 public class QuizAttemptResultDTO {
-    private Integer id;
+    private UUID id;
     private Float score;
     private QuizGeneralInfoDTO quiz;
     private List<QuestionResultDTO> questions;

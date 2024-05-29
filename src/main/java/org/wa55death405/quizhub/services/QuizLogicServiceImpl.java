@@ -13,7 +13,7 @@ import java.util.List;
 /*
     * This class is responsible for processing the quiz attempt.
     * It also delegates the processing of the question attempts to the QuestionLogicService.
-    * It calculates the score of the quiz attempt
+    * It calculates the score of the quiz attempt,
     * And lastly, it saves the quiz attempt to the database.
  */
 
