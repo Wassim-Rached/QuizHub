@@ -12,6 +12,7 @@ import org.wa55death405.quizhub.repositories.QuizAttemptRepository;
 import org.wa55death405.quizhub.services.QuizService;
 
 import java.util.List;
+import java.util.UUID;
 
 /*
     this class is the controller of the dev
@@ -34,7 +35,7 @@ public class DevController {
      */
     @PostMapping("/attempt/{quizAttemptId}/submit-perfect")
     @Transactional
-    public void submitPerfectResponse(@PathVariable Integer quizAttemptId) {
+    public void submitPerfectResponse(@PathVariable UUID quizAttemptId) {
         var quizAttempt= quizAttemptRepository.findById(quizAttemptId);
         if(quizAttempt.isEmpty()){
             return;

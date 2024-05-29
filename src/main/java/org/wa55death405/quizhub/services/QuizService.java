@@ -60,7 +60,7 @@ public class QuizService implements IQuizService{
     }
 
     @Override
-    public QuizAttemptTakingDTO getQuizAttemptTaking(Integer quizAttemptId) {
+    public QuizAttemptTakingDTO getQuizAttemptTaking(UUID quizAttemptId) {
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
@@ -72,7 +72,7 @@ public class QuizService implements IQuizService{
 
     @Override
     @Transactional
-    public void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptSubmissions, Integer quizAttemptId) {
+    public void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptSubmissions, UUID quizAttemptId) {
         if (questionAttemptSubmissions == null || questionAttemptSubmissions.isEmpty()) {
             System.out.println("No question attempts to submit");
             return;
@@ -123,7 +123,7 @@ public class QuizService implements IQuizService{
     }
 
     @Override
-    public void cancelQuizAttempt(Integer quizAttemptId) {
+    public void cancelQuizAttempt(UUID quizAttemptId) {
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
@@ -134,7 +134,7 @@ public class QuizService implements IQuizService{
     }
 
     @Override
-    public QuizAttempt finishQuizAttempt(Integer quizAttemptId) {
+    public QuizAttempt finishQuizAttempt(UUID quizAttemptId) {
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
@@ -143,7 +143,7 @@ public class QuizService implements IQuizService{
     }
 
     @Override
-    public QuizAttemptResultDTO getQuizAttemptResult(Integer quizAttemptId) {
+    public QuizAttemptResultDTO getQuizAttemptResult(UUID quizAttemptId) {
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );

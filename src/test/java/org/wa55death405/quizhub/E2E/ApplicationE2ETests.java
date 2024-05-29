@@ -78,7 +78,7 @@ public class ApplicationE2ETests {
                         "data", matchesPattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"))
                 .extract()
                 .response();
-        var quizId = UUID.fromString(response.jsonPath().getString("data"));
+        UUID quizId = UUID.fromString(response.jsonPath().getString("data"));
 
         // Search for the quiz
         HashMap<String, String> queryParams = new HashMap<>();
@@ -97,15 +97,17 @@ public class ApplicationE2ETests {
                 .body("data[0].title", equalTo(quizCreationDTO.getTitle()));
 
         // Start an attempt
-        var predictedQuizAttemptId = 1;
-        given()
+        var startQuizResponse = given()
                 .when()
                 .post(getBaseUrl() + "/quiz/" + quizId + "/start")
                 .then()
                 .statusCode(CREATED.value())
                 .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
                         "message", notNullValue(),
-                        "data", equalTo(predictedQuizAttemptId));
+                        "data", matchesPattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"))
+                .extract()
+                .response();
+        UUID quizAttemptId = UUID.fromString(startQuizResponse.jsonPath().getString("data"));
 
         // Submit the attempt
         Quiz quiz = quizRepository.findById(quizId).orElseThrow(() -> new EntityNotFoundException("Quiz not found"));
@@ -116,7 +118,7 @@ public class ApplicationE2ETests {
                 .contentType("application/json")
                 .body(questionAttemptSubmissionRequestBody)
                 .when()
-                .post(getBaseUrl() + "/quiz/attempt/" + predictedQuizAttemptId + "/submit")
+                .post(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/submit")
                 .then()
                 .statusCode(ACCEPTED.value())
                 .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
@@ -126,13 +128,13 @@ public class ApplicationE2ETests {
         // Get the attempt taking
         given()
                 .when()
-                .get(getBaseUrl() + "/quiz/attempt/" + predictedQuizAttemptId + "/taking")
+                .get(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/taking")
                 .then()
                 .statusCode(200)
                 .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
                 "message", notNullValue(),
                         "data", notNullValue(),
-                        "data.id", equalTo(predictedQuizAttemptId),
+                        "data.id", equalTo(quizAttemptId.toString()),
                         "data.quiz.id", equalTo(quizId.toString()),
                         "data.quiz.title", equalTo(quiz.getTitle()),
                         "data.questions", hasSize(equalTo(quiz.getQuestions().size())),
@@ -163,7 +165,7 @@ public class ApplicationE2ETests {
                 .contentType("application/json")
                 .body(correctQuestionAttemptSubmissionRequestBody)
                 .when()
-                .post(getBaseUrl() + "/quiz/attempt/" + predictedQuizAttemptId + "/submit")
+                .post(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/submit")
                 .then()
                 .statusCode(ACCEPTED.value())
                 .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
@@ -173,7 +175,7 @@ public class ApplicationE2ETests {
         // Finish the attempt
         given()
                 .when()
-                .post(getBaseUrl() + "/quiz/attempt/" + predictedQuizAttemptId + "/finish")
+                .post(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/finish")
                 .then()
                 .statusCode(200)
                 .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
@@ -185,13 +187,13 @@ public class ApplicationE2ETests {
         // Get the attempt result
         given()
                 .when()
-                .get(getBaseUrl() + "/quiz/attempt/" + predictedQuizAttemptId + "/result")
+                .get(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/result")
                 .then()
                 .statusCode(200)
                 .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
                         "message", notNullValue(),
                         "data", notNullValue(),
-                        "data.id", equalTo(predictedQuizAttemptId),
+                        "data.id", equalTo(quizAttemptId.toString()),
                         "data.quiz.id", equalTo(quizId.toString()),
                         "data.quiz.title", equalTo(quiz.getTitle()),
                         "data.questions", hasSize(equalTo(quiz.getQuestions().size())),
