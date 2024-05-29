@@ -8,6 +8,7 @@ import org.wa55death405.quizhub.interfaces.dto.EntityDTO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /*
     * DTO class for 'QuestionAttempt' entity
@@ -22,7 +23,7 @@ public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,I
     private String answerAttempt;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    private List<Integer> choiceAttempts = new ArrayList<>();
+    private List<UUID> choiceAttempts = new ArrayList<>();
 
     // for OPTION_ORDERING
     private HashMap<Integer,Integer> orderedOptionAttempts = new HashMap<>();
