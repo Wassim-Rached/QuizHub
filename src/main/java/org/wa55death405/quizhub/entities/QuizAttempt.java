@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ import java.util.Objects;
 public class QuizAttempt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private UUID id;
     private Float score = null;
 
     @ManyToOne(optional = false)

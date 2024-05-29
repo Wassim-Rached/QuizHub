@@ -21,6 +21,7 @@ import org.wa55death405.quizhub.repositories.QuizRepository;
 import org.wa55death405.quizhub.services.QuizService;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -140,7 +141,7 @@ class QuizServiceTest {
             var attemptsSubmissions = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
 
             // when
-            assertThrows(EntityNotFoundException.class, () -> quizService.submitQuestionAttempts(attemptsSubmissions, -1));
+            assertThrows(EntityNotFoundException.class, () -> quizService.submitQuestionAttempts(attemptsSubmissions, UUID.randomUUID()));
         }
 
         @Test
@@ -253,7 +254,7 @@ class QuizServiceTest {
         @Test
         void test_not_found() {
             // when
-            assertThrows(EntityNotFoundException.class, () -> quizService.getQuizAttemptTaking(-1));
+            assertThrows(EntityNotFoundException.class, () -> quizService.getQuizAttemptTaking(UUID.randomUUID()));
         }
     }
 
@@ -344,7 +345,7 @@ class QuizServiceTest {
         @Test
         void test_not_found() {
             // when
-            assertThrows(EntityNotFoundException.class, () -> quizService.getQuizAttemptResult(-1));
+            assertThrows(EntityNotFoundException.class, () -> quizService.getQuizAttemptResult(UUID.randomUUID()));
         }
 
         @Test
