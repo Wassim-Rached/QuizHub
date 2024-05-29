@@ -702,10 +702,10 @@ class QuestionLogicServiceTest {
         // normal behavior tests
         @Test
         public void testHandleQuestionAttempt__normal() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("7").build();
-            var choice2 = Choice.builder().id(2).isCorrect(true).choice("13").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("4").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("7").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("4").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                 .id(1)
@@ -743,10 +743,10 @@ class QuestionLogicServiceTest {
 
         @Test
         public void testHandleQuestionAttempt__part_failure() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("7").build();
-            var choice2 = Choice.builder().id(2).isCorrect(true).choice("13").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("4").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("7").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("4").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -786,10 +786,10 @@ class QuestionLogicServiceTest {
         @Test
         public void testHandleQuestionAttempt__full_failure() {
             // Setup
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("7").build();
-            var choice2 = Choice.builder().id(2).isCorrect(true).choice("13").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("4").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("7").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("4").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -828,10 +828,10 @@ class QuestionLogicServiceTest {
         // unpredicted behavior tests
         @Test
         public void testHandleQuestionAttempt__empty_choices() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("7").build();
-            var choice2 = Choice.builder().id(2).isCorrect(true).choice("13").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("4").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("7").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("4").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -864,10 +864,10 @@ class QuestionLogicServiceTest {
 
         @Test
         public void testHandleQuestionAttempt__null_choices() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("7").build();
-            var choice2 = Choice.builder().id(2).isCorrect(true).choice("13").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("4").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("7").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("4").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -900,10 +900,10 @@ class QuestionLogicServiceTest {
 
         @Test
         public void testHandleQuestionAttempt__overflow_choices() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("7").build();
-            var choice2 = Choice.builder().id(2).isCorrect(true).choice("13").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("4").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("7").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("4").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -943,11 +943,11 @@ class QuestionLogicServiceTest {
         @Test
         public void testHandleQuestionAttempt__unrelated_choices() {
             // Setup
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("7").build();
-            var choice2 = Choice.builder().id(2).isCorrect(true).choice("13").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("4").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
-            var choice5 = Choice.builder().id(5).isCorrect(true).choice("asser").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("7").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("4").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
+            var choice5 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("asser").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -987,10 +987,10 @@ class QuestionLogicServiceTest {
         // normal behavior tests
         @Test
         public void testHandleQuestionAttempt__normal() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("13").build();
-            var choice2 = Choice.builder().id(2).isCorrect(false).choice("130").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("40").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("130").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("40").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -1024,10 +1024,10 @@ class QuestionLogicServiceTest {
 
         @Test
         public void testHandleQuestionAttempt__failure() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("13").build();
-            var choice2 = Choice.builder().id(2).isCorrect(false).choice("130").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("40").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("130").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("40").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -1063,10 +1063,10 @@ class QuestionLogicServiceTest {
         // unpredicted behavior tests
         @Test
         public void testHandleQuestionAttempt__empty_choices() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("13").build();
-            var choice2 = Choice.builder().id(2).isCorrect(false).choice("130").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("40").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("130").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("40").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -1099,10 +1099,10 @@ class QuestionLogicServiceTest {
 
         @Test
         public void testHandleQuestionAttempt__null_choices() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("13").build();
-            var choice2 = Choice.builder().id(2).isCorrect(false).choice("130").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("40").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("130").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("40").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -1135,10 +1135,10 @@ class QuestionLogicServiceTest {
 
         @Test
         public void testHandleQuestionAttempt__overflow_choices() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("13").build();
-            var choice2 = Choice.builder().id(2).isCorrect(false).choice("130").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("40").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("130").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("40").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
                     .id(1)
@@ -1174,11 +1174,11 @@ class QuestionLogicServiceTest {
 
         @Test
         public void testHandleQuestionAttempt__unrelated_choices() {
-            var choice1 = Choice.builder().id(1).isCorrect(true).choice("13").build();
-            var choice2 = Choice.builder().id(2).isCorrect(false).choice("130").build();
-            var choice3 = Choice.builder().id(3).isCorrect(false).choice("40").build();
-            var choice4 = Choice.builder().id(4).isCorrect(false).choice("26").build();
-            var choice5 = Choice.builder().id(5).isCorrect(false).choice("asser").build();
+            var choice1 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("13").build();
+            var choice2 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("130").build();
+            var choice3 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("40").build();
+            var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
+            var choice5 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("asser").build();
             Question question = Question.builder()
                     .id(1)
                     .questionType(QuestionType.SINGLE_CHOICE)

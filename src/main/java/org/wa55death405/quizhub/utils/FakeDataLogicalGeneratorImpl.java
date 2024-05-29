@@ -79,7 +79,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
             }
             case MULTIPLE_CHOICE, SINGLE_CHOICE:{
                 var questionChoices = question.getChoices();
-                var randomChoices = new ArrayList<Integer>();
+                var randomChoices = new ArrayList<UUID>();
                 for (Choice questionChoice : questionChoices) {
                     if (Faker.instance().bool().bool()) {
                         randomChoices.add(questionChoice.getId());
