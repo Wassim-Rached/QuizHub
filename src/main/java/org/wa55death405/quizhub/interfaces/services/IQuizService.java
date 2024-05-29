@@ -17,19 +17,59 @@ import java.util.UUID;
 */
 
 public interface IQuizService {
+    /*
+        * search quizzes by title
+        * if title is null or empty, return all quizzes
+        * @param title the title to search for
+        * @return a list of quizzes that match the title
+     */
     List<QuizGeneralInfoDTO> searchQuizzes(String title);
 
+    /*
+        * create a new quiz
+        * @param quizCreationDTO the data needed to create the quiz
+        * @return the created quiz
+     */
     Quiz createQuiz(QuizCreationDTO quizCreationDTO);
 
+    /*
+        * get a quiz by its id
+        * @param quizId the id of the quiz
+        * @return the quiz with the given id
+     */
     QuizAttempt startQuizAttempt(UUID quizId);
 
+    /*
+        * get a quiz attempt by its id
+        * @param quizAttemptId id of the quiz attempt
+        * @return the quiz attempt with the given id
+     */
     QuizAttemptTakingDTO getQuizAttemptTaking(UUID quizAttemptId);
 
-    void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptTakings, UUID quizAttemptId);
+    /*
+        * submit the question attempts of a quiz attempt
+        * @param questionAttemptSubmissions the question attempts to submit
+        * @param quizAttemptId the id of the quiz attempt
+     */
+    void submitQuestionAttempts(List<QuestionAttemptSubmissionDTO> questionAttemptSubmissions, UUID quizAttemptId);
 
+    /*
+        * cancel a quiz attempt
+        * @param quizAttemptId the id of the quiz attempt
+     */
     void cancelQuizAttempt(UUID quizAttemptId);
 
+    /*
+        * finish a quiz attempt
+        * @param quizAttemptId the id of the quiz attempt
+        * @return the finished quiz attempt
+     */
     QuizAttempt finishQuizAttempt(UUID quizAttemptId);
 
+    /*
+        * get the result of a quiz attempt
+        * @param quizAttemptId id of the quiz attempt
+        * @return the result of the quiz attempt
+     */
     QuizAttemptResultDTO getQuizAttemptResult(UUID quizAttemptId);
 }
