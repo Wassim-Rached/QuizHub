@@ -41,9 +41,9 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                     .collect(Collectors.toMap(OrderedOption::getCorrectPosition,OrderedOption::getId)));
             break;
             case OPTION_MATCHING:
-                HashMap<Integer,List<Integer>> optionMatchAttempts = new HashMap<>();
+                HashMap<UUID,List<Integer>> optionMatchAttempts = new HashMap<>();
                 question.getCorrectOptionMatches().forEach(correctOptionMatch -> {
-                    Integer optionId = correctOptionMatch.getOption().getId();
+                    UUID optionId = correctOptionMatch.getOption().getId();
                     Integer matchId = correctOptionMatch.getMatch().getId();
                     var optionMatchAttempt = optionMatchAttempts.computeIfAbsent(optionId, k -> new ArrayList<>());
                     optionMatchAttempt.add(matchId);
@@ -112,7 +112,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                 Collections.shuffle(randomizedMatchesIds);
 
                 // <optionId, List<matchId>>
-                var randomOptionMatchesAttempts = new HashMap<Integer,List<Integer>>();
+                var randomOptionMatchesAttempts = new HashMap<UUID,List<Integer>>();
 
                 // loop through the number of option matches to make
                 for (int i = 0; i < numberOfOptionMatchesToMake; i++) {
