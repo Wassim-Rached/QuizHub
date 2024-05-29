@@ -13,6 +13,7 @@ import org.wa55death405.quizhub.enums.QuestionType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /*
     * This class represents the result of a question.
@@ -20,7 +21,7 @@ import java.util.List;
  */
 @Data
 public class QuestionResultDTO {
-    private Integer id;
+    private UUID id;
     private String question;
     private Float coefficient = 1f;
     private QuestionType questionType;

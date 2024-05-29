@@ -4,10 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.wa55death405.quizhub.enums.QuestionType;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -18,7 +15,7 @@ import java.util.Set;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private UUID id;
     @Column(nullable = false)
     private String question;
     @Column(nullable = false)
