@@ -9,6 +9,7 @@ import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.entities.QuizAttempt;
 
 import java.util.List;
+import java.util.UUID;
 
 /*
     this interface contains all the methods
@@ -20,7 +21,7 @@ public interface IQuizService {
 
     Quiz createQuiz(QuizCreationDTO quizCreationDTO);
 
-    QuizAttempt startQuizAttempt(Integer quizId);
+    QuizAttempt startQuizAttempt(UUID quizId);
 
     QuizAttemptTakingDTO getQuizAttemptTaking(Integer quizAttemptId);
 

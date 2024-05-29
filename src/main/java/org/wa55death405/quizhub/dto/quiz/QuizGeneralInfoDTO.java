@@ -4,10 +4,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.wa55death405.quizhub.entities.Quiz;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 public class QuizGeneralInfoDTO {
-    private Integer id;
+    private UUID id;
     private String title;
 
     public QuizGeneralInfoDTO(Quiz quiz) {
