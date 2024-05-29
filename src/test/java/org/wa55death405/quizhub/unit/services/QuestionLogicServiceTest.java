@@ -49,7 +49,7 @@ class QuestionLogicServiceTest {
 
             // question
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_MATCHING)
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
@@ -107,7 +107,7 @@ class QuestionLogicServiceTest {
 
             // question
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_MATCHING)
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
@@ -165,7 +165,7 @@ class QuestionLogicServiceTest {
 
             // question
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_MATCHING)
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
@@ -226,7 +226,7 @@ class QuestionLogicServiceTest {
 
             // question
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_MATCHING)
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
@@ -281,7 +281,7 @@ class QuestionLogicServiceTest {
 
             // question
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_MATCHING)
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
@@ -348,7 +348,7 @@ class QuestionLogicServiceTest {
 
             // question
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_MATCHING)
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
@@ -398,7 +398,7 @@ class QuestionLogicServiceTest {
 
             // question
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_MATCHING)
                     .question("match the following countries with their capitals")
                     .correctOptionMatches(
@@ -447,7 +447,7 @@ class QuestionLogicServiceTest {
             var orderedOption3 = OrderedOption.builder().id(UUID.randomUUID()).option("300").correctPosition(2).build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_ORDERING)
                     .question("put the following numbers in ascending order from top to bottom")
                     .orderedOptions(List.of(orderedOption1,orderedOption2,orderedOption3))
@@ -490,7 +490,7 @@ class QuestionLogicServiceTest {
             var orderedOption3 = OrderedOption.builder().id(UUID.randomUUID()).option("300").correctPosition(2).build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_ORDERING)
                     .question("put the following numbers in ascending order from top to bottom")
                     .orderedOptions(List.of(orderedOption1,orderedOption2,orderedOption3))
@@ -530,7 +530,7 @@ class QuestionLogicServiceTest {
         @Test
         void testHandleQuestionAttempt__empty_orderedOptionAttempts() {
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_ORDERING)
                     .question("put the following numbers in ascending order from top to bottom")
                     .orderedOptions(
@@ -567,7 +567,7 @@ class QuestionLogicServiceTest {
         @Test
         void testHandleQuestionAttempt__null_orderedOptionAttempts() {
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_ORDERING)
                     .question("put the following numbers in ascending order from top to bottom")
                     .orderedOptions(
@@ -608,7 +608,7 @@ class QuestionLogicServiceTest {
             var orderedOption3 = OrderedOption.builder().id(UUID.randomUUID()).option("300").correctPosition(2).build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_ORDERING)
                     .question("put the following numbers in ascending order from top to bottom")
                     .orderedOptions(
@@ -655,7 +655,7 @@ class QuestionLogicServiceTest {
             var orderedOption4 = OrderedOption.builder().id(UUID.randomUUID()).option("world war 2").correctPosition(3).build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.OPTION_ORDERING)
                     .question("put the following numbers in ascending order from top to bottom")
                     .orderedOptions(
@@ -707,7 +707,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                .id(1)
+                .id(UUID.randomUUID())
                 .questionType(QuestionType.MULTIPLE_CHOICE)
                 .question("which one of those are prime numbers?")
                 .choices(List.of(choice1, choice2, choice3, choice4))
@@ -748,7 +748,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.MULTIPLE_CHOICE)
                     .question("which one of those are prime numbers?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -791,7 +791,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.MULTIPLE_CHOICE)
                     .question("which one of those are prime numbers?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -833,7 +833,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.MULTIPLE_CHOICE)
                     .question("which one of those are prime numbers?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -869,7 +869,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.MULTIPLE_CHOICE)
                     .question("which one of those are prime numbers?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -905,7 +905,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.MULTIPLE_CHOICE)
                     .question("which one of those are prime numbers?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -949,7 +949,7 @@ class QuestionLogicServiceTest {
             var choice5 = Choice.builder().id(UUID.randomUUID()).isCorrect(true).choice("asser").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.MULTIPLE_CHOICE)
                     .question("which one of those are prime numbers?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -992,7 +992,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.SINGLE_CHOICE)
                     .question("which one of those is a prime number?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -1029,7 +1029,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.SINGLE_CHOICE)
                     .question("which one of those is a prime number?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -1068,7 +1068,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.SINGLE_CHOICE)
                     .question("which one of those is a prime number?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -1104,7 +1104,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.SINGLE_CHOICE)
                     .question("which one of those is a prime number?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -1140,7 +1140,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
 
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.SINGLE_CHOICE)
                     .question("which one of those is a prime number?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -1179,7 +1179,7 @@ class QuestionLogicServiceTest {
             var choice4 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("26").build();
             var choice5 = Choice.builder().id(UUID.randomUUID()).isCorrect(false).choice("asser").build();
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.SINGLE_CHOICE)
                     .question("which one of those is a prime number?")
                     .choices(List.of(choice1, choice2, choice3, choice4))
@@ -1217,7 +1217,7 @@ class QuestionLogicServiceTest {
         @Test
         public void testHandleQuestionAttempt__normal() {
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.TRUE_FALSE)
                     .question("is 7 a prime number?")
                     .answer(Answer.builder().id(UUID.randomUUID()).answer("true").build())
@@ -1249,7 +1249,7 @@ class QuestionLogicServiceTest {
         @Test
         public void testHandleQuestionAttempt__failure() {
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.TRUE_FALSE)
                     .question("is 7 a prime number?")
                     .answer(Answer.builder().id(UUID.randomUUID()).answer("true").build())
@@ -1282,7 +1282,7 @@ class QuestionLogicServiceTest {
         @Test
         public void testHandleQuestionAttempt__null_answer() {
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.TRUE_FALSE)
                     .question("is 7 a prime number?")
                     .answer(Answer.builder().id(UUID.randomUUID()).answer("true").build())
@@ -1314,7 +1314,7 @@ class QuestionLogicServiceTest {
         @Test
         public void testHandleQuestionAttempt__null_answerAttempt() {
             Question question = Question.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .questionType(QuestionType.TRUE_FALSE)
                     .question("is 7 a prime number?")
                     .answer(Answer.builder().id(UUID.randomUUID()).answer("true").build())

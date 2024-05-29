@@ -151,9 +151,8 @@ class QuizControllerTest {
     void getQuizAttemptTaking() throws Exception {
         // arrange
         Quiz quiz = fakeDataRandomGenerator.generate_Quiz();
-        int index = 0;
         for (var question : quiz.getQuestions()) {
-            question.setId(index++);
+            question.setId(UUID.randomUUID());
         }
         var quizAttempt = fakeDataLogicalGenerator.generate_QuizAttempt(quiz);
         quizAttempt.setId(1);
@@ -214,9 +213,8 @@ class QuizControllerTest {
     void getQuizAttemptResult() throws Exception {
         // arrange
         Quiz quiz = fakeDataRandomGenerator.generate_Quiz();
-        int index = 0;
         for (var question : quiz.getQuestions()) {
-            question.setId(index++);
+            question.setId(UUID.randomUUID());
         }
         var quizAttempt = fakeDataLogicalGenerator.generate_QuizAttempt(quiz);
         quizAttempt.setId(1);
