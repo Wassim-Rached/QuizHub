@@ -89,7 +89,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                 break;
             }
             case OPTION_ORDERING:{
-                var randomizedOrderedOptions = new ArrayList<>(question.getOrderedOptions().stream().map(OrderedOption::getId).toList());
+                List<UUID> randomizedOrderedOptions = new ArrayList<>(question.getOrderedOptions().stream().map(OrderedOption::getId).toList());
                 Collections.shuffle(randomizedOrderedOptions);
                 HashMap<Integer,UUID> orderedOptionAttempts = new HashMap<>();
                 for (int i = 0; i < randomizedOrderedOptions.size(); i++) {
