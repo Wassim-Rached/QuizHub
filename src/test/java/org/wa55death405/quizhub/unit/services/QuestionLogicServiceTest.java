@@ -69,9 +69,9 @@ class QuestionLogicServiceTest {
                     .question(question)
                     .optionMatchAttempts(
                             List.of(
-                                    OptionMatchAttempt.builder().id(1).option(option_tunisia).match(match_tunis).build(),
-                                    OptionMatchAttempt.builder().id(2).option(option_france).match(match_paris).build(),
-                                    OptionMatchAttempt.builder().id(3).option(option_usa).match(match_washington).build()
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_tunis).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_france).match(match_paris).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build()
                             )
                     )
                     .build();
@@ -127,9 +127,9 @@ class QuestionLogicServiceTest {
                     .question(question)
                     .optionMatchAttempts(
                             List.of(
-                                    OptionMatchAttempt.builder().id(1).option(option_tunisia).match(match_paris).build(),
-                                    OptionMatchAttempt.builder().id(2).option(option_france).match(match_tunis).build(),
-                                    OptionMatchAttempt.builder().id(3).option(option_usa).match(match_washington).build()
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_paris).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_france).match(match_tunis).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build()
                             )
                     )
                     .build();
@@ -185,9 +185,9 @@ class QuestionLogicServiceTest {
                     .question(question)
                     .optionMatchAttempts(
                             List.of(
-                                    OptionMatchAttempt.builder().id(1).option(option_tunisia).match(match_washington).build(),
-                                    OptionMatchAttempt.builder().id(2).option(option_france).match(match_tunis).build(),
-                                    OptionMatchAttempt.builder().id(3).option(option_usa).match(match_paris).build()
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_washington).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_france).match(match_tunis).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_usa).match(match_paris).build()
                             )
                     )
                     .build();
@@ -246,8 +246,8 @@ class QuestionLogicServiceTest {
                     .question(question)
                     .optionMatchAttempts(
                             List.of(
-                                    OptionMatchAttempt.builder().id(1).option(option_tunisia).match(match_tunis).build(),
-                                    OptionMatchAttempt.builder().id(4).option(option_tomato).match(match_fruit).build()
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_tunis).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_tomato).match(match_fruit).build()
                             )
                     )
                     .build();
@@ -301,20 +301,20 @@ class QuestionLogicServiceTest {
                     .question(question)
                     .optionMatchAttempts(
                             List.of(
-                                    OptionMatchAttempt.builder().id(1).option(option_tunisia).match(match_tunis).build(),
-                                    OptionMatchAttempt.builder().id(2).option(option_tunisia).match(match_paris).build(),
-                                    OptionMatchAttempt.builder().id(3).option(option_tunisia).match(match_washington).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_tunis).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_paris).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_tunisia).match(match_washington).build(),
 
-                                    OptionMatchAttempt.builder().id(4).option(option_france).match(match_tunis).build(),
-                                    OptionMatchAttempt.builder().id(5).option(option_france).match(match_paris).build(),
-                                    OptionMatchAttempt.builder().id(6).option(option_france).match(match_washington).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_france).match(match_tunis).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_france).match(match_paris).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_france).match(match_washington).build(),
 
-                                    OptionMatchAttempt.builder().id(7).option(option_usa).match(match_tunis).build(),
-                                    OptionMatchAttempt.builder().id(8).option(option_usa).match(match_paris).build(),
-                                    OptionMatchAttempt.builder().id(9).option(option_usa).match(match_washington).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_usa).match(match_tunis).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_usa).match(match_paris).build(),
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build(),
 
                                     // the extra one
-                                    OptionMatchAttempt.builder().id(10).option(option_usa).match(match_washington).build()
+                                    OptionMatchAttempt.builder().id(UUID.randomUUID()).option(option_usa).match(match_washington).build()
                             )
                     )
                     .build();

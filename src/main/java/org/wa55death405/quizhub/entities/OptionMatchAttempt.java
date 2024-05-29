@@ -4,6 +4,8 @@ package org.wa55death405.quizhub.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Data
 @ToString
@@ -13,7 +15,7 @@ import lombok.*;
 public class OptionMatchAttempt{
     @Id
     @GeneratedValue
-    private Integer id;
+    private UUID id;
     private Boolean isCorrect;
 
     // TODO : match and option should be unique together
