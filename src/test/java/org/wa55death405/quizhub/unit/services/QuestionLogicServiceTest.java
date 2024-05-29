@@ -65,7 +65,7 @@ class QuestionLogicServiceTest {
 
             // attempt
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .optionMatchAttempts(
                             List.of(
@@ -123,7 +123,7 @@ class QuestionLogicServiceTest {
 
             // attempt
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .optionMatchAttempts(
                             List.of(
@@ -181,7 +181,7 @@ class QuestionLogicServiceTest {
 
             // attempt
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .optionMatchAttempts(
                             List.of(
@@ -242,7 +242,7 @@ class QuestionLogicServiceTest {
 
             // attempt
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .optionMatchAttempts(
                             List.of(
@@ -297,7 +297,7 @@ class QuestionLogicServiceTest {
 
             // attempt
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .optionMatchAttempts(
                             List.of(
@@ -364,7 +364,7 @@ class QuestionLogicServiceTest {
 
             // attempt
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .optionMatchAttempts(List.of())
                     .build();
@@ -414,7 +414,7 @@ class QuestionLogicServiceTest {
 
             // attempt
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .optionMatchAttempts(null)
                     .build();
@@ -454,7 +454,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .orderedOptionAttempts(
                             List.of(
@@ -497,7 +497,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .orderedOptionAttempts(
                             List.of(
@@ -543,7 +543,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .orderedOptionAttempts(new ArrayList<>())
                     .build();
@@ -580,7 +580,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .orderedOptionAttempts(null)
                     .build();
@@ -619,7 +619,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .orderedOptionAttempts(
                             List.of(
@@ -666,7 +666,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .orderedOptionAttempts(
                             List.of(
@@ -714,7 +714,7 @@ class QuestionLogicServiceTest {
                 .build();
 
             var questionAttempt = QuestionAttempt.builder()
-                .id(1)
+                .id(UUID.randomUUID())
                 .question(question)
                 .choiceAttempts(List.of(
                         ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build(),
@@ -755,7 +755,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             var questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(List.of(
                             ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build(),
@@ -798,7 +798,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             var questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(List.of(
                             ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice3).build(),
@@ -840,7 +840,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             var questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(List.of())
                     .build();
@@ -876,7 +876,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             var questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(null)
                     .build();
@@ -912,7 +912,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             var questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(List.of(
                             ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build(),
@@ -956,7 +956,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             var questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(List.of(
                             ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build(),
@@ -999,7 +999,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(List.of(ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build()))
                     .build();
@@ -1036,7 +1036,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(List.of(ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice2).build()))
                     .build();
@@ -1075,7 +1075,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(List.of())
                     .build();
@@ -1111,7 +1111,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(null)
                     .build();
@@ -1147,7 +1147,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(List.of(
                             ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice1).build(),
@@ -1186,7 +1186,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .choiceAttempts(List.of(
                             ChoiceAttempt.builder().id(UUID.randomUUID()).choice(choice5).build()
@@ -1224,7 +1224,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .answerAttempt(AnswerAttempt.builder().id(UUID.randomUUID()).answer("true").build())
                     .build();
@@ -1256,7 +1256,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .answerAttempt(AnswerAttempt.builder().id(UUID.randomUUID()).answer("false").build())
                     .build();
@@ -1289,7 +1289,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .answerAttempt(AnswerAttempt.builder().id(UUID.randomUUID()).answer(null).build())
                     .build();
@@ -1321,7 +1321,7 @@ class QuestionLogicServiceTest {
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
-                    .id(1)
+                    .id(UUID.randomUUID())
                     .question(question)
                     .answerAttempt(null)
                     .build();
