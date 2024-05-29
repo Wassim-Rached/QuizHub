@@ -14,6 +14,7 @@ import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.interfaces.services.IQuizService;
 
 import java.util.List;
+import java.util.UUID;
 
 /*
     this class is the controller of the quiz
@@ -44,7 +45,7 @@ public class QuizController {
         and returns the quiz attempt id
      */
     @PostMapping("/{quizId}/start")
-    public ResponseEntity<StandardApiResponse<Integer>> startQuizAttempt(@PathVariable Integer quizId) {
+    public ResponseEntity<StandardApiResponse<Integer>> startQuizAttempt(@PathVariable UUID quizId) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt started successfully",quizService.startQuizAttempt(quizId).getId()), HttpStatus.CREATED);
     }
 
@@ -72,10 +73,10 @@ public class QuizController {
     /*
         this api is used to create a new quiz
         it takes the quiz creation dto as a body
-        and returns the id of the created quiz
+        and returns id of the created quiz
      */
     @PostMapping
-    public ResponseEntity<StandardApiResponse<Integer>> createQuiz(@RequestBody QuizCreationDTO body) {
+    public ResponseEntity<StandardApiResponse<UUID>> createQuiz(@RequestBody QuizCreationDTO body) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz created successfully",quizService.createQuiz(body).getId()), HttpStatus.CREATED);
     }
 

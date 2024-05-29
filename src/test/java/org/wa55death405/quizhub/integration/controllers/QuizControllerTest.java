@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -60,8 +61,9 @@ class QuizControllerTest {
         // arrange
         List<QuizGeneralInfoDTO> expectedQuizzes = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
+            UUID id = UUID.randomUUID();
             var quiz = Quiz.builder()
-                    .id(i)
+                    .id(id)
                     .title("Quiz " + i)
                     .build();
             expectedQuizzes.add(new QuizGeneralInfoDTO(quiz));
@@ -84,7 +86,7 @@ class QuizControllerTest {
         QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
         fakeDataRandomGenerator.fill(quizCreationDTO);
         Quiz quiz = quizCreationDTO.toEntity(null);
-        quiz.setId(1);
+        quiz.setId(UUID.randomUUID());
         when(quizService.createQuiz(quizCreationDTO)).thenReturn(quiz);
         var requestBodyJson = this.objectMapper.writeValueAsString(quizCreationDTO);
 
@@ -94,7 +96,7 @@ class QuizControllerTest {
                 .content(requestBodyJson))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
-                .andExpect(jsonPath("$.data").value(quiz.getId()))
+                .andExpect(jsonPath("$.data").value(quiz.getId().toString()))
                 .andDo(
                         document("create-quiz",
                                 preprocessRequest(prettyPrint()),
@@ -106,7 +108,7 @@ class QuizControllerTest {
     @Test
     void startQuizAttempt() throws Exception {
         // arrange
-        Integer quizId = 1;
+        UUID quizId = UUID.randomUUID();
         QuizAttempt quizAttempt = new QuizAttempt();
         quizAttempt.setId(1);
         when(quizService.startQuizAttempt(quizId)).thenReturn(quizAttempt);

@@ -18,6 +18,7 @@ import org.wa55death405.quizhub.repositories.*;
 import org.wa55death405.quizhub.utils.DBErrorExtractorUtils;
 
 import java.util.List;
+import java.util.UUID;
 
 /*
     * This class is responsible for providing
@@ -48,7 +49,7 @@ public class QuizService implements IQuizService{
     }
 
     @Override
-    public QuizAttempt startQuizAttempt(Integer quizId) {
+    public QuizAttempt startQuizAttempt(UUID quizId) {
         Quiz quiz = quizRepository.findById(quizId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz with id " + quizId + " not found")
         );

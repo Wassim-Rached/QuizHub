@@ -6,11 +6,12 @@ import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptTakingDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 // TODO: should be removed no one is using it
 @Data
 public class QuizTakingDTO {
-    private Integer id;
+    private UUID id;
     private String title;
     private List<QuestionTakingDTO> questions = new ArrayList<>();
     private QuizAttemptTakingDTO quizAttempt;
