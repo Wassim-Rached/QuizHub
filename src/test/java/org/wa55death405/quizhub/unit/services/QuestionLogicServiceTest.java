@@ -1227,7 +1227,7 @@ class QuestionLogicServiceTest {
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
                     .id(1)
                     .question(question)
-                    .answerAttempt(AnswerAttempt.builder().id(1).answer("true").build())
+                    .answerAttempt(AnswerAttempt.builder().id(UUID.randomUUID()).answer("true").build())
                     .build();
 
             // Mock behavior
@@ -1259,7 +1259,7 @@ class QuestionLogicServiceTest {
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
                     .id(1)
                     .question(question)
-                    .answerAttempt(AnswerAttempt.builder().id(1).answer("false").build())
+                    .answerAttempt(AnswerAttempt.builder().id(UUID.randomUUID()).answer("false").build())
                     .build();
 
             // Mock behavior
@@ -1292,7 +1292,7 @@ class QuestionLogicServiceTest {
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
                     .id(1)
                     .question(question)
-                    .answerAttempt(AnswerAttempt.builder().id(1).answer(null).build())
+                    .answerAttempt(AnswerAttempt.builder().id(UUID.randomUUID()).answer(null).build())
                     .build();
 
             // Mock behavior
