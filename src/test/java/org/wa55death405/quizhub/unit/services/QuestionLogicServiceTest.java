@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @ExtendWith(MockitoExtension.class)
 class QuestionLogicServiceTest {
@@ -1220,7 +1221,7 @@ class QuestionLogicServiceTest {
                     .id(1)
                     .questionType(QuestionType.TRUE_FALSE)
                     .question("is 7 a prime number?")
-                    .answer(Answer.builder().id(1).answer("true").build())
+                    .answer(Answer.builder().id(UUID.randomUUID()).answer("true").build())
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
@@ -1252,7 +1253,7 @@ class QuestionLogicServiceTest {
                     .id(1)
                     .questionType(QuestionType.TRUE_FALSE)
                     .question("is 7 a prime number?")
-                    .answer(Answer.builder().id(1).answer("true").build())
+                    .answer(Answer.builder().id(UUID.randomUUID()).answer("true").build())
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
@@ -1285,7 +1286,7 @@ class QuestionLogicServiceTest {
                     .id(1)
                     .questionType(QuestionType.TRUE_FALSE)
                     .question("is 7 a prime number?")
-                    .answer(Answer.builder().id(1).answer("true").build())
+                    .answer(Answer.builder().id(UUID.randomUUID()).answer("true").build())
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
@@ -1317,7 +1318,7 @@ class QuestionLogicServiceTest {
                     .id(1)
                     .questionType(QuestionType.TRUE_FALSE)
                     .question("is 7 a prime number?")
-                    .answer(Answer.builder().id(1).answer("true").build())
+                    .answer(Answer.builder().id(UUID.randomUUID()).answer("true").build())
                     .build();
 
             QuestionAttempt questionAttempt = QuestionAttempt.builder()
