@@ -29,7 +29,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-public class ApplicationE2ETests {
+class ApplicationE2ETests {
 
     @Autowired
     private IFakeDataRandomGenerator fakeDataRandomGenerator;
