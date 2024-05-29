@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class AnswerAttempt {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private Boolean isCorrect = null;
     @Column(nullable = false)
