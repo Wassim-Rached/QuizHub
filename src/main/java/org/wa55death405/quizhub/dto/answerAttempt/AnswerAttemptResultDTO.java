@@ -4,9 +4,11 @@ package org.wa55death405.quizhub.dto.answerAttempt;
 import lombok.Data;
 import org.wa55death405.quizhub.entities.AnswerAttempt;
 
+import java.util.UUID;
+
 @Data
 public class AnswerAttemptResultDTO {
-    private Integer id;
+    private UUID id;
     private Boolean isCorrect;
     private String answer;
 
