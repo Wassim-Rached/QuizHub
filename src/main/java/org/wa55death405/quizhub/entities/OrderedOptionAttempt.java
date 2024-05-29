@@ -3,6 +3,8 @@ package org.wa55death405.quizhub.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Data
 @ToString
@@ -12,7 +14,7 @@ import lombok.*;
 public class OrderedOptionAttempt {
     @Id
     @GeneratedValue
-    private Integer id;
+    private UUID id;
     @Column(nullable = false)
     private Integer position;
     private Boolean isCorrect = null;
