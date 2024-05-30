@@ -1,4 +1,4 @@
-package org.wa55death405.quizhub.E2E;
+package org.wa55death405.quizhub.e2e;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
