@@ -30,8 +30,8 @@ jobs:
             mvn clean
             mvn -B package --file pom.xml
 
-        - name: Upload test results
-          uses: actions/upload-artifact@v2
-          with:
-            name: test-results
-            path: target/
+#        - name: Upload test results
+#          uses: actions/upload-artifact@v2
+#          with:
+#            name: test-results
+#            path: target/
