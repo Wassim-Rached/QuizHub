@@ -6,6 +6,12 @@ WORKDIR /app
 # Copy the jar file to the container
 COPY ./target/quiz-hub-0.0.1-SNAPSHOT.jar /app
 
+# Define build argument for version
+ARG APP_VERSION
+
+# Pass the version as an environment variable
+ENV APP_VERSION=${APP_VERSION}
+
 # Expose the port
 EXPOSE 8080
 
