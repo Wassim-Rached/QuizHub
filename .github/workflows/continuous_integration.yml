@@ -1,6 +1,6 @@
 name: Continuous Integration
-run-name: CI Pipeline for ${{ github.repository }} @ ${{ github.ref }}
-concurrency: CI-${{ github.repository }}-${{ github.ref }}
+run-name: CI Pipeline for @${{ github.ref }}
+concurrency: CI-${{ github.ref }}
 
 on:
     pull_request:
