@@ -45,4 +45,5 @@ jobs:
           context: .
           dockerfile: Dockerfile
           push: true
+          build-args: APP_VERSION=${{ github.event.release.tag_name || github.event.inputs.releaseTag }}
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/quizhub:${{ github.event.release.tag_name || github.event.inputs.releaseTag }}
