@@ -33,4 +33,4 @@ build/
 .vscode/
 
 # auto generated ressources
-#/src/main/resources/static/
+/src/main/resources/static/
