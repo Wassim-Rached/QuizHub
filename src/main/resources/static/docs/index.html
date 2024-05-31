@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.15">
+<title>QuizHub Backend Server API Documentation</title>
+<style>
+span{
+    background: none !important;
+}
+
+/* Override Bootstrap defaults */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* HTTP Request and Response Sections */
+.http-request, .http-response {
+    background-color: #fff;
+    border: 1px solid #ced4da; /* Light gray border */
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Code Blocks */
+pre {
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 1rem;
+    border-radius: 0.25rem;
+    overflow-x: auto;
+    border: 1px solid #ced4da; /* Light gray border */
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+th, td {
+    border: 1px solid #ced4da; /* Light gray border */
+    padding: 0.75rem;
+}
+
+th {
+    background-color: #f2f2f2; /* Light gray background for table headers */
+}
+
+/* Links */
+a {
+    color: #007bff; /* Blue links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3; /* Darker blue on hover */
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="book">
+<div id="header">
+<h1>QuizHub Backend Server API Documentation</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Welcome to the QuizHub Backend Server API Documentation. This document provides comprehensive information about the various endpoints available in the QuizHub application.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a><a class="link" href="#_overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The QuizHub Backend Server provides RESTful APIs for managing quizzes, users, and scores. Below you will find the detailed documentation of the available endpoints.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_api_endpoints"><a class="anchor" href="#_api_endpoints"></a><a class="link" href="#_api_endpoints">API Endpoints</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_search_quizzes"><a class="anchor" href="#_search_quizzes"></a><a class="link" href="#_search_quizzes">Search Quizzes</a></h3>
+<div class="listingblock">
+<div class="title">Search for quizzes by title</div>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/quiz/search HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 897
+
+{
+  "status" : "SUCCESS",
+  "message" : "Quizzes fetched successfully",
+  "data" : [ {
+    "id" : "e0caee55-9076-4e67-a61e-8a7bed537bc5",
+    "title" : "Quiz 0"
+  }, {
+    "id" : "4df2bb00-caea-40a2-b5f4-8bc0664c8df6",
+    "title" : "Quiz 1"
+  }, {
+    "id" : "724de53a-627d-4cb7-a475-5dee37bd834c",
+    "title" : "Quiz 2"
+  }, {
+    "id" : "3c7f9946-a85d-4b41-9f31-fc9e5b3cb3d1",
+    "title" : "Quiz 3"
+  }, {
+    "id" : "c763556f-6d34-4582-9c23-8cb2efa13818",
+    "title" : "Quiz 4"
+  }, {
+    "id" : "6dd56111-5316-43fc-8a1e-5f05b74a85ae",
+    "title" : "Quiz 5"
+  }, {
+    "id" : "a39db448-6a54-4b1b-be81-f1aa70803f35",
+    "title" : "Quiz 6"
+  }, {
+    "id" : "4b87d81c-333d-4223-a866-7c868e41a3e9",
+    "title" : "Quiz 7"
+  }, {
+    "id" : "ee910c9c-9494-4494-b21c-563b026c3e16",
+    "title" : "Quiz 8"
+  }, {
+    "id" : "b4f74a98-ad3e-49fb-a842-976b9a4ccacf",
+    "title" : "Quiz 9"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_quiz"><a class="anchor" href="#_create_quiz"></a><a class="link" href="#_create_quiz">Create Quiz</a></h3>
+<div class="listingblock">
+<div class="title">Create a new quiz</div>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/quiz HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 2188
+Host: localhost:8080
+
+{
+  "title" : "Dolores molestiae quas iste.",
+  "questions" : [ {
+    "question" : "Ut qui hic maxime dolores ipsa excepturi.",
+    "questionType" : "TRUE_FALSE",
+    "coefficient" : 1.0,
+    "answer" : "excepturi",
+    "choices" : { },
+    "orderedOptions" : { },
+    "optionMatches" : { }
+  }, {
+    "question" : "Necessitatibus soluta sapiente doloremque aut itaque.",
+    "questionType" : "SHORT_ANSWER",
+    "coefficient" : 1.0,
+    "answer" : "corrupti",
+    "choices" : { },
+    "orderedOptions" : { },
+    "optionMatches" : { }
+  }, {
+    "question" : "Iste et fugit.",
+    "questionType" : "NUMERIC",
+    "coefficient" : 1.0,
+    "answer" : "dicta",
+    "choices" : { },
+    "orderedOptions" : { },
+    "optionMatches" : { }
+  }, {
+    "question" : "Necessitatibus magni eaque suscipit maiores.",
+    "questionType" : "FILL_IN_THE_BLANK",
+    "coefficient" : 1.0,
+    "answer" : "aut",
+    "choices" : { },
+    "orderedOptions" : { },
+    "optionMatches" : { }
+  }, {
+    "question" : "Accusamus nisi quo.",
+    "questionType" : "SINGLE_CHOICE",
+    "coefficient" : 1.0,
+    "answer" : null,
+    "choices" : {
+      "magni" : false,
+      "inventore" : false,
+      "eum" : true
+    },
+    "orderedOptions" : { },
+    "optionMatches" : { }
+  }, {
+    "question" : "Magni nulla quae ratione rerum maiores molestiae.",
+    "questionType" : "MULTIPLE_CHOICE",
+    "coefficient" : 1.0,
+    "answer" : null,
+    "choices" : {
+      "quam" : false,
+      "et" : true
+    },
+    "orderedOptions" : { },
+    "optionMatches" : { }
+  }, {
+    "question" : "Aut magni quasi.",
+    "questionType" : "OPTION_MATCHING",
+    "coefficient" : 1.0,
+    "answer" : null,
+    "choices" : { },
+    "orderedOptions" : { },
+    "optionMatches" : {
+      "natus" : [ "laborum", "odio", "ut" ],
+      "nobis" : [ "laborum" ],
+      "numquam" : [ "laborum", "odio" ]
+    }
+  }, {
+    "question" : "Laborum optio animi asperiores voluptas consectetur eos non.",
+    "questionType" : "OPTION_ORDERING",
+    "coefficient" : 1.0,
+    "answer" : null,
+    "choices" : { },
+    "orderedOptions" : {
+      "0" : "nisi",
+      "1" : "praesentium",
+      "2" : "voluptatem"
+    },
+    "optionMatches" : { }
+  } ]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 201 Created
+Content-Type: application/json
+Content-Length: 120
+
+{
+  "status" : "SUCCESS",
+  "message" : "Quiz created successfully",
+  "data" : "888b1a81-99bd-4f4c-93f4-548dce080cd9"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_start_quiz_attempt"><a class="anchor" href="#_start_quiz_attempt"></a><a class="link" href="#_start_quiz_attempt">Start Quiz Attempt</a></h3>
+<div class="listingblock">
+<div class="title">Start a new quiz attempt</div>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/quiz/62ce3373-895f-4fa7-bea1-74707dd3aa07/start HTTP/1.1
+Host: localhost:8080
+Content-Type: application/x-www-form-urlencoded</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 201 Created
+Content-Type: application/json
+Content-Length: 128
+
+{
+  "status" : "SUCCESS",
+  "message" : "Quiz attempt started successfully",
+  "data" : "a84e19f9-f8d4-4612-90c1-a5e300e87342"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_submit_question_attempts"><a class="anchor" href="#_submit_question_attempts"></a><a class="link" href="#_submit_question_attempts">Submit Question Attempts</a></h3>
+<div class="listingblock">
+<div class="title">Submit answers for a quiz attempt</div>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/quiz/attempt/39a395ca-9493-4aa4-a2c8-f0cc76458bf9/submit HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1237
+Host: localhost:8080
+
+[ {
+  "question" : null,
+  "answerAttempt" : "in",
+  "choiceAttempts" : [ ],
+  "orderedOptionAttempts" : { },
+  "optionMatchAttempts" : { }
+}, {
+  "question" : null,
+  "answerAttempt" : "cumque",
+  "choiceAttempts" : [ ],
+  "orderedOptionAttempts" : { },
+  "optionMatchAttempts" : { }
+}, {
+  "question" : null,
+  "answerAttempt" : "reprehenderit",
+  "choiceAttempts" : [ ],
+  "orderedOptionAttempts" : { },
+  "optionMatchAttempts" : { }
+}, {
+  "question" : null,
+  "answerAttempt" : "consequatur",
+  "choiceAttempts" : [ ],
+  "orderedOptionAttempts" : { },
+  "optionMatchAttempts" : { }
+}, {
+  "question" : null,
+  "answerAttempt" : null,
+  "choiceAttempts" : [ null, null, null ],
+  "orderedOptionAttempts" : { },
+  "optionMatchAttempts" : { }
+}, {
+  "question" : null,
+  "answerAttempt" : null,
+  "choiceAttempts" : [ null, null, null ],
+  "orderedOptionAttempts" : { },
+  "optionMatchAttempts" : { }
+}, {
+  "question" : null,
+  "answerAttempt" : null,
+  "choiceAttempts" : [ ],
+  "orderedOptionAttempts" : { },
+  "optionMatchAttempts" : { }
+}, {
+  "question" : null,
+  "answerAttempt" : null,
+  "choiceAttempts" : [ ],
+  "orderedOptionAttempts" : {
+    "0" : null,
+    "1" : null,
+    "2" : null
+  },
+  "optionMatchAttempts" : { }
+} ]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 202 Accepted
+Content-Type: application/json
+Content-Length: 101
+
+{
+  "status" : "SUCCESS",
+  "message" : "Question attempts submitted successfully",
+  "data" : null
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_quiz_attempt_taking"><a class="anchor" href="#_get_quiz_attempt_taking"></a><a class="link" href="#_get_quiz_attempt_taking">Get Quiz Attempt Taking</a></h3>
+<div class="listingblock">
+<div class="title">Get the details of an ongoing quiz attempt</div>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/quiz/attempt/3396b5e6-272f-450c-b8d3-a21703b213b4/taking HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 5345
+
+{
+  "status" : "SUCCESS",
+  "message" : "Quiz attempt taking fetched successfully",
+  "data" : {
+    "id" : "3396b5e6-272f-450c-b8d3-a21703b213b4",
+    "quiz" : {
+      "id" : null,
+      "title" : "Sapiente mollitia ducimus laborum."
+    },
+    "questions" : [ {
+      "id" : "ca87c4e1-dfa0-40c7-9f59-93ee78423b28",
+      "question" : "Tenetur alias quos saepe ipsam nostrum autem.",
+      "coefficient" : 1.0,
+      "questionType" : "TRUE_FALSE",
+      "choices" : [ ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "questionAttempt" : {
+        "answerAttempt" : {
+          "answer" : "dolor"
+        },
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "8f7d3567-cd47-494e-950c-4e12caae4021",
+      "question" : "Nihil maiores illum iure ad.",
+      "coefficient" : 1.0,
+      "questionType" : "SHORT_ANSWER",
+      "choices" : [ ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "questionAttempt" : {
+        "answerAttempt" : {
+          "answer" : "delectus"
+        },
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "12d6712d-27f2-4dd3-af01-7033dee899dd",
+      "question" : "Temporibus omnis sit quaerat dolor accusantium minima illo.",
+      "coefficient" : 1.0,
+      "questionType" : "NUMERIC",
+      "choices" : [ ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "questionAttempt" : {
+        "answerAttempt" : {
+          "answer" : "doloribus"
+        },
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "d71473ea-8b4b-4cce-9128-9490b1fce549",
+      "question" : "Non corporis et aperiam veritatis consequuntur dolores aliquid.",
+      "coefficient" : 1.0,
+      "questionType" : "FILL_IN_THE_BLANK",
+      "choices" : [ ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "questionAttempt" : {
+        "answerAttempt" : {
+          "answer" : "non"
+        },
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "b22834ca-5036-4d8e-90a0-d81d2037d9e0",
+      "question" : "Qui rerum est corrupti et dolorem.",
+      "coefficient" : 1.0,
+      "questionType" : "SINGLE_CHOICE",
+      "choices" : [ {
+        "id" : null,
+        "choice" : "qui"
+      }, {
+        "id" : null,
+        "choice" : "illo"
+      }, {
+        "id" : null,
+        "choice" : "eos"
+      }, {
+        "id" : null,
+        "choice" : "voluptatibus"
+      } ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "questionAttempt" : {
+        "answerAttempt" : null,
+        "choiceAttempts" : [ {
+          "choice" : {
+            "id" : null,
+            "choice" : null
+          }
+        }, {
+          "choice" : {
+            "id" : null,
+            "choice" : null
+          }
+        }, {
+          "choice" : {
+            "id" : null,
+            "choice" : null
+          }
+        } ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "d8823096-4212-454c-b9c0-45d80904bbb9",
+      "question" : "Porro consequatur ex error reprehenderit.",
+      "coefficient" : 1.0,
+      "questionType" : "MULTIPLE_CHOICE",
+      "choices" : [ {
+        "id" : null,
+        "choice" : "vitae"
+      }, {
+        "id" : null,
+        "choice" : "quia"
+      }, {
+        "id" : null,
+        "choice" : "consectetur"
+      } ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "questionAttempt" : {
+        "answerAttempt" : null,
+        "choiceAttempts" : [ {
+          "choice" : {
+            "id" : null,
+            "choice" : null
+          }
+        }, {
+          "choice" : {
+            "id" : null,
+            "choice" : null
+          }
+        } ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "8ee9c3ea-b1c4-4aa7-8d73-63094d7da519",
+      "question" : "Culpa voluptatem magni sit aut in sunt.",
+      "coefficient" : 1.0,
+      "questionType" : "OPTION_MATCHING",
+      "choices" : [ ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "questionAttempt" : {
+        "answerAttempt" : null,
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "448f0e3f-dd09-46f0-b8e4-69598b686c8b",
+      "question" : "Consequatur occaecati ipsa eligendi ipsa enim omnis.",
+      "coefficient" : 1.0,
+      "questionType" : "OPTION_ORDERING",
+      "choices" : [ ],
+      "orderedOptions" : [ {
+        "id" : null,
+        "option" : "maxime"
+      }, {
+        "id" : null,
+        "option" : "iste"
+      } ],
+      "matches" : [ ],
+      "options" : [ ],
+      "questionAttempt" : {
+        "answerAttempt" : null,
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ {
+          "id" : null,
+          "position" : 0
+        }, {
+          "id" : null,
+          "position" : 1
+        } ],
+        "optionMatchAttempts" : [ ]
+      }
+    } ]
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cancel_quiz_attempt"><a class="anchor" href="#_cancel_quiz_attempt"></a><a class="link" href="#_cancel_quiz_attempt">Cancel Quiz Attempt</a></h3>
+<div class="listingblock">
+<div class="title">Cancel an ongoing quiz attempt</div>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /api/quiz/attempt/6658633c-f720-48ac-95b8-154704ef6e85/cancel HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 95
+
+{
+  "status" : "SUCCESS",
+  "message" : "Quiz attempt canceled successfully",
+  "data" : null
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_finish_quiz_attempt"><a class="anchor" href="#_finish_quiz_attempt"></a><a class="link" href="#_finish_quiz_attempt">Finish Quiz Attempt</a></h3>
+<div class="listingblock">
+<div class="title">Finish and submit a quiz attempt</div>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/quiz/attempt/b36ce58b-db25-41d5-a944-c30324b81a19/finish HTTP/1.1
+Host: localhost:8080
+Content-Type: application/x-www-form-urlencoded</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 109
+
+{
+  "status" : "SUCCESS",
+  "message" : "Quiz attempt finished and processed successfully",
+  "data" : 50.0
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_quiz_attempt_result"><a class="anchor" href="#_get_quiz_attempt_result"></a><a class="link" href="#_get_quiz_attempt_result">Get Quiz Attempt Result</a></h3>
+<div class="listingblock">
+<div class="title">Get the results of a completed quiz attempt</div>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /api/quiz/attempt/a3164fe6-0196-427b-a48e-a38ae00d91b3/result HTTP/1.1
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 9649
+
+{
+  "status" : "SUCCESS",
+  "message" : "Quiz attempt result fetched successfully",
+  "data" : {
+    "id" : "a3164fe6-0196-427b-a48e-a38ae00d91b3",
+    "score" : null,
+    "quiz" : {
+      "id" : null,
+      "title" : "Autem beatae quis eos molestiae."
+    },
+    "questions" : [ {
+      "id" : "97e5ecf0-e7f4-4289-b552-0bb8ad1d1599",
+      "question" : "Aspernatur rerum unde aliquid.",
+      "coefficient" : 1.0,
+      "questionType" : "TRUE_FALSE",
+      "answer" : {
+        "answer" : "praesentium"
+      },
+      "choices" : [ ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "correctOptionMatches" : [ ],
+      "questionAttempt" : {
+        "correctnessPercentage" : null,
+        "answerAttempt" : {
+          "id" : null,
+          "isCorrect" : null,
+          "answer" : "ex"
+        },
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "bf94bcad-8a00-401c-9c91-0b0873c0bfe1",
+      "question" : "Natus eos quasi laborum ducimus facilis ut.",
+      "coefficient" : 1.0,
+      "questionType" : "SHORT_ANSWER",
+      "answer" : {
+        "answer" : "cumque"
+      },
+      "choices" : [ ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "correctOptionMatches" : [ ],
+      "questionAttempt" : {
+        "correctnessPercentage" : null,
+        "answerAttempt" : {
+          "id" : null,
+          "isCorrect" : null,
+          "answer" : "distinctio"
+        },
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "d06fd946-e088-40f3-8cdc-5bcf319f369b",
+      "question" : "Ut hic sed optio.",
+      "coefficient" : 1.0,
+      "questionType" : "NUMERIC",
+      "answer" : {
+        "answer" : "mollitia"
+      },
+      "choices" : [ ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "correctOptionMatches" : [ ],
+      "questionAttempt" : {
+        "correctnessPercentage" : null,
+        "answerAttempt" : {
+          "id" : null,
+          "isCorrect" : null,
+          "answer" : "neque"
+        },
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "2afb391c-f32c-45c0-8c9a-267365089427",
+      "question" : "Ea totam qui voluptatem ullam molestiae est labore.",
+      "coefficient" : 1.0,
+      "questionType" : "FILL_IN_THE_BLANK",
+      "answer" : {
+        "answer" : "nam"
+      },
+      "choices" : [ ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "correctOptionMatches" : [ ],
+      "questionAttempt" : {
+        "correctnessPercentage" : null,
+        "answerAttempt" : {
+          "id" : null,
+          "isCorrect" : null,
+          "answer" : "nobis"
+        },
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "eb77e4eb-cdde-41b1-b543-50a80fe900b4",
+      "question" : "Dicta et quia incidunt voluptatem velit itaque.",
+      "coefficient" : 1.0,
+      "questionType" : "SINGLE_CHOICE",
+      "answer" : null,
+      "choices" : [ {
+        "id" : null,
+        "choice" : "in",
+        "isCorrect" : false
+      }, {
+        "id" : null,
+        "choice" : "quia",
+        "isCorrect" : true
+      }, {
+        "id" : null,
+        "choice" : "et",
+        "isCorrect" : false
+      } ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "correctOptionMatches" : [ ],
+      "questionAttempt" : {
+        "correctnessPercentage" : null,
+        "answerAttempt" : null,
+        "choiceAttempts" : [ {
+          "choice" : {
+            "id" : null,
+            "choice" : null
+          },
+          "isCorrect" : null
+        } ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "cc745a48-df86-473d-9350-647ff3e3a767",
+      "question" : "Et ab omnis quia quas excepturi omnis.",
+      "coefficient" : 1.0,
+      "questionType" : "MULTIPLE_CHOICE",
+      "answer" : null,
+      "choices" : [ {
+        "id" : null,
+        "choice" : "modi",
+        "isCorrect" : false
+      }, {
+        "id" : null,
+        "choice" : "quo",
+        "isCorrect" : true
+      }, {
+        "id" : null,
+        "choice" : "id",
+        "isCorrect" : true
+      } ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "correctOptionMatches" : [ ],
+      "questionAttempt" : {
+        "correctnessPercentage" : null,
+        "answerAttempt" : null,
+        "choiceAttempts" : [ {
+          "choice" : {
+            "id" : null,
+            "choice" : null
+          },
+          "isCorrect" : null
+        } ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "34b45115-cf07-4df2-85af-6802308cbb84",
+      "question" : "Sunt et cumque quod officiis temporibus qui voluptatem.",
+      "coefficient" : 1.0,
+      "questionType" : "OPTION_MATCHING",
+      "answer" : null,
+      "choices" : [ ],
+      "orderedOptions" : [ ],
+      "matches" : [ ],
+      "options" : [ ],
+      "correctOptionMatches" : [ {
+        "match" : {
+          "id" : null,
+          "match" : "voluptas"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "adipisci"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "voluptas"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "consectetur"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "voluptas"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "et"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "voluptas"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "quis"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "assumenda"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "consectetur"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "assumenda"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "consequuntur"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "assumenda"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "est"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "assumenda"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "quis"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "nemo"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "et"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "nostrum"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "consectetur"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "nostrum"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "est"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "nostrum"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "et"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "nostrum"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "quis"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "et"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "adipisci"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "et"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "et"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "ut"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "consectetur"
+        }
+      }, {
+        "match" : {
+          "id" : null,
+          "match" : "ut"
+        },
+        "option" : {
+          "id" : null,
+          "option" : "consequuntur"
+        }
+      } ],
+      "questionAttempt" : {
+        "correctnessPercentage" : null,
+        "answerAttempt" : null,
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ ],
+        "optionMatchAttempts" : [ ]
+      }
+    }, {
+      "id" : "76748076-a220-4984-ba48-cba1c2b66ec9",
+      "question" : "Est dolorem nobis quidem.",
+      "coefficient" : 1.0,
+      "questionType" : "OPTION_ORDERING",
+      "answer" : null,
+      "choices" : [ ],
+      "orderedOptions" : [ {
+        "id" : null,
+        "option" : "quisquam",
+        "correctPosition" : 0
+      }, {
+        "id" : null,
+        "option" : "reiciendis",
+        "correctPosition" : 1
+      }, {
+        "id" : null,
+        "option" : "temporibus",
+        "correctPosition" : 2
+      } ],
+      "matches" : [ ],
+      "options" : [ ],
+      "correctOptionMatches" : [ ],
+      "questionAttempt" : {
+        "correctnessPercentage" : null,
+        "answerAttempt" : null,
+        "choiceAttempts" : [ ],
+        "orderedOptionAttempts" : [ {
+          "id" : null,
+          "position" : 0,
+          "isCorrect" : null
+        }, {
+          "id" : null,
+          "position" : 1,
+          "isCorrect" : null
+        }, {
+          "id" : null,
+          "position" : 2,
+          "isCorrect" : null
+        } ],
+        "optionMatchAttempts" : [ ]
+      }
+    } ]
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2024-05-28 00:38:21 +0200
+</div>
+</div>
+</body>
+</html>
