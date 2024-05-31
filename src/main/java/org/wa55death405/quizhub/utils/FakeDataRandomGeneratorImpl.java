@@ -1,30 +1,42 @@
 package org.wa55death405.quizhub.utils;
 
 import com.github.javafaker.Faker;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.dto.question.QuestionCreationRequestDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.enums.QuestionType;
+import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
 
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-// TODO: name should be changed to 'FakeDataRandomGenerator'
-public class FakeDataGenerator {
+/*
+    * This class is responsible for generating fake data
+    not to be mistaken with 'FakeDataLogicalGeneratorImpl'
+    * this class is used to generate fake data
+    that requires random generations
+ */
+@Service
+@RequiredArgsConstructor
+public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
 
-    private static final Faker faker = new Faker();
+    private final Faker faker;
 
-    public static void fill(QuizCreationDTO quizCreationDTO) {
+    @Override
+    public void fill(QuizCreationDTO quizCreationDTO) {
         quizCreationDTO.setTitle(faker.lorem().sentence());
         // Generate one instance for all types of questions
         for (QuestionType questionType : QuestionType.values()) {
             QuestionCreationRequestDTO questionCreationRequestDTO = new QuestionCreationRequestDTO();
-            FakeDataGenerator.fill(questionCreationRequestDTO,questionType);
+            this.fill(questionCreationRequestDTO,questionType);
             quizCreationDTO.getQuestions().add(questionCreationRequestDTO);
         }
     }
 
-    public static void fill(QuestionCreationRequestDTO questionCreationRequestDTO, QuestionType questionType) {
+    @Override
+    public void fill(QuestionCreationRequestDTO questionCreationRequestDTO, QuestionType questionType) {
         questionCreationRequestDTO.setQuestionType(questionType);
         questionCreationRequestDTO.setQuestion(faker.lorem().sentence());
         questionCreationRequestDTO.setCoefficient(1f);
@@ -94,9 +106,10 @@ public class FakeDataGenerator {
     }
 
     // TODO : looks weird should be changed
-    public static Quiz generate_Quiz(){
+    @Override
+    public Quiz generate_Quiz(){
         QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-        FakeDataGenerator.fill(quizCreationDTO);
+        this.fill(quizCreationDTO);
         return quizCreationDTO.toEntity(null);
     }
 

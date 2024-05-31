@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Comparator;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -14,8 +15,8 @@ import java.util.Comparator;
 @NoArgsConstructor
 public class Match {
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     @Column(nullable = false)
     private String match;
 

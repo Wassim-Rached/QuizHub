@@ -1,4 +1,4 @@
-name: Build & Push 'staging' Docker Image
+name: Deploy Staging to Live Environment
 
 on:
   workflow_dispatch:
@@ -20,9 +20,9 @@ jobs:
           distribution: 'corretto'
           java-version: 21
 
-#      - name: Unit Tests
-#        run: mvn -B test --file pom.xml
-#
+      - name: Test the application
+        run: mvn -B test --file pom.xml
+
       - name: Build the application
         run: |
           mvn clean

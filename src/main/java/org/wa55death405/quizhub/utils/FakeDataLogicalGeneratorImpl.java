@@ -6,22 +6,23 @@ import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
+import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 /*
     * This class is responsible for generating fake data
-    not to be mistaken with FakeDataGenerator
+    not to be mistaken with 'FakeDataRandomGeneratorImpl'
     * this class is used to generate fake data
     that requires logical generations
  */
-// TODO: name should be changed to 'FakeDataLogicalGenerator'
 @Service
 @RequiredArgsConstructor
-public class FakeDataLogicalUtils {
+public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
 
-    public static QuestionAttemptSubmissionDTO getPerfectScoreQuestionAttemptSubmissionDTO(Question question) {
+    @Override
+    public QuestionAttemptSubmissionDTO getPerfectScoreQuestionAttemptSubmissionDTO(Question question) {
         /*
             I don't know what tf did I just wrote, but it works
             it returns a QuestionAttemptSubmissionDTO
@@ -36,14 +37,14 @@ public class FakeDataLogicalUtils {
             case MULTIPLE_CHOICE,SINGLE_CHOICE:
                 questionAttemptSubmissionDTO.setChoiceAttempts(question.getCorrectChoices().stream().map(Choice::getId).toList());
                 break;
-            case OPTION_ORDERING: questionAttemptSubmissionDTO.setOrderedOptionAttempts((HashMap<Integer, Integer>) question.getOrderedOptions().stream()
+            case OPTION_ORDERING: questionAttemptSubmissionDTO.setOrderedOptionAttempts((HashMap<Integer, UUID>) question.getOrderedOptions().stream()
                     .collect(Collectors.toMap(OrderedOption::getCorrectPosition,OrderedOption::getId)));
             break;
             case OPTION_MATCHING:
-                HashMap<Integer,List<Integer>> optionMatchAttempts = new HashMap<>();
+                HashMap<UUID,List<UUID>> optionMatchAttempts = new HashMap<>();
                 question.getCorrectOptionMatches().forEach(correctOptionMatch -> {
-                    Integer optionId = correctOptionMatch.getOption().getId();
-                    Integer matchId = correctOptionMatch.getMatch().getId();
+                    UUID optionId = correctOptionMatch.getOption().getId();
+                    UUID matchId = correctOptionMatch.getMatch().getId();
                     var optionMatchAttempt = optionMatchAttempts.computeIfAbsent(optionId, k -> new ArrayList<>());
                     optionMatchAttempt.add(matchId);
                 });
@@ -56,12 +57,14 @@ public class FakeDataLogicalUtils {
         return questionAttemptSubmissionDTO;
     }
 
-    public static List<QuestionAttemptSubmissionDTO> getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(Quiz quiz) {
-        return quiz.getQuestions().stream().map(FakeDataLogicalUtils::getPerfectScoreQuestionAttemptSubmissionDTO).toList();
+    @Override
+    public List<QuestionAttemptSubmissionDTO> getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(Quiz quiz) {
+        return quiz.getQuestions().stream().map(this::getPerfectScoreQuestionAttemptSubmissionDTO).toList();
     }
 
     // TODO : the logic might not be the best here
-    public static QuestionAttemptSubmissionDTO getRandomQuestionAttemptSubmissionDTO(Question question) {
+    @Override
+    public QuestionAttemptSubmissionDTO getRandomQuestionAttemptSubmissionDTO(Question question) {
         QuestionAttemptSubmissionDTO questionAttemptSubmissionDTO = new QuestionAttemptSubmissionDTO();
         questionAttemptSubmissionDTO.setQuestion(question.getId());
         switch (question.getQuestionType()) {
@@ -76,7 +79,7 @@ public class FakeDataLogicalUtils {
             }
             case MULTIPLE_CHOICE, SINGLE_CHOICE:{
                 var questionChoices = question.getChoices();
-                var randomChoices = new ArrayList<Integer>();
+                var randomChoices = new ArrayList<UUID>();
                 for (Choice questionChoice : questionChoices) {
                     if (Faker.instance().bool().bool()) {
                         randomChoices.add(questionChoice.getId());
@@ -86,9 +89,9 @@ public class FakeDataLogicalUtils {
                 break;
             }
             case OPTION_ORDERING:{
-                var randomizedOrderedOptions = new ArrayList<>(question.getOrderedOptions().stream().map(OrderedOption::getId).toList());
+                List<UUID> randomizedOrderedOptions = new ArrayList<>(question.getOrderedOptions().stream().map(OrderedOption::getId).toList());
                 Collections.shuffle(randomizedOrderedOptions);
-                var orderedOptionAttempts = new HashMap<Integer,Integer>();
+                HashMap<Integer,UUID> orderedOptionAttempts = new HashMap<>();
                 for (int i = 0; i < randomizedOrderedOptions.size(); i++) {
                     orderedOptionAttempts.put(i,randomizedOrderedOptions.get(i));
                 }
@@ -108,18 +111,19 @@ public class FakeDataLogicalUtils {
                 Collections.shuffle(randomizedOptionsIds);
                 Collections.shuffle(randomizedMatchesIds);
 
-                var randomOptionMatchesAttempts = new HashMap<Integer,List<Integer>>();
+                // <optionId, List<matchId>>
+                var randomOptionMatchesAttempts = new HashMap<UUID,List<UUID>>();
 
                 // loop through the number of option matches to make
                 for (int i = 0; i < numberOfOptionMatchesToMake; i++) {
                     // get a random option and match
-                    var optionId = randomizedOptionsIds.get(Faker.instance().random().nextInt(0,numberOfOptions));
-                    var matchId = randomizedMatchesIds.get(Faker.instance().random().nextInt(0,numberOfMatches));
+                    var optionId = randomizedOptionsIds.get(Faker.instance().random().nextInt(numberOfOptions-1));
+                    var matchId = randomizedMatchesIds.get(Faker.instance().random().nextInt(numberOfMatches-1));
                     // connect the option to the match
-                    if (randomOptionMatchesAttempts.containsKey(matchId)) {
-                        randomOptionMatchesAttempts.get(matchId).add(optionId);
+                    if (randomOptionMatchesAttempts.containsKey(optionId)) {
+                        randomOptionMatchesAttempts.get(optionId).add(matchId);
                     } else {
-                        randomOptionMatchesAttempts.put(matchId, List.of(optionId));
+                        randomOptionMatchesAttempts.put(optionId, new ArrayList<>(List.of(matchId)));
                     }
                 }
                 // set the option matches
@@ -133,12 +137,14 @@ public class FakeDataLogicalUtils {
         return questionAttemptSubmissionDTO;
     }
 
-    public static List<QuestionAttemptSubmissionDTO> getRandomQuestionAttemptSubmissionDTOsForQuiz(Quiz quiz) {
-        return quiz.getQuestions().stream().map(FakeDataLogicalUtils::getRandomQuestionAttemptSubmissionDTO).toList();
+    @Override
+    public List<QuestionAttemptSubmissionDTO> getRandomQuestionAttemptSubmissionDTOsForQuiz(Quiz quiz) {
+        return quiz.getQuestions().stream().map(this::getRandomQuestionAttemptSubmissionDTO).toList();
     }
 
-    public static QuizAttempt generate_QuizAttempt(Quiz quiz){
-        var attempts = FakeDataLogicalUtils.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
+    @Override
+    public QuizAttempt generate_QuizAttempt(Quiz quiz){
+        var attempts = this.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
         var quizAttempt = QuizAttempt.builder().quiz(quiz).build();
         List<QuestionAttempt> questionAttempts = attempts.stream().map(a->a.toEntity(quizAttempt.getId())).toList();
         quizAttempt.setQuestionAttempts(questionAttempts);

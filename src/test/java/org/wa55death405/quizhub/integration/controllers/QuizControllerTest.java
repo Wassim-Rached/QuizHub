@@ -1,13 +1,17 @@
-package org.wa55death405.quizhub.controllers;
+package org.wa55death405.quizhub.integration.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.wa55death405.quizhub.controllers.QuizController;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
@@ -16,8 +20,10 @@ import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.entities.QuizAttempt;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.interfaces.services.IQuizService;
-import org.wa55death405.quizhub.utils.FakeDataGenerator;
-import org.wa55death405.quizhub.utils.FakeDataLogicalUtils;
+import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
+import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
+import org.wa55death405.quizhub.utils.FakeDataLogicalGeneratorImpl;
+import org.wa55death405.quizhub.utils.FakeDataRandomGeneratorImpl;
 
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -25,6 +31,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -34,7 +41,9 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 
 @WebMvcTest(QuizController.class)
 @AutoConfigureMockMvc
+@Import({FakeDataRandomGeneratorImpl.class, FakeDataLogicalGeneratorImpl.class, Faker.class})
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets/quiz")
+@ActiveProfiles("test")
 class QuizControllerTest {
 
     @Autowired
@@ -42,15 +51,19 @@ class QuizControllerTest {
     @MockBean
     private IQuizService quizService;
     private final ObjectMapper objectMapper = new ObjectMapper();
-
+    @Autowired
+    private IFakeDataRandomGenerator fakeDataRandomGenerator;
+    @Autowired
+    private IFakeDataLogicalGenerator fakeDataLogicalGenerator;
 
     @Test
     void searchQuizzes() throws Exception {
         // arrange
         List<QuizGeneralInfoDTO> expectedQuizzes = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
+            UUID id = UUID.randomUUID();
             var quiz = Quiz.builder()
-                    .id(i)
+                    .id(id)
                     .title("Quiz " + i)
                     .build();
             expectedQuizzes.add(new QuizGeneralInfoDTO(quiz));
@@ -71,9 +84,9 @@ class QuizControllerTest {
     void createQuiz() throws Exception {
         // arrange
         QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-        FakeDataGenerator.fill(quizCreationDTO);
+        fakeDataRandomGenerator.fill(quizCreationDTO);
         Quiz quiz = quizCreationDTO.toEntity(null);
-        quiz.setId(1);
+        quiz.setId(UUID.randomUUID());
         when(quizService.createQuiz(quizCreationDTO)).thenReturn(quiz);
         var requestBodyJson = this.objectMapper.writeValueAsString(quizCreationDTO);
 
@@ -83,7 +96,7 @@ class QuizControllerTest {
                 .content(requestBodyJson))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
-                .andExpect(jsonPath("$.data").value(quiz.getId()))
+                .andExpect(jsonPath("$.data").value(quiz.getId().toString()))
                 .andDo(
                         document("create-quiz",
                                 preprocessRequest(prettyPrint()),
@@ -95,16 +108,16 @@ class QuizControllerTest {
     @Test
     void startQuizAttempt() throws Exception {
         // arrange
-        Integer quizId = 1;
+        UUID quizId = UUID.randomUUID();
         QuizAttempt quizAttempt = new QuizAttempt();
-        quizAttempt.setId(1);
+        quizAttempt.setId(UUID.randomUUID());
         when(quizService.startQuizAttempt(quizId)).thenReturn(quizAttempt);
 
         // act and assert
          this.mockMvc.perform(post("/api/quiz/{quizId}/start", quizId))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
-                .andExpect(jsonPath("$.data").value(quizAttempt.getId()))
+                .andExpect(jsonPath("$.data").value(quizAttempt.getId().toString()))
                 .andDo(document(
                         "start-quiz-attempt",
                         preprocessRequest(prettyPrint()),
@@ -116,13 +129,13 @@ class QuizControllerTest {
     void submitQuestionAttempts() throws Exception {
         // arrange
         var quizCreationDTO = new QuizCreationDTO();
-        FakeDataGenerator.fill(quizCreationDTO);
+        fakeDataRandomGenerator.fill(quizCreationDTO);
         Quiz quiz = quizCreationDTO.toEntity(null);
-        var attempts = FakeDataLogicalUtils.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
+        var attempts = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
         var requestJson = this.objectMapper.writeValueAsString(attempts);
 
         // act and assert
-        this.mockMvc.perform(post("/api/quiz/attempt/{quizAttemptId}/submit", 1)
+        this.mockMvc.perform(post("/api/quiz/attempt/{quizAttemptId}/submit", UUID.randomUUID())
                 .contentType("application/json")
                 .content(requestJson))
                 .andExpect(status().isAccepted())
@@ -137,13 +150,12 @@ class QuizControllerTest {
     @Test
     void getQuizAttemptTaking() throws Exception {
         // arrange
-        Quiz quiz = FakeDataGenerator.generate_Quiz();
-        int index = 0;
+        Quiz quiz = fakeDataRandomGenerator.generate_Quiz();
         for (var question : quiz.getQuestions()) {
-            question.setId(index++);
+            question.setId(UUID.randomUUID());
         }
-        var quizAttempt = FakeDataLogicalUtils.generate_QuizAttempt(quiz);
-        quizAttempt.setId(1);
+        var quizAttempt = fakeDataLogicalGenerator.generate_QuizAttempt(quiz);
+        quizAttempt.setId(UUID.randomUUID());
 
         var attempt = new QuizAttemptTakingDTO(quizAttempt);
         when(quizService.getQuizAttemptTaking(quizAttempt.getId())).thenReturn(attempt);
@@ -163,7 +175,7 @@ class QuizControllerTest {
     @Test
     void cancelQuizAttempt() throws Exception {
         // arrange
-        Integer quizAttemptId = 1;
+        UUID quizAttemptId = UUID.randomUUID();
 
         // act and assert
         this.mockMvc.perform(delete("/api/quiz/attempt/{quizAttemptId}/cancel", quizAttemptId))
@@ -179,7 +191,7 @@ class QuizControllerTest {
     @Test
     void finishQuizAttempt() throws Exception {
         // arrange
-        Integer quizAttemptId = 1;
+        UUID quizAttemptId = UUID.randomUUID();
         QuizAttempt quizAttempt = new QuizAttempt();
         quizAttempt.setId(quizAttemptId);
         quizAttempt.setScore(50.0f);
@@ -200,13 +212,12 @@ class QuizControllerTest {
     @Test
     void getQuizAttemptResult() throws Exception {
         // arrange
-        Quiz quiz = FakeDataGenerator.generate_Quiz();
-        int index = 0;
+        Quiz quiz = fakeDataRandomGenerator.generate_Quiz();
         for (var question : quiz.getQuestions()) {
-            question.setId(index++);
+            question.setId(UUID.randomUUID());
         }
-        var quizAttempt = FakeDataLogicalUtils.generate_QuizAttempt(quiz);
-        quizAttempt.setId(1);
+        var quizAttempt = fakeDataLogicalGenerator.generate_QuizAttempt(quiz);
+        quizAttempt.setId(UUID.randomUUID());
 
         var attempt = new QuizAttemptResultDTO(quizAttempt);
         when(quizService.getQuizAttemptResult(quizAttempt.getId())).thenReturn(attempt);

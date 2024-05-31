@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# auto generated ressources
+/src/main/resources/static/

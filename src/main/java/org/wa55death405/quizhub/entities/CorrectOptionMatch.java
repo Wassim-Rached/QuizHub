@@ -4,6 +4,8 @@ package org.wa55death405.quizhub.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Data
 @ToString
@@ -14,7 +16,7 @@ import lombok.*;
 public class CorrectOptionMatch {
     @Id
     @GeneratedValue
-    private Integer id;
+    private UUID id;
 
     @ManyToOne(cascade = CascadeType.ALL,optional = false)
     @JoinColumn(name = "match_id")
