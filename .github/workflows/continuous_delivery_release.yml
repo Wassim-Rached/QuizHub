@@ -1,14 +1,18 @@
-name: Deploy Staging to Live Environment
+name: Push Release to Image Registry
+run-name: Pushing @${{ github.event.release.tag_name || github.event.inputs.releaseTag }} to Image Registry
 
 on:
+  release:
+    types: [published]
   workflow_dispatch:
-  push:
-    branches:
-      - staging
+    inputs:
+      releaseTag:
+        description: 'Release Tag to Deploy'
+        required: false
 
 jobs:
-  build-deploy:
-    name: Build & Deploy
+  deploy:
+    name: Deploy Release - @${{ github.event.release.tag_name || github.event.inputs.releaseTag }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,24 +32,16 @@ jobs:
           mvn clean
           mvn -B package --file pom.xml
 
-      - name: Build Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          dockerfile: Dockerfile
-          push: false
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/quizhub:staging
-
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Push to Docker Hub
+      - name: Build Docker Image
         uses: docker/build-push-action@v2
         with:
           context: .
           dockerfile: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/quizhub:staging
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/quizhub:${{ github.event.release.tag_name || github.event.inputs.releaseTag }}
