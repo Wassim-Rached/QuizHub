@@ -83,6 +83,8 @@ class ApplicationE2ETests {
         // Search for the quiz
         HashMap<String, String> queryParams = new HashMap<>();
         queryParams.put("title", quizCreationDTO.getTitle());
+        queryParams.put("page", "0");
+        queryParams.put("size", "1");
         given()
                 .queryParams(queryParams)
                 .when()
@@ -92,9 +94,12 @@ class ApplicationE2ETests {
                 .body("status", equalTo(StandardApiStatus.SUCCESS.toString()))
                 .body("message", notNullValue())
                 .body("data",notNullValue())
-                .body("data",hasSize(equalTo(1)))
-                .body("data[0].id", equalTo(quizId.toString()))
-                .body("data[0].title", equalTo(quizCreationDTO.getTitle()));
+                .body("data.currentPage",equalTo(0))
+                .body("data.currentItemsSize",equalTo(1))
+                .body("data.totalItems",equalTo(1))
+                .body("data.items",hasSize(equalTo(1)))
+                .body("data.items[0].id", equalTo(quizId.toString()))
+                .body("data.items[0].title", equalTo(quizCreationDTO.getTitle()));
 
         // Start an attempt
         var startQuizResponse = given()
