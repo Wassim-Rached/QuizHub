@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.wa55death405.quizhub.controllers.QuizController;
+import org.wa55death405.quizhub.dto.StandardPageList;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
@@ -26,6 +27,7 @@ import org.wa55death405.quizhub.utils.FakeDataLogicalGeneratorImpl;
 import org.wa55death405.quizhub.utils.FakeDataRandomGeneratorImpl;
 
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -59,19 +61,26 @@ class QuizControllerTest {
     @Test
     void searchQuizzes() throws Exception {
         // arrange
-        List<QuizGeneralInfoDTO> expectedQuizzes = new ArrayList<>();
+        int page = 0;
+        int size = 10;
+        long totalItems = 10;
+        StandardPageList<QuizGeneralInfoDTO> expectedQuizzes = new StandardPageList<>();
+        expectedQuizzes.setCurrentPage(page);
+        expectedQuizzes.setTotalItems(totalItems);
+        expectedQuizzes.setCurrentItemsSize(size);
+        expectedQuizzes.setItems(new ArrayList<>());
+
         for (int i = 0; i < 10; i++) {
-            UUID id = UUID.randomUUID();
             var quiz = Quiz.builder()
-                    .id(id)
+                    .id(UUID.randomUUID())
                     .title("Quiz " + i)
                     .build();
-            expectedQuizzes.add(new QuizGeneralInfoDTO(quiz));
+            expectedQuizzes.getItems().add(new QuizGeneralInfoDTO(quiz));
         }
-        when(quizService.searchQuizzes(anyString())).thenReturn(expectedQuizzes);
+        when(quizService.searchQuizzes(anyString(),anyInt(),anyInt())).thenReturn(expectedQuizzes);
 
         // act and assert
-        this.mockMvc.perform(get("/api/quiz/search"))
+        this.mockMvc.perform(get("/api/quiz/search?page={page}&size={size}", page, size))
                 .andExpect(status().isOk())
                 .andDo(document(
                         "search-quizzes",
