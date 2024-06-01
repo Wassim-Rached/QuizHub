@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.wa55death405.quizhub.dto.StandardApiResponse;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
@@ -18,6 +19,12 @@ import java.io.FileNotFoundException;
     it is used to handle the exceptions thrown by the controllers
  */
 
+/*
+    TODO:
+      separate the exception handlers into different classes
+      * one for predefined spring or library exceptions
+      * one for custom exceptions
+ */
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
@@ -39,5 +46,10 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(FileNotFoundException.class)
     public ResponseEntity<StandardApiResponse<Void>> handleFileNotFoundException(FileNotFoundException e) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, "File not found"), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<StandardApiResponse<Void>> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, "Invalid value for parameter "+ e.getPropertyName() +". Expected type: "+ e.getRequiredType()), HttpStatus.BAD_REQUEST);
     }
 }
