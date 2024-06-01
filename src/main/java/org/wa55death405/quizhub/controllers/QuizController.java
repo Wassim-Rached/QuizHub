@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.wa55death405.quizhub.dto.StandardPageList;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.StandardApiResponse;
@@ -32,11 +33,16 @@ public class QuizController {
     /*
         this api is used to get search for quizzes
         it takes the title of the quiz as a query parameter
+        along with the page number and the size of the page
         and returns a list of quizzes that match the title
      */
     @GetMapping("/search")
-    public ResponseEntity<StandardApiResponse<List<QuizGeneralInfoDTO>>> searchQuizzes(@RequestParam(required = false,defaultValue = "") String title) {
-        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quizzes fetched successfully",quizService.searchQuizzes(title)), HttpStatus.OK);
+    public ResponseEntity<StandardApiResponse<StandardPageList<QuizGeneralInfoDTO>>> searchQuizzes(
+            @RequestParam(defaultValue = "") String title,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quizzes fetched successfully",quizService.searchQuizzes(title, page, size)), HttpStatus.OK);
     }
 
     /*

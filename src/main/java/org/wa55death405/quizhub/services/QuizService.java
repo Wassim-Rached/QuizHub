@@ -4,7 +4,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.wa55death405.quizhub.dto.StandardPageList;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
@@ -36,9 +39,14 @@ public class QuizService implements IQuizService{
     private final EntityManager entityManager;
 
     @Override
-    public List<QuizGeneralInfoDTO> searchQuizzes(String title) {
-        List<Quiz> quizzes = quizRepository.findAllByTitleContainingIgnoreCase(title);
-        return quizzes.stream().map(QuizGeneralInfoDTO::new).toList();
+    public StandardPageList<QuizGeneralInfoDTO> searchQuizzes(String title, int page, int size) {
+        Page<Quiz> quizzes = quizRepository.findAllByTitleContainingIgnoreCase(title,PageRequest.of(page, size));
+        StandardPageList<QuizGeneralInfoDTO> standardPageList = new StandardPageList<>();
+        standardPageList.setItems(quizzes.map(QuizGeneralInfoDTO::new).toList());
+        standardPageList.setCurrentPage(quizzes.getNumber());
+        standardPageList.setCurrentItemsSize(quizzes.getNumberOfElements());
+        standardPageList.setTotalItems(quizzes.getTotalElements());
+        return standardPageList;
     }
 
     @Override
