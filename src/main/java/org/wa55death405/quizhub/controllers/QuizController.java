@@ -88,6 +88,17 @@ public class QuizController {
 
     /*
         this api is used to get the needed information to
+        be able to create certain quiz that already exists
+        @Param quizId the id of the quiz
+        @return the needed information to create the quiz
+     */
+    @GetMapping("/{quizId}/creation-info")
+    public ResponseEntity<StandardApiResponse<QuizCreationDTO>> getQuizCreationInfo(@PathVariable UUID quizId) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS, "Quiz creation info fetched successfully", quizService.getQuizCreationInfo(quizId)), HttpStatus.OK);
+    }
+
+    /*
+        this api is used to get the needed information to
         be able to play the quiz, such as the questions
         and the previous submitted non-finished attempts
      */
@@ -115,5 +126,6 @@ public class QuizController {
     public ResponseEntity<StandardApiResponse<QuizAttemptResultDTO>> getQuizAttemptResult(@PathVariable UUID quizAttemptId) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt result fetched successfully",quizService.getQuizAttemptResult(quizAttemptId)), HttpStatus.OK);
     }
+
 
 }
