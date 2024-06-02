@@ -1,6 +1,7 @@
 package org.wa55death405.quizhub.dto.quiz;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.wa55death405.quizhub.dto.question.QuestionCreationRequestDTO;
 import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class QuizCreationDTO implements EntityDTO<Quiz,Void> {
     private String title;
     private List<QuestionCreationRequestDTO> questions = new ArrayList<>();
@@ -24,5 +26,10 @@ public class QuizCreationDTO implements EntityDTO<Quiz,Void> {
                 .build();
         quiz.setQuestions(questions.stream().map(q -> q.toEntity(quiz)).toList());
         return quiz;
+    }
+
+    public QuizCreationDTO(Quiz quiz) {
+        this.title = quiz.getTitle();
+        this.questions = quiz.getQuestions().stream().map(QuestionCreationRequestDTO::new).toList();
     }
 }
