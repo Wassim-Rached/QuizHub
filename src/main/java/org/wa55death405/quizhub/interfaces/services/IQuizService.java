@@ -73,4 +73,11 @@ public interface IQuizService {
         * @return the result of the quiz attempt
      */
     QuizAttemptResultDTO getQuizAttemptResult(UUID quizAttemptId);
+
+    /*
+        * get the info needed to create a quiz
+        * @param quizId the id of the quiz
+        * @return the needed information to create the quiz
+     */
+    QuizCreationDTO getQuizCreationInfo(UUID quizId);
 }

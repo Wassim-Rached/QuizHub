@@ -160,4 +160,12 @@ public class QuizService implements IQuizService{
         }
         return new QuizAttemptResultDTO(quizAttempt);
     }
+
+    @Override
+    public QuizCreationDTO getQuizCreationInfo(UUID quizId) {
+        Quiz quiz = quizRepository.findById(quizId).orElseThrow(
+                () -> new EntityNotFoundException("Quiz with id " + quizId + " not found")
+        );
+        return new QuizCreationDTO(quiz);
+    }
 }
