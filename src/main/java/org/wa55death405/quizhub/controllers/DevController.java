@@ -3,10 +3,13 @@ package org.wa55death405.quizhub.controllers;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.wa55death405.quizhub.dto.StandardApiResponse;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
+import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
+import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
 import org.wa55death405.quizhub.repositories.QuizAttemptRepository;
 import org.wa55death405.quizhub.services.QuizService;
@@ -23,6 +26,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @Profile("dev")
+@RequestMapping("/dev")
 public class DevController {
     private final QuizService quizService;
     private final QuizAttemptRepository quizAttemptRepository;
@@ -43,5 +47,16 @@ public class DevController {
         var quiz = quizAttempt.get().getQuiz();
         List<QuestionAttemptSubmissionDTO> attempts = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(quiz);
         quizService.submitQuestionAttempts(attempts,quizAttemptId);
+    }
+
+    /*
+        this api is used to get the needed information to
+        be able to create certain quiz that already exists
+        @Param quizId the id of the quiz
+        @return the needed information to create the quiz
+    */
+    @GetMapping("/{quizId}/creation-info")
+    public ResponseEntity<StandardApiResponse<QuizCreationDTO>> getQuizCreationInfo(@PathVariable UUID quizId) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS, "Quiz creation info fetched successfully", quizService.getQuizCreationInfo(quizId)), HttpStatus.OK);
     }
 }
