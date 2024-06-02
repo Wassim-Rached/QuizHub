@@ -1,0 +1,107 @@
+[
+  {
+    "title": "Software Development Quiz",
+    "questions": [
+      {
+        "question": "Version control systems help manage changes to source code over time.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1.0,
+        "answer": "TRUE",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "What does 'IDE' stand for in software development?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answer": "Integrated Development Environment",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "How many bytes are in a kilobyte (KB)?",
+        "questionType": "NUMERIC",
+        "coefficient": 1.0,
+        "answer": "1024",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "In Java, the (blank) keyword is used to define a class,and the (blank) keyword is used to create a new object of that class.",
+        "questionType": "FILL_IN_THE_BLANK",
+        "coefficient": 1.0,
+        "answer": "class(|)new",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Which of these is a programming language?\n",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "Java": true,
+          "CSS": false,
+          "XML": false,
+          "HTML": false
+        },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Which of the following are types of software testing?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "User Acceptance Testing": false,
+          "Performance Testing": false,
+          "Regression Testing": false,
+          "Unit Testing": true,
+          "Integration Testing": true
+        },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Match the following terms with their descriptions.",
+        "questionType": "OPTION_MATCHING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": {
+          "Kanban": [
+            "A method for managing work with an emphasis on visualizing the workflow."
+          ],
+          "Agile": [
+            "A software development methodology that emphasizes flexibility and customer collaboration."
+          ],
+          "Scrum": [
+            "A framework for implementing Agile that includes roles, events, and artifacts."
+          ]
+        }
+      },
+      {
+        "question": "Arrange the following software development lifecycle phases in the correct order.",
+        "questionType": "OPTION_ORDERING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": { },
+        "orderedOptions": {
+          "1": "Requirements Analysis",
+          "2": "Plan & Design",
+          "3": "Implementation",
+          "4": "Maintenance",
+          "5": "Deployment"
+        },
+        "optionMatches": { }
+      }
+    ]
+
+  }
+]
