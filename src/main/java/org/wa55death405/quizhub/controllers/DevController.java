@@ -26,7 +26,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @Profile("dev")
-@RequestMapping("/dev")
+@RequestMapping("/api/dev")
 public class DevController {
     private final QuizService quizService;
     private final QuizAttemptRepository quizAttemptRepository;
@@ -55,7 +55,7 @@ public class DevController {
         @Param quizId the id of the quiz
         @return the needed information to create the quiz
     */
-    @GetMapping("/{quizId}/creation-info")
+    @GetMapping("/quiz/{quizId}/creation-info")
     public ResponseEntity<StandardApiResponse<QuizCreationDTO>> getQuizCreationInfo(@PathVariable UUID quizId) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS, "Quiz creation info fetched successfully", quizService.getQuizCreationInfo(quizId)), HttpStatus.OK);
     }
