@@ -115,6 +115,7 @@ class ApplicationE2ETests {
         UUID quizAttemptId = UUID.fromString(startQuizResponse.jsonPath().getString("data"));
 
         // Submit the attempt
+        quizRepository.flush();
         Quiz quiz = quizRepository.findById(quizId).orElseThrow(() -> new EntityNotFoundException("Quiz not found"));
         List<QuestionAttemptSubmissionDTO> questionAttemptSubmissionDTO = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
         String questionAttemptSubmissionRequestBody = this.objectMapper.writeValueAsString(questionAttemptSubmissionDTO);
