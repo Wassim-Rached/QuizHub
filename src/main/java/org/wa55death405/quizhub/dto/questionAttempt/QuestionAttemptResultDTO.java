@@ -37,21 +37,24 @@ public class QuestionAttemptResultDTO {
         }
 
         // for MULTIPLE_CHOICE, SINGLE_CHOICE
-        if(questionAttempt.getChoiceAttempts() != null){
+        if(questionAttempt.getChoiceAttempts() != null && !questionAttempt.getChoiceAttempts().isEmpty()){
+            choiceAttempts = new ArrayList<>();
             for(ChoiceAttempt choiceAttempt : questionAttempt.getChoiceAttempts()){
                 choiceAttempts.add(new ChoiceAttemptResultDTO(choiceAttempt));
             }
         }
 
         // for OPTION_ORDERING
-        if(questionAttempt.getOrderedOptionAttempts() != null){
+        if(questionAttempt.getOrderedOptionAttempts() != null && !questionAttempt.getOrderedOptionAttempts().isEmpty()){
+            orderedOptionAttempts = new ArrayList<>();
             for(OrderedOptionAttempt orderedOptionAttempt : questionAttempt.getOrderedOptionAttempts()){
                 orderedOptionAttempts.add(new OrderedOptionAttemptResultDTO(orderedOptionAttempt));
             }
         }
 
         // for OPTION_MATCHING
-        if(questionAttempt.getOptionMatchAttempts() != null){
+        if(questionAttempt.getOptionMatchAttempts() != null && !questionAttempt.getOptionMatchAttempts().isEmpty()){
+            optionMatchAttempts = new ArrayList<>();
             for(OptionMatchAttempt optionMatchAttempt : questionAttempt.getOptionMatchAttempts()){
                 optionMatchAttempts.add(new OptionMatchAttemptResult(optionMatchAttempt));
             }
