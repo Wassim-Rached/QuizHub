@@ -31,11 +31,11 @@ public class Question {
     private Answer answer;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Choice> choices = new ArrayList<>();
 
     // for OPTION_ORDERING
-    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<OrderedOption> orderedOptions = new ArrayList<>();
 
     // for MATCHING_OPTION
@@ -43,7 +43,7 @@ public class Question {
     private List<Match> matches = new ArrayList<>();
     @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
     private List<Option> options = new ArrayList<>();
-    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<CorrectOptionMatch> correctOptionMatches = new ArrayList<>();
 
     @Override
