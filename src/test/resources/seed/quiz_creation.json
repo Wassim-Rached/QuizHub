@@ -1,0 +1,421 @@
+[
+  {
+    "title": "Software Development Quiz",
+    "questions": [
+      {
+        "question": "Version control systems help manage changes to source code over time.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1.0,
+        "answer": "TRUE",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "What does 'IDE' stand for in software development?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answer": "Integrated Development Environment",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "How many bytes are in a kilobyte (KB)?",
+        "questionType": "NUMERIC",
+        "coefficient": 1.0,
+        "answer": "1024",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "In Java, the (blank) keyword is used to define a class,and the (blank) keyword is used to create a new object of that class.",
+        "questionType": "FILL_IN_THE_BLANK",
+        "coefficient": 1.0,
+        "answer": "class(|)new",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Which of these is a programming language?\n",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "Java": true,
+          "CSS": false,
+          "XML": false,
+          "HTML": false
+        },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Which of the following are types of software testing?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "User Acceptance Testing": false,
+          "Performance Testing": false,
+          "Regression Testing": false,
+          "Unit Testing": true,
+          "Integration Testing": true
+        },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Match the following terms with their descriptions.",
+        "questionType": "OPTION_MATCHING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": {
+          "Kanban": [
+            "A method for managing work with an emphasis on visualizing the workflow."
+          ],
+          "Agile": [
+            "A software development methodology that emphasizes flexibility and customer collaboration."
+          ],
+          "Scrum": [
+            "A framework for implementing Agile that includes roles, events, and artifacts."
+          ]
+        }
+      },
+      {
+        "question": "Arrange the following software development lifecycle phases in the correct order.",
+        "questionType": "OPTION_ORDERING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": { },
+        "orderedOptions": {
+          "1": "Requirements Analysis",
+          "2": "Plan & Design",
+          "3": "Implementation",
+          "4": "Maintenance",
+          "5": "Deployment"
+        },
+        "optionMatches": { }
+      }
+    ]
+  },
+  {
+    "title": "Comprehensive Technology Quiz",
+    "questions": [
+      {
+        "question": "The internet and the World Wide Web are the same thing.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1.0,
+        "answer": "FALSE",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "What is the full form of HTTP?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answer": "HyperText Transfer Protocol",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "How many bits are in a byte?",
+        "questionType": "NUMERIC",
+        "coefficient": 1.0,
+        "answer": "8",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "In HTML, the (blank) tag is used to create a hyperlink.",
+        "questionType": "FILL_IN_THE_BLANK",
+        "coefficient": 1.0,
+        "answer": "a",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Which of these is a programming language?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "Python": true,
+          "HTML": false,
+          "CSS": false,
+          "JSON": false
+        },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Which of the following are database management systems?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "MySQL": true,
+          "MongoDB": true,
+          "OracleDB": true,
+          "DynamoDB": true,
+          "ReactJS": false
+        },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Match the following terms with their descriptions.",
+        "questionType": "OPTION_MATCHING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": {
+          "HTTP": [
+            "A protocol for transferring web pages."
+          ],
+          "API": [
+            "A set of functions for building software applications."
+          ],
+          "JSON": [
+            "A lightweight data-interchange format."
+          ]
+        }
+      },
+      {
+        "question": "Arrange the following layers of the OSI model in the correct order.",
+        "questionType": "OPTION_ORDERING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": { },
+        "orderedOptions": {
+          "1": "Physical Layer",
+          "2": "Data Link Layer",
+          "3": "Network Layer",
+          "4": "Transport Layer",
+          "5": "Session Layer",
+          "6": "Presentation Layer",
+          "7": "Application Layer"
+        },
+        "optionMatches": { }
+      }
+    ]
+  },
+  {
+    "title": "Advanced Computer Science Quiz",
+    "questions": [
+      {
+        "question": "A binary search tree is always balanced.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1.0,
+        "answer": "FALSE",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "What does 'OOP' stand for in programming?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answer": "Object-Oriented Programming",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "How many bits are in an IPv6 address?",
+        "questionType": "NUMERIC",
+        "coefficient": 1.0,
+        "answer": "128",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "In Python, the (blank) keyword is used to define a function.",
+        "questionType": "FILL_IN_THE_BLANK",
+        "coefficient": 1.0,
+        "answer": "def",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Which of these data structures is a Last-In-First-Out (LIFO) structure?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "Queue": false,
+          "Array": false,
+          "Stack": true,
+          "Linked List": false
+        },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Which of the following are sorting algorithms?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "Bubble Sort": true,
+          "Quick Sort": true,
+          "Binary Search": false,
+          "Merge Sort": true,
+          "Linear Search": false
+        },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Match the following algorithms with their complexities.",
+        "questionType": "OPTION_MATCHING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": {
+          "Binary Search": [
+            "O(log n)"
+          ],
+          "Bubble Sort": [
+            "O(n^2)"
+          ],
+          "Merge Sort": [
+            "O(n log n)"
+          ]
+        }
+      },
+      {
+        "question": "Arrange the following steps of a machine learning workflow in the correct order.",
+        "questionType": "OPTION_ORDERING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": { },
+        "orderedOptions": {
+          "1": "Data Collection",
+          "2": "Data Preprocessing",
+          "3": "Model Training",
+          "4": "Model Evaluation",
+          "5": "Model Deployment"
+        },
+        "optionMatches": { }
+      }
+    ]
+  },
+  {
+    "title": "Cybersecurity Fundamentals Quiz",
+    "questions": [
+      {
+        "question": "A firewall is used to block unauthorized access to a network.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1.0,
+        "answer": "TRUE",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "What does 'RSA' stand for in cryptography?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answer": "Rivest-Shamir-Adleman",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "How many bits are used in an AES-256 encryption key?",
+        "questionType": "NUMERIC",
+        "coefficient": 1.0,
+        "answer": "256",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "In cybersecurity, (blank) is the practice of protecting systems, networks, and programs from digital attacks.",
+        "questionType": "FILL_IN_THE_BLANK",
+        "coefficient": 1.0,
+        "answer": "cybersecurity",
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Which of these is considered a type of malware?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "Firewall": false,
+          "Antivirus": false,
+          "Worm": true,
+          "Router": false
+        },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Which of the following are common methods of authentication?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "Password": true,
+          "Biometrics": true,
+          "Encryption": false,
+          "Two-Factor Authentication": true,
+          "Firewall": false
+        },
+        "orderedOptions": { },
+        "optionMatches": { }
+      },
+      {
+        "question": "Match the following cybersecurity terms with their definitions.",
+        "questionType": "OPTION_MATCHING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": { },
+        "orderedOptions": { },
+        "optionMatches": {
+          "Phishing": [
+            "A method of trying to gather personal information using deceptive e-mails and websites."
+          ],
+          "Encryption": [
+            "The process of converting information or data into a code to prevent unauthorized access."
+          ],
+          "Malware": [
+            "Software that is specifically designed to disrupt, damage, or gain unauthorized access to a computer system."
+          ]
+        }
+      },
+      {
+        "question": "Arrange the following steps in a typical incident response process in the correct order.",
+        "questionType": "OPTION_ORDERING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": { },
+        "orderedOptions": {
+          "1": "Preparation",
+          "2": "Identification",
+          "3": "Containment",
+          "4": "Eradication",
+          "5": "Recovery",
+          "6": "Lessons Learned"
+        },
+        "optionMatches": { }
+      }
+    ]
+  }
+]
