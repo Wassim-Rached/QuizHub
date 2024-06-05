@@ -19,31 +19,42 @@ public class QuestionAttemptResultDTO {
     private AnswerAttemptResultDTO answerAttempt;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    private List<ChoiceAttemptResultDTO> choiceAttempts = new ArrayList<>();
+    private List<ChoiceAttemptResultDTO> choiceAttempts;
 
     // for OPTION_ORDERING
-    private List<OrderedOptionAttemptResultDTO> orderedOptionAttempts = new ArrayList<>();
+    private List<OrderedOptionAttemptResultDTO> orderedOptionAttempts;
 
     // for OPTION_MATCHING
-    private List<OptionMatchAttemptResult> optionMatchAttempts = new ArrayList<>();
+    private List<OptionMatchAttemptResult> optionMatchAttempts;
 
     public QuestionAttemptResultDTO(QuestionAttempt questionAttempt){
 //        this.id = questionAttempt.getId();
         this.correctnessPercentage = questionAttempt.getCorrectnessPercentage();
+
+        // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
         if (questionAttempt.getAnswerAttempt() != null){
             this.answerAttempt = new AnswerAttemptResultDTO(questionAttempt.getAnswerAttempt());
         }
-        if(questionAttempt.getChoiceAttempts() != null){
+
+        // for MULTIPLE_CHOICE, SINGLE_CHOICE
+        if(questionAttempt.getChoiceAttempts() != null && !questionAttempt.getChoiceAttempts().isEmpty()){
+            choiceAttempts = new ArrayList<>();
             for(ChoiceAttempt choiceAttempt : questionAttempt.getChoiceAttempts()){
                 choiceAttempts.add(new ChoiceAttemptResultDTO(choiceAttempt));
             }
         }
-        if(questionAttempt.getOrderedOptionAttempts() != null){
+
+        // for OPTION_ORDERING
+        if(questionAttempt.getOrderedOptionAttempts() != null && !questionAttempt.getOrderedOptionAttempts().isEmpty()){
+            orderedOptionAttempts = new ArrayList<>();
             for(OrderedOptionAttempt orderedOptionAttempt : questionAttempt.getOrderedOptionAttempts()){
                 orderedOptionAttempts.add(new OrderedOptionAttemptResultDTO(orderedOptionAttempt));
             }
         }
-        if(questionAttempt.getOptionMatchAttempts() != null){
+
+        // for OPTION_MATCHING
+        if(questionAttempt.getOptionMatchAttempts() != null && !questionAttempt.getOptionMatchAttempts().isEmpty()){
+            optionMatchAttempts = new ArrayList<>();
             for(OptionMatchAttempt optionMatchAttempt : questionAttempt.getOptionMatchAttempts()){
                 optionMatchAttempts.add(new OptionMatchAttemptResult(optionMatchAttempt));
             }

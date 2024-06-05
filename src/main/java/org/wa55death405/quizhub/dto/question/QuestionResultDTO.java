@@ -10,6 +10,7 @@ import org.wa55death405.quizhub.dto.orderedOption.OrderedOptionResultDTO;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptResultDTO;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.QuestionType;
+import org.wa55death405.quizhub.exceptions.InputValidationException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +31,15 @@ public class QuestionResultDTO {
     private AnswerResultDTO answer;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    private List<ChoiceResultDTO> choices = new ArrayList<>();
+    private List<ChoiceResultDTO> choices;
 
     // for OPTION_ORDERING
-    private List<OrderedOptionResultDTO> orderedOptions = new ArrayList<>();
+    private List<OrderedOptionResultDTO> orderedOptions;
 
     // for MATCHING_OPTION
-    private List<MatchGeneralDTO> matches = new ArrayList<>();
-    private List<OptionGeneralDTO> options = new ArrayList<>();
-    private List<CorrectOptionMatchResultDTO> correctOptionMatches = new ArrayList<>();
+    private List<MatchGeneralDTO> matches;
+    private List<OptionGeneralDTO> options;
+    private List<CorrectOptionMatchResultDTO> correctOptionMatches;
 
     // to show the play's attempt
     private QuestionAttemptResultDTO questionAttempt;
@@ -48,37 +49,47 @@ public class QuestionResultDTO {
         this.question = question.getQuestion();
         this.coefficient = question.getCoefficient();
         this.questionType = question.getQuestionType();
-        // I know this is ugly, but I have to do this
+
         if (questionAttempt != null){
             this.questionAttempt = new QuestionAttemptResultDTO(questionAttempt);
         }
-        if (question.getAnswer() != null){
-            this.answer = new AnswerResultDTO(question.getAnswer());
-        }
-        if (question.getChoices() != null) {
-            for (Choice choice : question.getChoices()) {
-                choices.add(new ChoiceResultDTO(choice));
+
+        switch (this.questionType){
+            case TRUE_FALSE,FILL_IN_THE_BLANK,NUMERIC,SHORT_ANSWER->{
+                if (question.getAnswer() == null)
+                    throw new InputValidationException("Answer is required for question of type " + this.questionType);
+                this.answer = new AnswerResultDTO(question.getAnswer());
             }
-        }
-        if (question.getOrderedOptions() != null) {
-            for (OrderedOption orderedOption : question.getOrderedOptions()) {
-                orderedOptions.add(new OrderedOptionResultDTO(orderedOption));
+            case MULTIPLE_CHOICE,SINGLE_CHOICE -> {
+                choices = new ArrayList<>();
+                for (Choice choice : question.getChoices()) {
+                    choices.add(new ChoiceResultDTO(choice));
+                }
             }
-        }
-        if (question.getMatches() != null) {
-            for (Match match : question.getMatches()) {
-                matches.add(new MatchGeneralDTO(match));
+            case OPTION_MATCHING -> {
+                matches = new ArrayList<>();
+                options = new ArrayList<>();
+                correctOptionMatches = new ArrayList<>();
+
+                for (Match match : question.getMatches()) {
+                    matches.add(new MatchGeneralDTO(match));
+                }
+
+                for (Option option : question.getOptions()) {
+                    options.add(new OptionGeneralDTO(option));
+                }
+
+                for (CorrectOptionMatch correctOptionMatch : question.getCorrectOptionMatches()) {
+                    correctOptionMatches.add(new CorrectOptionMatchResultDTO(correctOptionMatch));
+                }
             }
-        }
-        if (question.getOptions() != null) {
-            for (Option option : question.getOptions()) {
-                options.add(new OptionGeneralDTO(option));
+            case OPTION_ORDERING -> {
+                orderedOptions = new ArrayList<>();
+                for (OrderedOption orderedOption : question.getOrderedOptions()) {
+                    orderedOptions.add(new OrderedOptionResultDTO(orderedOption));
+                }
             }
-        }
-        if (question.getCorrectOptionMatches() != null) {
-            for (CorrectOptionMatch correctOptionMatch : question.getCorrectOptionMatches()) {
-                correctOptionMatches.add(new CorrectOptionMatchResultDTO(correctOptionMatch));
-            }
+            default -> {throw new IllegalArgumentException("Invalid question type");}
         }
     }
 }

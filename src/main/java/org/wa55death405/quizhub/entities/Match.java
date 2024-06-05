@@ -35,7 +35,13 @@ public class Match {
             return false;
         }
         Match comparedMatch = (Match) obj;
-        return id.equals(comparedMatch.id);
+        if (this.id !=null) return id.equals(comparedMatch.id);
+
+        if (this.question != null && comparedMatch.question != null
+            && this.question.getId() != null && comparedMatch.question.getId() != null) {
+            return this.question.getId().equals(comparedMatch.question.getId()) && this.match.equals(comparedMatch.match);
+        }
+        throw new RuntimeException("Match Can Not Be Compared Without Id or Question Id");
     }
 
 }
