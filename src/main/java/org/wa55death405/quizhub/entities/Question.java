@@ -52,6 +52,13 @@ public class Question {
         return Objects.hash(id, question,coefficient);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Question other)) return false;
+        return Objects.equals(id, other.id);
+    }
+
     public List<Choice> getCorrectChoices() {
         return choices.stream().filter(Choice::getIsCorrect).toList();
     }
