@@ -30,6 +30,7 @@ public class Question {
     @OneToOne(mappedBy = "question",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Answer answer;
 
+    // TODO: Eager fetching might need to be changed to lazy fetching
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
     @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Choice> choices = new ArrayList<>();
@@ -39,9 +40,9 @@ public class Question {
     private List<OrderedOption> orderedOptions = new ArrayList<>();
 
     // for MATCHING_OPTION
-    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Match> matches = new ArrayList<>();
-    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Option> options = new ArrayList<>();
     @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<CorrectOptionMatch> correctOptionMatches = new ArrayList<>();
