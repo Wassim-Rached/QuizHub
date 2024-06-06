@@ -23,13 +23,13 @@ public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,U
     private String answerAttempt;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    private List<UUID> choiceAttempts = new ArrayList<>();
+    private List<UUID> choiceAttempts;
 
     // for OPTION_ORDERING
-    private HashMap<Integer,UUID> orderedOptionAttempts = new HashMap<>();
+    private HashMap<Integer,UUID> orderedOptionAttempts;
 
     // for OPTION_MATCHING: <optionId, List<matchId>>
-    private HashMap<UUID,List<UUID>> optionMatchAttempts = new HashMap<>();
+    private HashMap<UUID,List<UUID>> optionMatchAttempts;
 
     @Override
     public QuestionAttempt toEntity(UUID quizAttempt) {
@@ -50,7 +50,7 @@ public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,U
 
 
         // convert answerAttempt to AnswerAttempt object
-        if(answerAttempt != null && !answerAttempt.isEmpty()){
+        if(answerAttempt != null){
             questionAttempt.setAnswerAttempt(
                     AnswerAttempt.builder()
                             .answer(answerAttempt)
@@ -59,16 +59,19 @@ public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,U
         }
 
         // convert choiceAttempt ids to choiceAttempt objects
-        choiceAttempts.forEach(choiceAttempt -> choiceAttemptsObjs.add(ChoiceAttempt.builder().choice(Choice.builder().id(choiceAttempt).build()).questionAttempt(questionAttempt).build()));
+        if (choiceAttempts != null)
+            choiceAttempts.forEach(choiceAttempt -> choiceAttemptsObjs.add(ChoiceAttempt.builder().choice(Choice.builder().id(choiceAttempt).build()).questionAttempt(questionAttempt).build()));
 
         // convert orderedOptionAttempts to orderedOptionAttempt objects
-        orderedOptionAttempts.forEach((key, value) -> orderedOptionAttemptsObjs.add(OrderedOptionAttempt.builder().orderedOption(OrderedOption.builder().id(value).build()).position(key).questionAttempt(questionAttempt).build()));
+        if (orderedOptionAttempts != null)
+            orderedOptionAttempts.forEach((key, value) -> orderedOptionAttemptsObjs.add(OrderedOptionAttempt.builder().orderedOption(OrderedOption.builder().id(value).build()).position(key).questionAttempt(questionAttempt).build()));
 
         // convert optionMatchAttempts to optionMatchAttempt objects
-        optionMatchAttempts.forEach((key, value) -> {
-            Option option = Option.builder().id(key).build();
-            value.forEach(matchId -> optionMatchAttemptsObjs.add(OptionMatchAttempt.builder().option(option).match(Match.builder().id(matchId).build()).questionAttempt(questionAttempt).build()));
-        });
+        if (optionMatchAttempts != null)
+            optionMatchAttempts.forEach((key, value) -> {
+                Option option = Option.builder().id(key).build();
+                value.forEach(matchId -> optionMatchAttemptsObjs.add(OptionMatchAttempt.builder().option(option).match(Match.builder().id(matchId).build()).questionAttempt(questionAttempt).build()));
+            });
 
         return questionAttempt;
     }

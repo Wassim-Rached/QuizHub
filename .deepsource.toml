@@ -18,3 +18,8 @@ enabled = true
 [[analyzers]]
 name = "shell"
 enabled = true
+
+[[rules]]
+analyzer = "java"
+enabled = true
+name = "doc-missing"

@@ -3,8 +3,7 @@ package org.wa55death405.quizhub.e2e;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -12,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.entities.Quiz;
+import org.wa55death405.quizhub.enums.QuestionType;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
@@ -58,122 +58,192 @@ class ApplicationE2ETests {
         * 7. Finish the attempt.
         * 8. Retrieve the attempt result.
     */
-    @Test
-    @Transactional
-    void testQuizLifecycle() throws JsonProcessingException {
-        // Create a quiz
-        QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-        fakeDataRandomGenerator.fill(quizCreationDTO);
-        String quizCreationRequestBody = this.objectMapper.writeValueAsString(quizCreationDTO);
+    // TODO: validation with json schema might be needed
+    @Nested
+    @TestMethodOrder(org.junit.jupiter.api.MethodOrderer.OrderAnnotation.class)
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    class TestQuizLifecycle{
+        private Quiz quiz;
+        private UUID quizAttemptId;
 
-        var response = given()
-                .contentType("application/json")
-                .body(quizCreationRequestBody)
-                .when()
-                .post(getBaseUrl() + "/quiz")
-                .then()
-                .statusCode(CREATED.value())
-                .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
-                "message", notNullValue(),
-                        "data", matchesPattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"))
-                .extract()
-                .response();
-        UUID quizId = UUID.fromString(response.jsonPath().getString("data"));
+        // create quiz
+        @Test
+        @Order(1)
+        void testCreateQuiz() throws JsonProcessingException {
+            // Create a quiz
+            QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
+            fakeDataRandomGenerator.fill(quizCreationDTO);
+            this.quiz = quizCreationDTO.toEntity(null);
+            String quizCreationRequestBody = objectMapper.writeValueAsString(quizCreationDTO);
 
-        // Search for the quiz
-        HashMap<String, String> queryParams = new HashMap<>();
-        queryParams.put("title", quizCreationDTO.getTitle());
-        given()
-                .queryParams(queryParams)
-                .when()
-                .get(getBaseUrl() + "/quiz/search")
-                .then()
-                .statusCode(200)
-                .body("status", equalTo(StandardApiStatus.SUCCESS.toString()))
-                .body("message", notNullValue())
-                .body("data",notNullValue())
-                .body("data",hasSize(equalTo(1)))
-                .body("data[0].id", equalTo(quizId.toString()))
-                .body("data[0].title", equalTo(quizCreationDTO.getTitle()));
+            var response = given()
+                    .contentType("application/json")
+                    .body(quizCreationRequestBody)
+                    .when()
+                    .post(getBaseUrl() + "/quiz")
+                    .then()
+                    .statusCode(CREATED.value())
+                    .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
+                            "message", notNullValue(),
+                            "data", matchesPattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"))
+                    .extract()
+                    .response();
+            UUID quizId = UUID.fromString(response.jsonPath().getString("data"));
+            quiz = quizRepository.findById(quizId).orElseThrow(() -> new EntityNotFoundException("Quiz not found"));
+        }
 
-        // Start an attempt
-        var startQuizResponse = given()
-                .when()
-                .post(getBaseUrl() + "/quiz/" + quizId + "/start")
-                .then()
-                .statusCode(CREATED.value())
-                .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
-                        "message", notNullValue(),
-                        "data", matchesPattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"))
-                .extract()
-                .response();
-        UUID quizAttemptId = UUID.fromString(startQuizResponse.jsonPath().getString("data"));
+        // search for the quiz
+        @Test
+        @Order(2)
+        void testSearchQuiz() {
+            // Search for the quiz
+            HashMap<String, String> queryParams = new HashMap<>();
+            queryParams.put("title", quiz.getTitle().substring(1, 3));
+            queryParams.put("page", "0");
+            queryParams.put("size", "10");
+            given()
+                    .queryParams(queryParams)
+                    .when()
+                    .get(getBaseUrl() + "/quiz/search")
+                    .then()
+                    .statusCode(200)
+                    .body("status", equalTo(StandardApiStatus.SUCCESS.toString()))
+                    .body("message", notNullValue())
+                    .body("data", notNullValue())
+                    .body("data.currentPage", equalTo(0))
+                    .body("data.currentItemsSize", equalTo(1))
+                    .body("data.totalItems", equalTo(1))
+                    .body("data.items", hasSize(equalTo(1)))
+                    .body("data.items[0].id", equalTo(this.quiz.getId().toString()))
+                    .body("data.items[0].title", equalTo(this.quiz.getTitle()));
+        }
+
+        @Test
+        @Order(3)
+        void testStartQuizAttempt() {
+            // Start an attempt
+            var startQuizResponse = given()
+                    .when()
+                    .post(getBaseUrl() + "/quiz/" + this.quiz.getId() + "/start")
+                    .then()
+                    .statusCode(CREATED.value())
+                    .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
+                            "message", notNullValue(),
+                            "data", matchesPattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"))
+                    .extract()
+                    .response();
+
+            this.quizAttemptId = UUID.fromString(startQuizResponse.jsonPath().getString("data"));
+        }
 
         // Submit the attempt
-        Quiz quiz = quizRepository.findById(quizId).orElseThrow(() -> new EntityNotFoundException("Quiz not found"));
-        List<QuestionAttemptSubmissionDTO> questionAttemptSubmissionDTO = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
-        String questionAttemptSubmissionRequestBody = this.objectMapper.writeValueAsString(questionAttemptSubmissionDTO);
+        @Test
+        @Order(4)
+        void testSubmitQuizAttempt() throws JsonProcessingException {
+            List<QuestionAttemptSubmissionDTO> questionAttemptSubmissionDTO = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(this.quiz);
+            String questionAttemptSubmissionRequestBody = objectMapper.writeValueAsString(questionAttemptSubmissionDTO);
 
-        given()
-                .contentType("application/json")
-                .body(questionAttemptSubmissionRequestBody)
-                .when()
-                .post(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/submit")
-                .then()
-                .statusCode(ACCEPTED.value())
-                .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
-                        "message", notNullValue(),
-                        "data", nullValue());
+            given()
+                    .contentType("application/json")
+                    .body(questionAttemptSubmissionRequestBody)
+                    .when()
+                    .post(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/submit")
+                    .then()
+                    .statusCode(ACCEPTED.value())
+                    .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
+                            "message", notNullValue(),
+                            "data", nullValue());
+        }
 
         // Get the attempt taking
-        given()
+        @Test
+        @Order(5)
+        void testGetQuizAttemptTaking() {
+            given()
                 .when()
                 .get(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/taking")
                 .then()
                 .statusCode(200)
                 .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
-                "message", notNullValue(),
-                        "data", notNullValue(),
-                        "data.id", equalTo(quizAttemptId.toString()),
-                        "data.quiz.id", equalTo(quizId.toString()),
-                        "data.quiz.title", equalTo(quiz.getTitle()),
-                        "data.questions", hasSize(equalTo(quiz.getQuestions().size())),
-                        "data.questions", everyItem(anyOf(
-                                hasKey("choices"),
-                                hasKey("orderedOptions"),
-                                hasKey("matches"),
-                                hasKey("options")
-                        )),
-                        "data.questions", everyItem(
+                    "message", notNullValue(),
+                    "data", notNullValue(),
+                    "data.id", equalTo(quizAttemptId.toString()),
+                    "data.quiz.id", equalTo(quiz.getId().toString()),
+                    "data.quiz.title", equalTo(quiz.getTitle()),
+                    "data.questions", hasSize(equalTo(quiz.getQuestions().size())),
+                    "data.questions", everyItem(
+                        allOf(
+                            // Ensure "questionAttempt" is always non-null
+                            hasEntry(equalTo("questionAttempt"), notNullValue()),
+                            hasEntry(equalTo("question"), notNullValue()),
+                            hasEntry(equalTo("coefficient"), notNullValue()),
+                            hasEntry(equalTo("questionType"), notNullValue()),
+                            // Ensure structure for each question type
+                            anyOf(
+                                // for SINGLE_CHOICE and MULTIPLE_CHOICE
                                 allOf(
-                                        anyOf(
-                                                hasEntry(equalTo("choices"), notNullValue()),
-                                                hasEntry(equalTo("orderedOptions"), notNullValue()),
-                                                hasEntry(equalTo("matches"), notNullValue()),
-                                                hasEntry(equalTo("options"), notNullValue())
-                                        )
+                                    hasEntry(equalTo("choices"), notNullValue()),
+                                    hasEntry(equalTo("orderedOptions"), nullValue()),
+                                    hasEntry(equalTo("matches"), nullValue()),
+                                    hasEntry(equalTo("options"), nullValue())
+                                ),
+                                // for OPTION_ORDERING
+                                allOf(
+                                    hasEntry(equalTo("choices"), nullValue()),
+                                    hasEntry(equalTo("orderedOptions"), notNullValue()),
+                                    hasEntry(equalTo("matches"), nullValue()),
+                                    hasEntry(equalTo("options"), nullValue())
+                                ),
+                                // for OPTION_MATCHING
+                                allOf(
+                                    hasEntry(equalTo("choices"), nullValue()),
+                                    hasEntry(equalTo("orderedOptions"), nullValue()),
+                                    hasEntry(equalTo("matches"), notNullValue()),
+                                    hasEntry(equalTo("options"), notNullValue())
+                                ),
+                                // for SHORT_ANSWER, TRUE_FALSE, FILL_IN_THE_BLANK, NUMERIC
+                                allOf(
+                                    hasEntry(equalTo("choices"), nullValue()),
+                                    hasEntry(equalTo("orderedOptions"), nullValue()),
+                                    hasEntry(equalTo("matches"), nullValue()),
+                                    hasEntry(equalTo("options"), nullValue()),
+                                    anyOf(
+                                        hasEntry(equalTo("questionType"), equalTo(QuestionType.SHORT_ANSWER.getValue())),
+                                        hasEntry(equalTo("questionType"), equalTo(QuestionType.TRUE_FALSE.getValue())),
+                                        hasEntry(equalTo("questionType"), equalTo(QuestionType.FILL_IN_THE_BLANK.getValue())),
+                                        hasEntry(equalTo("questionType"), equalTo(QuestionType.NUMERIC.getValue()))
+                                    )
                                 )
+                            )
                         )
-                );
+                ));
+        }
 
+        // Resubmit the attempt
+        @Test
+        @Order(4)
+        void testReSubmitQuizAttempt() throws JsonProcessingException {
+            this.quiz = quizRepository.findById(this.quiz.getId()).orElseThrow(() -> new EntityNotFoundException("Quiz not found"));
+            List<QuestionAttemptSubmissionDTO> questionAttemptSubmissionDTO = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(this.quiz);
+            String questionAttemptSubmissionRequestBody = objectMapper.writeValueAsString(questionAttemptSubmissionDTO);
 
-        // Submit the attempt again
-        var correctQuestionAttemptSubmissionDTO = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(quiz);
-        var correctQuestionAttemptSubmissionRequestBody = this.objectMapper.writeValueAsString(correctQuestionAttemptSubmissionDTO);
-
-        given()
-                .contentType("application/json")
-                .body(correctQuestionAttemptSubmissionRequestBody)
-                .when()
-                .post(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/submit")
-                .then()
-                .statusCode(ACCEPTED.value())
-                .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
-                        "message", notNullValue(),
-                        "data", nullValue());
+            given()
+                    .contentType("application/json")
+                    .body(questionAttemptSubmissionRequestBody)
+                    .when()
+                    .post(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/submit")
+                    .then()
+                    .statusCode(ACCEPTED.value())
+                    .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
+                    "message", notNullValue(),
+                            "data", nullValue());
+        }
 
         // Finish the attempt
-        given()
+        @Test
+        @Order(6)
+        void testFinishQuizAttempt() {
+            given()
                 .when()
                 .post(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/finish")
                 .then()
@@ -183,39 +253,70 @@ class ApplicationE2ETests {
                         "data", notNullValue(),
                         "data", instanceOf(Float.class),
                         "data", equalTo(100f));
+        }
 
         // Get the attempt result
-        given()
-                .when()
-                .get(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/result")
-                .then()
-                .statusCode(200)
-                .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
-                        "message", notNullValue(),
-                        "data", notNullValue(),
-                        "data.id", equalTo(quizAttemptId.toString()),
-                        "data.quiz.id", equalTo(quizId.toString()),
-                        "data.quiz.title", equalTo(quiz.getTitle()),
-                        "data.questions", hasSize(equalTo(quiz.getQuestions().size())),
-                        "data.questions", everyItem(anyOf(
-                                hasKey("choices"),
-                                hasKey("orderedOptions"),
-                                hasKey("matches"),
-                                hasKey("options"),
-                                hasKey("questionAttempt")
-                        )),
-                        "data.questions", everyItem(
+        @Test
+        @Order(7)
+        void testGetQuizAttemptResult() {
+            given()
+                    .when()
+                    .get(getBaseUrl() + "/quiz/attempt/" + quizAttemptId + "/result")
+                    .then()
+                    .statusCode(200)
+                    .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
+                    "message", notNullValue(),
+                            "data", notNullValue(),
+                            "data.id", equalTo(this.quizAttemptId.toString()),
+                            "data.quiz.id", equalTo(this.quiz.getId().toString()),
+                            "data.quiz.title", equalTo(this.quiz.getTitle()),
+                            "data.questions", hasSize(equalTo(this.quiz.getQuestions().size())),
+                            "data.questions", everyItem(
                                 allOf(
-                                        anyOf(
-                                                hasEntry(equalTo("choices"), notNullValue()),
-                                                hasEntry(equalTo("orderedOptions"), notNullValue()),
-                                                hasEntry(equalTo("matches"), notNullValue()),
-                                                hasEntry(equalTo("options"), notNullValue())
+                                    // Ensure "questionAttempt" is always non-null
+                                    hasEntry(equalTo("questionAttempt"), notNullValue()),
+                                    hasEntry(equalTo("question"), notNullValue()),
+                                    hasEntry(equalTo("coefficient"), notNullValue()),
+                                    hasEntry(equalTo("questionType"), notNullValue()),
+                                    // Ensure structure for each question type
+                                    anyOf(
+                                        // for SINGLE_CHOICE and MULTIPLE_CHOICE
+                                        allOf(
+                                            hasEntry(equalTo("choices"), notNullValue()),
+                                            hasEntry(equalTo("orderedOptions"), nullValue()),
+                                            hasEntry(equalTo("matches"), nullValue()),
+                                            hasEntry(equalTo("options"), nullValue())
+                                        ),
+                                        // for OPTION_ORDERING
+                                        allOf(
+                                            hasEntry(equalTo("choices"), nullValue()),
+                                            hasEntry(equalTo("orderedOptions"), notNullValue()),
+                                            hasEntry(equalTo("matches"), nullValue()),
+                                            hasEntry(equalTo("options"), nullValue())
+                                        ),
+                                        // for OPTION_MATCHING
+                                        allOf(
+                                            hasEntry(equalTo("choices"), nullValue()),
+                                            hasEntry(equalTo("orderedOptions"), nullValue()),
+                                            hasEntry(equalTo("matches"), notNullValue()),
+                                            hasEntry(equalTo("options"), notNullValue())
+                                        ),
+                                        // for SHORT_ANSWER, TRUE_FALSE, FILL_IN_THE_BLANK, NUMERIC
+                                        allOf(
+                                            hasEntry(equalTo("choices"), nullValue()),
+                                            hasEntry(equalTo("orderedOptions"), nullValue()),
+                                            hasEntry(equalTo("matches"), nullValue()),
+                                            hasEntry(equalTo("options"), nullValue()),
+                                            anyOf(
+                                                hasEntry(equalTo("questionType"), equalTo(QuestionType.SHORT_ANSWER.getValue())),
+                                                hasEntry(equalTo("questionType"), equalTo(QuestionType.TRUE_FALSE.getValue())),
+                                                hasEntry(equalTo("questionType"), equalTo(QuestionType.FILL_IN_THE_BLANK.getValue())),
+                                                hasEntry(equalTo("questionType"), equalTo(QuestionType.NUMERIC.getValue()))
+                                            )
                                         )
-                                )
-                        ),
-                        "data.questions.questionAttempt", notNullValue()
-                );
+                                    )
+                    )));
+        }
     }
 
 }

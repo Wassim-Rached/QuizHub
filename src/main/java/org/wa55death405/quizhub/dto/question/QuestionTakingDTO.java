@@ -26,14 +26,14 @@ public class QuestionTakingDTO {
     private QuestionType questionType;
 
     // For MULTIPLE_CHOICE and SINGLE_CHOICE
-    private List<ChoiceGeneralDTO> choices = new ArrayList<>();
+    private List<ChoiceGeneralDTO> choices;
 
     // For OPTION_ORDERING
-    private List<OrderedOptionGeneralDTO> orderedOptions = new ArrayList<>();
+    private List<OrderedOptionGeneralDTO> orderedOptions;
 
     // For OPTION_MATCHING
-    private List<MatchGeneralDTO> matches = new ArrayList<>();
-    private List<OptionGeneralDTO> options = new ArrayList<>();
+    private List<MatchGeneralDTO> matches;
+    private List<OptionGeneralDTO> options;
 
     // For previous attempts
     private QuestionAttemptTakingDTO questionAttempt;
@@ -46,16 +46,24 @@ public class QuestionTakingDTO {
         if (questionAttempt != null){
             this.questionAttempt = new QuestionAttemptTakingDTO(questionAttempt);
         }
-        this.choices = question.getChoices().stream()
+
+        if (!question.getChoices().isEmpty())
+            this.choices = question.getChoices().stream()
                 .map(ChoiceGeneralDTO::new)
                 .toList();
-        this.orderedOptions = question.getOrderedOptions().stream()
+
+        if (!question.getOrderedOptions().isEmpty())
+            this.orderedOptions = question.getOrderedOptions().stream()
                 .map(OrderedOptionGeneralDTO::new)
                 .toList();
-        this.matches = question.getMatches().stream()
+
+        if (!question.getMatches().isEmpty())
+            this.matches = question.getMatches().stream()
                 .map(MatchGeneralDTO::new)
                 .toList();
-        this.options = question.getOptions().stream()
+
+        if (!question.getOptions().isEmpty())
+            this.options = question.getOptions().stream()
                 .map(OptionGeneralDTO::new)
                 .toList();
     }

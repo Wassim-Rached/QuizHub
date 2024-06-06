@@ -1,35 +1,23 @@
 package org.wa55death405.quizhub.integration.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.javafaker.Faker;
-import org.junit.jupiter.api.Test;
+import jakarta.transaction.Transactional;
+import org.hibernate.Hibernate;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.wa55death405.quizhub.controllers.QuizController;
+import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
-import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
-import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
-import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptTakingDTO;
 import org.wa55death405.quizhub.entities.Quiz;
-import org.wa55death405.quizhub.entities.QuizAttempt;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
-import org.wa55death405.quizhub.interfaces.services.IQuizService;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
-import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
-import org.wa55death405.quizhub.utils.FakeDataLogicalGeneratorImpl;
-import org.wa55death405.quizhub.utils.FakeDataRandomGeneratorImpl;
+import org.wa55death405.quizhub.interfaces.utils.ISeedDataLoader;
+import org.wa55death405.quizhub.repositories.QuizRepository;
 
-
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,103 +27,108 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 
-@WebMvcTest(QuizController.class)
+@SpringBootTest()
 @AutoConfigureMockMvc
-@Import({FakeDataRandomGeneratorImpl.class, FakeDataLogicalGeneratorImpl.class, Faker.class})
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets/quiz")
 @ActiveProfiles("test")
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class QuizControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @MockBean
-    private IQuizService quizService;
-    private final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
-    private IFakeDataRandomGenerator fakeDataRandomGenerator;
+    private ISeedDataLoader seedDataLoader;
+    @Autowired
+    private QuizRepository quizRepository;
     @Autowired
     private IFakeDataLogicalGenerator fakeDataLogicalGenerator;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Test
-    void searchQuizzes() throws Exception {
-        // arrange
-        List<QuizGeneralInfoDTO> expectedQuizzes = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            UUID id = UUID.randomUUID();
-            var quiz = Quiz.builder()
-                    .id(id)
-                    .title("Quiz " + i)
-                    .build();
-            expectedQuizzes.add(new QuizGeneralInfoDTO(quiz));
+    // variables
+    private Quiz quiz;
+    private UUID quizAttemptId;
+
+    @BeforeAll
+    public void setUp() {
+        // seed data
+        List<QuizCreationDTO> quizCreationDTOS = seedDataLoader.getQuizCreationDTOs();
+        for (QuizCreationDTO quizCreationDTO : quizCreationDTOS) {
+            Quiz quiz = quizCreationDTO.toEntity(null);
+            quizRepository.save(quiz);
         }
-        when(quizService.searchQuizzes(anyString())).thenReturn(expectedQuizzes);
-
-        // act and assert
-        this.mockMvc.perform(get("/api/quiz/search"))
-                .andExpect(status().isOk())
-                .andDo(document(
-                        "search-quizzes",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint())
-                ));
+        quiz = quizRepository.findAll().get(0);
+        Hibernate.initialize(quiz.getQuestions());
     }
 
     @Test
+    @Order(1)
+    void searchQuizzes() throws Exception {
+        // arrange
+        int page = 0;
+        int size = 10;
+
+        // act and assert
+        this.mockMvc.perform(get("/api/quiz/search?page={page}&size={size}", page, size))
+            .andExpect(status().isOk())
+            .andDo(document(
+                    "search-quizzes",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint())
+            ));
+    }
+
+    @Test
+    @Order(2)
     void createQuiz() throws Exception {
         // arrange
-        QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
-        fakeDataRandomGenerator.fill(quizCreationDTO);
-        Quiz quiz = quizCreationDTO.toEntity(null);
-        quiz.setId(UUID.randomUUID());
-        when(quizService.createQuiz(quizCreationDTO)).thenReturn(quiz);
+        QuizCreationDTO quizCreationDTO = seedDataLoader.getQuizCreationDTOs().get(0);
         var requestBodyJson = this.objectMapper.writeValueAsString(quizCreationDTO);
 
         // act and assert
-        this.mockMvc.perform(post("/api/quiz")
-                .contentType("application/json")
-                .content(requestBodyJson))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
-                .andExpect(jsonPath("$.data").value(quiz.getId().toString()))
-                .andDo(
-                        document("create-quiz",
-                                preprocessRequest(prettyPrint()),
-                                preprocessResponse(prettyPrint())
-                        )
-                );
+        String responseStr = this.mockMvc.perform(post("/api/quiz")
+            .contentType("application/json")
+            .content(requestBodyJson))
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
+            .andExpect(jsonPath("$.data").exists())
+            .andDo(
+                document("create-quiz",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint())
+                )
+            ).andReturn().getResponse().getContentAsString();
+        UUID quizId = UUID.fromString(objectMapper.readTree(responseStr).path("data").asText());
+        quizRepository.deleteById(quizId);
     }
 
     @Test
+    @Order(3)
     void startQuizAttempt() throws Exception {
-        // arrange
-        UUID quizId = UUID.randomUUID();
-        QuizAttempt quizAttempt = new QuizAttempt();
-        quizAttempt.setId(UUID.randomUUID());
-        when(quizService.startQuizAttempt(quizId)).thenReturn(quizAttempt);
-
+        UUID quizId = quiz.getId();
         // act and assert
-         this.mockMvc.perform(post("/api/quiz/{quizId}/start", quizId))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
-                .andExpect(jsonPath("$.data").value(quizAttempt.getId().toString()))
-                .andDo(document(
-                        "start-quiz-attempt",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint())
-                ));
+        String responseStr = this.mockMvc.perform(post("/api/quiz/{quizId}/start", quizId))
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
+            .andExpect(jsonPath("$.data").exists())
+            .andDo(document(
+                    "start-quiz-attempt",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint())
+            )).andReturn().getResponse().getContentAsString();
+
+        quizAttemptId = UUID.fromString(objectMapper.readTree(responseStr).path("data").asText());
     }
 
     @Test
+    @Order(4)
     void submitQuestionAttempts() throws Exception {
         // arrange
-        var quizCreationDTO = new QuizCreationDTO();
-        fakeDataRandomGenerator.fill(quizCreationDTO);
-        Quiz quiz = quizCreationDTO.toEntity(null);
-        var attempts = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(quiz);
+        List<QuestionAttemptSubmissionDTO> attempts = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(quiz);
         var requestJson = this.objectMapper.writeValueAsString(attempts);
 
         // act and assert
-        this.mockMvc.perform(post("/api/quiz/attempt/{quizAttemptId}/submit", UUID.randomUUID())
+        this.mockMvc.perform(post("/api/quiz/attempt/{quizAttemptId}/submit", quizAttemptId)
                 .contentType("application/json")
                 .content(requestJson))
                 .andExpect(status().isAccepted())
@@ -148,20 +141,10 @@ class QuizControllerTest {
     }
 
     @Test
+    @Order(5)
     void getQuizAttemptTaking() throws Exception {
-        // arrange
-        Quiz quiz = fakeDataRandomGenerator.generate_Quiz();
-        for (var question : quiz.getQuestions()) {
-            question.setId(UUID.randomUUID());
-        }
-        var quizAttempt = fakeDataLogicalGenerator.generate_QuizAttempt(quiz);
-        quizAttempt.setId(UUID.randomUUID());
-
-        var attempt = new QuizAttemptTakingDTO(quizAttempt);
-        when(quizService.getQuizAttemptTaking(quizAttempt.getId())).thenReturn(attempt);
-
-        // act and assert
-        this.mockMvc.perform(get("/api/quiz/attempt/{quizAttemptId}/taking", quizAttempt.getId()))
+        // arrange, act and assert
+        this.mockMvc.perform(get("/api/quiz/attempt/{quizAttemptId}/taking", quizAttemptId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
                 .andExpect(jsonPath("$.data").hasJsonPath())
@@ -173,11 +156,10 @@ class QuizControllerTest {
     }
 
     @Test
+    @Order(6)
+    @Transactional
     void cancelQuizAttempt() throws Exception {
-        // arrange
-        UUID quizAttemptId = UUID.randomUUID();
-
-        // act and assert
+        // arrange, act and assert
         this.mockMvc.perform(delete("/api/quiz/attempt/{quizAttemptId}/cancel", quizAttemptId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
@@ -189,19 +171,13 @@ class QuizControllerTest {
     }
 
     @Test
+    @Order(7)
     void finishQuizAttempt() throws Exception {
-        // arrange
-        UUID quizAttemptId = UUID.randomUUID();
-        QuizAttempt quizAttempt = new QuizAttempt();
-        quizAttempt.setId(quizAttemptId);
-        quizAttempt.setScore(50.0f);
-        when(quizService.finishQuizAttempt(quizAttemptId)).thenReturn(quizAttempt);
-
-        // act and assert
+        // arrange, act and assert
         this.mockMvc.perform(post("/api/quiz/attempt/{quizAttemptId}/finish", quizAttemptId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
-                .andExpect(jsonPath("$.data").value(quizAttempt.getScore()))
+                .andExpect(jsonPath("$.data").value(100f))
                 .andDo(document(
                         "finish-quiz-attempt",
                         preprocessRequest(prettyPrint()),
@@ -210,20 +186,10 @@ class QuizControllerTest {
     }
 
     @Test
+    @Order(8)
     void getQuizAttemptResult() throws Exception {
-        // arrange
-        Quiz quiz = fakeDataRandomGenerator.generate_Quiz();
-        for (var question : quiz.getQuestions()) {
-            question.setId(UUID.randomUUID());
-        }
-        var quizAttempt = fakeDataLogicalGenerator.generate_QuizAttempt(quiz);
-        quizAttempt.setId(UUID.randomUUID());
-
-        var attempt = new QuizAttemptResultDTO(quizAttempt);
-        when(quizService.getQuizAttemptResult(quizAttempt.getId())).thenReturn(attempt);
-
-        // act and assert
-        this.mockMvc.perform(get("/api/quiz/attempt/{quizAttemptId}/result", quizAttempt.getId()))
+        // arrange, act and assert
+        this.mockMvc.perform(get("/api/quiz/attempt/{quizAttemptId}/result", quizAttemptId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
                 .andExpect(jsonPath("$.data").hasJsonPath())

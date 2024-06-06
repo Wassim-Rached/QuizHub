@@ -43,4 +43,11 @@ public interface IFakeDataLogicalGenerator {
         that contains a single attempt for each question
      */
     QuizAttempt generate_QuizAttempt(Quiz quiz);
+
+    /*
+        generate a perfect quiz attempt for a given quiz
+        that contains a single attempt for each question
+        with all correct answers
+     */
+    QuizAttempt generate_PerfectScoreQuizAttempt(Quiz quiz);
 }

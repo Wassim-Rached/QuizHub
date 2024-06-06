@@ -23,26 +23,32 @@ public class QuestionAttemptTakingDTO {
     private AnswerAttemptTakingDTO answerAttempt;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    private List<ChoiceAttemptTakingDTO> choiceAttempts = List.of();
+    private List<ChoiceAttemptTakingDTO> choiceAttempts;
 
     // for OPTION_ORDERING
-    private List<OrderedOptionAttemptTakingDTO> orderedOptionAttempts = List.of();
+    private List<OrderedOptionAttemptTakingDTO> orderedOptionAttempts;
 
     // for OPTION_MATCHING
-    private List<OptionMatchAttemptTakingDTO> optionMatchAttempts = List.of();
+    private List<OptionMatchAttemptTakingDTO> optionMatchAttempts;
 
     public QuestionAttemptTakingDTO(QuestionAttempt questionAttempt){
 //        this.id = questionAttempt.getId();
         if (questionAttempt.getAnswerAttempt() != null){
             this.answerAttempt = new AnswerAttemptTakingDTO(questionAttempt.getAnswerAttempt());
         }
-        this.choiceAttempts = questionAttempt.getChoiceAttempts().stream()
+
+        if (!questionAttempt.getChoiceAttempts().isEmpty())
+            this.choiceAttempts = questionAttempt.getChoiceAttempts().stream()
                 .map(ChoiceAttemptTakingDTO::new)
                 .toList();
-        this.orderedOptionAttempts = questionAttempt.getOrderedOptionAttempts().stream()
+
+        if (!questionAttempt.getOrderedOptionAttempts().isEmpty())
+            this.orderedOptionAttempts = questionAttempt.getOrderedOptionAttempts().stream()
                 .map(OrderedOptionAttemptTakingDTO::new)
                 .toList();
-        this.optionMatchAttempts = questionAttempt.getOptionMatchAttempts().stream()
+
+        if (!questionAttempt.getOptionMatchAttempts().isEmpty())
+            this.optionMatchAttempts = questionAttempt.getOptionMatchAttempts().stream()
                 .map(OptionMatchAttemptTakingDTO::new)
                 .toList();
     }

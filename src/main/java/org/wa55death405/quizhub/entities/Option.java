@@ -30,7 +30,14 @@ public class Option {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Option option = (Option) obj;
-        return id.equals(option.id);
+        Option comparedOption = (Option) obj;
+        if (this.id !=null) return id.equals(comparedOption.id);
+
+        if (this.question != null && comparedOption.question != null
+                && this.question.getId() != null && comparedOption.question.getId() != null) {
+            return this.question.getId().equals(comparedOption.question.getId()) && this.option.equals(comparedOption.option);
+        }
+        throw new RuntimeException("Option Can Not Be Compared Without Id or Question Id");
+
     }
 }

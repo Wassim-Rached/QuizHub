@@ -20,13 +20,14 @@ jobs:
           distribution: 'corretto'
           java-version: 21
 
+      - name: Clean the application
+        run: mvn clean
+
       - name: Test the application
         run: mvn -B test --file pom.xml
 
       - name: Build the application
-        run: |
-          mvn clean
-          mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml
 
       - name: Build Docker Image
         uses: docker/build-push-action@v2

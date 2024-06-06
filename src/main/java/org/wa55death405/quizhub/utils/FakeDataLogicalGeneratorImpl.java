@@ -45,8 +45,13 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                 question.getCorrectOptionMatches().forEach(correctOptionMatch -> {
                     UUID optionId = correctOptionMatch.getOption().getId();
                     UUID matchId = correctOptionMatch.getMatch().getId();
-                    var optionMatchAttempt = optionMatchAttempts.computeIfAbsent(optionId, k -> new ArrayList<>());
-                    optionMatchAttempt.add(matchId);
+                    if (optionMatchAttempts.containsKey(optionId)) {
+                        optionMatchAttempts.get(optionId).add(matchId);
+                    } else {
+                        optionMatchAttempts.put(optionId, new ArrayList<>(List.of(matchId)));
+                    }
+//                    var optionMatchAttempt = optionMatchAttempts.computeIfAbsent(optionId, k -> new ArrayList<>());
+//                    optionMatchAttempt.add(matchId);
                 });
                 questionAttemptSubmissionDTO.setOptionMatchAttempts(optionMatchAttempts);
             break;
@@ -150,5 +155,15 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
         quizAttempt.setQuestionAttempts(questionAttempts);
         return quizAttempt;
     }
+
+    @Override
+    public QuizAttempt generate_PerfectScoreQuizAttempt(Quiz quiz) {
+        var attempts = this.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(quiz);
+        var quizAttempt = QuizAttempt.builder().quiz(quiz).build();
+        List<QuestionAttempt> questionAttempts = attempts.stream().map(a->a.toEntity(quizAttempt.getId())).toList();
+        quizAttempt.setQuestionAttempts(questionAttempts);
+        return quizAttempt;
+    }
+
 
 }

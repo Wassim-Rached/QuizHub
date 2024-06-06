@@ -1,5 +1,6 @@
 package org.wa55death405.quizhub.interfaces.services;
 
+import org.wa55death405.quizhub.dto.StandardPageList;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptSubmissionDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
@@ -23,7 +24,7 @@ public interface IQuizService {
         * @param title the title to search for
         * @return a list of quizzes that match the title
      */
-    List<QuizGeneralInfoDTO> searchQuizzes(String title);
+    StandardPageList<QuizGeneralInfoDTO> searchQuizzes(String title, int page, int size);
 
     /*
         * create a new quiz
@@ -72,4 +73,11 @@ public interface IQuizService {
         * @return the result of the quiz attempt
      */
     QuizAttemptResultDTO getQuizAttemptResult(UUID quizAttemptId);
+
+    /*
+        * get the info needed to create a quiz
+        * @param quizId the id of the quiz
+        * @return the needed information to create the quiz
+     */
+    QuizCreationDTO getQuizCreationInfo(UUID quizId);
 }
