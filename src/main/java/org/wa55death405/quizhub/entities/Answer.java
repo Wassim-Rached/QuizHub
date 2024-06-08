@@ -23,7 +23,7 @@ public class Answer {
     private Question question;
 
     public boolean compareAnswer(String attempt) {
-        return this.answer.equals(attempt);
+        return this.answer.equalsIgnoreCase(attempt);
     }
 
     @Override
