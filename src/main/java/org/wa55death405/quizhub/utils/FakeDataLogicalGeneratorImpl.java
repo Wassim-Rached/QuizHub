@@ -32,7 +32,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
         questionAttemptSubmissionDTO.setQuestion(question.getId());
         switch (question.getQuestionType()){
             case TRUE_FALSE,NUMERIC,SHORT_ANSWER,FILL_IN_THE_BLANK:
-                questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswer().getAnswer());
+                questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswers().get(0).getAnswer());
                 break;
             case MULTIPLE_CHOICE,SINGLE_CHOICE:
                 questionAttemptSubmissionDTO.setChoiceAttempts(question.getCorrectChoices().stream().map(Choice::getId).toList());
@@ -76,7 +76,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
             case TRUE_FALSE, NUMERIC, SHORT_ANSWER, FILL_IN_THE_BLANK:{
                 // one in 3 chance of getting the correct answer
                 if (Faker.instance().random().nextInt(1,5) == 1) {
-                    questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswer().getAnswer());
+                    questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswers().get(0).getAnswer());
                 } else {
                     questionAttemptSubmissionDTO.setAnswerAttempt(Faker.instance().lorem().word());
                 }

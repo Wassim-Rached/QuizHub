@@ -27,8 +27,8 @@ public class Question {
     private Quiz quiz;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
-    @OneToOne(mappedBy = "question",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Answer answer;
+    @OneToMany(mappedBy = "question",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Answer> answers;
 
     // TODO: Eager fetching might need to be changed to lazy fetching
     // for MULTIPLE_CHOICE, SINGLE_CHOICE

@@ -19,7 +19,7 @@ public class Answer {
     @Column(nullable = false)
     private String answer;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Question question;
 
     public boolean compareAnswer(String attempt) {
