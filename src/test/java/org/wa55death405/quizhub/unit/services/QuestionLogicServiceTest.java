@@ -1279,6 +1279,38 @@ class QuestionLogicServiceTest {
             verify(answerAttemptRepository).save(any());
         }
 
+        @Test
+        public void testHandleQuestionAttempt__case_sensitivity() {
+            Question question = Question.builder()
+                    .id(UUID.randomUUID())
+                    .questionType(QuestionType.TRUE_FALSE)
+                    .question("Whats the Capital Of Tunisia ?")
+                    .answers(new ArrayList<>(List.of(Answer.builder().id(UUID.randomUUID()).answer("tunis").build())))
+                    .build();
+
+            QuestionAttempt questionAttempt = QuestionAttempt.builder()
+                    .id(UUID.randomUUID())
+                    .question(question)
+                    .answerAttempt(AnswerAttempt.builder().id(UUID.randomUUID()).answer("TuNIs").build())
+                    .build();
+
+            // Mock behavior
+            when(questionAttemptRepository.save(any())).thenReturn(questionAttempt);
+            when(answerAttemptRepository.save(any())).thenReturn(questionAttempt.getAnswerAttempt());
+
+            // Call method
+            questionLogicService.handleQuestionAttempt(questionAttempt);
+
+            // Assert correctnessPercentage is calculated
+            var answerAttempt = questionAttempt.getAnswerAttempt();
+            assertTrue(answerAttempt.getIsCorrect());
+            assertEquals(100F, questionAttempt.getCorrectnessPercentage());
+
+            // Verify correctnessPercentage is calculated
+            verify(questionAttemptRepository).save(any());
+            verify(answerAttemptRepository).save(any());
+        }
+
         // unpredicted behavior tests
         @Test
         public void testHandleQuestionAttempt__null_answer() {
