@@ -5,6 +5,7 @@ import org.wa55death405.quizhub.dto.question.QuestionTakingDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.entities.QuizAttempt;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,5 +23,8 @@ public class QuizAttemptTakingDTO {
             var qa = quizAttempt.getQuestionAttempts().stream().filter(qa1 -> qa1.getQuestion().getId().equals(q.getId())).findFirst().orElse(null);
             return new QuestionTakingDTO(q, qa);
         }).collect(Collectors.toList());
+
+        // randomize the questions list order
+        Collections.shuffle(this.questions);
     }
 }
