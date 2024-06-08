@@ -18,6 +18,7 @@ import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+// TODO : this class bean could be created in the security configuration class
 @Component
 @Profile({"prod", "exp"})
 public class RateLimitInterceptor implements HandlerInterceptor {
