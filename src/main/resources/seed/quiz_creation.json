@@ -6,7 +6,7 @@
         "question": "Version control systems help manage changes to source code over time.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1.0,
-        "answer": "TRUE",
+        "answers": ["TRUE"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -15,7 +15,7 @@
         "question": "What does 'IDE' stand for in software development?",
         "questionType": "SHORT_ANSWER",
         "coefficient": 1.0,
-        "answer": "Integrated Development Environment",
+        "answers": ["Integrated Development Environment"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -24,7 +24,7 @@
         "question": "How many bytes are in a kilobyte (KB)?",
         "questionType": "NUMERIC",
         "coefficient": 1.0,
-        "answer": "1024",
+        "answers": ["1024"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -33,7 +33,7 @@
         "question": "In Java, the (blank) keyword is used to define a class,and the (blank) keyword is used to create a new object of that class.",
         "questionType": "FILL_IN_THE_BLANK",
         "coefficient": 1.0,
-        "answer": "class(|)new",
+        "answers": ["class(|)new"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -110,7 +110,7 @@
         "question": "The internet and the World Wide Web are the same thing.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1.0,
-        "answer": "FALSE",
+        "answers": ["FALSE"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -119,7 +119,7 @@
         "question": "What is the full form of HTTP?",
         "questionType": "SHORT_ANSWER",
         "coefficient": 1.0,
-        "answer": "HyperText Transfer Protocol",
+        "answers": ["HyperText Transfer Protocol"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -128,7 +128,7 @@
         "question": "How many bits are in a byte?",
         "questionType": "NUMERIC",
         "coefficient": 1.0,
-        "answer": "8",
+        "answers": ["8"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -137,7 +137,7 @@
         "question": "In HTML, the (blank) tag is used to create a hyperlink.",
         "questionType": "FILL_IN_THE_BLANK",
         "coefficient": 1.0,
-        "answer": "a",
+        "answers": ["a"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -216,7 +216,7 @@
         "question": "A binary search tree is always balanced.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1.0,
-        "answer": "FALSE",
+        "answers": ["FALSE"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -225,7 +225,7 @@
         "question": "What does 'OOP' stand for in programming?",
         "questionType": "SHORT_ANSWER",
         "coefficient": 1.0,
-        "answer": "Object-Oriented Programming",
+        "answers": ["Object-Oriented Programming","Object Oriented Programming"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -234,7 +234,7 @@
         "question": "How many bits are in an IPv6 address?",
         "questionType": "NUMERIC",
         "coefficient": 1.0,
-        "answer": "128",
+        "answers": ["128"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -243,7 +243,7 @@
         "question": "In Python, the (blank) keyword is used to define a function.",
         "questionType": "FILL_IN_THE_BLANK",
         "coefficient": 1.0,
-        "answer": "def",
+        "answers": ["def"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -320,7 +320,7 @@
         "question": "A firewall is used to block unauthorized access to a network.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1.0,
-        "answer": "TRUE",
+        "answers": ["TRUE"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -329,7 +329,7 @@
         "question": "What does 'RSA' stand for in cryptography?",
         "questionType": "SHORT_ANSWER",
         "coefficient": 1.0,
-        "answer": "Rivest-Shamir-Adleman",
+        "answers": ["Rivest-Shamir-Adleman","Rivest Shamir Adleman","Rivest, Shamir and Adleman","Rivest,Shamir,Adleman"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -338,7 +338,7 @@
         "question": "How many bits are used in an AES-256 encryption key?",
         "questionType": "NUMERIC",
         "coefficient": 1.0,
-        "answer": "256",
+        "answers": ["256"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -347,7 +347,7 @@
         "question": "In cybersecurity, (blank) is the practice of protecting systems, networks, and programs from digital attacks.",
         "questionType": "FILL_IN_THE_BLANK",
         "coefficient": 1.0,
-        "answer": "cybersecurity",
+        "answers": ["cybersecurity"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null

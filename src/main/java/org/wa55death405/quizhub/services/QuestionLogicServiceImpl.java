@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.MultipleChoiceAlgorithmeType;
+import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
 import org.wa55death405.quizhub.interfaces.services.IQuestionLogicService;
 import org.wa55death405.quizhub.repositories.*;
 
@@ -242,7 +243,7 @@ public class QuestionLogicServiceImpl implements IQuestionLogicService {
 
     private void general_comparison(QuestionAttempt questionAttempt) {
         AnswerAttempt attempt = questionAttempt.getAnswerAttempt();
-        Answer answer = questionAttempt.getQuestion().getAnswer();
+        List<Answer> answers = questionAttempt.getQuestion().getAnswers();
 
         if (attempt == null) {
             questionAttempt.setCorrectnessPercentage(0F);
@@ -250,11 +251,20 @@ public class QuestionLogicServiceImpl implements IQuestionLogicService {
             return;
         }
 
-        if (answer == null) {
-            throw new IllegalArgumentException("Question with id " + questionAttempt.getQuestion().getId() + " has no answer");
+        if (answers == null || answers.isEmpty()) {
+            throw new IrregularBehaviorException("Question with id " + questionAttempt.getQuestion().getId() + " has no answer");
         }
-        
-        if (answer.compareAnswer(attempt.getAnswer())){
+
+        boolean isAttemptCorrect = false;
+
+        for (Answer answer : answers) {
+            if (answer.compareAnswer(attempt.getAnswer())) {
+                isAttemptCorrect = true;
+                break;
+            }
+        }
+
+        if (isAttemptCorrect) {
             questionAttempt.setCorrectnessPercentage(100F);
             attempt.setIsCorrect(true);
         } else {

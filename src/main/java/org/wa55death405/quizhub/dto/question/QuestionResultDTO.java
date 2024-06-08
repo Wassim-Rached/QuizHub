@@ -11,6 +11,7 @@ import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptResultDTO;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.QuestionType;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
+import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +57,9 @@ public class QuestionResultDTO {
 
         switch (this.questionType){
             case TRUE_FALSE,FILL_IN_THE_BLANK,NUMERIC,SHORT_ANSWER->{
-                if (question.getAnswer() == null)
-                    throw new InputValidationException("Answer is required for question of type " + this.questionType);
-                this.answer = new AnswerResultDTO(question.getAnswer());
+                if (question.getAnswers() == null || question.getAnswers().isEmpty())
+                    throw new IrregularBehaviorException("Answer is required for question of type " + this.questionType);
+                this.answer = new AnswerResultDTO(question.getAnswers().get(0));
             }
             case MULTIPLE_CHOICE,SINGLE_CHOICE -> {
                 choices = new ArrayList<>();

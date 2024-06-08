@@ -10,6 +10,7 @@ import org.wa55death405.quizhub.enums.QuestionType;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 /*
@@ -42,7 +43,7 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
         questionCreationRequestDTO.setCoefficient(1f);
         switch (questionType) {
             case TRUE_FALSE,FILL_IN_THE_BLANK,NUMERIC,SHORT_ANSWER:
-                questionCreationRequestDTO.setAnswer(faker.lorem().word());
+                questionCreationRequestDTO.setAnswers(new ArrayList<>(List.of(faker.lorem().word())));
                 return;
             case MULTIPLE_CHOICE:
                 /*
