@@ -3,7 +3,6 @@ package org.wa55death405.quizhub.configurations;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -19,17 +18,17 @@ import java.util.List;
 
 @Configuration
 public class SecurityConfiguration {
-    @Value("${app.CORS.ALLOWED-ORIGINS}")
+    @Value("${app.CORS.ALLOWED-ORIGINS:*}")
     private String ALLOWED_ORIGINS;
-    @Value("${app.CORS.ALLOWED-METHODS}")
+    @Value("${app.CORS.ALLOWED-METHODS:*}")
     private String ALLOWED_METHODS;
-    @Value("${app.CORS.ALLOWED-HEADERS}")
+    @Value("${app.CORS.ALLOWED-HEADERS:*}")
     private String ALLOWED_HEADERS;
-    @Value("${app.CORS.EXPOSED-HEADERS}")
+    @Value("${app.CORS.EXPOSED-HEADERS:*}")
     private String EXPOSED_HEADERS;
-    @Value("${app.CORS.ALLOW-CREDENTIALS}")
+    @Value("${app.CORS.ALLOW-CREDENTIALS:true}")
     private String ALLOW_CREDENTIALS;
-    @Value("${app.CORS.MAX-AGE}")
+    @Value("${app.CORS.MAX-AGE:3600}")
     private String MAX_AGE;
 
 //    @Bean
