@@ -35,7 +35,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                 questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswers().get(0).getAnswer());
                 break;
             case MULTIPLE_CHOICE,SINGLE_CHOICE:
-                questionAttemptSubmissionDTO.setChoiceAttempts(question.getCorrectChoices().stream().map(Choice::getId).toList());
+                questionAttemptSubmissionDTO.setChoiceAttempts(question.getCorrectChoices().stream().map(Choice::getId).collect(Collectors.toSet()));
                 break;
             case OPTION_ORDERING: questionAttemptSubmissionDTO.setOrderedOptionAttempts((HashMap<Integer, UUID>) question.getOrderedOptions().stream()
                     .collect(Collectors.toMap(OrderedOption::getCorrectPosition,OrderedOption::getId)));
@@ -84,7 +84,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
             }
             case MULTIPLE_CHOICE, SINGLE_CHOICE:{
                 var questionChoices = question.getChoices();
-                var randomChoices = new ArrayList<UUID>();
+                Set<UUID> randomChoices = new HashSet<>();
                 for (Choice questionChoice : questionChoices) {
                     if (Faker.instance().bool().bool()) {
                         randomChoices.add(questionChoice.getId());

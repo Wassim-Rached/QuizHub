@@ -20,7 +20,7 @@ public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,U
     private String answerAttempt;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
-    private List<UUID> choiceAttempts;
+    private Set<UUID> choiceAttempts;
 
     // for OPTION_ORDERING
     private HashMap<Integer,UUID> orderedOptionAttempts;
