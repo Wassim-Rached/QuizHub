@@ -6,6 +6,17 @@ import lombok.*;
 
 import java.util.UUID;
 
+/*
+    * CorrectOptionMatch entity represents a correct match between an option and a match.
+    * Associated with Match and Option entities in a direct way.
+
+    @Rules
+    * Each correct option match should always be associated with a Question
+    * Correct option matches are unique for a question (it will result in unexpected behavior if the same match-option pair is added twice)
+    * Each correct option match should always be associated with a Match and an Option
+
+ */
+
 @Entity
 @Data
 @ToString

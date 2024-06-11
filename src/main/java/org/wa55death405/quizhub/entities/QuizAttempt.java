@@ -8,6 +8,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+/*
+    * QuizAttempt entity represents a quiz attempt made by a user.
+    * A quiz attempt is a collection of question attempts.
+
+    @Rules
+    * Each quiz attempt should be associated with a Quiz
+
+    @Note
+    * When first created, score should be null it will be set later by the system algorithm
+*/
+
 @Entity
 @Data
 @Builder
