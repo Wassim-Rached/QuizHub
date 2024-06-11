@@ -1,6 +1,7 @@
 package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.UUID;
@@ -33,6 +34,7 @@ public class OrderedOption {
     @GeneratedValue
     private UUID id;
     @Column(nullable = false)
+    @NotBlank
     private String option;
     // TODO : correctPosition should be renamed to correctOrder
     @Column(nullable = false)

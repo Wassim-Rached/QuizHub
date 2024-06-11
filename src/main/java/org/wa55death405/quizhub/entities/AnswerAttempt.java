@@ -1,6 +1,7 @@
 package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Objects;
@@ -29,6 +30,7 @@ public class AnswerAttempt {
     private UUID id;
     private Boolean isCorrect = null;
     @Column(nullable = false)
+    @NotBlank
     private String answer;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)

@@ -1,6 +1,7 @@
 package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false)
+    @NotBlank
     private String title;
 
     // TODO : change the fetch to lazy

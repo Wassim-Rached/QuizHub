@@ -1,6 +1,7 @@
 package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.UUID;
@@ -34,6 +35,7 @@ public class Option {
     @GeneratedValue
     private UUID id;
     @Column(nullable = false)
+    @NotBlank
     private String option;
 
     @ManyToOne(optional = false)
