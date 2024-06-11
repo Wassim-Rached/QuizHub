@@ -44,6 +44,11 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
         switch (questionType) {
             case TRUE_FALSE,FILL_IN_THE_BLANK,NUMERIC,SHORT_ANSWER:
                 questionCreationRequestDTO.setAnswers(new ArrayList<>(List.of(faker.lorem().word())));
+                if (questionType == QuestionType.FILL_IN_THE_BLANK){
+                    // this just needs to not be null the backend logic wouldn't care about the value
+                    // it is used by the frontend to display the paragraph to help the user answer
+                    questionCreationRequestDTO.setParagraphToBeFilled(faker.lorem().sentence());
+                }
                 return;
             case MULTIPLE_CHOICE:
                 /*
