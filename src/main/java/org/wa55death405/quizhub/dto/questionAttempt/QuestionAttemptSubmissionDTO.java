@@ -5,10 +5,7 @@ import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
 import org.wa55death405.quizhub.interfaces.dto.EntityDTO;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /*
     * DTO class for 'QuestionAttempt' entity
@@ -29,7 +26,7 @@ public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,U
     private HashMap<Integer,UUID> orderedOptionAttempts;
 
     // for OPTION_MATCHING: <optionId, List<matchId>>
-    private HashMap<UUID,List<UUID>> optionMatchAttempts;
+    private HashMap<UUID,Set<UUID>> optionMatchAttempts;
 
     @Override
     public QuestionAttempt toEntity(UUID quizAttempt) {

@@ -41,14 +41,14 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                     .collect(Collectors.toMap(OrderedOption::getCorrectPosition,OrderedOption::getId)));
             break;
             case OPTION_MATCHING:
-                HashMap<UUID,List<UUID>> optionMatchAttempts = new HashMap<>();
+                HashMap<UUID,Set<UUID>> optionMatchAttempts = new HashMap<>();
                 question.getCorrectOptionMatches().forEach(correctOptionMatch -> {
                     UUID optionId = correctOptionMatch.getOption().getId();
                     UUID matchId = correctOptionMatch.getMatch().getId();
                     if (optionMatchAttempts.containsKey(optionId)) {
                         optionMatchAttempts.get(optionId).add(matchId);
                     } else {
-                        optionMatchAttempts.put(optionId, new ArrayList<>(List.of(matchId)));
+                        optionMatchAttempts.put(optionId, new HashSet<>(List.of(matchId)));
                     }
 //                    var optionMatchAttempt = optionMatchAttempts.computeIfAbsent(optionId, k -> new ArrayList<>());
 //                    optionMatchAttempt.add(matchId);
@@ -117,7 +117,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                 Collections.shuffle(randomizedMatchesIds);
 
                 // <optionId, List<matchId>>
-                var randomOptionMatchesAttempts = new HashMap<UUID,List<UUID>>();
+                var randomOptionMatchesAttempts = new HashMap<UUID,Set<UUID>>();
 
                 // loop through the number of option matches to make
                 for (int i = 0; i < numberOfOptionMatchesToMake; i++) {
@@ -128,7 +128,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                     if (randomOptionMatchesAttempts.containsKey(optionId)) {
                         randomOptionMatchesAttempts.get(optionId).add(matchId);
                     } else {
-                        randomOptionMatchesAttempts.put(optionId, new ArrayList<>(List.of(matchId)));
+                        randomOptionMatchesAttempts.put(optionId, new HashSet<>(List.of(matchId)));
                     }
                 }
                 // set the option matches
