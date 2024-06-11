@@ -6,20 +6,35 @@ import lombok.*;
 import java.util.Objects;
 import java.util.UUID;
 
+/*
+    * Answer entity represents an answer for a question.
+    * Used with types (SHORT_ANSWER, TRUE_FALSE, NUMERIC, FILL_IN_THE_BLANK)
+
+    @Rules
+    * Each answer should be associated with a Question
+    * The answers are unique for a question
+
+    @Note
+    * The answer length is high for the case of fill in the blank questions
+ */
+
 @Entity
 @Data
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
 @ToString
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"answer", "question_id"}))
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Column(nullable = false)
+    // TODO : updatable could be changed to false ?
+    @Column(nullable = false,length = 1024)
     private String answer;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "question_id")
     private Question question;
 
     public boolean compareAnswer(String attempt) {

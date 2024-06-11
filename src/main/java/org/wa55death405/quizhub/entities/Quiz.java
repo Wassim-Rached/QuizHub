@@ -8,6 +8,20 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+/*
+    * Quiz entity represents a quiz.
+    * A quiz is most importantly a collection of questions.
+
+    @Rules
+    * Each quiz should have a title,
+    * Each quiz can have a list of questions or none
+    * Each quiz can have a list of attempts or none
+
+    @Note
+    * The questions are unique for a quiz
+    * The attempts are unique for a quiz
+*/
+
 @Entity
 @Data
 @Builder

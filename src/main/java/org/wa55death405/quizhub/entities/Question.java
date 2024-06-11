@@ -2,9 +2,28 @@ package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Check;
 import org.wa55death405.quizhub.enums.QuestionType;
 
 import java.util.*;
+
+/*
+    * Question entity represents a question for a quiz.
+    * Contains most of the relations 💀
+
+    @Rules
+    * Each question should be associated with a Quiz
+    * Each question should have a coefficient
+    * The Coefficient can't be less than 0
+    * Each question should have a type,
+    * Each question should have a question text
+    * Depending on the type, the question should have the necessary fields
+
+    @Note
+    * The question text is generally not long, so it stays at 255 characters
+ */
+
+// TODO: Eager fetching might need to be changed to lazy fetching
 
 @Entity
 @Data
@@ -19,6 +38,7 @@ public class Question {
     @Column(nullable = false)
     private String question;
     @Column(nullable = false)
+    @Check(constraints = "coefficient >= 0",name = "question_coefficient_positive_check")
     private Float coefficient = 1f;
     @Column(nullable = false)
     private QuestionType questionType;
@@ -34,7 +54,6 @@ public class Question {
     @OneToMany(mappedBy = "question",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Answer> answers;
 
-    // TODO: Eager fetching might need to be changed to lazy fetching
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
     @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Choice> choices = new ArrayList<>();

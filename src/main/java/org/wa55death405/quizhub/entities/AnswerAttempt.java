@@ -6,6 +6,17 @@ import lombok.*;
 import java.util.Objects;
 import java.util.UUID;
 
+/*
+    * AnswerAttempt entity represents an answer attempt made by a user for a question.
+    * Associated with Answer entity in non-direct way.
+
+    @Rules
+    * Each answer attempt should always be associated with a QuestionAttempt
+
+    @Note
+    * When first created, isCorrect should be null it will be set later by the system algorithm
+*/
+
 @Entity
 @Data
 @ToString
@@ -21,6 +32,7 @@ public class AnswerAttempt {
     private String answer;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "question_attempt_id")
     private QuestionAttempt questionAttempt;
 
     @Override
