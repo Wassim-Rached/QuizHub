@@ -1,15 +1,19 @@
 package org.wa55death405.quizhub.advices;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.wa55death405.quizhub.dto.StandardApiResponse;
+import org.wa55death405.quizhub.entities.ErrorLog;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
+import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
 import org.wa55death405.quizhub.exceptions.RateLimitReachedException;
+import org.wa55death405.quizhub.repositories.ErrorLogRepository;
 
 import java.io.FileNotFoundException;
 
@@ -26,7 +30,10 @@ import java.io.FileNotFoundException;
       * one for custom exceptions
  */
 @ControllerAdvice
+@RequiredArgsConstructor
 public class ControllerExceptionHandler {
+
+    private final ErrorLogRepository errorLogRepository;
 
     @ExceptionHandler(InputValidationException.class)
     public ResponseEntity<StandardApiResponse<Void>> handleInvalidQuestionResponseException(InputValidationException e) {
@@ -51,5 +58,25 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<StandardApiResponse<Void>> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, "Invalid value for parameter "+ e.getPropertyName() +". Expected type: "+ e.getRequiredType()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IrregularBehaviorException.class)
+    public ResponseEntity<StandardApiResponse<Void>> handleIrregularBehaviorException(IrregularBehaviorException e) {
+        ErrorLog errorLog = ErrorLog.builder()
+                .exceptionMessage(e.getMessage())
+                .stackTrace(ErrorLog.getStackTraceAsString(e))
+                .build();
+        errorLogRepository.save(errorLog);
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, "Something Irregular just happened"), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<StandardApiResponse<Void>> handleException(Exception e) {
+        ErrorLog errorLog = ErrorLog.builder()
+                .exceptionMessage(e.getMessage())
+                .stackTrace(ErrorLog.getStackTraceAsString(e))
+                .build();
+        errorLogRepository.save(errorLog);
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, "Something Went Wrong!"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
