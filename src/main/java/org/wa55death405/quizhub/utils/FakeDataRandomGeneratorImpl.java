@@ -52,10 +52,10 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
                 return;
             case MULTIPLE_CHOICE:
                 /*
-                    * At least 2 choices
+                    * At least 2 choices,
                     * At least one choice should be true
                  */
-                for (int i = 0; i < faker.random().nextInt(1, 4); i++) {
+                for (int i = 0; i < faker.random().nextInt(2, 5); i++) {
                     questionCreationRequestDTO.getChoices().put(faker.lorem().word(), faker.bool().bool());
                 }
                 questionCreationRequestDTO.getChoices().put(faker.lorem().word(), true);

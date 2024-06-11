@@ -78,7 +78,6 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         if (this.question == null || this.question.isBlank()) throw new InputValidationException("Question is required and cannot be empty");
         if (this.questionType == null) throw new InputValidationException("Question type is required for question '" + this.question + "'");
         if (quiz == null) throw new InputValidationException("Quiz is required for question '" + this.question + "'");
-        if (quiz.getId() == null) throw new InputValidationException("Quiz must be saved before adding questions");
 
         Question question = new Question();
         question.setQuestion(this.question);
@@ -110,7 +109,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
                     throw new InputValidationException("Choices are required for question '" + this.question + "' of type " + this.questionType);
                 }
 
-                if (this.choices.size() < QuestionAttempt.MIN_NUMBER_OF_CHOICES || this.choices.size() > QuestionAttempt.MIN_NUMBER_OF_CHOICES) {
+                if (this.choices.size() < QuestionAttempt.MIN_NUMBER_OF_CHOICES || this.choices.size() > QuestionAttempt.MAX_NUMBER_OF_CHOICES) {
                     throw new InputValidationException("Number of choices must be between " + QuestionAttempt.MIN_NUMBER_OF_CHOICES + " and " + QuestionAttempt.MAX_NUMBER_OF_CHOICES + " for question '" + this.question + "' of type " + this.questionType);
                 }
 
@@ -155,7 +154,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
                 if (this.optionMatches.size() < QuestionAttempt.MIN_NUMBER_OF_OPTION_MATCHES || this.optionMatches.size() > QuestionAttempt.MAX_NUMBER_OF_OPTION_MATCHES) {
                     throw new InputValidationException("Number of option matches must be between " + QuestionAttempt.MIN_NUMBER_OF_OPTION_MATCHES + " and " + QuestionAttempt.MAX_NUMBER_OF_OPTION_MATCHES + " for question '" + this.question + "' of type " + this.questionType);
                 }
-                
+
                 var correctOptionMatches = new ArrayList<CorrectOptionMatch>();
                 var standaloneMatches = new ArrayList<Match>();
                 var optionsHashMap = new HashMap<String,Option>();
