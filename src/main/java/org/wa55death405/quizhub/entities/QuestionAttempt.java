@@ -58,6 +58,14 @@ public class QuestionAttempt {
         return correctnessPercentage * question.getCoefficient();
     }
 
+    static public final Integer MAX_NUMBER_OF_CHOICES = 10;
+    static public final Integer MIN_NUMBER_OF_CHOICES = 2;
+
+    static public final Integer MAX_NUMBER_OF_ORDERED_OPTIONS = 10;
+    static public final Integer MIN_NUMBER_OF_ORDERED_OPTIONS = 2;
+
+    static public final Integer MAX_NUMBER_OF_OPTION_MATCHES = 10;
+    static public final Integer MIN_NUMBER_OF_OPTION_MATCHES = 2;
 
     @Override
     public int hashCode() {

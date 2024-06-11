@@ -74,9 +74,12 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
      */
     @Override
     public Question toEntity(Quiz quiz) {
-        if (coefficient <= 0) {
-            throw new InputValidationException("Coefficient must be greater than 0 for question '" + this.question + "'");
-        }
+        if (this.coefficient <= 0) throw new InputValidationException("Coefficient must be greater than 0 for question '" + this.question + "'");
+        if (this.question == null || this.question.isBlank()) throw new InputValidationException("Question is required and cannot be empty");
+        if (this.questionType == null) throw new InputValidationException("Question type is required for question '" + this.question + "'");
+        if (quiz == null) throw new InputValidationException("Quiz is required for question '" + this.question + "'");
+        if (quiz.getId() == null) throw new InputValidationException("Quiz must be saved before adding questions");
+
         Question question = new Question();
         question.setQuestion(this.question);
         question.setQuestionType(this.questionType);
@@ -106,9 +109,19 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
                 if (this.choices == null || this.choices.isEmpty()) {
                     throw new InputValidationException("Choices are required for question '" + this.question + "' of type " + this.questionType);
                 }
+
+                if (this.choices.size() < QuestionAttempt.MIN_NUMBER_OF_CHOICES || this.choices.size() > QuestionAttempt.MIN_NUMBER_OF_CHOICES) {
+                    throw new InputValidationException("Number of choices must be between " + QuestionAttempt.MIN_NUMBER_OF_CHOICES + " and " + QuestionAttempt.MAX_NUMBER_OF_CHOICES + " for question '" + this.question + "' of type " + this.questionType);
+                }
+
                 if (this.questionType == QuestionType.SINGLE_CHOICE) {
                     if (this.choices.values().stream().filter(Boolean::booleanValue).count() != 1) {
                         throw new InputValidationException("Exactly one choice must be correct for question '" + this.question + "' of type " + this.questionType);
+                    }
+                }
+                if (this.questionType == QuestionType.MULTIPLE_CHOICE){
+                    if (this.choices.values().stream().noneMatch(Boolean::booleanValue)) {
+                        throw new InputValidationException("At least one choice must be correct for question '" + this.question + "' of type " + this.questionType);
                     }
                 }
                 var choicesList = this.choices.entrySet().stream()
@@ -120,6 +133,10 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
                 if (this.orderedOptions == null || this.orderedOptions.isEmpty()) {
                     throw new InputValidationException("Ordered options are required for question '" + this.question + "' of type " + this.questionType);
                 }
+                if (this.orderedOptions.size() < QuestionAttempt.MIN_NUMBER_OF_ORDERED_OPTIONS || this.orderedOptions.size() > QuestionAttempt.MAX_NUMBER_OF_ORDERED_OPTIONS) {
+                    throw new InputValidationException("Number of ordered options must be between " + QuestionAttempt.MIN_NUMBER_OF_ORDERED_OPTIONS + " and " + QuestionAttempt.MAX_NUMBER_OF_ORDERED_OPTIONS + " for question '" + this.question + "' of type " + this.questionType);
+                }
+
                 var orderedOptions = new ArrayList<OrderedOption>();
                 for (var entry : this.orderedOptions.entrySet()) {
                     orderedOptions.add(OrderedOption.builder()
@@ -135,6 +152,10 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
                 if (this.optionMatches == null || this.optionMatches.isEmpty()) {
                     throw new InputValidationException("Option matches are required for question '" + this.question + "' of type " + this.questionType);
                 }
+                if (this.optionMatches.size() < QuestionAttempt.MIN_NUMBER_OF_OPTION_MATCHES || this.optionMatches.size() > QuestionAttempt.MAX_NUMBER_OF_OPTION_MATCHES) {
+                    throw new InputValidationException("Number of option matches must be between " + QuestionAttempt.MIN_NUMBER_OF_OPTION_MATCHES + " and " + QuestionAttempt.MAX_NUMBER_OF_OPTION_MATCHES + " for question '" + this.question + "' of type " + this.questionType);
+                }
+                
                 var correctOptionMatches = new ArrayList<CorrectOptionMatch>();
                 var standaloneMatches = new ArrayList<Match>();
                 var optionsHashMap = new HashMap<String,Option>();
