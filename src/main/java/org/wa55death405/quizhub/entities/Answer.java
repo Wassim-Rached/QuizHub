@@ -1,6 +1,7 @@
 package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Objects;
@@ -30,7 +31,9 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     // TODO : updatable could be changed to false ?
+
     @Column(nullable = false,length = 1024)
+    @NotBlank
     private String answer;
 
     @ManyToOne(optional = false)

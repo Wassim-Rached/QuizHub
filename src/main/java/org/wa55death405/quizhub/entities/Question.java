@@ -1,6 +1,7 @@
 package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.annotations.Check;
 import org.wa55death405.quizhub.enums.QuestionType;
@@ -36,6 +37,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column(nullable = false)
+    @NotBlank
     private String question;
     @Column(nullable = false)
     @Check(constraints = "coefficient >= 0",name = "question_coefficient_positive_check")

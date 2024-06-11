@@ -2,6 +2,7 @@ package org.wa55death405.quizhub.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Comparator;
@@ -35,6 +36,7 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false, length = 1024)
+    @NotBlank
     private String match;
 
     @ManyToOne(optional = false)

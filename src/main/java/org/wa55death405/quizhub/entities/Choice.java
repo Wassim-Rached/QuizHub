@@ -2,6 +2,7 @@ package org.wa55death405.quizhub.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Objects;
@@ -31,6 +32,7 @@ public class Choice {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false)
+    @NotBlank
     private String choice;
     @Column(nullable = false)
     private Boolean isCorrect;
