@@ -18,9 +18,10 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
     private QuestionType questionType;
     private Float coefficient;
     private List<String> answers;
+    private String paragraphToBeFilled;
     private HashMap<String,Boolean> choices = new HashMap<>();
     private HashMap<Integer,String> orderedOptions = new HashMap<>();
-    // HashMap<option, [match1, match2, ...]>
+    // HashMap<match, [option1, option2, ...]>
     private HashMap<String,List<String>> optionMatches = new HashMap<>();
 
     /*
@@ -31,6 +32,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         this.question = question.getQuestion();
         this.questionType = question.getQuestionType();
         this.coefficient = question.getCoefficient();
+
         switch (questionType) {
             case TRUE_FALSE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK:
                 this.answers = question.getAnswers().stream().map(Answer::getAnswer).toList();
@@ -91,6 +93,12 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
                                 .map(answer -> Answer.builder().answer(answer).question(question).build())
                                 .toList()
                 );
+                if (this.questionType == QuestionType.FILL_IN_THE_BLANK) {
+                    if (this.paragraphToBeFilled == null || this.paragraphToBeFilled.isBlank()) {
+                        throw new InputValidationException("Paragraph to be filled is required for question '" + this.question + "' of type " + this.questionType);
+                    }
+                    question.setParagraphToBeFilled(this.paragraphToBeFilled);
+                }
                 break;
 
             case MULTIPLE_CHOICE:

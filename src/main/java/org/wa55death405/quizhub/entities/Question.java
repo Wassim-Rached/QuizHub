@@ -26,6 +26,10 @@ public class Question {
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Quiz quiz;
 
+    // for FILL_IN_THE_BLANK
+    @Column(columnDefinition = "TEXT")
+    private String paragraphToBeFilled;
+
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
     @OneToMany(mappedBy = "question",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Answer> answers;

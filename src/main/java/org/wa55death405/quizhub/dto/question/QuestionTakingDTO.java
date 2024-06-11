@@ -28,6 +28,9 @@ public class QuestionTakingDTO {
     private Float coefficient = 1f;
     private QuestionType questionType;
 
+    // For FILL_IN_THE_BLANK
+    private String paragraphToBeFilled;
+
     // For MULTIPLE_CHOICE and SINGLE_CHOICE
     private List<ChoiceGeneralDTO> choices;
 
@@ -46,6 +49,8 @@ public class QuestionTakingDTO {
         this.question = question.getQuestion();
         this.coefficient = question.getCoefficient();
         this.questionType = question.getQuestionType();
+        this.paragraphToBeFilled = question.getParagraphToBeFilled();
+
         if (questionAttempt != null){
             this.questionAttempt = new QuestionAttemptTakingDTO(questionAttempt);
         }

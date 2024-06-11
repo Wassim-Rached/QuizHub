@@ -28,6 +28,9 @@ public class QuestionResultDTO {
     private Float coefficient = 1f;
     private QuestionType questionType;
 
+    // for FILL_IN_THE_BLANK
+    private String paragraphToBeFilled;
+
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
     private AnswerResultDTO answer;
 
@@ -60,6 +63,10 @@ public class QuestionResultDTO {
                 if (question.getAnswers() == null || question.getAnswers().isEmpty())
                     throw new IrregularBehaviorException("Answer is required for question of type " + this.questionType);
                 this.answer = new AnswerResultDTO(question.getAnswers().get(0));
+
+                if (this.questionType == QuestionType.FILL_IN_THE_BLANK){
+                    this.paragraphToBeFilled = question.getParagraphToBeFilled();
+                }
             }
             case MULTIPLE_CHOICE,SINGLE_CHOICE -> {
                 choices = new ArrayList<>();
