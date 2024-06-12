@@ -73,6 +73,10 @@ public class Question {
     @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<CorrectOptionMatch> correctOptionMatches = new ArrayList<>();
 
+    /*
+        * Validation Global Rules
+    */
+
     // for coefficient
     public static final int MAX_COEFFICIENT = 10;
 
@@ -80,18 +84,23 @@ public class Question {
     public static final int MIN_FILL_IN_THE_BLANK_BLANKS = 1;
     public static final int MAX_FILL_IN_THE_BLANK_BLANKS = 15;
 
+    // for MULTIPLE_CHOICE, SINGLE_CHOICE
+    static public final Integer MAX_NUMBER_OF_CHOICES = 10;
+    static public final Integer MIN_NUMBER_OF_CHOICES = 2;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, question,coefficient);
-    }
+    // for OPTION_ORDERING
+    static public final Integer MAX_NUMBER_OF_ORDERED_OPTIONS = 10;
+    static public final Integer MIN_NUMBER_OF_ORDERED_OPTIONS = 2;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Question other)) return false;
-        return Objects.equals(id, other.id);
-    }
+    // for OPTION_MATCHING
+    static public final Integer MAX_NUMBER_OF_OPTION_MATCHES_OPTIONS = 10;
+    static public final Integer MAX_NUMBER_OF_OPTION_MATCHES_MATCHES = 10;
+    static public final Integer MIN_NUMBER_OF_OPTION_MATCHES_OPTIONS = 2;
+    static public final Integer MIN_NUMBER_OF_OPTION_MATCHES_MATCHES = 2;
+
+    /*
+        * Helper Methods
+     */
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE (generally for MULTIPLE_CHOICE)
     public List<Choice> getCorrectChoices() {
@@ -114,5 +123,21 @@ public class Question {
         return Algorithms.countWordsSeparatedByDelimiter(answers,"(|)");
     }
 
+
+    /*
+        Object Methods
+    */
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, question,coefficient);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Question other)) return false;
+        return Objects.equals(id, other.id);
+    }
 
 }
