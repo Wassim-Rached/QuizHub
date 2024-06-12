@@ -24,6 +24,9 @@ public class QuizCreationDTO implements EntityDTO<Quiz,Void> {
         Quiz quiz = Quiz.builder()
                 .title(title)
                 .build();
+        if (questions == null || questions.size() < Quiz.MIN_QUESTION_COUNT || questions.size() > Quiz.MAX_QUESTION_COUNT) {
+            throw new InputValidationException("Quiz should have between " + Quiz.MIN_QUESTION_COUNT + " and " + Quiz.MAX_QUESTION_COUNT + " questions");
+        }
         quiz.setQuestions(questions.stream().map(q -> q.toEntity(quiz)).toList());
         return quiz;
     }

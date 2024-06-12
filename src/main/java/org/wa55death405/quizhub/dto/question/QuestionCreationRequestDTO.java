@@ -87,6 +87,14 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
 
         switch (questionType) {
             case TRUE_FALSE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK:
+                if (this.questionType == QuestionType.FILL_IN_THE_BLANK) {
+                    if (this.paragraphToBeFilled == null || this.paragraphToBeFilled.isBlank()) {
+                        throw new InputValidationException("Paragraph to be filled is required for question '" + this.question + "' of type " + this.questionType);
+                    }
+                    if (Question.countBlanks(this.paragraphToBeFilled) < Question.MIN_FILL_IN_THE_BLANK_BLANKS || Question.countBlanks(this.paragraphToBeFilled) > Question.MAX_FILL_IN_THE_BLANK_BLANKS) {
+                        throw new InputValidationException("Paragraph to be filled must contain at least one blank for question '" + this.question + "' of type " + this.questionType);
+                    }
+                }
                 if (this.answers == null || this.answers.isEmpty()) {
                     throw new InputValidationException("Answer is required for question '" + this.question + "' of type " + this.questionType);
                 }
@@ -96,9 +104,10 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
                                 .toList()
                 );
                 if (this.questionType == QuestionType.FILL_IN_THE_BLANK) {
-                    if (this.paragraphToBeFilled == null || this.paragraphToBeFilled.isBlank()) {
-                        throw new InputValidationException("Paragraph to be filled is required for question '" + this.question + "' of type " + this.questionType);
+                    if (Question.countBlanks(this.paragraphToBeFilled) != Question.countBlanksAnswers(this.answers.get(0))){
+                        throw new InputValidationException("There are " + Question.countBlanks(this.paragraphToBeFilled) + " blanks in the paragraph but " + Question.countBlanksAnswers(this.answers.get(0)) + " answers were provided for question '" + this.question + "' of type " + this.questionType);
                     }
+
                     question.setParagraphToBeFilled(this.paragraphToBeFilled);
                 }
                 break;
@@ -149,10 +158,15 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
 
             case OPTION_MATCHING:
                 if (this.optionMatches == null || this.optionMatches.isEmpty()) {
-                    throw new InputValidationException("Option matches are required for question '" + this.question + "' of type " + this.questionType);
+                    throw new InputValidationException("options and matches are required for question '" + this.question + "' of type " + this.questionType);
                 }
-                if (this.optionMatches.size() < QuestionAttempt.MIN_NUMBER_OF_OPTION_MATCHES || this.optionMatches.size() > QuestionAttempt.MAX_NUMBER_OF_OPTION_MATCHES) {
-                    throw new InputValidationException("Number of option matches must be between " + QuestionAttempt.MIN_NUMBER_OF_OPTION_MATCHES + " and " + QuestionAttempt.MAX_NUMBER_OF_OPTION_MATCHES + " for question '" + this.question + "' of type " + this.questionType);
+
+                if (this.numberOfMatches() < QuestionAttempt.MIN_NUMBER_OF_OPTION_MATCHES_MATCHES || this.numberOfMatches() > QuestionAttempt.MAX_NUMBER_OF_OPTION_MATCHES_MATCHES) {
+                    throw new InputValidationException("Number of matches must be between " + QuestionAttempt.MIN_NUMBER_OF_OPTION_MATCHES_MATCHES + " and " + QuestionAttempt.MAX_NUMBER_OF_OPTION_MATCHES_MATCHES + " for question '" + this.question + "' of type " + this.questionType);
+                }
+
+                if (this.numberOfOptions() < QuestionAttempt.MIN_NUMBER_OF_OPTION_MATCHES_OPTIONS || this.numberOfOptions() > QuestionAttempt.MAX_NUMBER_OF_OPTION_MATCHES_OPTIONS) {
+                    throw new InputValidationException("Number of options must be between " + QuestionAttempt.MIN_NUMBER_OF_OPTION_MATCHES_OPTIONS + " and " + QuestionAttempt.MAX_NUMBER_OF_OPTION_MATCHES_OPTIONS + " for question '" + this.question + "' of type " + this.questionType);
                 }
 
                 var correctOptionMatches = new ArrayList<CorrectOptionMatch>();
@@ -195,5 +209,12 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         return question;
     }
 
+    public int numberOfOptions(){
+        return this.optionMatches.values().stream().reduce(0, (total, list) -> total + list.size(), Integer::sum);
+    }
+
+    public int numberOfMatches(){
+        return this.optionMatches.size();
+    }
 
 }
