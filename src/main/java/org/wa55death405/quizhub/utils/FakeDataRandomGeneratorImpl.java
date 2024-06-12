@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.dto.question.QuestionCreationRequestDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
+import org.wa55death405.quizhub.entities.Question;
 import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.enums.QuestionType;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
@@ -42,14 +43,29 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
         questionCreationRequestDTO.setQuestion(faker.lorem().sentence());
         questionCreationRequestDTO.setCoefficient(1f);
         switch (questionType) {
-            case TRUE_FALSE,FILL_IN_THE_BLANK,NUMERIC,SHORT_ANSWER:
+            case TRUE_FALSE,NUMERIC,SHORT_ANSWER:
                 questionCreationRequestDTO.setAnswers(new ArrayList<>(List.of(faker.lorem().word())));
-                if (questionType == QuestionType.FILL_IN_THE_BLANK){
-                    // this just needs to not be null the backend logic wouldn't care about the value
-                    // it is used by the frontend to display the paragraph to help the user answer
-                    questionCreationRequestDTO.setParagraphToBeFilled(faker.lorem().sentence());
-                }
                 return;
+
+            case FILL_IN_THE_BLANK:
+                List<String> answers = new ArrayList<>();
+                // persist the numberOfBlanks as variable,
+                // so we can set the same number as answers
+                int numberOfBlanks = faker.random().nextInt(Question.MIN_FILL_IN_THE_BLANK_BLANKS, Question.MAX_FILL_IN_THE_BLANK_BLANKS);
+                for (int i = 0; i < numberOfBlanks; i++) {
+                    answers.add(faker.lorem().word());
+                }
+                questionCreationRequestDTO.setAnswers(new ArrayList<>(List.of(String.join("(|)",answers))));
+
+                // this just needs to not be null the backend logic wouldn't care about the value
+                // as long as it includes at least one blank separator currently "{{blank}}"
+                // it is used by the frontend to display the paragraph to help the user answer
+                StringBuilder paragraphToBeFilled = new StringBuilder();
+                for (int i = 0; i < numberOfBlanks; i++) {
+                    paragraphToBeFilled.append(faker.lorem().sentence()).append(" {{blank}} ");
+                }
+                questionCreationRequestDTO.setParagraphToBeFilled(paragraphToBeFilled.toString());
+
             case MULTIPLE_CHOICE:
                 /*
                     * At least 2 choices,
