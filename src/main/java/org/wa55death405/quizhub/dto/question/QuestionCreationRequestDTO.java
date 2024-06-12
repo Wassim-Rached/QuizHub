@@ -75,6 +75,8 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
     @Override
     public Question toEntity(Quiz quiz) {
         if (this.coefficient <= 0) throw new InputValidationException("Coefficient must be greater than 0 for question '" + this.question + "'");
+        if (this.coefficient > Question.MAX_COEFFICIENT) throw new InputValidationException("Coefficient must be less than or equal to " + Question.MAX_COEFFICIENT + " for question '" + this.question + "'");
+
         if (this.question == null || this.question.isBlank()) throw new InputValidationException("Question is required and cannot be empty");
         if (this.questionType == null) throw new InputValidationException("Question type is required for question '" + this.question + "'");
         if (quiz == null) throw new InputValidationException("Quiz is required for question '" + this.question + "'");
@@ -87,29 +89,39 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
 
         switch (questionType) {
             case TRUE_FALSE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK:
+
                 if (this.questionType == QuestionType.FILL_IN_THE_BLANK) {
                     if (this.paragraphToBeFilled == null || this.paragraphToBeFilled.isBlank()) {
                         throw new InputValidationException("Paragraph to be filled is required for question '" + this.question + "' of type " + this.questionType);
                     }
-                    if (Question.countBlanks(this.paragraphToBeFilled) < Question.MIN_FILL_IN_THE_BLANK_BLANKS || Question.countBlanks(this.paragraphToBeFilled) > Question.MAX_FILL_IN_THE_BLANK_BLANKS) {
+
+                    int blanksCount = Question.countBlanks(this.paragraphToBeFilled);
+                    if (blanksCount < Question.MIN_FILL_IN_THE_BLANK_BLANKS || blanksCount > Question.MAX_FILL_IN_THE_BLANK_BLANKS) {
                         throw new InputValidationException("Paragraph to be filled must contain at least one blank for question '" + this.question + "' of type " + this.questionType);
                     }
                 }
+
+                // this is between both FILL_IN_THE_BLANK, so it verifies the existence
+                // of the answer before counting it
                 if (this.answers == null || this.answers.isEmpty()) {
                     throw new InputValidationException("Answer is required for question '" + this.question + "' of type " + this.questionType);
                 }
+
+                if (this.questionType == QuestionType.FILL_IN_THE_BLANK) {
+                    int blanksCount = Question.countBlanks(this.paragraphToBeFilled);
+                    int answersCount = Question.countBlanksAnswers(this.answers.get(0));
+                    if (blanksCount != answersCount){
+                        throw new InputValidationException("There are " + blanksCount + " blanks in the paragraph but " + answersCount + " answers were provided for question '" + this.question + "' of type " + this.questionType);
+                    }
+
+                    question.setParagraphToBeFilled(this.paragraphToBeFilled);
+                }
+
                 question.setAnswers(
                         this.answers.stream()
                                 .map(answer -> Answer.builder().answer(answer).question(question).build())
                                 .toList()
                 );
-                if (this.questionType == QuestionType.FILL_IN_THE_BLANK) {
-                    if (Question.countBlanks(this.paragraphToBeFilled) != Question.countBlanksAnswers(this.answers.get(0))){
-                        throw new InputValidationException("There are " + Question.countBlanks(this.paragraphToBeFilled) + " blanks in the paragraph but " + Question.countBlanksAnswers(this.answers.get(0)) + " answers were provided for question '" + this.question + "' of type " + this.questionType);
-                    }
-
-                    question.setParagraphToBeFilled(this.paragraphToBeFilled);
-                }
                 break;
 
             case MULTIPLE_CHOICE:
