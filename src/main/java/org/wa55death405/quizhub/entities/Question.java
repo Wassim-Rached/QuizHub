@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.annotations.Check;
 import org.wa55death405.quizhub.enums.QuestionType;
+import org.wa55death405.quizhub.utils.Algorithms;
 
 import java.util.*;
 
@@ -72,6 +73,14 @@ public class Question {
     @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<CorrectOptionMatch> correctOptionMatches = new ArrayList<>();
 
+    // for coefficient
+    public static final int MAX_COEFFICIENT = 10;
+
+    // for FILL_IN_THE_BLANK
+    public static final int MIN_FILL_IN_THE_BLANK_BLANKS = 1;
+    public static final int MAX_FILL_IN_THE_BLANK_BLANKS = 15;
+
+
     @Override
     public int hashCode() {
         return Objects.hash(id, question,coefficient);
@@ -84,39 +93,26 @@ public class Question {
         return Objects.equals(id, other.id);
     }
 
+    // for MULTIPLE_CHOICE, SINGLE_CHOICE (generally for MULTIPLE_CHOICE)
     public List<Choice> getCorrectChoices() {
         return choices.stream().filter(Choice::getIsCorrect).toList();
     }
 
-    public static final int MIN_FILL_IN_THE_BLANK_BLANKS = 1;
-    public static final int MAX_FILL_IN_THE_BLANK_BLANKS = 15;
 
-
+    // for FILL_IN_THE_BLANK
     public static int countBlanks(String paragraphToBeFilled) {
-        return countOccurrences(paragraphToBeFilled, "{{blank}}");
+        if (paragraphToBeFilled == null || paragraphToBeFilled.isBlank()) {
+            return 0;
+        }
+        return Algorithms.countStringOccurrences(paragraphToBeFilled,"{{blank}}");
     }
-
     public static int countBlanksAnswers(String answers) {
-        if (answers == null || answers.isBlank() || answers.equals("(|)")) {
-            return 0;
-        }
-        // TODO : this have to be fixed later
-        return answers.split("(\\|)").length;
-    }
-
-    private static int countOccurrences(String text, String searchString) {
-        if (searchString.isEmpty()) {
+        if ( answers == null || answers.isBlank() ) {
             return 0;
         }
 
-        int count = 0;
-        int fromIndex = 0;
-
-        while ((fromIndex = text.indexOf(searchString, fromIndex)) != -1 ) {
-            count++;
-            fromIndex += searchString.length();
-        }
-
-        return count;
+        return Algorithms.countWordsSeparatedByDelimiter(answers,"(|)");
     }
+
+
 }
