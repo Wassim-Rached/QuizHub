@@ -43,6 +43,9 @@ public class Quiz {
     @OneToMany(mappedBy = "quiz")
     private List<QuizAttempt> attempts = new ArrayList<>();
 
+    public static final int MAX_QUESTION_COUNT = 15;
+    public static final int MIN_QUESTION_COUNT = 1;
+
     @Override
     public int hashCode() {
         return Objects.hash(id, title);

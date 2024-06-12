@@ -64,8 +64,12 @@ public class QuestionAttempt {
     static public final Integer MAX_NUMBER_OF_ORDERED_OPTIONS = 10;
     static public final Integer MIN_NUMBER_OF_ORDERED_OPTIONS = 2;
 
-    static public final Integer MAX_NUMBER_OF_OPTION_MATCHES = 10;
-    static public final Integer MIN_NUMBER_OF_OPTION_MATCHES = 2;
+    static public final Integer MAX_NUMBER_OF_OPTION_MATCHES_MATCHES = 10;
+    static public final Integer MIN_NUMBER_OF_OPTION_MATCHES_MATCHES = 2;
+
+    static public final Integer MIN_NUMBER_OF_OPTION_MATCHES_OPTIONS = 2;
+    static public final Integer MAX_NUMBER_OF_OPTION_MATCHES_OPTIONS = 10;
+
 
     @Override
     public int hashCode() {

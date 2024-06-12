@@ -88,4 +88,35 @@ public class Question {
         return choices.stream().filter(Choice::getIsCorrect).toList();
     }
 
+    public static final int MIN_FILL_IN_THE_BLANK_BLANKS = 1;
+    public static final int MAX_FILL_IN_THE_BLANK_BLANKS = 15;
+
+
+    public static int countBlanks(String paragraphToBeFilled) {
+        return countOccurrences(paragraphToBeFilled, "{{blank}}");
+    }
+
+    public static int countBlanksAnswers(String answers) {
+        if (answers == null || answers.isBlank() || answers.equals("(|)")) {
+            return 0;
+        }
+        // TODO : this have to be fixed later
+        return answers.split("(\\|)").length;
+    }
+
+    private static int countOccurrences(String text, String searchString) {
+        if (searchString.isEmpty()) {
+            return 0;
+        }
+
+        int count = 0;
+        int fromIndex = 0;
+
+        while ((fromIndex = text.indexOf(searchString, fromIndex)) != -1 ) {
+            count++;
+            fromIndex += searchString.length();
+        }
+
+        return count;
+    }
 }
