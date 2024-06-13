@@ -41,4 +41,11 @@ public class AnswerAttempt {
     public int hashCode() {
         return Objects.hash(id, isCorrect,answer);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof AnswerAttempt answerAttempt)) return false;
+        return Objects.equals(id, answerAttempt.id);
+    }
 }
