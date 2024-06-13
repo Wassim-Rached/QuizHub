@@ -180,7 +180,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         var orderedOptions = new ArrayList<OrderedOption>();
         for (var entry : this.orderedOptions.entrySet()) {
             if (entry.getValue() == null || entry.getValue().isBlank()) {
-                throw new InputValidationException("Option value cannot be empty for question '" + this.question + "' of type " + this.questionType + " at position " + entry.getKey());
+                throw new InputValidationException("Ordered Option value cannot be empty for question '" + this.question + "' of type " + this.questionType + " at position " + entry.getKey());
             }
             orderedOptions.add(OrderedOption.builder()
                     .correctPosition(entry.getKey())
