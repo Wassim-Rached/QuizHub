@@ -11,6 +11,7 @@ import java.util.*;
     * DTO class for 'QuestionAttempt' entity
     * This class is used to convert the incoming JSON request to 'QuestionAttempt' entity
  */
+// TODO: Add questionType field for clearer validation
 @Data
 public class QuestionAttemptSubmissionDTO implements EntityDTO<QuestionAttempt,UUID> {
 //    TODO rename question to questionId

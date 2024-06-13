@@ -93,8 +93,8 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
                     * Each 'Option' should have at least one match
                     * A match can be assigned to multiple options or none
                  */
-                var numberOfOptions = faker.random().nextInt(2, 7);
-                var numberOfMatches = faker.random().nextInt(2,7);
+                var numberOfOptions = faker.random().nextInt(Question.MIN_NUMBER_OF_OPTION_MATCHES_OPTIONS, Question.MAX_NUMBER_OF_OPTION_MATCHES_OPTIONS);
+                var numberOfMatches = faker.random().nextInt(Question.MIN_NUMBER_OF_OPTION_MATCHES_MATCHES, Question.MAX_NUMBER_OF_OPTION_MATCHES_MATCHES);
 
                 // Generate the matches that will be used
                 var matches = new ArrayList<String>();
