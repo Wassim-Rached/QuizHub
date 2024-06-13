@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.wa55death405.quizhub.dto.StandardApiResponse;
 import org.wa55death405.quizhub.entities.ErrorLog;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
@@ -16,6 +17,8 @@ import org.wa55death405.quizhub.exceptions.RateLimitReachedException;
 import org.wa55death405.quizhub.repositories.ErrorLogRepository;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 /*
@@ -70,11 +73,19 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, "Something Irregular just happened"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardApiResponse<Void>> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        String rootCauseMessage = Objects.requireNonNull(e.getRootCause()).getMessage();
+
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, rootCauseMessage), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<StandardApiResponse<Void>> handleException(Exception e) {
         ErrorLog errorLog = ErrorLog.builder()
                 .exceptionMessage(e.getMessage())
                 .stackTrace(ErrorLog.getStackTraceAsString(e))
+                .timestamp(LocalDateTime.now())
                 .build();
         errorLogRepository.save(errorLog);
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.FAILURE, "Something Went Wrong!"), HttpStatus.INTERNAL_SERVER_ERROR);
