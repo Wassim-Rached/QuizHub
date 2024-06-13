@@ -121,7 +121,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
 
         // this is between both FILL_IN_THE_BLANK, so it verifies the existence
         // of the answer before counting it
-        if (this.answers == null || this.answers.isEmpty()) {
+        if (this.answers == null || this.answers.isEmpty() || this.answers.stream().anyMatch(answer -> answer == null || answer.isBlank())) {
             throw new InputValidationException("Answer is required for question '" + this.question + "' of type " + this.questionType);
         }
 
