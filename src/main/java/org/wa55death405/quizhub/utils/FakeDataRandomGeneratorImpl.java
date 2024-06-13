@@ -68,30 +68,30 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
 
             case MULTIPLE_CHOICE:
                 /*
-                    * At least 2 choices,
+                    * Random number of choices between the MIN and MAX
                     * At least one choice should be true
                  */
-                for (int i = 0; i < faker.random().nextInt(2, 5); i++) {
+                for (int i = 0; i < faker.random().nextInt(Question.MIN_NUMBER_OF_CHOICES, Question.MAX_NUMBER_OF_CHOICES - 1); i++) {
                     questionCreationRequestDTO.getChoices().put(faker.lorem().word(), faker.bool().bool());
                 }
                 questionCreationRequestDTO.getChoices().put(faker.lorem().word(), true);
                 return;
             case SINGLE_CHOICE:
                 /*
-                    * At least 2 choices
+                    * Random amount of choices between the MIN and MAX
                     * Only one choice should be true
                  */
-                for (int i = 0; i < faker.random().nextInt(2, 4); i++) {
+                for (int i = 0; i < faker.random().nextInt(Question.MIN_NUMBER_OF_CHOICES, Question.MAX_NUMBER_OF_CHOICES - 1); i++) {
                     questionCreationRequestDTO.getChoices().put(faker.lorem().word(), false);
                 }
                 questionCreationRequestDTO.getChoices().put(faker.lorem().word(), true);
                 return;
             case OPTION_MATCHING:
                 /*
-                    * At least 2 'Options'
-                    * At least 2 'Matches'
+                    * Random amount of 'Options' between the MIN and MAX
+                    * Random amount of 'Matches' between the MIN and MAX
                     * Each 'Option' should have at least one match
-                    * A match can be assigned to multiple options or none
+                    * A match can be linked to multiple options or none
                  */
                 var numberOfOptions = faker.random().nextInt(Question.MIN_NUMBER_OF_OPTION_MATCHES_OPTIONS, Question.MAX_NUMBER_OF_OPTION_MATCHES_OPTIONS);
                 var numberOfMatches = faker.random().nextInt(Question.MIN_NUMBER_OF_OPTION_MATCHES_MATCHES, Question.MAX_NUMBER_OF_OPTION_MATCHES_MATCHES);
@@ -116,10 +116,10 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
                 return;
             case OPTION_ORDERING:
                 /*
-                    * At least 2 options
+                    * Random number of ordered options between the MIN and MAX
                  */
-                for (int i = 0; i < faker.random().nextInt(2, 5); i++) {
-                    questionCreationRequestDTO.getOrderedOptions().put(i, faker.lorem().word());
+                for (int i = 0; i < faker.random().nextInt(Question.MIN_NUMBER_OF_ORDERED_OPTIONS, Question.MAX_NUMBER_OF_ORDERED_OPTIONS); i++) {
+                    questionCreationRequestDTO.getOrderedOptions().put(i, faker.lorem().word()+i);
                 }
                 return;
             default:
