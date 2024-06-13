@@ -65,6 +65,7 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
                     paragraphToBeFilled.append(faker.lorem().sentence()).append(" {{blank}} ");
                 }
                 questionCreationRequestDTO.setParagraphToBeFilled(paragraphToBeFilled.toString());
+                return;
 
             case MULTIPLE_CHOICE:
                 /*
@@ -86,6 +87,7 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
                 }
                 questionCreationRequestDTO.getChoices().put(faker.lorem().word(), true);
                 return;
+
             case OPTION_MATCHING:
                 /*
                     * Random amount of 'Options' between the MIN and MAX
@@ -122,6 +124,7 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
                     questionCreationRequestDTO.getOrderedOptions().put(i, faker.lorem().word()+i);
                 }
                 return;
+
             default:
                 throw new IllegalArgumentException("Unknown question type: " + questionType);
         }
