@@ -87,152 +87,168 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
 
         switch (questionType) {
             case TRUE_FALSE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK:
-
-                if (this.questionType == QuestionType.FILL_IN_THE_BLANK) {
-                    if (this.paragraphToBeFilled == null || this.paragraphToBeFilled.isBlank()) {
-                        throw new InputValidationException("Paragraph to be filled is required for question '" + this.question + "' of type " + this.questionType);
-                    }
-
-                    int blanksCount = Question.countBlanks(this.paragraphToBeFilled);
-                    if (blanksCount < Question.MIN_FILL_IN_THE_BLANK_BLANKS || blanksCount > Question.MAX_FILL_IN_THE_BLANK_BLANKS) {
-                        throw new InputValidationException("Paragraph to be filled must contain at least one blank for question '" + this.question + "' of type " + this.questionType);
-                    }
-                }
-
-                // this is between both FILL_IN_THE_BLANK, so it verifies the existence
-                // of the answer before counting it
-                if (this.answers == null || this.answers.isEmpty()) {
-                    throw new InputValidationException("Answer is required for question '" + this.question + "' of type " + this.questionType);
-                }
-
-                if (this.questionType == QuestionType.FILL_IN_THE_BLANK) {
-                    int blanksCount = Question.countBlanks(this.paragraphToBeFilled);
-                    int answersCount = Question.countBlanksAnswers(this.answers.get(0));
-                    if (blanksCount != answersCount){
-                        throw new InputValidationException("There are " + blanksCount + " blanks in the paragraph but " + answersCount + " answers were provided for question '" + this.question + "' of type " + this.questionType);
-                    }
-
-                    question.setParagraphToBeFilled(this.paragraphToBeFilled);
-                }
-
-                question.setAnswers(
-                        this.answers.stream()
-                                .map(answer -> Answer.builder().answer(answer).question(question).build())
-                                .toList()
-                );
+                this.generalComparison(question);
                 break;
 
             case MULTIPLE_CHOICE:
             case SINGLE_CHOICE:
-                if (this.choices == null || this.choices.isEmpty()) {
-                    throw new InputValidationException("Choices are required for question '" + this.question + "' of type " + this.questionType);
-                }
-
-                if (this.choices.size() < Question.MIN_NUMBER_OF_CHOICES || this.choices.size() > Question.MAX_NUMBER_OF_CHOICES) {
-                    throw new InputValidationException("Number of choices must be between " + Question.MIN_NUMBER_OF_CHOICES + " and " + Question.MAX_NUMBER_OF_CHOICES + " for question '" + this.question + "' of type " + this.questionType);
-                }
-
-                if (this.questionType == QuestionType.SINGLE_CHOICE) {
-                    if (this.choices.values().stream().filter(Boolean::booleanValue).count() != 1) {
-                        throw new InputValidationException("Exactly one choice must be correct for question '" + this.question + "' of type " + this.questionType);
-                    }
-                }
-
-                if (this.questionType == QuestionType.MULTIPLE_CHOICE){
-                    if (this.choices.values().stream().noneMatch(Boolean::booleanValue)) {
-                        throw new InputValidationException("At least one choice must be correct for question '" + this.question + "' of type " + this.questionType);
-                    }
-                }
-
-                var choicesList = this.choices.entrySet().stream()
-                        .map(entry -> Choice.builder().choice(entry.getKey()).isCorrect(entry.getValue()).question(question).build()).toList();
-                question.setChoices(choicesList);
+                this.choiceType(question);
                 break;
 
             case OPTION_ORDERING:
-                if (this.orderedOptions == null || this.orderedOptions.isEmpty()) {
-                    throw new InputValidationException("Ordered options are required for question '" + this.question + "' of type " + this.questionType);
-                }
-                int numberOfOrderedOptions = this.orderedOptions.size();
-                if (numberOfOrderedOptions < Question.MIN_NUMBER_OF_ORDERED_OPTIONS || numberOfOrderedOptions > Question.MAX_NUMBER_OF_ORDERED_OPTIONS) {
-                    throw new InputValidationException("Number of ordered options must be between " + Question.MIN_NUMBER_OF_ORDERED_OPTIONS + " and " + Question.MAX_NUMBER_OF_ORDERED_OPTIONS + " for question '" + this.question + "' of type " + this.questionType);
-                }
-
-                var orderedOptions = new ArrayList<OrderedOption>();
-                for (var entry : this.orderedOptions.entrySet()) {
-                    if (entry.getValue() == null || entry.getValue().isBlank()) {
-                        throw new InputValidationException("Option value cannot be empty for question '" + this.question + "' of type " + this.questionType + " at position " + entry.getKey());
-                    }
-                    orderedOptions.add(OrderedOption.builder()
-                            .correctPosition(entry.getKey())
-                            .option(entry.getValue())
-                            .question(question)
-                            .build());
-                }
-                question.setOrderedOptions(orderedOptions);
+                this.optionOrdering(question);
                 break;
 
             case OPTION_MATCHING:
-                // we don't check for duplication because the data is received as a map
-                if (this.optionMatches == null || this.optionMatches.isEmpty()) {
-                    throw new InputValidationException("options and matches are required for question '" + this.question + "' of type " + this.questionType);
-                }
-
-                int numberOfOptionMatchesMatches = this.numberOfMatches();
-                if (numberOfOptionMatchesMatches < Question.MIN_NUMBER_OF_OPTION_MATCHES_MATCHES || numberOfOptionMatchesMatches > Question.MAX_NUMBER_OF_OPTION_MATCHES_MATCHES) {
-                    throw new InputValidationException("Number of matches must be between " + Question.MIN_NUMBER_OF_OPTION_MATCHES_MATCHES + " and " + Question.MAX_NUMBER_OF_OPTION_MATCHES_MATCHES + " for question '" + this.question + "' of type " + this.questionType);
-                }
-
-                int numberOfOptionMatchesOptions = this.numberOfOptions();
-                if (numberOfOptionMatchesOptions < Question.MIN_NUMBER_OF_OPTION_MATCHES_OPTIONS || numberOfOptionMatchesOptions > Question.MAX_NUMBER_OF_OPTION_MATCHES_OPTIONS) {
-                    throw new InputValidationException("Number of options must be between " + Question.MIN_NUMBER_OF_OPTION_MATCHES_OPTIONS + " and " + Question.MAX_NUMBER_OF_OPTION_MATCHES_OPTIONS + " for question '" + this.question + "' of type " + this.questionType);
-                }
-
-                // algorithm for transforming the data
-                var correctOptionMatches = new ArrayList<CorrectOptionMatch>();
-                var standaloneMatches = new ArrayList<Match>();
-                var optionsHashMap = new HashMap<String,Option>();
-                for (var entry : this.optionMatches.entrySet()) {
-                    List<String> optionValues = entry.getValue();
-                    String matchValue = entry.getKey();
-                    if (matchValue == null || matchValue.isBlank()) {
-                        throw new InputValidationException("Match value cannot be empty for question '" + this.question + "' of type " + this.questionType);
-                    }
-                    var match = Match.builder().match(matchValue).question(question).build();
-
-                    if (optionValues == null || optionValues.isEmpty()) {
-                        standaloneMatches.add(match);
-                        continue;
-                    }
-
-                    for (String optionValue : optionValues) {
-                        if (optionValue == null || optionValue.isBlank()) {
-                            throw new InputValidationException("Option value cannot be empty for question '" + this.question + "' of type " + this.questionType);
-                        }
-                        Option option = optionsHashMap.get(optionValue);
-                        if (option == null) {
-                            option = Option.builder().option(optionValue).question(question).build();
-                            optionsHashMap.put(optionValue, option);
-                        }
-
-                        var correctOptionMatch = CorrectOptionMatch.builder()
-                            .match(match)
-                            .option(option)
-                            .question(question)
-                            .build();
-                        correctOptionMatches.add(correctOptionMatch);
-                    }
-                }
-
-                // normally correct option matches will save all
-                // options and matches inside it
-                question.setCorrectOptionMatches(correctOptionMatches);
-                // but for standalone matches, we will save them
-                // from the matches list
-                question.setMatches(standaloneMatches);
+                this.optionMatching(question);
                 break;
         }
         return question;
+    }
+
+    // private helpers
+    private void generalComparison(Question question){
+        if (this.questionType == QuestionType.FILL_IN_THE_BLANK) {
+            if (this.paragraphToBeFilled == null || this.paragraphToBeFilled.isBlank()) {
+                throw new InputValidationException("Paragraph to be filled is required for question '" + this.question + "' of type " + this.questionType);
+            }
+
+            int blanksCount = Question.countBlanks(this.paragraphToBeFilled);
+            if (blanksCount < Question.MIN_FILL_IN_THE_BLANK_BLANKS || blanksCount > Question.MAX_FILL_IN_THE_BLANK_BLANKS) {
+                throw new InputValidationException("Paragraph to be filled must contain at least one blank for question '" + this.question + "' of type " + this.questionType);
+            }
+        }
+
+        // this is between both FILL_IN_THE_BLANK, so it verifies the existence
+        // of the answer before counting it
+        if (this.answers == null || this.answers.isEmpty()) {
+            throw new InputValidationException("Answer is required for question '" + this.question + "' of type " + this.questionType);
+        }
+
+        if (this.questionType == QuestionType.FILL_IN_THE_BLANK) {
+            int blanksCount = Question.countBlanks(this.paragraphToBeFilled);
+            int answersCount = Question.countBlanksAnswers(this.answers.get(0));
+            if (blanksCount != answersCount){
+                throw new InputValidationException("There are " + blanksCount + " blanks in the paragraph but " + answersCount + " answers were provided for question '" + this.question + "' of type " + this.questionType);
+            }
+
+            question.setParagraphToBeFilled(this.paragraphToBeFilled);
+        }
+
+        question.setAnswers(
+                this.answers.stream()
+                        .map(answer -> Answer.builder().answer(answer).question(question).build())
+                        .toList()
+        );
+    }
+
+    private void choiceType(Question question){
+        if (this.choices == null || this.choices.isEmpty()) {
+            throw new InputValidationException("Choices are required for question '" + this.question + "' of type " + this.questionType);
+        }
+
+        if (this.choices.size() < Question.MIN_NUMBER_OF_CHOICES || this.choices.size() > Question.MAX_NUMBER_OF_CHOICES) {
+            throw new InputValidationException("Number of choices must be between " + Question.MIN_NUMBER_OF_CHOICES + " and " + Question.MAX_NUMBER_OF_CHOICES + " for question '" + this.question + "' of type " + this.questionType);
+        }
+
+        if (this.questionType == QuestionType.SINGLE_CHOICE) {
+            if (this.choices.values().stream().filter(Boolean::booleanValue).count() != 1) {
+                throw new InputValidationException("Exactly one choice must be correct for question '" + this.question + "' of type " + this.questionType);
+            }
+        }
+
+        if (this.questionType == QuestionType.MULTIPLE_CHOICE){
+            if (this.choices.values().stream().noneMatch(Boolean::booleanValue)) {
+                throw new InputValidationException("At least one choice must be correct for question '" + this.question + "' of type " + this.questionType);
+            }
+        }
+
+        var choicesList = this.choices.entrySet().stream()
+                .map(entry -> Choice.builder().choice(entry.getKey()).isCorrect(entry.getValue()).question(question).build()).toList();
+        question.setChoices(choicesList);
+    }
+
+    private void optionOrdering(Question question){
+        if (this.orderedOptions == null || this.orderedOptions.isEmpty()) {
+            throw new InputValidationException("Ordered options are required for question '" + this.question + "' of type " + this.questionType);
+        }
+        int numberOfOrderedOptions = this.orderedOptions.size();
+        if (numberOfOrderedOptions < Question.MIN_NUMBER_OF_ORDERED_OPTIONS || numberOfOrderedOptions > Question.MAX_NUMBER_OF_ORDERED_OPTIONS) {
+            throw new InputValidationException("Number of ordered options must be between " + Question.MIN_NUMBER_OF_ORDERED_OPTIONS + " and " + Question.MAX_NUMBER_OF_ORDERED_OPTIONS + " for question '" + this.question + "' of type " + this.questionType);
+        }
+
+        var orderedOptions = new ArrayList<OrderedOption>();
+        for (var entry : this.orderedOptions.entrySet()) {
+            if (entry.getValue() == null || entry.getValue().isBlank()) {
+                throw new InputValidationException("Option value cannot be empty for question '" + this.question + "' of type " + this.questionType + " at position " + entry.getKey());
+            }
+            orderedOptions.add(OrderedOption.builder()
+                    .correctPosition(entry.getKey())
+                    .option(entry.getValue())
+                    .question(question)
+                    .build());
+        }
+        question.setOrderedOptions(orderedOptions);
+    }
+
+    private void optionMatching(Question question){
+        // we don't check for duplication because the data is received as a map
+        if (this.optionMatches == null || this.optionMatches.isEmpty()) {
+            throw new InputValidationException("options and matches are required for question '" + this.question + "' of type " + this.questionType);
+        }
+
+        int numberOfOptionMatchesMatches = this.numberOfMatches();
+        if (numberOfOptionMatchesMatches < Question.MIN_NUMBER_OF_OPTION_MATCHES_MATCHES || numberOfOptionMatchesMatches > Question.MAX_NUMBER_OF_OPTION_MATCHES_MATCHES) {
+            throw new InputValidationException("Number of matches must be between " + Question.MIN_NUMBER_OF_OPTION_MATCHES_MATCHES + " and " + Question.MAX_NUMBER_OF_OPTION_MATCHES_MATCHES + " for question '" + this.question + "' of type " + this.questionType);
+        }
+
+        int numberOfOptionMatchesOptions = this.numberOfOptions();
+        if (numberOfOptionMatchesOptions < Question.MIN_NUMBER_OF_OPTION_MATCHES_OPTIONS || numberOfOptionMatchesOptions > Question.MAX_NUMBER_OF_OPTION_MATCHES_OPTIONS) {
+            throw new InputValidationException("Number of options must be between " + Question.MIN_NUMBER_OF_OPTION_MATCHES_OPTIONS + " and " + Question.MAX_NUMBER_OF_OPTION_MATCHES_OPTIONS + " for question '" + this.question + "' of type " + this.questionType);
+        }
+
+        // algorithm for transforming the data
+        var correctOptionMatches = new ArrayList<CorrectOptionMatch>();
+        var standaloneMatches = new ArrayList<Match>();
+        var optionsHashMap = new HashMap<String,Option>();
+        for (var entry : this.optionMatches.entrySet()) {
+            List<String> optionValues = entry.getValue();
+            String matchValue = entry.getKey();
+            if (matchValue == null || matchValue.isBlank()) {
+                throw new InputValidationException("Match value cannot be empty for question '" + this.question + "' of type " + this.questionType);
+            }
+            var match = Match.builder().match(matchValue).question(question).build();
+
+            if (optionValues == null || optionValues.isEmpty()) {
+                standaloneMatches.add(match);
+                continue;
+            }
+
+            for (String optionValue : optionValues) {
+                if (optionValue == null || optionValue.isBlank()) {
+                    throw new InputValidationException("Option value cannot be empty for question '" + this.question + "' of type " + this.questionType);
+                }
+                Option option = optionsHashMap.get(optionValue);
+                if (option == null) {
+                    option = Option.builder().option(optionValue).question(question).build();
+                    optionsHashMap.put(optionValue, option);
+                }
+
+                var correctOptionMatch = CorrectOptionMatch.builder()
+                        .match(match)
+                        .option(option)
+                        .question(question)
+                        .build();
+                correctOptionMatches.add(correctOptionMatch);
+            }
+        }
+
+        // normally correct option matches will save all
+        // options and matches inside it
+        question.setCorrectOptionMatches(correctOptionMatches);
+        // but for standalone matches, we will save them
+        // from the matches list
+        question.setMatches(standaloneMatches);
     }
 
     private String[] getOptions(){
@@ -241,6 +257,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         return options.toArray(new String[0]);
     }
 
+    // global helpers
     public int numberOfOptions(){
         return this.getOptions().length;
     }
