@@ -88,6 +88,14 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         switch (questionType) {
             case TRUE_FALSE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK:
                 this.generalComparison(question);
+                if (this.answers == null || this.answers.isEmpty()) {
+                    throw new InputValidationException("Answer is required for question '" + this.question + "' of type " + this.questionType);
+                }
+                question.setAnswers(
+                        this.answers.stream()
+                                .map(answer -> Answer.builder().answer(answer).question(question).build())
+                                .toList()
+                );
                 break;
 
             case MULTIPLE_CHOICE:
