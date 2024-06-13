@@ -24,7 +24,7 @@ public class Feedback {
     @Id
     @GeneratedValue
     private UUID id;
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false,length = 1024)
     @NotBlank
     private String content;
     private Integer rating;

@@ -50,4 +50,11 @@ public class Quiz {
     public int hashCode() {
         return Objects.hash(id, title);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Quiz quiz)) return false;
+        return Objects.equals(id, quiz.id);
+    }
 }

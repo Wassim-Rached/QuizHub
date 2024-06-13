@@ -46,4 +46,11 @@ public class ChoiceAttempt {
     public int hashCode() {
         return Objects.hash(id, isCorrect);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof ChoiceAttempt choiceAttempt)) return false;
+        return Objects.equals(id, choiceAttempt.id);
+    }
 }

@@ -48,4 +48,11 @@ public class Answer {
     public int hashCode() {
         return Objects.hash(id, answer);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Answer other)) return false;
+        return Objects.equals(id, other.id);
+    }
 }
