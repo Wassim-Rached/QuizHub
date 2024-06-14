@@ -1,118 +1,10 @@
 [
   {
-    "title": "Fundamentals of Data Science Quiz",
+    "title": "Web Development Basics Quiz",
     "quizAccessType": "PUBLIC",
     "questions": [
       {
-        "question": "A scatter plot is used to visualize the relationship between two variables.",
-        "questionType": "TRUE_FALSE",
-        "coefficient": 1.0,
-        "answers": ["TRUE"],
-        "choices": null,
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "What does 'KNN' stand for in machine learning?",
-        "questionType": "SHORT_ANSWER",
-        "coefficient": 1.0,
-        "answers": ["K-Nearest Neighbors"],
-        "choices": null,
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "How many principal components are used in PCA to explain the maximum variance?",
-        "questionType": "NUMERIC",
-        "coefficient": 1.0,
-        "answers": ["2"],
-        "choices": null,
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "Fill in the blanks please",
-        "paragraphToBeFilled": "In supervised learning, the {{blank}} variable is predicted using the {{blank}} variables.",
-        "questionType": "FILL_IN_THE_BLANK",
-        "coefficient": 1.0,
-        "answers": ["target(|)feature"],
-        "choices": null,
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "Which of these is a type of clustering algorithm?",
-        "questionType": "SINGLE_CHOICE",
-        "coefficient": 1.0,
-        "answer": null,
-        "choices": {
-          "K-Means": true,
-          "Linear Regression": false,
-          "Logistic Regression": false,
-          "Decision Tree": false
-        },
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "Which of the following are types of neural networks?",
-        "questionType": "MULTIPLE_CHOICE",
-        "coefficient": 1.0,
-        "answer": null,
-        "choices": {
-          "Convolutional Neural Networks (CNNs)": true,
-          "Recurrent Neural Networks (RNNs)": true,
-          "Support Vector Machines (SVMs)": false,
-          "Random Forests": false,
-          "Generative Adversarial Networks (GANs)": true
-        },
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "Match the following machine learning terms with their definitions.",
-        "questionType": "OPTION_MATCHING",
-        "coefficient": 1.0,
-        "answer": null,
-        "choices": null,
-        "orderedOptions": null,
-        "optionMatches": {
-          "A modeling error which occurs when a function is too closely fit to a limited set of data points.": [
-            "Overfitting"
-          ],
-          "A technique used to prevent overfitting by adding a penalty term to the model.": [
-            "Regularization"
-          ],
-          "A statistical method used to estimate the skill of machine learning models.": [
-            "Cross-Validation"
-          ],
-          "A method for optimizing hyperparameters.": [],
-          "A commonly used activation function.": []
-        }
-      },
-      {
-        "question": "Arrange the following steps of the data preprocessing workflow in the correct order.",
-        "questionType": "OPTION_ORDERING",
-        "coefficient": 1.0,
-        "answer": null,
-        "choices": null,
-        "orderedOptions": {
-          "1": "Data Cleaning",
-          "2": "Data Integration",
-          "3": "Data Transformation",
-          "4": "Data Reduction",
-          "5": "Data Discretization"
-        },
-        "optionMatches": null
-      }
-    ]
-  },
-  {
-    "title": "Frontend Development Quiz",
-    "quizAccessType": "PUBLIC",
-    "questions": [
-      {
-        "question": "HTML is used to structure content on the web.",
+        "question": "HTML stands for HyperText Markup Language.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1.0,
         "answers": ["TRUE"],
@@ -130,20 +22,20 @@
         "optionMatches": null
       },
       {
-        "question": "How many pixels are there in a rem unit if the root font-size is 16px?",
+        "question": "How many main heading tags are there in HTML?",
         "questionType": "NUMERIC",
         "coefficient": 1.0,
-        "answers": ["16"],
+        "answers": ["6"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
         "question": "Fill in the blanks please",
-        "paragraphToBeFilled": "In CSS, the {{blank}} property is used to set the text color, and the {{blank}} property is used to set the background color.",
+        "paragraphToBeFilled": "In HTML, the {{blank}} tag is used to create a hyperlink, and the {{blank}} tag is used to create an image.",
         "questionType": "FILL_IN_THE_BLANK",
         "coefficient": 1.0,
-        "answers": ["color(|)background-color"],
+        "answers": ["<a>(|)<img>"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
@@ -155,72 +47,72 @@
         "answer": null,
         "choices": {
           "React": true,
-          "CSS": false,
           "HTML": false,
+          "CSS": false,
           "SQL": false
         },
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Which of the following are CSS pre-processors?",
+        "question": "Which of the following are HTML elements?",
         "questionType": "MULTIPLE_CHOICE",
         "coefficient": 1.0,
         "answer": null,
         "choices": {
-          "Sass": true,
-          "LESS": true,
-          "Stylus": true,
-          "PostCSS": false,
-          "TypeScript": false
+          "<div>": true,
+          "<span>": true,
+          "<p>": true,
+          "<style>": false,
+          "<script>": false
         },
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Match the following frontend terms with their definitions.",
+        "question": "Match the following HTML tags with their purposes.",
         "questionType": "OPTION_MATCHING",
         "coefficient": 1.0,
         "answer": null,
         "choices": null,
         "orderedOptions": null,
         "optionMatches": {
-          "A JavaScript library for building user interfaces.": [
-            "React"
+          "Defines a paragraph.": [
+            "<p>"
           ],
-          "A CSS framework for developing responsive and mobile-first websites.": [
-            "Bootstrap"
+          "Defines a division or a section.": [
+            "<div>"
           ],
-          "A package manager for JavaScript.": [
-            "npm"
+          "Defines a header for a document or section.": [
+            "<header>"
           ],
-          "A tool for optimizing web performance.": [],
-          "A templating language for HTML.": []
+          "Defines an unordered list.": [],
+          "Defines a hyperlink.": []
         }
       },
       {
-        "question": "Arrange the following steps of the typical frontend development workflow in the correct order.",
+        "question": "Arrange the following steps of building a simple web page in the correct order.",
         "questionType": "OPTION_ORDERING",
         "coefficient": 1.0,
         "answer": null,
         "choices": null,
         "orderedOptions": {
-          "1": "Design Mockups",
-          "2": "HTML Structuring",
-          "3": "CSS Styling",
-          "4": "JavaScript Functionality",
-          "5": "Testing and Debugging"
+          "1": "Create HTML structure",
+          "2": "Add CSS styles",
+          "3": "Include JavaScript functionality",
+          "4": "Test the web page",
+          "5": "Deploy the web page"
         },
         "optionMatches": null
       }
     ]
   },
   {
-    "title": "Backend Development Quiz",
+    "title": "DBMS Basics Quiz",
     "quizAccessType": "PUBLIC",
     "questions": [
       {
-        "question": "RESTful APIs use HTTP methods such as GET, POST, PUT, and DELETE.",
+        "question": "DBMS stands for Database Management System.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1.0,
         "answers": ["TRUE"],
@@ -229,106 +121,106 @@
         "optionMatches": null
       },
       {
-        "question": "What does 'ORM' stand for in the context of database management?",
+        "question": "What does 'SQL' stand for?",
         "questionType": "SHORT_ANSWER",
         "coefficient": 1.0,
-        "answers": ["Object-Relational Mapping"],
+        "answers": ["Structured Query Language"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "How many distinct series of HTTP status codes represent a successful HTTP request?",
+        "question": "How many primary types of data models are there in DBMS?",
         "questionType": "NUMERIC",
         "coefficient": 1.0,
-        "answers": ["1"],
+        "answers": ["3"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
         "question": "Fill in the blanks please",
-        "paragraphToBeFilled": "In a relational database, the {{blank}} clause is used to filter records, and the {{blank}} clause is used to sort the results.",
+        "paragraphToBeFilled": "In a relational database, the {{blank}} key uniquely identifies each record, while the {{blank}} key is used to link two tables.",
         "questionType": "FILL_IN_THE_BLANK",
         "coefficient": 1.0,
-        "answers": ["WHERE(|)ORDER BY"],
+        "answers": ["primary(|)foreign"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Which of these is a NoSQL database?",
+        "question": "Which of these is a popular relational database management system?",
         "questionType": "SINGLE_CHOICE",
         "coefficient": 1.0,
         "answer": null,
         "choices": {
-          "MongoDB": true,
-          "PostgreSQL": false,
-          "MySQL": false,
-          "SQLite": false
+          "MySQL": true,
+          "Python": false,
+          "HTML": false,
+          "CSS": false
         },
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Which of the following are HTTP methods?",
+        "question": "Which of the following are types of database keys?",
         "questionType": "MULTIPLE_CHOICE",
         "coefficient": 1.0,
         "answer": null,
         "choices": {
-          "GET": true,
-          "POST": true,
-          "DELETE": true,
-          "FETCH": false,
-          "CONNECT": true
+          "Primary Key": true,
+          "Foreign Key": true,
+          "Composite Key": true,
+          "CSS Key": false,
+          "JavaScript Key": false
         },
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Match the following backend terms with their definitions.",
+        "question": "Match the following SQL commands with their purposes.",
         "questionType": "OPTION_MATCHING",
         "coefficient": 1.0,
         "answer": null,
         "choices": null,
         "orderedOptions": null,
         "optionMatches": {
-          "A lightweight, highly scalable, and super-fast HTTP server.": [
-            "Nginx"
+          "Used to create a table.": [
+            "CREATE"
           ],
-          "An open-source SQL database management system.": [
-            "MySQL"
+          "Used to insert data into a table.": [
+            "INSERT"
           ],
-          "A tool for managing dependencies in a project.": [
-            "npm"
+          "Used to update existing data within a table.": [
+            "UPDATE"
           ],
-          "A protocol for securing communications over a computer network.": [],
-          "A type of middleware that helps in processing requests and responses.": []
+          "Used to delete records from a table.": [],
+          "Used to retrieve data from a table.": []
         }
       },
       {
-        "question": "Arrange the following steps of the typical backend development workflow in the correct order.",
+        "question": "Arrange the following steps of designing a database in the correct order.",
         "questionType": "OPTION_ORDERING",
         "coefficient": 1.0,
         "answer": null,
         "choices": null,
         "orderedOptions": {
-          "1": "Requirement Analysis",
-          "2": "Database Design",
-          "3": "API Development",
-          "4": "Testing",
-          "5": "Deployment"
+          "1": "Identify the purpose of the database",
+          "2": "Gather data requirements",
+          "3": "Define tables and fields",
+          "4": "Establish relationships between tables",
+          "5": "Normalize the database"
         },
         "optionMatches": null
       }
     ]
   },
   {
-    "title": "DevOps Fundamentals Quiz",
+    "title": "Programming Languages Basics Quiz",
     "quizAccessType": "PUBLIC",
     "questions": [
       {
-        "question": "DevOps aims to unify software development (Dev) and software operation (Ops).",
+        "question": "Python is a programming language.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1.0,
         "answers": ["TRUE"],
@@ -337,16 +229,16 @@
         "optionMatches": null
       },
       {
-        "question": "What does 'CI/CD' stand for in the context of DevOps?",
+        "question": "What does 'OOP' stand for?",
         "questionType": "SHORT_ANSWER",
         "coefficient": 1.0,
-        "answers": ["Continuous Integration/Continuous Deployment"],
+        "answers": ["Object-Oriented Programming"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "How many main phases are there in a typical CI/CD pipeline?",
+        "question": "How many main data types are there in most programming languages?",
         "questionType": "NUMERIC",
         "coefficient": 1.0,
         "answers": ["4"],
@@ -356,86 +248,87 @@
       },
       {
         "question": "Fill in the blanks please",
-        "paragraphToBeFilled": "In DevOps, the {{blank}} tool is used for automating configuration management, and {{blank}} is used for container orchestration.",
+        "paragraphToBeFilled": "In Python, the {{blank}} keyword is used to define a function, and the {{blank}} keyword is used to create a class.",
         "questionType": "FILL_IN_THE_BLANK",
         "coefficient": 1.0,
-        "answers": ["Ansible(|)Kubernetes"],
+        "answers": ["def(|)class"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Which of these is a version control system?",
+        "question": "Which of these is a statically typed programming language?",
         "questionType": "SINGLE_CHOICE",
         "coefficient": 1.0,
         "answer": null,
         "choices": {
-          "Git": true,
-          "Docker": false,
-          "Jenkins": false,
-          "Terraform": false
+          "Java": true,
+          "Python": false,
+          "JavaScript": false,
+          "Ruby": false
         },
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Which of the following are containerization tools?",
+        "question": "Which of the following are programming paradigms?",
         "questionType": "MULTIPLE_CHOICE",
         "coefficient": 1.0,
         "answer": null,
         "choices": {
-          "Docker": true,
-          "Podman": true,
-          "Vagrant": false,
-          "Kubernetes": true,
-          "Chef": false
+          "Object-Oriented Programming": true,
+          "Functional Programming": true,
+          "Procedural Programming": true,
+          "Relational Programming": false,
+          "Markup Programming": false
         },
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Match the following DevOps tools with their primary uses.",
+        "question": "Match the following programming languages with their typical use cases.",
         "questionType": "OPTION_MATCHING",
         "coefficient": 1.0,
         "answer": null,
         "choices": null,
         "orderedOptions": null,
         "optionMatches": {
-          "Version control system for tracking changes in source code.": [
-            "Git"
+          "Used for web development.": [
+            "JavaScript"
           ],
-          "Automation server for building, testing, and deploying code.": [
-            "Jenkins"
+          "Used for system programming.": [
+            "C"
           ],
-          "Tool for defining and provisioning infrastructure as code.": [
-            "Terraform"
+          "Used for scientific computing.": [
+            "Python"
           ],
-          "Configuration management tool used for automating infrastructure tasks.": [],
-          "Container platform that automates the deployment, scaling, and management of containerized applications.": []
+          "Used for mobile app development.": [],
+          "Used for enterprise applications.": []
         }
       },
       {
-        "question": "Arrange the following steps of a typical CI/CD pipeline in the correct order.",
+        "question": "Arrange the following steps of writing a simple program in the correct order.",
         "questionType": "OPTION_ORDERING",
         "coefficient": 1.0,
         "answer": null,
         "choices": null,
         "orderedOptions": {
-          "1": "Source",
-          "2": "Build",
-          "3": "Test",
-          "4": "Deploy"
+          "1": "Choose a programming language",
+          "2": "Write the code",
+          "3": "Compile/interpret the code",
+          "4": "Run the program",
+          "5": "Debug the program"
         },
         "optionMatches": null
       }
     ]
   },
   {
-    "title": "Design Patterns and Best Practices Quiz",
+    "title": "Design Patterns Basics Quiz",
     "quizAccessType": "PUBLIC",
     "questions": [
       {
-        "question": "The Singleton pattern ensures a class has only one instance and provides a global point of access to it.",
+        "question": "The Singleton pattern ensures a class has only one instance.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1.0,
         "answers": ["TRUE"],
@@ -444,58 +337,58 @@
         "optionMatches": null
       },
       {
-        "question": "What does 'SOLID' stand for in object-oriented design?",
+        "question": "What is the main purpose of the Factory Method pattern?",
         "questionType": "SHORT_ANSWER",
         "coefficient": 1.0,
-        "answers": ["Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion"],
+        "answers": ["To create objects without specifying the exact class"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "How many principles are included in the SOLID design principles?",
+        "question": "How many main categories of design patterns are there?",
         "questionType": "NUMERIC",
         "coefficient": 1.0,
-        "answers": ["5"],
+        "answers": ["3"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
         "question": "Fill in the blanks please",
-        "paragraphToBeFilled": "The {{blank}} pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation. The {{blank}} pattern defines an interface for creating a single object but lets subclasses alter the type of objects that will be created.",
+        "paragraphToBeFilled": "The {{blank}} pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.",
         "questionType": "FILL_IN_THE_BLANK",
         "coefficient": 1.0,
-        "answers": ["Iterator(|)Factory Method"],
+        "answers": ["Iterator"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Which of these is a creational design pattern?",
+        "question": "Which of these patterns is a creational pattern?",
         "questionType": "SINGLE_CHOICE",
         "coefficient": 1.0,
         "answer": null,
         "choices": {
-          "Abstract Factory": true,
-          "Adapter": false,
+          "Singleton": true,
+          "Observer": false,
           "Decorator": false,
-          "Observer": false
+          "Mediator": false
         },
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Which of the following are structural design patterns?",
+        "question": "Which of the following are structural patterns?",
         "questionType": "MULTIPLE_CHOICE",
         "coefficient": 1.0,
         "answer": null,
         "choices": {
           "Adapter": true,
           "Bridge": true,
-          "Facade": true,
+          "Composite": true,
           "Command": false,
-          "Template Method": false
+          "Strategy": false
         },
         "orderedOptions": null,
         "optionMatches": null
@@ -508,138 +401,31 @@
         "choices": null,
         "orderedOptions": null,
         "optionMatches": {
-          "Provides an interface for creating families of related or dependent objects without specifying their concrete classes.": [
-            "Abstract Factory"
+          "Defines a family of algorithms and makes them interchangeable.": [
+            "Strategy"
           ],
-          "Converts the interface of a class into another interface clients expect.": [
-            "Adapter"
+          "Separates object construction from its representation.": [
+            "Builder"
           ],
-          "Allows an object to alter its behavior when its internal state changes.": [
-            "State"
+          "Encapsulates a request as an object.": [
+            "Command"
           ],
-          "Ensures a class has only one instance and provides a global point of access to it.": [],
-          "Allows an object to be notified when a state change occurs.": []
+          "Provides a surrogate or placeholder for another object.": [],
+          "Ensures a class has only one instance.": []
         }
       },
       {
-        "question": "Arrange the following steps of the software design process in the correct order.",
+        "question": "Arrange the following steps of using the Observer pattern in the correct order.",
         "questionType": "OPTION_ORDERING",
         "coefficient": 1.0,
         "answer": null,
         "choices": null,
         "orderedOptions": {
-          "1": "Requirement Analysis",
-          "2": "System Design",
-          "3": "Implementation",
-          "4": "Testing",
-          "5": "Maintenance"
-        },
-        "optionMatches": null
-      }
-    ]
-  },
-  {
-    "title": "Advanced Database Management Quiz",
-    "quizAccessType": "PUBLIC",
-    "questions": [
-      {
-        "question": "A database transaction must follow the ACID properties to ensure data integrity.",
-        "questionType": "TRUE_FALSE",
-        "coefficient": 1.0,
-        "answers": ["TRUE"],
-        "choices": null,
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "What does 'MVCC' stand for in database management?",
-        "questionType": "SHORT_ANSWER",
-        "coefficient": 1.0,
-        "answers": ["Multiversion Concurrency Control"],
-        "choices": null,
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "How many normal forms are there in the process of database normalization?",
-        "questionType": "NUMERIC",
-        "coefficient": 1.0,
-        "answers": ["5"],
-        "choices": null,
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "Fill in the blanks please",
-        "paragraphToBeFilled": "In a relational database, a {{blank}} key uniquely identifies each record in a table, while a {{blank}} key is a field (or collection of fields) in one table that uniquely identifies a row of another table.",
-        "questionType": "FILL_IN_THE_BLANK",
-        "coefficient": 1.0,
-        "answers": ["primary(|)foreign"],
-        "choices": null,
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "Which of these is used to ensure the atomicity of transactions?",
-        "questionType": "SINGLE_CHOICE",
-        "coefficient": 1.0,
-        "answer": null,
-        "choices": {
-          "Two-phase commit": true,
-          "Sharding": false,
-          "Replication": false,
-          "Indexing": false
-        },
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "Which of the following are types of database isolation levels?",
-        "questionType": "MULTIPLE_CHOICE",
-        "coefficient": 1.0,
-        "answer": null,
-        "choices": {
-          "Read Uncommitted": true,
-          "Read Committed": true,
-          "Repeatable Read": true,
-          "Serializable": true,
-          "Non-repeatable Read": false
-        },
-        "orderedOptions": null,
-        "optionMatches": null
-      },
-      {
-        "question": "Match the following SQL keywords with their descriptions.",
-        "questionType": "OPTION_MATCHING",
-        "coefficient": 1.0,
-        "answer": null,
-        "choices": null,
-        "orderedOptions": null,
-        "optionMatches": {
-          "Ensures that all database changes are committed or none are.": [
-            "COMMIT"
-          ],
-          "Rolls back a transaction to the beginning or to a savepoint.": [
-            "ROLLBACK"
-          ],
-          "Sets a savepoint within a transaction.": [
-            "SAVEPOINT"
-          ],
-          "Used to grant specific privileges to users or roles.": [],
-          "Retrieves specific data from one or more tables.": []
-        }
-      },
-      {
-        "question": "Arrange the following steps of query optimization in the correct order.",
-        "questionType": "OPTION_ORDERING",
-        "coefficient": 1.0,
-        "answer": null,
-        "choices": null,
-        "orderedOptions": {
-          "1": "Parsing",
-          "2": "Translation",
-          "3": "Optimization",
-          "4": "Execution"
+          "1": "Define a subject interface",
+          "2": "Create concrete observer classes",
+          "3": "Implement a concrete subject class",
+          "4": "Register observers with the subject",
+          "5": "Notify observers of changes"
         },
         "optionMatches": null
       }
