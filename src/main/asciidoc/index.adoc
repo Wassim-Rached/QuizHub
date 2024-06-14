@@ -20,6 +20,11 @@ The QuizHub Backend Server provides RESTful APIs for managing quizzes, users, an
 include::{snippets}/quiz/search-quizzes/http-request.adoc[]
 include::{snippets}/quiz/search-quizzes/http-response.adoc[]
 
+=== Get Quiz By ID
+.Get a quiz by its ID
+include::{snippets}/quiz/get-quiz-by-id/http-request.adoc[]
+include::{snippets}/quiz/get-quiz-by-id/http-response.adoc[]
+
 === Create Quiz
 .Create a new quiz
 include::{snippets}/quiz/create-quiz/http-request.adoc[]

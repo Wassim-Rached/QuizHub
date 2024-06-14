@@ -104,6 +104,24 @@ class QuizControllerTest {
 
     @Test
     @Order(3)
+    void getQuizById() throws Exception {
+        // arrange
+        UUID quizId = quiz.getId();
+
+        // act and assert
+        this.mockMvc.perform(get("/api/quiz/{quizId}", quizId))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.status").value(StandardApiStatus.SUCCESS.toString()))
+            .andExpect(jsonPath("$.data").exists())
+            .andDo(document(
+                    "get-quiz-by-id",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint())
+            ));
+    }
+
+    @Test
+    @Order(4)
     void startQuizAttempt() throws Exception {
         UUID quizId = quiz.getId();
         // act and assert
@@ -121,7 +139,7 @@ class QuizControllerTest {
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     void submitQuestionAttempts() throws Exception {
         // arrange
         List<QuestionAttemptSubmissionDTO> attempts = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(quiz);
@@ -141,7 +159,7 @@ class QuizControllerTest {
     }
 
     @Test
-    @Order(5)
+    @Order(6)
     void getQuizAttemptTaking() throws Exception {
         // arrange, act and assert
         this.mockMvc.perform(get("/api/quiz/attempt/{quizAttemptId}/taking", quizAttemptId))
@@ -156,7 +174,7 @@ class QuizControllerTest {
     }
 
     @Test
-    @Order(6)
+    @Order(7)
     @Transactional
     void cancelQuizAttempt() throws Exception {
         // arrange, act and assert
@@ -171,7 +189,7 @@ class QuizControllerTest {
     }
 
     @Test
-    @Order(7)
+    @Order(8)
     void finishQuizAttempt() throws Exception {
         // arrange, act and assert
         this.mockMvc.perform(post("/api/quiz/attempt/{quizAttemptId}/finish", quizAttemptId))
@@ -186,7 +204,7 @@ class QuizControllerTest {
     }
 
     @Test
-    @Order(8)
+    @Order(9)
     void getQuizAttemptResult() throws Exception {
         // arrange, act and assert
         this.mockMvc.perform(get("/api/quiz/attempt/{quizAttemptId}/result", quizAttemptId))

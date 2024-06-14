@@ -72,7 +72,7 @@ class QuizServiceTest {
     }
 
     @Nested
-    class Test_startQuizAttempt{
+    class Test_startQuizAttempt {
         private Quiz preExisting__Quiz;
 
         @BeforeEach
@@ -84,7 +84,7 @@ class QuizServiceTest {
         }
 
         @Test
-        void test_normal(){
+        void test_normal() {
             // when
             QuizAttempt quizAttempt = quizService.startQuizAttempt(preExisting__Quiz.getId());
 
@@ -94,7 +94,7 @@ class QuizServiceTest {
     }
 
     @Nested
-    class Test_submitQuestionAttempts{
+    class Test_submitQuestionAttempts {
         private QuizAttempt preExisting__QuizAttempt;
         private Quiz preExisting__Quiz;
 
@@ -110,7 +110,7 @@ class QuizServiceTest {
         }
 
         @Test
-        void test_normal(){
+        void test_normal() {
             // given
             var attemptsSubmissions = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
 
@@ -122,11 +122,11 @@ class QuizServiceTest {
             entityManager.clear();
             var quizAttempt = quizAttemptRepository.findById(preExisting__QuizAttempt.getId()).orElseThrow(() -> new IrregularBehaviorException("Quiz attempt not found"));
             var questionAttempts = quizAttempt.getQuestionAttempts();
-            assertEquals(attemptsSubmissions.size(),questionAttempts.size());
+            assertEquals(attemptsSubmissions.size(), questionAttempts.size());
         }
 
         @Test
-        void test_quiz_attempt_already_finished(){
+        void test_quiz_attempt_already_finished() {
             // given
             quizService.finishQuizAttempt(preExisting__QuizAttempt.getId());
             var attemptsSubmissions = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
@@ -136,7 +136,7 @@ class QuizServiceTest {
         }
 
         @Test
-        void test_quiz_attempt_not_found(){
+        void test_quiz_attempt_not_found() {
             // given
             var attemptsSubmissions = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
 
@@ -145,7 +145,7 @@ class QuizServiceTest {
         }
 
         @Test
-        void test_unrelated_question_attempt(){
+        void test_unrelated_question_attempt() {
             // given
             var quizCreationDTO = new QuizCreationDTO();
             fakeDataRandomGenerator.fill(quizCreationDTO);
@@ -157,11 +157,11 @@ class QuizServiceTest {
             var ex = assertThrows(InputValidationException.class,
                     () -> quizService.submitQuestionAttempts(List.of(attemptsSubmissions), preExisting__QuizAttempt.getId())
             );
-            assertEquals("Question with id " + anotherQuizQuestion.getId() + " does not belong to quiz with id " + preExisting__QuizAttempt.getQuiz().getId(),ex.getMessage());
+            assertEquals("Question with id " + anotherQuizQuestion.getId() + " does not belong to quiz with id " + preExisting__QuizAttempt.getQuiz().getId(), ex.getMessage());
         }
 
         @Test
-        void test_overlapping_question_attempts(){
+        void test_overlapping_question_attempts() {
             // given
             var attemptsSubmissions_random = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
             var attemptsSubmissions_perfectScore = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
@@ -174,12 +174,12 @@ class QuizServiceTest {
 
             // then
             var quizAttempt = quizService.finishQuizAttempt(preExisting__QuizAttempt.getId());
-            assertEquals(100f,quizAttempt.getScore());
+            assertEquals(100f, quizAttempt.getScore());
         }
     }
 
     @Nested
-    class Test_cancelQuizAttempt{
+    class Test_cancelQuizAttempt {
         private QuizAttempt preExisting__QuizAttempt;
 
         @BeforeEach
@@ -193,7 +193,7 @@ class QuizServiceTest {
         }
 
         @Test
-        void test_without_attempts(){
+        void test_without_attempts() {
             // when
             quizService.cancelQuizAttempt(preExisting__QuizAttempt.getId());
 
@@ -203,7 +203,7 @@ class QuizServiceTest {
         }
 
         @Test
-        void test_with_attempts(){
+        void test_with_attempts() {
             //given
             var attempts = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(preExisting__QuizAttempt.getQuiz());
             quizService.submitQuestionAttempts(attempts, preExisting__QuizAttempt.getId());
@@ -219,7 +219,7 @@ class QuizServiceTest {
     }
 
     @Nested
-    class Test_getQuizAttemptTaking{
+    class Test_getQuizAttemptTaking {
 
         private QuizAttempt preExisting__QuizAttempt;
 
@@ -259,7 +259,7 @@ class QuizServiceTest {
     }
 
     @Nested
-    class Test_finishQuizAttempt{
+    class Test_finishQuizAttempt {
         private QuizAttempt preExisting__QuizAttempt;
 
         @BeforeEach
@@ -280,19 +280,19 @@ class QuizServiceTest {
         }
 
         @Test
-        void test_normal(){
+        void test_normal() {
             // when
             QuizAttempt quizAttempt = quizService.finishQuizAttempt(preExisting__QuizAttempt.getId());
 
             // then
             assertNotNull(quizAttempt);
-            assertEquals(100f,quizAttempt.getScore());
+            assertEquals(100f, quizAttempt.getScore());
         }
 
     }
 
     @Nested
-    class Test_getQuizAttemptResult{
+    class Test_getQuizAttemptResult {
         private QuizAttempt preExisting__QuizAttempt;
         private Quiz preExisting__Quiz;
 
@@ -310,7 +310,7 @@ class QuizServiceTest {
         void test_with_attempts() {
             // given
             var attempts = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(preExisting__Quiz);
-            quizService.submitQuestionAttempts(attempts,preExisting__QuizAttempt.getId());
+            quizService.submitQuestionAttempts(attempts, preExisting__QuizAttempt.getId());
             quizService.finishQuizAttempt(preExisting__QuizAttempt.getId());
             entityManager.flush();
             entityManager.clear();
@@ -321,8 +321,8 @@ class QuizServiceTest {
             // then
             assertNotNull(quizAttemptResult);
             assertNotNull(quizAttemptResult.getScore());
-            assertTrue(quizAttemptResult.getQuestions().stream().noneMatch(q-> q.getQuestionAttempt() == null));
-            assertEquals(preExisting__Quiz.getQuestions().size(),quizAttemptResult.getQuestions().size());
+            assertTrue(quizAttemptResult.getQuestions().stream().noneMatch(q -> q.getQuestionAttempt() == null));
+            assertEquals(preExisting__Quiz.getQuestions().size(), quizAttemptResult.getQuestions().size());
         }
 
         @Test
@@ -337,9 +337,9 @@ class QuizServiceTest {
 
             // then
             assertNotNull(quizAttemptResult);
-            assertEquals(0f,quizAttemptResult.getScore());
-            assertTrue(quizAttemptResult.getQuestions().stream().noneMatch(q-> q.getQuestionAttempt() != null));
-            assertEquals(preExisting__Quiz.getQuestions().size(),quizAttemptResult.getQuestions().size());
+            assertEquals(0f, quizAttemptResult.getScore());
+            assertTrue(quizAttemptResult.getQuestions().stream().noneMatch(q -> q.getQuestionAttempt() != null));
+            assertEquals(preExisting__Quiz.getQuestions().size(), quizAttemptResult.getQuestions().size());
         }
 
         @Test
@@ -352,9 +352,40 @@ class QuizServiceTest {
         void test_quiz_attempt_not_finished() {
             // when
             var ex = assertThrows(InputValidationException.class, () -> quizService.getQuizAttemptResult(preExisting__QuizAttempt.getId()));
-            assertEquals("Quiz attempt with id " + preExisting__QuizAttempt.getId() + " is not finished yet",ex.getMessage());
+            assertEquals("Quiz attempt with id " + preExisting__QuizAttempt.getId() + " is not finished yet", ex.getMessage());
         }
     }
 
+    @Nested
+    class Test_getQuizById {
+        private Quiz preExisting__Quiz;
 
+        @BeforeEach
+        void setUp() {
+            // Set up pre-existing data, such as a quiz, to be used in multiple tests
+            QuizCreationDTO quizCreationDTO = new QuizCreationDTO();
+            fakeDataRandomGenerator.fill(quizCreationDTO);
+            preExisting__Quiz = quizService.createQuiz(quizCreationDTO);
+        }
+
+        // normal behavior tests
+        @Test
+        void test_normal() {
+            // given
+            UUID quizId = preExisting__Quiz.getId();
+
+            // when
+            var quiz = quizService.getQuizById(quizId);
+
+            // then
+            assertNotNull(quiz);
+            assertEquals(quizId, quiz.getId());
+        }
+
+        @Test
+        void test_not_found() {
+            // when
+            assertThrows(EntityNotFoundException.class, () -> quizService.getQuizById(UUID.randomUUID()));
+        }
+    }
 }
