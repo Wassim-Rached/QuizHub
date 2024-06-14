@@ -1,6 +1,7 @@
 [
   {
     "title": "Fundamentals of Data Science Quiz",
+    "quizAccessType": "PUBLIC",
     "questions": [
       {
         "question": "A scatter plot is used to visualize the relationship between two variables.",
@@ -108,6 +109,7 @@
   },
   {
     "title": "Frontend Development Quiz",
+    "quizAccessType": "PUBLIC",
     "questions": [
       {
         "question": "HTML is used to structure content on the web.",
@@ -215,6 +217,7 @@
   },
   {
     "title": "Backend Development Quiz",
+    "quizAccessType": "PUBLIC",
     "questions": [
       {
         "question": "RESTful APIs use HTTP methods such as GET, POST, PUT, and DELETE.",
@@ -322,6 +325,7 @@
   },
   {
     "title": "DevOps Fundamentals Quiz",
+    "quizAccessType": "PUBLIC",
     "questions": [
       {
         "question": "DevOps aims to unify software development (Dev) and software operation (Ops).",
@@ -428,6 +432,7 @@
   },
   {
     "title": "Design Patterns and Best Practices Quiz",
+    "quizAccessType": "PUBLIC",
     "questions": [
       {
         "question": "The Singleton pattern ensures a class has only one instance and provides a global point of access to it.",
@@ -535,6 +540,7 @@
   },
   {
     "title": "Advanced Database Management Quiz",
+    "quizAccessType": "PUBLIC",
     "questions": [
       {
         "question": "A database transaction must follow the ACID properties to ensure data integrity.",
@@ -639,5 +645,4 @@
       }
     ]
   }
-
 ]

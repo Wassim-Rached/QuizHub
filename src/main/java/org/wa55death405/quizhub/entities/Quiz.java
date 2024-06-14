@@ -3,6 +3,7 @@ package org.wa55death405.quizhub.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.wa55death405.quizhub.enums.QuizAccessType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class Quiz {
     @Column(nullable = false)
     @NotBlank
     private String title;
+    private QuizAccessType quizAccessType;
 
     // TODO : change the fetch to lazy
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
