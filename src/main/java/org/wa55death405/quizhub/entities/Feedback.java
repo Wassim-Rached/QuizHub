@@ -4,10 +4,19 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.UUID;
+
+/*
+    * Feedback entity represents a feedback given by a user.
+
+    @Rules
+    * Feedback should have a content
+    * Feedback should have a timestamp (will be set automatically)
+ */
 
 @Data
 @Entity
@@ -15,7 +24,8 @@ public class Feedback {
     @Id
     @GeneratedValue
     private UUID id;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false,length = 1024)
+    @NotBlank
     private String content;
     private Integer rating;
     private String email;

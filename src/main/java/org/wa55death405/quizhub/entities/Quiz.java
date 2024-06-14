@@ -1,12 +1,27 @@
 package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+/*
+    * Quiz entity represents a quiz.
+    * A quiz is most importantly a collection of questions.
+
+    @Rules
+    * Each quiz should have a title,
+    * Each quiz can have a list of questions or none
+    * Each quiz can have a list of attempts or none
+
+    @Note
+    * The questions are unique for a quiz
+    * The attempts are unique for a quiz
+*/
 
 @Entity
 @Data
@@ -19,6 +34,7 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false)
+    @NotBlank
     private String title;
 
     // TODO : change the fetch to lazy
@@ -27,8 +43,18 @@ public class Quiz {
     @OneToMany(mappedBy = "quiz")
     private List<QuizAttempt> attempts = new ArrayList<>();
 
+    public static final int MAX_QUESTION_COUNT = 15;
+    public static final int MIN_QUESTION_COUNT = 1;
+
     @Override
     public int hashCode() {
         return Objects.hash(id, title);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Quiz quiz)) return false;
+        return Objects.equals(id, quiz.id);
     }
 }
