@@ -116,5 +116,15 @@ public class QuizController {
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz attempt result fetched successfully",quizService.getQuizAttemptResult(quizAttemptId)), HttpStatus.OK);
     }
 
+    /*
+        this api is used to get the quiz by id
+        it takes the quiz id as a path variable
+        and returns the quiz
+     */
+    @GetMapping("/{quizId}")
+    public ResponseEntity<StandardApiResponse<QuizGeneralInfoDTO>> getQuiz(@PathVariable UUID quizId) {
+        return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz fetched successfully",quizService.getQuizById(quizId)), HttpStatus.OK);
+    }
+
 
 }
