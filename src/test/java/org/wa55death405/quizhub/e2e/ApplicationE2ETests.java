@@ -15,6 +15,7 @@ import org.wa55death405.quizhub.enums.QuestionType;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
+import org.wa55death405.quizhub.interfaces.utils.ISeedDataLoader;
 import org.wa55death405.quizhub.repositories.QuizRepository;
 
 import java.util.HashMap;
@@ -39,6 +40,8 @@ class ApplicationE2ETests {
     private ObjectMapper objectMapper;
     @Autowired
     private QuizRepository quizRepository;
+    @Autowired
+    private ISeedDataLoader seedDataLoader;
 
     @LocalServerPort
     private int port;
@@ -66,6 +69,15 @@ class ApplicationE2ETests {
     class TestQuizLifecycle{
         private Quiz quiz;
         private UUID quizAttemptId;
+        private Quiz seedQuiz;
+
+        @BeforeAll
+        void setUp() {
+            // Reset the database
+            QuizCreationDTO quiz = seedDataLoader.getQuizCreationDTOs().get(0);
+            Quiz quizEntity = quiz.toEntity(null);
+            seedQuiz = quizRepository.save(quizEntity);
+        }
 
         // create quiz
         @Test
@@ -99,7 +111,7 @@ class ApplicationE2ETests {
         void testSearchQuiz() {
             // Search for the quiz
             HashMap<String, String> queryParams = new HashMap<>();
-            queryParams.put("title", quiz.getTitle().substring(1, 3));
+            queryParams.put("title", seedQuiz.getTitle().substring(1, 3));
             queryParams.put("page", "0");
             queryParams.put("size", "10");
             given()
@@ -115,8 +127,8 @@ class ApplicationE2ETests {
                     .body("data.currentItemsSize", equalTo(1))
                     .body("data.totalItems", equalTo(1))
                     .body("data.items", hasSize(equalTo(1)))
-                    .body("data.items[0].id", equalTo(this.quiz.getId().toString()))
-                    .body("data.items[0].title", equalTo(this.quiz.getTitle()));
+                    .body("data.items[0].id", equalTo(this.seedQuiz.getId().toString()))
+                    .body("data.items[0].title", equalTo(this.seedQuiz.getTitle()));
         }
 
         // get the quiz details by id

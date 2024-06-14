@@ -11,6 +11,7 @@ import org.wa55death405.quizhub.dto.StandardApiResponse;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptTakingDTO;
+import org.wa55death405.quizhub.enums.QuizAccessType;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.interfaces.services.IQuizService;
 
@@ -83,6 +84,7 @@ public class QuizController {
      */
     @PostMapping
     public ResponseEntity<StandardApiResponse<UUID>> createQuiz(@RequestBody QuizCreationDTO body) {
+        body.setQuizAccessType(QuizAccessType.LINKED);
         return new ResponseEntity<>(new StandardApiResponse<>(StandardApiStatus.SUCCESS,"Quiz created successfully",quizService.createQuiz(body).getId()), HttpStatus.CREATED);
     }
 

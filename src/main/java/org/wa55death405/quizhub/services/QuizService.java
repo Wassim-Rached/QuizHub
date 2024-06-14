@@ -14,6 +14,7 @@ import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptTakingDTO;
 import org.wa55death405.quizhub.entities.*;
+import org.wa55death405.quizhub.enums.QuizAccessType;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
 import org.wa55death405.quizhub.interfaces.services.IQuizLogicService;
 import org.wa55death405.quizhub.interfaces.services.IQuizService;
@@ -40,7 +41,7 @@ public class QuizService implements IQuizService{
 
     @Override
     public StandardPageList<QuizGeneralInfoDTO> searchQuizzes(String title, int page, int size) {
-        Page<Quiz> quizzes = quizRepository.findAllByTitleContainingIgnoreCase(title,PageRequest.of(page, size));
+        Page<Quiz> quizzes = quizRepository.findAllByTitleContainingIgnoreCaseAndQuizAccessTypeEquals(title,PageRequest.of(page, size), QuizAccessType.PUBLIC);
         StandardPageList<QuizGeneralInfoDTO> standardPageList = new StandardPageList<>();
         standardPageList.setItems(quizzes.map(QuizGeneralInfoDTO::new).toList());
         standardPageList.setCurrentPage(quizzes.getNumber());
