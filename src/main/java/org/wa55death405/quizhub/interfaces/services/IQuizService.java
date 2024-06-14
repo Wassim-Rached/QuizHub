@@ -80,4 +80,11 @@ public interface IQuizService {
         * @return the needed information to create the quiz
      */
     QuizCreationDTO getQuizCreationInfo(UUID quizId);
+
+    /*
+        * get the quiz by its id
+        * @param quizId the id of the quiz
+        * @return the quiz with the given id
+     */
+    QuizGeneralInfoDTO getQuizById(UUID quizId);
 }
