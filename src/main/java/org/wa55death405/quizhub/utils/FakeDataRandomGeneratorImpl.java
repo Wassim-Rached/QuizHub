@@ -8,6 +8,7 @@ import org.wa55death405.quizhub.dto.quiz.QuizCreationDTO;
 import org.wa55death405.quizhub.entities.Question;
 import org.wa55death405.quizhub.entities.Quiz;
 import org.wa55death405.quizhub.enums.QuestionType;
+import org.wa55death405.quizhub.enums.QuizAccessType;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
     @Override
     public void fill(QuizCreationDTO quizCreationDTO) {
         quizCreationDTO.setTitle(faker.lorem().sentence());
+        quizCreationDTO.setQuizAccessType(QuizAccessType.PUBLIC);
         // Generate one instance for all types of questions
         for (QuestionType questionType : QuestionType.values()) {
             QuestionCreationRequestDTO questionCreationRequestDTO = new QuestionCreationRequestDTO();
