@@ -16,6 +16,7 @@ import java.util.List;
 public class QuizCreationDTO implements EntityDTO<Quiz,Void> {
     private String title;
     private QuizAccessType quizAccessType;
+    private Integer timeLimit;
     private List<QuestionCreationRequestDTO> questions = new ArrayList<>();
 
     @Override
@@ -23,9 +24,13 @@ public class QuizCreationDTO implements EntityDTO<Quiz,Void> {
         if (title == null || title.isBlank()) {
             throw new InputValidationException("Quiz 'title' is required");
         }
+        if (timeLimit != null && timeLimit < 60) {
+            throw new InputValidationException("Quiz 'timeLimit' should be at least 60 seconds");
+        }
         if (quizAccessType == null) throw new InputValidationException("Quiz 'quizAccessType' is required");
         Quiz quiz = Quiz.builder()
                 .title(title)
+                .timeLimit(timeLimit)
                 .quizAccessType(quizAccessType)
                 .build();
         if (questions == null || questions.size() < Quiz.MIN_QUESTION_COUNT || questions.size() > Quiz.MAX_QUESTION_COUNT) {
@@ -41,6 +46,7 @@ public class QuizCreationDTO implements EntityDTO<Quiz,Void> {
    */
     public QuizCreationDTO(Quiz quiz) {
         this.title = quiz.getTitle();
+        this.timeLimit = quiz.getTimeLimit();
         this.quizAccessType = quiz.getQuizAccessType();
         this.questions = quiz.getQuestions().stream().map(QuestionCreationRequestDTO::new).toList();
     }

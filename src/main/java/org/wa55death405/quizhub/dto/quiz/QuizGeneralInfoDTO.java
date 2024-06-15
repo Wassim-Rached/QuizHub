@@ -12,11 +12,13 @@ import java.util.UUID;
 public class QuizGeneralInfoDTO {
     private UUID id;
     private String title;
+    private Integer timeLimit;
     private QuizAccessType quizAccessType;
 
     public QuizGeneralInfoDTO(Quiz quiz) {
         this.id = quiz.getId();
         this.title = quiz.getTitle();
+        this.timeLimit = quiz.getTimeLimit();
         this.quizAccessType = quiz.getQuizAccessType();
     }
 }

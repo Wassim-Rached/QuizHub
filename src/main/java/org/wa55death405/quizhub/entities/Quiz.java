@@ -3,6 +3,7 @@ package org.wa55death405.quizhub.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.annotations.Check;
 import org.wa55death405.quizhub.enums.QuizAccessType;
 
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class Quiz {
     @NotBlank
     private String title;
     private QuizAccessType quizAccessType;
+    @Check(constraints = "time_limit >= 60")
+    private Integer timeLimit;
 
     // TODO : change the fetch to lazy
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -47,6 +50,11 @@ public class Quiz {
 
     public static final int MAX_QUESTION_COUNT = 15;
     public static final int MIN_QUESTION_COUNT = 1;
+
+    public static final int MAX_TIME_LIMIT = 3600;
+    public static final int MIN_TIME_LIMIT = 60;
+    public static final int GRACE_PERIOD_SECONDS = 20;
+
 
     @Override
     public int hashCode() {
