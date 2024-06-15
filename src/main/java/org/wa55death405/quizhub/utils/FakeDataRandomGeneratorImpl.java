@@ -102,6 +102,7 @@ public class FakeDataRandomGeneratorImpl implements IFakeDataRandomGenerator {
                 var numberOfMatches = faker.random().nextInt(Question.MIN_NUMBER_OF_OPTION_MATCHES_MATCHES, Question.MAX_NUMBER_OF_OPTION_MATCHES_MATCHES);
 
                 // Generate the matches that will be used
+                // TODO : flip the options and matches
                 var matches = new ArrayList<String>();
                 for (int i = 0; i < numberOfMatches; i++) {
                     matches.add(i + faker.lorem().word());
