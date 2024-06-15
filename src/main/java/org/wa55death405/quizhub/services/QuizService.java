@@ -21,6 +21,8 @@ import org.wa55death405.quizhub.interfaces.services.IQuizService;
 import org.wa55death405.quizhub.repositories.*;
 import org.wa55death405.quizhub.utils.DBErrorExtractorUtils;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,6 +66,7 @@ public class QuizService implements IQuizService{
         );
         QuizAttempt quizAttempt = new QuizAttempt();
         quizAttempt.setQuiz(quiz);
+        quizAttempt.setStartedAt(Instant.now());
         quizAttemptRepository.save(quizAttempt);
         return quizAttempt;
     }
@@ -147,6 +150,7 @@ public class QuizService implements IQuizService{
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
+        quizAttempt.setFinishedAt(Instant.now());
         quizLogicService.processQuizAttempt(quizAttempt);
         return quizAttempt;
     }

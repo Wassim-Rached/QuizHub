@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Check;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,8 @@ public class QuizAttempt {
     private UUID id;
     private Float score = null;
     @Column(nullable = false)
-    private LocalDateTime startedAt = LocalDateTime.now();
-    private LocalDateTime finishedAt;
-
+    private Instant startedAt;
+    private Instant finishedAt;
 
     @ManyToOne(optional = false)
     private Quiz quiz;
@@ -67,7 +66,8 @@ public class QuizAttempt {
         return score != null;
     }
 
-    public boolean finishedInTime() {
+    public boolean isFinishedInTime() {
+        if (quiz.getTimeLimit() == null) return true;
         return finishedAt.isBefore( startedAt.plusSeconds( quiz.getTimeLimit() + Quiz.GRACE_PERIOD_SECONDS ) );
     }
 }
