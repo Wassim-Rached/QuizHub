@@ -8,9 +8,9 @@ import org.wa55death405.quizhub.dto.orderedOption.OrderedOptionGeneralDTO;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptTakingDTO;
 import org.wa55death405.quizhub.entities.Question;
 import org.wa55death405.quizhub.entities.QuestionAttempt;
+import org.wa55death405.quizhub.entities.QuestionNote;
 import org.wa55death405.quizhub.enums.QuestionType;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -27,6 +27,7 @@ public class QuestionTakingDTO {
     private String question;
     private Float coefficient = 1f;
     private QuestionType questionType;
+    private String[] questionNotes;
 
     // For FILL_IN_THE_BLANK
     private String paragraphToBeFilled;
@@ -50,6 +51,12 @@ public class QuestionTakingDTO {
         this.coefficient = question.getCoefficient();
         this.questionType = question.getQuestionType();
         this.paragraphToBeFilled = question.getParagraphToBeFilled();
+
+        if (question.getQuestionNotes() != null && !question.getQuestionNotes().isEmpty()){
+            this.questionNotes = question.getQuestionNotes().stream()
+                .map(QuestionNote::getNote)
+                .toArray(String[]::new);
+        }
 
         if (questionAttempt != null){
             this.questionAttempt = new QuestionAttemptTakingDTO(questionAttempt);

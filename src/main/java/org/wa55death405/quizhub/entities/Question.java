@@ -49,6 +49,9 @@ public class Question {
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Quiz quiz;
 
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    private List<QuestionNote> questionNotes;
+
     // for FILL_IN_THE_BLANK
     @Column(columnDefinition = "TEXT")
     private String paragraphToBeFilled;
@@ -73,12 +76,16 @@ public class Question {
     @OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<CorrectOptionMatch> correctOptionMatches = new ArrayList<>();
 
+
     /*
         * Validation Global Rules
     */
 
     // for coefficient
     public static final int MAX_COEFFICIENT = 10;
+
+    // for question_notes
+    public static final int MAX_QUESTION_NOTES = 2;
 
     // for FILL_IN_THE_BLANK
     public static final int MIN_FILL_IN_THE_BLANK_BLANKS = 1;
