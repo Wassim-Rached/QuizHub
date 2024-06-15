@@ -27,6 +27,7 @@ public class QuestionResultDTO {
     private String question;
     private Float coefficient = 1f;
     private QuestionType questionType;
+    private String[] questionNotes;
 
     // for FILL_IN_THE_BLANK
     private String paragraphToBeFilled;
@@ -53,6 +54,12 @@ public class QuestionResultDTO {
         this.question = question.getQuestion();
         this.coefficient = question.getCoefficient();
         this.questionType = question.getQuestionType();
+
+        if (question.getQuestionNotes() != null && !question.getQuestionNotes().isEmpty()){
+            this.questionNotes = question.getQuestionNotes().stream()
+                .map(QuestionNote::getNote)
+                .toArray(String[]::new);
+        }
 
         if (questionAttempt != null){
             this.questionAttempt = new QuestionAttemptResultDTO(questionAttempt);

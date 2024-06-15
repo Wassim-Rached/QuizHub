@@ -17,6 +17,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
     private Float coefficient;
     private List<String> answers;
     private String paragraphToBeFilled;
+    private String[] questionNotes;
     private HashMap<String,Boolean> choices = new HashMap<>();
     private HashMap<Integer,String> orderedOptions = new HashMap<>();
     // HashMap<match, [option1, option2, ...]>
@@ -30,6 +31,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         this.question = question.getQuestion();
         this.questionType = question.getQuestionType();
         this.coefficient = question.getCoefficient();
+        this.questionNotes = question.getQuestionNotes().stream().map(QuestionNote::getNote).toArray(String[]::new);
 
         switch (questionType) {
             case TRUE_FALSE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK:
@@ -78,12 +80,21 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         if (this.question == null || this.question.isBlank()) throw new InputValidationException("Question is required and cannot be empty");
         if (this.questionType == null) throw new InputValidationException("Question type is required for question '" + this.question + "'");
         if (quiz == null) throw new InputValidationException("Quiz is required for question '" + this.question + "'");
+        if (this.questionNotes != null && this.questionNotes.length > Question.MAX_QUESTION_NOTES) throw new InputValidationException("Number of question notes must be less than or equal to " + Question.MAX_QUESTION_NOTES + " for question '" + this.question + "'");
 
         Question question = new Question();
         question.setQuestion(this.question);
         question.setQuestionType(this.questionType);
         question.setCoefficient(coefficient);
         question.setQuiz(quiz);
+
+        if (this.questionNotes != null && this.questionNotes.length > 0){
+            question.setQuestionNotes(
+                    Arrays.stream(this.questionNotes)
+                            .map(note -> QuestionNote.builder().note(note).question(question).build())
+                            .toList()
+            );
+        }
 
         switch (questionType) {
             case TRUE_FALSE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK:
