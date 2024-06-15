@@ -4,7 +4,141 @@
     "quizAccessType": "PUBLIC",
     "questions": [
       {
-        "question": "HTML stands for HyperText Markup Language.",
+        "question": "JavaScript is a loosely typed programming language.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1.0,
+        "answers": ["TRUE"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "questionNotes": ["Loosely typed languages do not require you to explicitly define data types."]
+      },
+      {
+        "question": "What does 'API' stand for in web development?",
+        "questionType": "SHORT_ANSWER",
+        "questionNotes": ["Use normal spaces between words."],
+        "coefficient": 1.0,
+        "answers": ["Application Programming Interface"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "How many different types of CSS position property values are there?",
+        "questionType": "NUMERIC",
+        "coefficient": 1.0,
+        "answers": ["5"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "Fill in the blanks please",
+        "paragraphToBeFilled": "In HTML, the {{blank}} attribute is used to specify a unique identifier for an element, and the {{blank}} attribute is used to apply a class to an element.",
+        "questionType": "FILL_IN_THE_BLANK",
+        "coefficient": 1.0,
+        "answers": ["id(|)class"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "Which of these is a CSS preprocessor?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "Sass": true,
+          "JavaScript": false,
+          "HTML": false,
+          "PHP": false
+        },
+        "orderedOptions": null,
+        "optionMatches": null,
+        "questionNotes": ["CSS preprocessors allow you to write CSS in a more maintainable and scalable way."]
+      },
+      {
+        "question": "Which of the following are semantic HTML elements?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "<article>": true,
+          "<section>": true,
+          "<footer>": true,
+          "<div>": false,
+          "<span>": false
+        },
+        "orderedOptions": null,
+        "optionMatches": null,
+        "questionNotes": ["Semantic elements provide meaning to the web page, making it easier to read for both developers and browsers."]
+      },
+      {
+        "question": "Match the following HTTP status codes with their meanings.",
+        "questionType": "OPTION_MATCHING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": {
+          "200 OK": [
+            "The request was successful."
+          ],
+          "404 Not Found": [
+            "The server can not find the requested resource."
+          ],
+          "500 Internal Server Error": [
+            "The server encountered an unexpected condition."
+          ],
+          "403 Forbidden": [],
+          "302 Found": []
+        },
+        "questionNotes": ["HTTP status codes help indicate the result of a client's request to the server."]
+      },
+      {
+        "question": "Arrange the following steps of performing an AJAX request in the correct order.",
+        "questionType": "OPTION_ORDERING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": null,
+        "orderedOptions": {
+          "1": "Create an XMLHttpRequest object",
+          "2": "Define a callback function",
+          "3": "Open a connection to the server",
+          "4": "Send the request",
+          "5": "Process the response"
+        },
+        "optionMatches": null,
+        "questionNotes": ["AJAX allows for asynchronous web page updates by exchanging data with a web server behind the scenes."]
+      },
+      {
+        "question": "React is a JavaScript library used for building user interfaces.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1.0,
+        "answers": ["TRUE"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "questionNotes": ["React is maintained by Facebook and a community of individual developers and companies."]
+      },
+      {
+        "question": "What does 'JSON' stand for?",
+        "questionType": "SHORT_ANSWER",
+        "questionNotes": ["Use normal spaces between words."],
+        "coefficient": 1.0,
+        "answers": ["JavaScript Object Notation"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      }
+    ]
+  },
+  {
+    "title": "DBMS Basics Quiz",
+    "quizAccessType": "PUBLIC",
+    "questions": [
+      {
+        "question": "DBMS stands for Database Management System.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1.0,
         "answers": ["TRUE"],
@@ -13,422 +147,377 @@
         "optionMatches": null
       },
       {
-        "question": "What does 'CSS' stand for?",
+        "question": "What does 'SQL' stand for?",
         "questionType": "SHORT_ANSWER",
+        "questionNotes": ["SQL: A standard language for accessing and manipulating databases."],
         "coefficient": 1.0,
-        "answers": ["Cascading Style Sheets"],
+        "answers": ["Structured Query Language"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "How many main heading tags are there in HTML?",
+        "question": "How many primary types of data models are there in DBMS?",
         "questionType": "NUMERIC",
         "coefficient": 1.0,
-        "answers": ["6"],
+        "answers": ["3"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
         "question": "Fill in the blanks please",
-        "paragraphToBeFilled": "In HTML, the {{blank}} tag is used to create a hyperlink, and the {{blank}} tag is used to create an image.",
+        "paragraphToBeFilled": "In a relational database, the {{blank}} key uniquely identifies each record, while the {{blank}} key is used to link two tables.",
         "questionType": "FILL_IN_THE_BLANK",
         "coefficient": 1.0,
-        "answers": ["<a>(|)<img>"],
+        "answers": ["primary(|)foreign"],
         "choices": null,
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Which of these is a JavaScript framework?",
+        "question": "Which of these is a popular relational database management system?",
         "questionType": "SINGLE_CHOICE",
         "coefficient": 1.0,
         "answer": null,
         "choices": {
-          "React": true,
+          "MySQL": true,
+          "Python": false,
           "HTML": false,
-          "CSS": false,
-          "SQL": false
+          "CSS": false
         },
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Which of the following are HTML elements?",
+        "question": "Which of the following are types of database keys?",
         "questionType": "MULTIPLE_CHOICE",
         "coefficient": 1.0,
         "answer": null,
         "choices": {
-          "<div>": true,
-          "<span>": true,
-          "<p>": true,
-          "<style>": false,
-          "<script>": false
+          "Primary Key": true,
+          "Foreign Key": true,
+          "Composite Key": true,
+          "CSS Key": false,
+          "JavaScript Key": false
         },
         "orderedOptions": null,
         "optionMatches": null
       },
       {
-        "question": "Match the following HTML tags with their purposes.",
+        "question": "Match the following SQL commands with their purposes.",
         "questionType": "OPTION_MATCHING",
         "coefficient": 1.0,
         "answer": null,
         "choices": null,
         "orderedOptions": null,
         "optionMatches": {
-          "Defines a paragraph.": [
-            "<p>"
+          "Used to create a table.": [
+            "CREATE"
           ],
-          "Defines a division or a section.": [
-            "<div>"
+          "Used to insert data into a table.": [
+            "INSERT"
           ],
-          "Defines a header for a document or section.": [
-            "<header>"
+          "Used to update existing data within a table.": [
+            "UPDATE"
           ],
-          "Defines an unordered list.": [],
-          "Defines a hyperlink.": []
+          "Used to delete records from a table.": [],
+          "Used to retrieve data from a table.": []
         }
       },
       {
-        "question": "Arrange the following steps of building a simple web page in the correct order.",
+        "question": "Arrange the following steps of designing a database in the correct order.",
         "questionType": "OPTION_ORDERING",
         "coefficient": 1.0,
         "answer": null,
         "choices": null,
         "orderedOptions": {
-          "1": "Create HTML structure",
-          "2": "Add CSS styles",
-          "3": "Include JavaScript functionality",
-          "4": "Test the web page",
-          "5": "Deploy the web page"
+          "1": "Identify the purpose of the database",
+          "2": "Gather data requirements",
+          "3": "Define tables and fields",
+          "4": "Establish relationships between tables",
+          "5": "Normalize the database"
         },
+        "optionMatches": null
+      },
+      {
+        "question": "NoSQL databases are designed to scale horizontally.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1.0,
+        "answers": ["TRUE"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "What does 'ACID' stand for in the context of database transactions?",
+        "questionType": "SHORT_ANSWER",
+        "questionNotes": ["ACID: Atomicity (complete operations), Consistency (state changes), Isolation (independent transactions), Durability (persisting results)."],
+        "coefficient": 1.0,
+        "answers": ["Atomicity Consistency Isolation Durability"],
+        "choices": null,
+        "orderedOptions": null,
         "optionMatches": null
       }
     ]
   },
-    {
-      "title": "DBMS Basics Quiz",
-      "quizAccessType": "PUBLIC",
-      "questions": [
-        {
-          "question": "DBMS stands for Database Management System.",
-          "questionType": "TRUE_FALSE",
-          "coefficient": 1.0,
-          "answers": ["TRUE"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
+  {
+    "title": "Programming Languages Basics Quiz",
+    "quizAccessType": "PUBLIC",
+    "questions": [
+      {
+        "question": "What is the purpose of a programming language?",
+        "questionType": "SHORT_ANSWER",
+        "questionNotes": ["Programming languages are used to instruct computers to perform specific tasks, such as calculations, data processing, or controlling hardware."],
+        "coefficient": 1.0,
+        "answers": ["To instruct computers to perform specific tasks"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "Define 'syntax' in the context of programming languages.",
+        "questionType": "SHORT_ANSWER",
+        "questionNotes": ["Syntax refers to the rules that define the structure and format of valid statements and expressions in a programming language."],
+        "coefficient": 1.0,
+        "answers": ["Syntax defines the structure and format of valid statements and expressions"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "How does 'dynamic typing' differ from 'static typing' in programming languages?",
+        "questionType": "SHORT_ANSWER",
+        "questionNotes": ["Dynamic typing allows variables to hold values of any type during execution, while static typing requires variables to be declared with a specific type before use."],
+        "coefficient": 1.0,
+        "answers": ["Dynamic typing allows variables to hold values of any type during execution; static typing requires variables to be declared with a specific type before use"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "What are the main components of an object in object-oriented programming (OOP)?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "Attributes": true,
+          "Methods": true,
+          "Properties": true,
+          "Functions": false,
+          "Variables": false
         },
-        {
-          "question": "What does 'SQL' stand for?",
-          "questionType": "SHORT_ANSWER",
-          "coefficient": 1.0,
-          "answers": ["Structured Query Language"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "Explain the concept of 'inheritance' in object-oriented programming (OOP).",
+        "questionType": "SHORT_ANSWER",
+        "questionNotes": ["Inheritance allows one class (child or subclass) to inherit properties and methods from another class (parent or superclass), promoting code reuse and creating hierarchical relationships."],
+        "coefficient": 1.0,
+        "answers": ["Inheritance allows one class to inherit properties and methods from another class; it promotes code reuse and creates hierarchical relationships"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "Which programming paradigm emphasizes writing code in terms of 'functions'?",
+        "questionType": "SINGLE_CHOICE",
+        "questionNotes": ["Functional programming focuses on functions as first-class citizens, enabling operations on functions and treating them as values."],
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "Functional Programming": true,
+          "Object-Oriented Programming": false,
+          "Procedural Programming": false,
+          "Scripting Programming": false
         },
-        {
-          "question": "How many primary types of data models are there in DBMS?",
-          "questionType": "NUMERIC",
-          "coefficient": 1.0,
-          "answers": ["3"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Fill in the blanks please",
-          "paragraphToBeFilled": "In a relational database, the {{blank}} key uniquely identifies each record, while the {{blank}} key is used to link two tables.",
-          "questionType": "FILL_IN_THE_BLANK",
-          "coefficient": 1.0,
-          "answers": ["primary(|)foreign"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Which of these is a popular relational database management system?",
-          "questionType": "SINGLE_CHOICE",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": {
-            "MySQL": true,
-            "Python": false,
-            "HTML": false,
-            "CSS": false
-          },
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Which of the following are types of database keys?",
-          "questionType": "MULTIPLE_CHOICE",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": {
-            "Primary Key": true,
-            "Foreign Key": true,
-            "Composite Key": true,
-            "CSS Key": false,
-            "JavaScript Key": false
-          },
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Match the following SQL commands with their purposes.",
-          "questionType": "OPTION_MATCHING",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": {
-            "Used to create a table.": [
-              "CREATE"
-            ],
-            "Used to insert data into a table.": [
-              "INSERT"
-            ],
-            "Used to update existing data within a table.": [
-              "UPDATE"
-            ],
-            "Used to delete records from a table.": [],
-            "Used to retrieve data from a table.": []
-          }
-        },
-        {
-          "question": "Arrange the following steps of designing a database in the correct order.",
-          "questionType": "OPTION_ORDERING",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": null,
-          "orderedOptions": {
-            "1": "Identify the purpose of the database",
-            "2": "Gather data requirements",
-            "3": "Define tables and fields",
-            "4": "Establish relationships between tables",
-            "5": "Normalize the database"
-          },
-          "optionMatches": null
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "Match the following programming languages with their typical use cases.",
+        "questionType": "OPTION_MATCHING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": {
+          "Used for web development.": [
+            "JavaScript"
+          ],
+          "Used for system programming.": [
+            "C"
+          ],
+          "Used for scientific computing.": [
+            "Python"
+          ],
+          "Used for mobile app development.": [
+            "Swift"
+          ],
+          "Used for enterprise applications.": [
+            "Java"
+          ]
         }
-      ]
+      },
+      {
+        "question": "Arrange the following steps of writing a simple program in the correct order.",
+        "questionType": "OPTION_ORDERING",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": null,
+        "orderedOptions": {
+          "1": "Choose a programming language",
+          "2": "Write the code",
+          "3": "Compile/interpret the code",
+          "4": "Run the program",
+          "5": "Debug the program"
+        },
+        "optionMatches": null
+      },
+      {
+        "question": "What are the advantages of using 'polymorphism' in object-oriented programming?",
+        "questionType": "SHORT_ANSWER",
+        "questionNotes": ["Polymorphism allows for flexibility and code reuse by enabling objects to be treated as instances of their superclass, facilitating method overriding and dynamic method binding."],
+        "coefficient": 1.0,
+        "answers": ["Polymorphism allows for flexibility and code reuse; it enables objects to be treated as instances of their superclass, facilitating method overriding and dynamic method binding"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      },
+      {
+        "question": "In JavaScript, what does 'var', 'let', and 'const' refer to?",
+        "questionType": "SHORT_ANSWER",
+        "questionNotes": ["Keywords used for variable declaration: var (function-scoped variable), let (block-scoped variable), and const (block-scoped constant, cannot be reassigned)."],
+        "coefficient": 1.0,
+        "answers": ["var is function-scoped, let is block-scoped, const is block-scoped and cannot be reassigned"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null
+      }
+    ]
+  },{
+  "title": "Design Patterns Basics Quiz",
+  "quizAccessType": "PUBLIC",
+  "questions": [
+    {
+      "question": "What is a design pattern?",
+      "questionType": "SHORT_ANSWER",
+      "questionNotes": ["A design pattern is a reusable solution to a commonly occurring problem in software design."],
+      "coefficient": 1.0,
+      "answers": ["A reusable solution to a commonly occurring software design problem"],
+      "choices": null,
+      "orderedOptions": null,
+      "optionMatches": null
     },
     {
-      "title": "Programming Languages Basics Quiz",
-      "quizAccessType": "PUBLIC",
-      "questions": [
-        {
-          "question": "Python is a programming language.",
-          "questionType": "TRUE_FALSE",
-          "coefficient": 1.0,
-          "answers": ["TRUE"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "What does 'OOP' stand for?",
-          "questionType": "SHORT_ANSWER",
-          "coefficient": 1.0,
-          "answers": ["Object-Oriented Programming"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "How many main data types are there in most programming languages?",
-          "questionType": "NUMERIC",
-          "coefficient": 1.0,
-          "answers": ["4"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Fill in the blanks please",
-          "paragraphToBeFilled": "In Python, the {{blank}} keyword is used to define a function, and the {{blank}} keyword is used to create a class.",
-          "questionType": "FILL_IN_THE_BLANK",
-          "coefficient": 1.0,
-          "answers": ["def(|)class"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Which of these is a statically typed programming language?",
-          "questionType": "SINGLE_CHOICE",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": {
-            "Java": true,
-            "Python": false,
-            "JavaScript": false,
-            "Ruby": false
-          },
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Which of the following are programming paradigms?",
-          "questionType": "MULTIPLE_CHOICE",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": {
-            "Object-Oriented Programming": true,
-            "Functional Programming": true,
-            "Procedural Programming": true,
-            "Relational Programming": false,
-            "Markup Programming": false
-          },
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Match the following programming languages with their typical use cases.",
-          "questionType": "OPTION_MATCHING",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": {
-            "Used for web development.": [
-              "JavaScript"
-            ],
-            "Used for system programming.": [
-              "C"
-            ],
-            "Used for scientific computing.": [
-              "Python"
-            ],
-            "Used for mobile app development.": [],
-            "Used for enterprise applications.": []
-          }
-        },
-        {
-          "question": "Arrange the following steps of writing a simple program in the correct order.",
-          "questionType": "OPTION_ORDERING",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": null,
-          "orderedOptions": {
-            "1": "Choose a programming language",
-            "2": "Write the code",
-            "3": "Compile/interpret the code",
-            "4": "Run the program",
-            "5": "Debug the program"
-          },
-          "optionMatches": null
-        }
-      ]
+      "question": "Explain the purpose of the Singleton pattern.",
+      "questionType": "SHORT_ANSWER",
+      "questionNotes": ["The Singleton pattern ensures a class has only one instance and provides a global point of access to that instance."],
+      "coefficient": 1.0,
+      "answers": ["To ensure a class has only one instance and provide a global point of access to that instance"],
+      "choices": null,
+      "orderedOptions": null,
+      "optionMatches": null
     },
     {
-      "title": "Design Patterns Basics Quiz",
-      "quizAccessType": "PUBLIC",
-      "questions": [
-        {
-          "question": "The Singleton pattern ensures a class has only one instance.",
-          "questionType": "TRUE_FALSE",
-          "coefficient": 1.0,
-          "answers": ["TRUE"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "What is the main purpose of the Factory Method pattern?",
-          "questionType": "SHORT_ANSWER",
-          "coefficient": 1.0,
-          "answers": ["To create objects without specifying the exact class"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "How many main categories of design patterns are there?",
-          "questionType": "NUMERIC",
-          "coefficient": 1.0,
-          "answers": ["3"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Fill in the blanks please",
-          "paragraphToBeFilled": "The {{blank}} pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.",
-          "questionType": "FILL_IN_THE_BLANK",
-          "coefficient": 1.0,
-          "answers": ["Iterator"],
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Which of these patterns is a creational pattern?",
-          "questionType": "SINGLE_CHOICE",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": {
-            "Singleton": true,
-            "Observer": false,
-            "Decorator": false,
-            "Mediator": false
-          },
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Which of the following are structural patterns?",
-          "questionType": "MULTIPLE_CHOICE",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": {
-            "Adapter": true,
-            "Bridge": true,
-            "Composite": true,
-            "Command": false,
-            "Strategy": false
-          },
-          "orderedOptions": null,
-          "optionMatches": null
-        },
-        {
-          "question": "Match the following design patterns with their descriptions.",
-          "questionType": "OPTION_MATCHING",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": null,
-          "orderedOptions": null,
-          "optionMatches": {
-            "Defines a family of algorithms and makes them interchangeable.": [
-              "Strategy"
-            ],
-            "Separates object construction from its representation.": [
-              "Builder"
-            ],
-            "Encapsulates a request as an object.": [
-              "Command"
-            ],
-            "Provides a surrogate or placeholder for another object.": [],
-            "Ensures a class has only one instance.": []
-          }
-        },
-        {
-          "question": "Arrange the following steps of using the Observer pattern in the correct order.",
-          "questionType": "OPTION_ORDERING",
-          "coefficient": 1.0,
-          "answer": null,
-          "choices": null,
-          "orderedOptions": {
-            "1": "Define a subject interface",
-            "2": "Create concrete observer classes",
-            "3": "Implement a concrete subject class",
-            "4": "Register observers with the subject",
-            "5": "Notify observers of changes"
-          },
-          "optionMatches": null
-        }
-      ]
+      "question": "What are the three main categories of design patterns?",
+      "questionType": "SHORT_ANSWER",
+      "questionNotes": ["The three main categories are creational, structural, and behavioral patterns."],
+      "coefficient": 1.0,
+      "answers": ["Creational, Structural, and Behavioral"],
+      "choices": null,
+      "orderedOptions": null,
+      "optionMatches": null
+    },
+    {
+      "question": "Explain the purpose of the Factory Method pattern.",
+      "questionType": "SHORT_ANSWER",
+      "questionNotes": ["The Factory Method pattern defines an interface for creating objects, but allows subclasses to decide which class to instantiate."],
+      "coefficient": 1.0,
+      "answers": ["To define an interface for creating objects, but allow subclasses to decide which class to instantiate"],
+      "choices": null,
+      "orderedOptions": null,
+      "optionMatches": null
+    },
+    {
+      "question": "Which design pattern provides a way to access elements of an aggregate object sequentially without exposing its underlying representation?",
+      "questionType": "SHORT_ANSWER",
+      "questionNotes": ["The Iterator pattern provides this functionality."],
+      "coefficient": 1.0,
+      "answers": ["Iterator"],
+      "choices": null,
+      "orderedOptions": null,
+      "optionMatches": null
+    },
+    {
+      "question": "Which design pattern separates object construction from its representation?",
+      "questionType": "SHORT_ANSWER",
+      "questionNotes": ["The Builder pattern separates these concerns, allowing complex object construction to be handled step-by-step."],
+      "coefficient": 1.0,
+      "answers": ["Builder"],
+      "choices": null,
+      "orderedOptions": null,
+      "optionMatches": null
+    },
+    {
+      "question": "Match the following design patterns with their descriptions.",
+      "questionType": "OPTION_MATCHING",
+      "coefficient": 1.0,
+      "answer": null,
+      "choices": null,
+      "orderedOptions": null,
+      "optionMatches": {
+        "Defines a family of algorithms and makes them interchangeable.": [
+          "Strategy"
+        ],
+        "Provides a surrogate or placeholder for another object.": [
+          "Proxy"
+        ],
+        "Encapsulates a request as an object.": [
+          "Command"
+        ],
+        "Ensures a class has only one instance.": [
+          "Singleton"
+        ]
+      }
+    },
+    {
+      "question": "Arrange the following steps of using the Observer pattern in the correct order.",
+      "questionType": "OPTION_ORDERING",
+      "coefficient": 1.0,
+      "answer": null,
+      "choices": null,
+      "orderedOptions": {
+        "1": "Define a subject interface",
+        "2": "Create concrete observer classes",
+        "3": "Implement a concrete subject class",
+        "4": "Register observers with the subject",
+        "5": "Notify observers of changes"
+      },
+      "optionMatches": null
+    },
+    {
+      "question": "Explain the concept of 'decorator' in design patterns.",
+      "questionType": "SHORT_ANSWER",
+      "questionNotes": ["The Decorator pattern dynamically adds behavior to an object at runtime without affecting the behavior of other objects from the same class."],
+      "coefficient": 1.0,
+      "answers": ["Decorator dynamically adds behavior to an object at runtime without affecting the behavior of other objects from the same class"],
+      "choices": null,
+      "orderedOptions": null,
+      "optionMatches": null
+    },
+    {
+      "question": "What is the main difference between the Adapter and Bridge patterns?",
+      "questionType": "SHORT_ANSWER",
+      "questionNotes": ["The Adapter pattern allows incompatible interfaces to work together, while the Bridge pattern separates abstraction from implementation."],
+      "coefficient": 1.0,
+      "answers": ["Adapter adapts interfaces to work together; Bridge separates abstraction from implementation"],
+      "choices": null,
+      "orderedOptions": null,
+      "optionMatches": null
     }
+  ]
+}
+
 ]
