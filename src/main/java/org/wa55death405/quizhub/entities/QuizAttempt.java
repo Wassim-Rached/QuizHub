@@ -2,7 +2,10 @@ package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Check;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,11 +28,17 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Check(constraints = "started_at <= finished_at")
+@Check(constraints = "score >= 0 AND score <= 100")
 public class QuizAttempt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private Float score = null;
+    @Column(nullable = false)
+    private LocalDateTime startedAt = LocalDateTime.now();
+    private LocalDateTime finishedAt;
+
 
     @ManyToOne(optional = false)
     private Quiz quiz;
@@ -56,5 +65,9 @@ public class QuizAttempt {
 
     public boolean isFinished() {
         return score != null;
+    }
+
+    public boolean finishedInTime() {
+        return finishedAt.isBefore( startedAt.plusSeconds( quiz.getTimeLimit() + Quiz.GRACE_PERIOD_SECONDS ) );
     }
 }
