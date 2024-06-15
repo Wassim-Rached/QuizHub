@@ -13,11 +13,11 @@ import java.util.List;
 
 /*
     * This class is responsible for handling the logic of a question
-    * It determines if the user's answer is correct or not
+    * It determines if the user's answer is correct, or not
     * It sets the correctness percentage of the question attempt
     * It sets the correctness of the various answer attempts
     * Wherever the answer be [ChoiceAttempt, OrderedOptionAttempt,AnswerAttempt...]
-    * And lastly it saves the changes to the database
+    * And lastly, it saves the changes to the database
  */
 
 @Service
@@ -29,7 +29,7 @@ public class QuestionLogicServiceImpl implements IQuestionLogicService {
     private final OrderedOptionAttemptRepository orderedOptionAttemptRepository;
     private final OptionMatchAttemptRepository optionMatchAttemptRepository;
 
-    // this method is called when a user attempts a question
+    // this method is called when a user attempts a question,
     // its core responsibility is to determine if the user's answer is correct
     // therefor it sets the correctness percentage of the question attempt
     // additionally it sets the correctness of the various answer attempts
@@ -38,7 +38,7 @@ public class QuestionLogicServiceImpl implements IQuestionLogicService {
     public void handleQuestionAttempt(QuestionAttempt questionAttempt) {
         switch (questionAttempt.getQuestion().getQuestionType()) {
             // "MULTIPLE_CHOICE" and "SINGLE_CHOICE" are handled differently
-            // for performance reasons ,but they still share the same logic
+            // for performance reasons, but they still share the same logic
             case MULTIPLE_CHOICE:
                 handle_MULTIPLE_CHOICE(questionAttempt);
                 break;
