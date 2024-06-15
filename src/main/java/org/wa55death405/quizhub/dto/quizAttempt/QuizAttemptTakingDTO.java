@@ -5,6 +5,7 @@ import org.wa55death405.quizhub.dto.question.QuestionTakingDTO;
 import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.entities.QuizAttempt;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +17,7 @@ public class QuizAttemptTakingDTO {
     private UUID id;
     private QuizGeneralInfoDTO quiz;
     private List<QuestionTakingDTO> questions;
-    private LocalDateTime startedAt;
+    private Instant startedAt;
 
     public QuizAttemptTakingDTO(QuizAttempt quizAttempt) {
         this.id = quizAttempt.getId();

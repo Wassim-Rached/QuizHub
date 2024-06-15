@@ -27,6 +27,12 @@ public class QuizLogicServiceImpl implements IQuizLogicService {
     public void processQuizAttempt(QuizAttempt quizAttempt) {
         if (quizAttempt == null) return;
 
+        if (!quizAttempt.isFinishedInTime()){
+            quizAttempt.setScore(0f);
+            quizAttemptRepository.save(quizAttempt);
+            return;
+        }
+
         List<QuestionAttempt> questionAttempts = quizAttempt.getQuestionAttempts();
         for (QuestionAttempt questionAttempt : questionAttempts){
             questionLogicService.handleQuestionAttempt(questionAttempt);

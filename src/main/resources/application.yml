@@ -9,6 +9,12 @@ app:
     MAX-AGE: ${CORS_MAX_AGE:3600}
 
 spring:
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+            time_zone: ${JDBC_TIME_ZONE:UTC}
+
   application:
     name: quiz-hub
   profiles:
