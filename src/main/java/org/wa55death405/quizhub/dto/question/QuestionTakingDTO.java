@@ -27,6 +27,7 @@ public class QuestionTakingDTO {
     private String question;
     private Float coefficient = 1f;
     private QuestionType questionType;
+    private String additionalContext;
     private String[] questionNotes;
 
     // For FILL_IN_THE_BLANK
@@ -51,6 +52,7 @@ public class QuestionTakingDTO {
         this.coefficient = question.getCoefficient();
         this.questionType = question.getQuestionType();
         this.paragraphToBeFilled = question.getParagraphToBeFilled();
+        this.additionalContext = question.getAdditionalContext();
 
         if (question.getQuestionNotes() != null && !question.getQuestionNotes().isEmpty()){
             this.questionNotes = question.getQuestionNotes().stream()
