@@ -47,6 +47,8 @@ public class Question {
     private QuestionType questionType;
     @Column(nullable = true,columnDefinition = "TEXT",length = 1024)
     private String additionalContext;
+    @Column(nullable = true,columnDefinition = "TEXT",length = 1024)
+    private String resultExplanation;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Quiz quiz;

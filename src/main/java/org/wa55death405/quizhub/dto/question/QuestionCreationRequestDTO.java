@@ -18,6 +18,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
     private List<String> answers;
     private String paragraphToBeFilled;
     private String additionalContext;
+    private String resultExplanation;
     private String[] questionNotes;
     private HashMap<String,Boolean> choices = new HashMap<>();
     private HashMap<Integer,String> orderedOptions = new HashMap<>();
@@ -34,6 +35,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         this.coefficient = question.getCoefficient();
         this.questionNotes = question.getQuestionNotes().stream().map(QuestionNote::getNote).toArray(String[]::new);
         this.additionalContext = question.getAdditionalContext();
+        this.resultExplanation = question.getResultExplanation();
 
         switch (questionType) {
             case TRUE_FALSE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK:
@@ -89,6 +91,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         question.setQuestionType(this.questionType);
         question.setCoefficient(coefficient);
         question.setAdditionalContext(additionalContext);
+        question.setResultExplanation(resultExplanation);
         question.setQuiz(quiz);
 
         if (this.questionNotes != null && this.questionNotes.length > 0){
