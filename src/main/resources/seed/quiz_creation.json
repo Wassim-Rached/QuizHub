@@ -1,5 +1,152 @@
 [
   {
+    "title": "Advanced C++ Quiz",
+    "quizAccessType": "PUBLIC",
+    "questions": [
+      {
+        "question": "What will be the output of the following C++ program?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["7"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```cpp\n#include <iostream>\n\nint main() {\n    int x = 5;\n    int y = ++x + x++;\n    std::cout << y << std::endl;\n    return 0;\n}\n```"
+      },
+      {
+        "question": "Identify the error in the following C++ code snippet.",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["Semicolon after if statement condition"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```cpp\n#include <iostream>\n\nint main() {\n    int x = 10;\n    if (x == 10); {\n        std::cout << \"x is 10\" << std::endl;\n    }\n    return 0;\n}\n```"
+      },
+      {
+        "question": "Explain the purpose of the 'const' keyword in C++.",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["To declare constants, ensuring that the value cannot be modified."],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": ""
+      },
+      {
+        "question": "What will be the output of the following C++ program?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["20"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```cpp\n#include <iostream>\n\nint main() {\n    int x = 10;\n    int &y = x;\n    y = y * 2;\n    std::cout << x << std::endl;\n    return 0;\n}\n```"
+      }
+    ]
+  },
+  {
+    "title": "Web Development Basics Quiz 2",
+    "quizAccessType": "PUBLIC",
+    "questions": [
+      {
+        "question": "What will be printed in the console after executing this JavaScript code?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["'Hello, World!'"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```javascript\nfunction greet() {\n  console.log('Hello, World!');\n}\ngreet();\n```"
+      },
+      {
+        "question": "Which CSS property is used to change the background color of an element?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1.0,
+        "answer": null,
+        "choices": {
+          "background-color": true,
+          "color": false,
+          "font-size": false,
+          "border": false
+        },
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```css\ndiv {\n  background-color: #f0f0f0;\n}\n```"
+      },
+      {
+        "question": "What will be the output of this HTML code?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["It will display 'Hello, World!' in a heading tag."],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```html\n<!DOCTYPE html>\n<html>\n<head>\n  <title>Example</title>\n</head>\n<body>\n  <h1>Hello, World!</h1>\n</body>\n</html>\n```"
+      },
+      {
+        "question": "Identify the error(s) in this JavaScript code snippet.",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["Missing semicolon after line 2."],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```javascript\nlet x = 5\nlet y = 10;\nconsole.log(x + y);\n```"
+      },
+      {
+        "question": "What is the purpose of the 'alt' attribute in an HTML <img> tag?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["It provides alternative text for screen readers and when the image fails to load."],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```html\n<img src=\"image.jpg\" alt=\"Description of the image\">\n```"
+      },
+      {
+        "question": "Does this CSS selector correctly target all <p> elements inside a <div> with class 'container'?",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1.0,
+        "answers": ["TRUE"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```css\ndiv.container p {\n  color: blue;\n}\n```"
+      },
+      {
+        "question": "Identify the correct syntax for a JavaScript function declaration.",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["function myFunction() { /* function body */ }"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```javascript\nfunction myFunction() {\n  // Function body\n}\nmyFunction(); // Function call\n```"
+      },
+      {
+        "question": "What is the output of the following JavaScript code?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["Hello, World!"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```javascript\nconsole.log('Hello, World!');\n```"
+      },
+      {
+        "question": "What is the correct way to link an external CSS file to an HTML document?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1.0,
+        "answers": ["<link rel=\"stylesheet\" href=\"styles.css\">"],
+        "choices": null,
+        "orderedOptions": null,
+        "optionMatches": null,
+        "additionalContext": "```html\n<!DOCTYPE html>\n<html>\n<head>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <!-- HTML content -->\n</body>\n</html>\n```"
+      }
+    ]
+  },
+  {
     "title": "Web Development Basics Quiz",
     "quizAccessType": "PUBLIC",
     "questions": [
@@ -396,7 +543,8 @@
         "optionMatches": null
       }
     ]
-  },{
+  },
+  {
   "title": "Design Patterns Basics Quiz",
   "quizAccessType": "PUBLIC",
   "questions": [

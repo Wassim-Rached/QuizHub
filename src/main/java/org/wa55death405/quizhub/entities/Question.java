@@ -45,6 +45,8 @@ public class Question {
     private Float coefficient = 1f;
     @Column(nullable = false)
     private QuestionType questionType;
+    @Column(nullable = true,columnDefinition = "TEXT",length = 1024)
+    private String additionalContext;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Quiz quiz;
