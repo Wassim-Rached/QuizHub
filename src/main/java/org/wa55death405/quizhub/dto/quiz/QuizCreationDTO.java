@@ -17,6 +17,7 @@ public class QuizCreationDTO implements EntityDTO<Quiz,Void> {
     private String title;
     private QuizAccessType quizAccessType;
     private Integer timeLimit;
+    private String description;
     private List<QuestionCreationRequestDTO> questions = new ArrayList<>();
 
     @Override
@@ -32,6 +33,7 @@ public class QuizCreationDTO implements EntityDTO<Quiz,Void> {
                 .title(title)
                 .timeLimit(timeLimit)
                 .quizAccessType(quizAccessType)
+                .description(description)
                 .build();
         if (questions == null || questions.size() < Quiz.MIN_QUESTION_COUNT || questions.size() > Quiz.MAX_QUESTION_COUNT) {
             throw new InputValidationException("Quiz should have between " + Quiz.MIN_QUESTION_COUNT + " and " + Quiz.MAX_QUESTION_COUNT + " questions");
@@ -48,6 +50,7 @@ public class QuizCreationDTO implements EntityDTO<Quiz,Void> {
         this.title = quiz.getTitle();
         this.timeLimit = quiz.getTimeLimit();
         this.quizAccessType = quiz.getQuizAccessType();
+        this.description = quiz.getDescription();
         this.questions = quiz.getQuestions().stream().map(QuestionCreationRequestDTO::new).toList();
     }
 }

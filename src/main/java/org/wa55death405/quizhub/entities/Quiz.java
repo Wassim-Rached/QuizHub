@@ -41,6 +41,8 @@ public class Quiz {
     private QuizAccessType quizAccessType;
     @Check(constraints = "time_limit >= 60")
     private Integer timeLimit;
+    @Column(nullable = true,columnDefinition = "TEXT",length = 1024)
+    private String description;
 
     // TODO : change the fetch to lazy
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

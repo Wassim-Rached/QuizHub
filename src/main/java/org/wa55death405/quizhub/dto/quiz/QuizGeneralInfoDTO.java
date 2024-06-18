@@ -14,11 +14,13 @@ public class QuizGeneralInfoDTO {
     private String title;
     private Integer timeLimit;
     private QuizAccessType quizAccessType;
+    private String description;
 
     public QuizGeneralInfoDTO(Quiz quiz) {
         this.id = quiz.getId();
         this.title = quiz.getTitle();
         this.timeLimit = quiz.getTimeLimit();
         this.quizAccessType = quiz.getQuizAccessType();
+        this.description = quiz.getDescription();
     }
 }
