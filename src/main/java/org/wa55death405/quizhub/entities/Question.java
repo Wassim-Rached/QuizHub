@@ -57,7 +57,7 @@ public class Question {
     private List<QuestionNote> questionNotes;
 
     // for FILL_IN_THE_BLANK
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT",length = 1024)
     private String paragraphToBeFilled;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
@@ -94,6 +94,10 @@ public class Question {
     // for FILL_IN_THE_BLANK
     public static final int MIN_FILL_IN_THE_BLANK_BLANKS = 1;
     public static final int MAX_FILL_IN_THE_BLANK_BLANKS = 15;
+
+    // for SHORT_ANSWER
+    public static final int MAX_SHORT_ANSWER_ANSWERS = 5;
+    public static final int MIN_SHORT_ANSWER_ANSWERS = 1;
 
     // for MULTIPLE_CHOICE, SINGLE_CHOICE
     static public final Integer MAX_NUMBER_OF_CHOICES = 10;
