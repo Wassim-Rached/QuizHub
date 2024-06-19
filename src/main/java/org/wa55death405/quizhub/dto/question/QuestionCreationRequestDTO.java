@@ -86,6 +86,12 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         if (quiz == null) throw new InputValidationException("Quiz is required for question '" + this.question + "'");
         if (this.questionNotes != null && this.questionNotes.length > Question.MAX_QUESTION_NOTES) throw new InputValidationException("Number of question notes must be less than or equal to " + Question.MAX_QUESTION_NOTES + " for question '" + this.question + "'");
 
+        if (this.questionType == QuestionType.SHORT_ANSWER){
+            if (this.answers.size() > Question.MAX_SHORT_ANSWER_ANSWERS){
+                throw new InputValidationException("Number of answers must be between " + Question.MIN_SHORT_ANSWER_ANSWERS + " and " + Question.MAX_SHORT_ANSWER_ANSWERS + " for question '" + this.question + "'");
+            }
+        }
+
         Question question = new Question();
         question.setQuestion(this.question);
         question.setQuestionType(this.questionType);
