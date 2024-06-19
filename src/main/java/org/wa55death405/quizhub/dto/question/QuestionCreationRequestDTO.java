@@ -36,6 +36,7 @@ public class QuestionCreationRequestDTO implements EntityDTO<Question,Quiz> {
         this.questionNotes = question.getQuestionNotes().stream().map(QuestionNote::getNote).toArray(String[]::new);
         this.additionalContext = question.getAdditionalContext();
         this.resultExplanation = question.getResultExplanation();
+        this.paragraphToBeFilled = question.getParagraphToBeFilled();
 
         switch (questionType) {
             case TRUE_FALSE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK:
