@@ -2,7 +2,7 @@
   {
     "title": "Entry C++ Quiz",
     "quizAccessType": "PUBLIC",
-    "timeLimit": 120,
+    "timeLimit": 1800,
     "description": "# Welcome to the Entry C++ Quiz!\n\n![C++ Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png)\n\nThis quiz is designed to test your knowledge of `entry-level concepts in C++`. Whether you're exploring `basic syntax`, understanding `fundamental data structures`, or learning about `introductory programming techniques`, this quiz provides a `foundational understanding` of C++ programming.\n\n## About the Quiz\n\nThis quiz is perfect for `beginners` looking to solidify their understanding of `C++ essentials`. It covers a variety of topics including:\n- `Basic syntax and control structures`\n- `Data types and variables`\n- `Functions and procedural programming concepts`\n\nTest your knowledge and enhance your skills with our carefully crafted questions that span both `theoretical understanding` and `practical application`. Whether you're `new to programming` or `transitioning to C++`, this quiz aims to build a `strong foundation` for your journey.\n\nAre you ready to embark on your `C++ learning adventure`? Let's get started!",
     "questions": [
       {
@@ -322,7 +322,7 @@
     "title": "HTTP Basics Quiz",
     "quizAccessType": "PUBLIC",
     "timeLimit": 1800,
-    "description": "# Welcome to the HTTP Basics Quiz!\n\nThis quiz tests your understanding of fundamental concepts related to HTTP (Hypertext Transfer Protocol). HTTP is the foundation of data communication on the World Wide Web, governing how web servers and clients interact. Explore key aspects such as request methods, status codes, headers, and more.\n\n## About the Quiz\n\nThis quiz covers essential topics including:\n- HTTP request methods and their purposes\n- HTTP status codes and their meanings\n- Headers and their role in HTTP communication\n\nEnhance your knowledge and grasp the core principles of HTTP with carefully crafted questions that bridge theoretical understanding with practical application.\n\nAre you ready to dive into the world of HTTP? Let's get started!",
+    "description": "# Welcome to the HTTP Basics Quiz!\n\n![Http Photo](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/HTTP_logo.svg/640px-HTTP_logo.svg.png)\n\nThis quiz tests your understanding of fundamental concepts related to HTTP (Hypertext Transfer Protocol). HTTP is the foundation of data communication on the World Wide Web, governing how web servers and clients interact. Explore key aspects such as request methods, status codes, headers, and more.\n\n## About the Quiz\n\nThis quiz covers essential topics including:\n- HTTP request methods and their purposes\n- HTTP status codes and their meanings\n- Headers and their role in HTTP communication\n\nEnhance your knowledge and grasp the core principles of HTTP with carefully crafted questions that bridge theoretical understanding with practical application.\n\nAre you ready to dive into the world of HTTP? Let's get started!",
     "questions": [
       {
         "question": "Which HTTP method is used to request data from a server?",
@@ -445,8 +445,8 @@
   {
     "title": "Entry Design Patterns Quiz",
     "quizAccessType": "PUBLIC",
-    "timeLimit": 120,
-    "description": "# Welcome to the Entry Design Patterns Quiz!\n\n![Design Patterns](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Design-patterns-svg.png/320px-Design-patterns-svg.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in Design Patterns**. Whether you're new to software design patterns or looking to solidify your understanding of basic principles, this quiz covers essential topics to get you started on your journey of software architecture.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental design patterns. It covers a variety of topics including:\n- Creational, Structural, and Behavioral design patterns\n- Real-world applications and examples of each pattern\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring design patterns for software development, this quiz aims to build a strong foundation for your learning path.\n\nAre you ready to dive into the world of Design Patterns? Let's get started!",
+    "timeLimit": null,
+    "description": "# Welcome to the Entry Design Patterns Quiz!\n\n![Design Patterns](https://bgasparotto.com/wp-content/uploads/2016/11/design-patterns-logo-2.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in Design Patterns**. Whether you're new to software design patterns or looking to solidify your understanding of basic principles, this quiz covers essential topics to get you started on your journey of software architecture.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental design patterns. It covers a variety of topics including:\n- Creational, Structural, and Behavioral design patterns\n- Real-world applications and examples of each pattern\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring design patterns for software development, this quiz aims to build a strong foundation for your learning path.\n\nAre you ready to dive into the world of Design Patterns? Let's get started!",
     "questions": [
       {
         "question": "Which design pattern is used to ensure a class has only one instance and provides a global point of access to that instance?",
@@ -617,5 +617,251 @@
         "optionMatches": {}
       }
     ]
-  }
+  },
+  {
+    "title": "Entry Algorithms Quiz",
+    "quizAccessType": "PUBLIC",
+    "timeLimit": 900,
+    "description": "# Welcome to the Entry Algorithms Quiz!\n\n![Algorithms](https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in Algorithms**. Whether you're new to algorithms or looking to solidify your understanding of basic principles, this quiz covers essential topics to get you started on your journey in computer science.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental algorithms. It covers a variety of topics including:\n- Sorting and Searching algorithms\n- Basic Data Structures\n- Algorithm complexity\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring algorithms for software development or academic purposes, this quiz aims to build a strong foundation for your learning path.\n\nAre you ready to dive into the world of Algorithms? Let's get started!",
+    "questions": [
+      {
+        "question": "Which algorithm is used to find the shortest path between nodes in a graph?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Dijkstra's algorithm is widely used to find the shortest path between nodes in a graph. It works by exploring all possible paths from the starting node to the target node and selecting the path with the minimum total weight.",
+        "questionNotes": [],
+        "choices": {
+          "Dijkstra's Algorithm": true,
+          "Merge Sort": false,
+          "Binary Search": false,
+          "Quick Sort": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which of the following sorting algorithms has an average time complexity of O(n log n)?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Merge Sort and Quick Sort both have an average time complexity of O(n log n). Merge Sort is stable and guarantees O(n log n) time complexity in all cases, making it a preferred choice in many applications.",
+        "questionNotes": [],
+        "choices": {
+          "Bubble Sort": false,
+          "Insertion Sort": false,
+          "Merge Sort": true,
+          "Quick Sort": true
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "What is the time complexity of the Depth-First Search (DFS) algorithm on a graph with V vertices and E edges in Big O notation? Provide the numerical representation of the coefficients. For example, for O(V^2), input 2.",
+        "questionType": "NUMERIC",
+        "coefficient": 1,
+        "answers": ["1"],
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The time complexity of Depth-First Search (DFS) is O(V + E). In Big O notation, the coefficients for V and E are 1.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+            "question": "Which data structure is commonly used to implement a Last-In-First-Out (LIFO) order of elements?",
+            "questionType": "SINGLE_CHOICE",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "A Stack is a data structure that follows the Last-In-First-Out (LIFO) order, where elements are inserted and removed from the same end. It supports operations like push (insert) and pop (remove) in constant time.",
+            "questionNotes": [],
+            "choices": {
+            "Queue": false,
+            "Heap": false,
+            "Stack": true,
+            "Linked List": false
+            },
+            "orderedOptions": {},
+            "optionMatches": {}
+        },
+      {
+            "question": "What is the primary purpose of the Binary Search algorithm?",
+            "questionType": "SINGLE_CHOICE",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "The primary purpose of the Binary Search algorithm is to efficiently locate a target value within a sorted array or list. It works by repeatedly dividing the search interval in half until the target value is found or the interval is empty.",
+            "questionNotes": [],
+            "choices": {
+            "To sort a list of elements in ascending order": false,
+            "To find the shortest path between nodes in a graph": false,
+            "To locate a target value in a sorted array": true,
+            "To traverse a tree data structure in a breadth-first manner": false
+            },
+            "orderedOptions": {},
+            "optionMatches": {}
+        },
+      {
+            "question": "Which algorithm is used to sort elements by recursively dividing the array into two halves, sorting the halves, and merging them back together?",
+            "questionType": "SINGLE_CHOICE",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "Merge Sort is an efficient sorting algorithm that follows the divide-and-conquer approach. It recursively divides the array into two halves, sorts the halves, and merges them back together in sorted order.",
+            "questionNotes": [],
+            "choices": {
+            "Bubble Sort": false,
+            "Insertion Sort": false,
+            "Merge Sort": true,
+            "Quick Sort": false
+            },
+            "orderedOptions": {},
+            "optionMatches": {}
+        },
+      {
+        "question": "In computer science, the Greedy algorithm always guarantees an optimal solution for a given problem.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1,
+        "answers": ["FALSE"],
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "False. While Greedy algorithms often provide optimal solutions for many problems, they do not guarantee optimal solutions in all cases. Sometimes, a Greedy approach may lead to locally optimal solutions that are not globally optimal.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      }
+    ]
+  },
+  {
+        "title": "Entry Git Quiz",
+        "quizAccessType": "PUBLIC",
+        "timeLimit": 900,
+        "description": "# Welcome to the Entry Git Quiz!\n\n![Git Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/320px-Git-logo.svg.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in Git**. Whether you're new to version control or looking to solidify your understanding of basic Git operations, this quiz covers essential topics to get you started on your Git journey.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental Git concepts. It covers a variety of topics including:\n- Basic Git commands\n- Branching and Merging\n- Remote repositories and collaboration\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring Git for software development, version control, or collaboration purposes, this quiz aims to build a strong foundation for your Git learning path.\n\nAre you ready to dive into the world of Git? Let's get started!",
+        "questions": [
+          {
+            "question": "What Git command is used to create a new branch and switch to it?",
+            "questionType": "SHORT_ANSWER",
+            "coefficient": 1,
+            "answers": ["git checkout -b", "git switch -c"],
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "The 'git checkout -b' command creates a new branch and switches to it in Git. Alternatively, 'git switch -c' also creates a new branch and switches to it.",
+            "questionNotes": [],
+            "choices": {},
+            "orderedOptions": {},
+            "optionMatches": {}
+          },
+          {
+            "question": "How many parents does a merge commit typically have in Git?",
+            "questionType": "NUMERIC",
+            "coefficient": 1,
+            "answers": ["2"],
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "A merge commit in Git typically has two parents: the commit from the branch being merged into and the commit from the branch being merged.",
+            "questionNotes": [],
+            "choices": {},
+            "orderedOptions": {},
+            "optionMatches": {}
+          },
+          {
+            "question": "In Git, what command is used to view the commit history of a repository?",
+            "questionType": "SHORT_ANSWER",
+            "coefficient": 1,
+            "answers": ["git log", "git history"],
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "The 'git log' command in Git displays the commit history of a repository, showing all commits in reverse chronological order.",
+            "questionNotes": [],
+            "choices": {},
+            "orderedOptions": {},
+            "optionMatches": {}
+          },
+          {
+            "question": "Which Git command is used to create a new branch?",
+            "questionType": "SINGLE_CHOICE",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "The 'git branch' command is used to create a new branch in Git. It allows developers to work on new features or fixes without affecting the main branch until they are ready to merge their changes.",
+            "questionNotes": [],
+            "choices": {
+              "git clone": false,
+              "git pull": false,
+              "git branch": true,
+              "git push": false
+            },
+            "orderedOptions": {},
+            "optionMatches": {}
+          },
+          {
+            "question": "Arrange the following Git commands in the correct order to stage and commit and push changes in a new branch.",
+            "questionType": "OPTION_ORDERING",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "Staging and committing changes in Git involves several key steps. First, 'git add' is used to stage changes. Second, 'git commit' is used to commit the staged changes with a message describing the modifications.",
+            "questionNotes": [],
+            "choices": {},
+            "orderedOptions": {
+              "1": "get checkout -b new-branch",
+              "2": "git add .",
+              "3": "git commit -m 'Commit message'",
+              "4": "git push origin new-branch"
+            },
+            "optionMatches": {}
+            }
+        ]
+    },
+  {
+        "title": "Entry JavaScript Quiz",
+        "quizAccessType": "PUBLIC",
+        "timeLimit": 900,
+        "description": "# Welcome to the Entry JavaScript Quiz!\n\n![JavaScript Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/320px-JavaScript-logo.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in JavaScript**. Whether you're new to JavaScript or looking to solidify your understanding of basic programming concepts, this quiz covers essential topics to get you started on your JavaScript journey.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental JavaScript concepts. It covers a variety of topics including:\n- JavaScript syntax and data types\n- Functions and control flow\n- DOM manipulation and event handling\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring JavaScript for web development, front-end programming, or scripting purposes, this quiz aims to build a strong foundation for your JavaScript learning path.\n\nAre you ready to dive into the world of JavaScript? Let's get started!",
+        "questions": [
+        {
+            "question": "Which keyword is used to declare a variable in JavaScript?",
+            "questionType": "SINGLE_CHOICE",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "The `var` keyword is used to declare a variable in JavaScript. Variables are used to store data values that can be referenced and manipulated in a program.",
+            "questionNotes": [],
+            "choices": {
+            "let": false,
+            "const": false,
+            "var": true,
+            "function": false
+            },
+            "orderedOptions": {},
+            "optionMatches": {}
+        },
+        {
+          "question": "What will be the output of the following JavaScript code snippet?",
+          "questionType": "SHORT_ANSWER",
+          "coefficient": 1,
+          "answers": ["6"],
+          "paragraphToBeFilled": null,
+          "additionalContext": "Consider the following JavaScript code:\n\n```javascript\nfunction foo() {\n  console.log(a);\n  var a = 6;\n}\nfoo();\n```",
+          "resultExplanation": "The output of the code snippet is 6. The 'a' variable is hoisted to the top of the function scope due to JavaScript's function scope hoisting behavior. Inside the function, 'a' is assigned a value of 6 before the console.log statement executes.",
+          "questionNotes": [],
+          "choices": {},
+          "orderedOptions": {},
+          "optionMatches": {}
+        }
+        ]
+    }
 ]
