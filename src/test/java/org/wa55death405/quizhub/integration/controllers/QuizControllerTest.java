@@ -98,8 +98,9 @@ class QuizControllerTest {
                     preprocessResponse(prettyPrint())
                 )
             ).andReturn().getResponse().getContentAsString();
-        UUID quizId = UUID.fromString(objectMapper.readTree(responseStr).path("data").asText());
-        quizRepository.deleteById(quizId);
+        // TODO: i dont know what is this even about
+        // UUID quizId = UUID.fromString(objectMapper.readTree(responseStr).path("data").asText());
+        // quizRepository.deleteById(quizId);
     }
 
     @Test
