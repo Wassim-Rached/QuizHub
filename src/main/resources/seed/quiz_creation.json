@@ -169,6 +169,163 @@
     ]
   },
   {
+    "title": "General Geography Quiz",
+    "quizAccessType": "PUBLIC",
+    "timeLimit": 900,
+    "description": "# Welcome to the General Geography Quiz!\n\n![Geography](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvqutW4W_79Oag11sbuGwIPZa5d24cHrMVYw&s)\n\nThis quiz is designed to test your knowledge of **general geography concepts**. Whether you're a geography enthusiast or looking to explore the world's diverse landscapes, this quiz covers essential topics to broaden your geographical understanding.\n\n## About the Quiz\n\nThis quiz is perfect for anyone interested in learning about the world's geography. It covers a variety of topics including:\n- Continents and countries\n- Landforms and bodies of water\n- Climate zones and biomes\n\nTest your knowledge and enhance your geographical awareness with carefully crafted questions that span both theoretical understanding and practical application. Whether you're exploring geography for educational purposes or personal interest, this quiz aims to broaden your horizons and deepen your appreciation of the world.\n\nAre you ready to embark on a journey around the globe? Let's get started!",
+    "questions": [
+      {
+        "question": "Which country is shown in the following image?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "![Country Image](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Flag_of_Uganda.svg/2560px-Flag_of_Uganda.svg.png)",
+        "resultExplanation": null,
+        "questionNotes": null,
+        "choices": {
+          "Uganda": true,
+          "Kenya": false,
+          "Tanzania": false,
+          "Rwanda": false,
+          "Burundi": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Identify the famous landmark shown in the photo below.",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "![Moai Statues Photo](https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/AhuTongariki.JPG/495px-AhuTongariki.JPG)",
+        "resultExplanation": "The Moai statues are monolithic human figures carved by the Rapa Nui people on Easter Island in eastern Polynesia between the years 1250 and 1500. They are believed to represent ancestors, chiefs, or other important figures in Rapa Nui society.",
+        "questionNotes": null,
+        "choices": {
+          "Great Wall of China (China)": false,
+          "Moai Statues (Easter Island in Chile)": true,
+          "Machu Picchu (Peru)": false,
+          "Colosseum (Italy)": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which country is highlighted on the map below?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "![Country Map](https://o.quizlet.com/5W4GiYGgLHAudLwFpw-fpw.png)",
+        "resultExplanation": "Argentina is highlighted on the map. It is a South American country known for its diverse landscapes, including the Andes Mountains, the Pampas grasslands, and the vibrant city of Buenos Aires.",
+        "questionNotes": null,
+        "choices": {
+          "Brazil": false,
+          "Argentina": true,
+          "Chile": false,
+          "Peru": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Rank the following countries from largest to smallest by area.",
+        "questionType": "OPTION_ORDERING",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "1. **Russia**: 17,098,242 km²\n2. **Canada**: 9,984,670 km²\n3. **China**: 9,596,961 km²\n4. **United States**: 9,525,067 km²\n5. **Brazil**: 8,515,767 km²\n6. **Australia**: 7,692,024 km²\n7. **India**: 3,287,263 km²",
+        "questionNotes": null,
+        "choices":{},
+        "orderedOptions": {
+          "1": "Russia",
+          "2": "Canada",
+          "3": "China",
+          "4": "United States",
+          "5": "Brazil",
+          "6": "Australia",
+          "7": "India"
+        },
+        "optionMatches": {}
+      },
+      {
+        "question": "Identify the famous landmark shown in the photo below.",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "![Machu Picchu Photo](https://res.cloudinary.com/rainforest-cruises/images/c_fill,g_auto/f_auto,q_auto/v1625773504/Top-10-SA-Attractions-Machu-Picchu/Top-10-SA-Attractions-Machu-Picchu.jpg)",
+        "resultExplanation": "Machu Picchu is an Incan citadel set high in the Andes Mountains in Peru, above the Urubamba River valley. Built in the 15th century and later abandoned, it’s renowned for its sophisticated dry-stone construction that fuses huge blocks without the use of mortar.",
+        "questionNotes": null,
+        "choices": {
+          "Great Wall of China (China)": false,
+          "Moai Statues (Easter Island in Chile)": false,
+          "Machu Picchu (Peru)": true,
+          "Colosseum (Italy)": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which mountain is the highest peak in North America?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Denali, also known as Mount McKinley, is the highest peak in North America, located in Alaska, USA.",
+        "questionNotes": [],
+        "choices": {
+          "Mount Logan": false,
+          "Pico de Orizaba": false,
+          "Mount Rainier": false,
+          "Denali (Mount McKinley)": true
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which country is highlighted on the map below?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "![Country Map](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh80og5T6r4jwIu7Ygxf5eW4YzbHP8RUoY9Q&s)",
+        "resultExplanation": "Poland is highlighted on the map. It is a Central European country known for its rich history, diverse culture, and landmarks such as the historic city of Kraków, the medieval castle of Malbork, and the Tatra Mountains.",
+        "questionNotes": null,
+        "choices": {
+          "Germany": false,
+          "Poland": true,
+          "Czech Republic": false,
+          "Ukraine": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+
+      {
+        "question": "Which country is highlighted on the map below?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "![Country Map](https://cdn.diaocthongthai.com/map/VNM/map_hd_0/locator-map-of-vietnam.gif)",
+        "resultExplanation": "Vietnam is highlighted on the map. It is a Southeast Asian country known for its rich history, diverse culture, and stunning natural landscapes.",
+        "questionNotes": null,
+        "choices": {
+          "China": false,
+          "Japan": false,
+          "South Korea": false,
+          "Vietnam": true
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      }
+    ]
+  },
+  {
     "title": "Entry Docker Quiz",
     "quizAccessType": "PUBLIC",
     "timeLimit": 1800,
@@ -319,163 +476,6 @@
     ]
   },
   {
-    "title": "General Geography Quiz",
-    "quizAccessType": "PUBLIC",
-    "timeLimit": 1800,
-    "description": "# Welcome to the General Geography Quiz!\n\n![Geography](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvqutW4W_79Oag11sbuGwIPZa5d24cHrMVYw&s)\n\nThis quiz is designed to test your knowledge of **general geography concepts**. Whether you're a geography enthusiast or looking to explore the world's diverse landscapes, this quiz covers essential topics to broaden your geographical understanding.\n\n## About the Quiz\n\nThis quiz is perfect for anyone interested in learning about the world's geography. It covers a variety of topics including:\n- Continents and countries\n- Landforms and bodies of water\n- Climate zones and biomes\n\nTest your knowledge and enhance your geographical awareness with carefully crafted questions that span both theoretical understanding and practical application. Whether you're exploring geography for educational purposes or personal interest, this quiz aims to broaden your horizons and deepen your appreciation of the world.\n\nAre you ready to embark on a journey around the globe? Let's get started!",
-    "questions": [
-      {
-        "question": "Which country is shown in the following image?",
-        "questionType": "SINGLE_CHOICE",
-        "coefficient": 1,
-        "answers": null,
-        "paragraphToBeFilled": null,
-        "additionalContext": "![Country Image](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Flag_of_Uganda.svg/2560px-Flag_of_Uganda.svg.png)",
-        "resultExplanation": null,
-        "questionNotes": null,
-        "choices": {
-          "Uganda": true,
-          "Kenya": false,
-          "Tanzania": false,
-          "Rwanda": false,
-          "Burundi": false
-        },
-        "orderedOptions": {},
-        "optionMatches": {}
-      },
-      {
-        "question": "Identify the famous landmark shown in the photo below.",
-        "questionType": "SINGLE_CHOICE",
-        "coefficient": 1,
-        "answers": null,
-        "paragraphToBeFilled": null,
-        "additionalContext": "![Moai Statues Photo](https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/AhuTongariki.JPG/495px-AhuTongariki.JPG)",
-        "resultExplanation": "The Moai statues are monolithic human figures carved by the Rapa Nui people on Easter Island in eastern Polynesia between the years 1250 and 1500. They are believed to represent ancestors, chiefs, or other important figures in Rapa Nui society.",
-        "questionNotes": null,
-        "choices": {
-          "Great Wall of China (China)": false,
-          "Moai Statues (Easter Island in Chile)": true,
-          "Machu Picchu (Peru)": false,
-          "Colosseum (Italy)": false
-        },
-        "orderedOptions": {},
-        "optionMatches": {}
-      },
-      {
-        "question": "Which country is highlighted on the map below?",
-        "questionType": "SINGLE_CHOICE",
-        "coefficient": 1,
-        "answers": null,
-        "paragraphToBeFilled": null,
-        "additionalContext": "![Country Map](https://o.quizlet.com/5W4GiYGgLHAudLwFpw-fpw.png)",
-        "resultExplanation": "Argentina is highlighted on the map. It is a South American country known for its diverse landscapes, including the Andes Mountains, the Pampas grasslands, and the vibrant city of Buenos Aires.",
-        "questionNotes": null,
-        "choices": {
-          "Brazil": false,
-          "Argentina": true,
-          "Chile": false,
-          "Peru": false
-        },
-        "orderedOptions": {},
-        "optionMatches": {}
-      },
-      {
-        "question": "Rank the following countries from largest to smallest by area.",
-        "questionType": "OPTION_ORDERING",
-        "coefficient": 1,
-        "answers": null,
-        "paragraphToBeFilled": null,
-        "additionalContext": null,
-        "resultExplanation": "1. **Russia**: 17,098,242 km²\n2. **Canada**: 9,984,670 km²\n3. **China**: 9,596,961 km²\n4. **United States**: 9,525,067 km²\n5. **Brazil**: 8,515,767 km²\n6. **Australia**: 7,692,024 km²\n7. **India**: 3,287,263 km²",
-        "questionNotes": null,
-        "choices":{},
-        "orderedOptions": {
-            "1": "Russia",
-            "2": "Canada",
-            "3": "China",
-            "4": "United States",
-            "5": "Brazil",
-            "6": "Australia",
-            "7": "India"
-        },
-        "optionMatches": {}
-      },
-      {
-        "question": "Identify the famous landmark shown in the photo below.",
-        "questionType": "SINGLE_CHOICE",
-        "coefficient": 1,
-        "answers": null,
-        "paragraphToBeFilled": null,
-        "additionalContext": "![Machu Picchu Photo](https://res.cloudinary.com/rainforest-cruises/images/c_fill,g_auto/f_auto,q_auto/v1625773504/Top-10-SA-Attractions-Machu-Picchu/Top-10-SA-Attractions-Machu-Picchu.jpg)",
-        "resultExplanation": "Machu Picchu is an Incan citadel set high in the Andes Mountains in Peru, above the Urubamba River valley. Built in the 15th century and later abandoned, it’s renowned for its sophisticated dry-stone construction that fuses huge blocks without the use of mortar.",
-        "questionNotes": null,
-        "choices": {
-          "Great Wall of China (China)": false,
-          "Moai Statues (Easter Island in Chile)": false,
-          "Machu Picchu (Peru)": true,
-          "Colosseum (Italy)": false
-        },
-        "orderedOptions": {},
-        "optionMatches": {}
-      },
-      {
-        "question": "Which mountain is the highest peak in North America?",
-        "questionType": "SINGLE_CHOICE",
-        "coefficient": 1,
-        "answers": null,
-        "paragraphToBeFilled": null,
-        "additionalContext": null,
-        "resultExplanation": "Denali, also known as Mount McKinley, is the highest peak in North America, located in Alaska, USA.",
-        "questionNotes": [],
-        "choices": {
-          "Mount Logan": false,
-          "Pico de Orizaba": false,
-          "Mount Rainier": false,
-          "Denali (Mount McKinley)": true
-        },
-        "orderedOptions": {},
-        "optionMatches": {}
-      },
-      {
-        "question": "Which country is highlighted on the map below?",
-        "questionType": "SINGLE_CHOICE",
-        "coefficient": 1,
-        "answers": null,
-        "paragraphToBeFilled": null,
-        "additionalContext": "![Country Map](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh80og5T6r4jwIu7Ygxf5eW4YzbHP8RUoY9Q&s)",
-        "resultExplanation": "Poland is highlighted on the map. It is a Central European country known for its rich history, diverse culture, and landmarks such as the historic city of Kraków, the medieval castle of Malbork, and the Tatra Mountains.",
-        "questionNotes": null,
-        "choices": {
-          "Germany": false,
-          "Poland": true,
-          "Czech Republic": false,
-          "Ukraine": false
-        },
-        "orderedOptions": {},
-        "optionMatches": {}
-      },
-
-      {
-        "question": "Which country is highlighted on the map below?",
-        "questionType": "SINGLE_CHOICE",
-        "coefficient": 1,
-        "answers": null,
-        "paragraphToBeFilled": null,
-        "additionalContext": "![Country Map](https://cdn.diaocthongthai.com/map/VNM/map_hd_0/locator-map-of-vietnam.gif)",
-        "resultExplanation": "Vietnam is highlighted on the map. It is a Southeast Asian country known for its rich history, diverse culture, and stunning natural landscapes.",
-        "questionNotes": null,
-        "choices": {
-          "China": false,
-          "Japan": false,
-          "South Korea": false,
-          "Vietnam": true
-        },
-        "orderedOptions": {},
-        "optionMatches": {}
-      }
-    ]
-  },
-  {
     "title": "HTTP Basics Quiz",
     "quizAccessType": "PUBLIC",
     "timeLimit": 1800,
@@ -600,111 +600,99 @@
     ]
   },
   {
-    "title": "Entry Algorithms Quiz",
+    "title": "General History Quiz",
     "quizAccessType": "PUBLIC",
     "timeLimit": 900,
-    "description": "# Welcome to the Entry Algorithms Quiz!\n\n![Algorithms](https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in Algorithms**. Whether you're new to algorithms or looking to solidify your understanding of basic principles, this quiz covers essential topics to get you started on your journey in computer science.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental algorithms. It covers a variety of topics including:\n- Sorting and Searching algorithms\n- Basic Data Structures\n- Algorithm complexity\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring algorithms for software development or academic purposes, this quiz aims to build a strong foundation for your learning path.\n\nAre you ready to dive into the world of Algorithms? Let's get started!",
+    "description": "# Welcome to the General History Quiz!\n\n![History](data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEBUSEhIWFhUWEBUVEBYVFRYVFRUWFRUXFhUVFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGxAQGi0mHyUtLS0tLS0tLS8tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAIwBaAMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAEAAIDBQYBB//EAEwQAAEDAgMDCAUIBggFBQAAAAEAAgMEEQUSIQYxQRMiUWFxgZGhBzJSscEUIzNCYnLR8BVzgpKy4SQ0NUNjosLSU3SDk7MIFiVUZP/EABkBAAIDAQAAAAAAAAAAAAAAAAEDAAIEBf/EADARAAICAQMCAgkDBQAAAAAAAAABAhEDBBIhMUEicRMyM1FhgZGx8CNCoQUUNFLB/9oADAMBAAIRAxEAPwDyaCRWlNMqGJ6sKeVImjVBl9DKjopFRwyouOdZ5GhFy2RStkVUydTsnSy5ZB6WZBNmUrZULLUEXTSmcouGRCwjiopFx0qhfKigDJEO8J75FA+RFFGMeEPInveoHuTEijY1yicU5yhcVdIrZxyiKcSo3FXSKNjXqMpzimEq6KMaU0rpTUQHCmEJ5XFYBGQiML+mb2g+BUJRmBD+lR9qrN+F+RIrxLzO4yC2tnuLWq5P/ISq6pdd5PWfwWn9IzgcSmLeJF+2wup9mqOjMcZqcnOJLib3yh9ju6lWM/CpBlDlxRjQrXDoAtfQ7N09TNdscbGPk0s85WAnpB3AFXO1ew9PRta6KUPuLnK46eZQlk3LgMMe18lThFFe2mq9G2Ppg2VhtaxC8oirHMPNeR3/AIrXbDYhUS1LG8q4tzC4zW0vrusVz54J3Zq9JFqiT/1H/T0h6YpPJw/FZj0NvtXt+98Eb6WDL+kHR1Li8R6wAm+WN4BAHT333Ks9FZtiYA0HKaeJWyTvE/zuZ0qkvzsUe3bLYhN95UCv9vBbEaj9b8FQJ2D2cfJCc3tH5nEkkk4UJJJJQgklxJQgkkklCE7XImKVBgpwcqtWMjKi2inRLKhUjZVM2ZKeMfHIXjKlTsqVRNqFMyoS3AYshfMqFM2dUkdQiGzpTgMUy1+UrnylVvKrrJFNhN5Y8qml6gZInl6FEs64qJyc56jc5FAbGkKNzVJdNcVYBE5qhkapXuQ73ooDI3BRuCe5yjc5NQpjHBRkKQlMKJVjMqWVOSurAIy1NIUhTSVADLIrBP61F94IYlTYUf6TF98KT9V+QY+svMvPSRT5MRk+02N/7zG387qnhGeFo9kuaf2jmaey61XpgZasjd7VO3yA/FZLCKlrZMr/AFHjI/qvud3Hyul4neJMOSlkZBHnjN2uLSDwNrELb7LbQzP5jzm0sbjUjiSs3V0ZbIWu3jQ9Y4FP2flyTAH2u+46FJ1OIzHcJfA9Pds5BOA4MAcRc25pGl9438N4Q2D4SaKqjeJLAOvZ4yutfgRo7RXOCPADTfjqeg7yLHiotvMYZDRPDgHF3NYHWNja2ZvWOkLKm+hokl1owXpIrZJ8RlkfexLWxG1gWNAAy9PFQei91sVZ+tF/3lc+jkz1rXxVDWywNFwXtu4HcLOuCe3f1qv2Up2w486Np5rastbrwD9E9uouL7GelakvzqUXpEbbFKkf4nwCzi1PpObbFan749yyyfg9nHyRnze0YlxdXE0UJJJJQhxJdXFCCSSSUIdTgpmxKVsIVXIuoMGCeEYyEKVsIVXNF1BgIupWAo+OFqKigb0JbyIaoMrmAqdoKtGQN6FK2JvQlPIhigVbWlSMYVaBjU4Naq+kLKACwFPsUcMqhnmaAq77LbQVwKYShavEQq6SvunRg2JlOKLsSBJxVEK0qRtcVZ42VWVFi9QPCgFTdPbIptaI5piLUwsU4cnhoKPILQJlXC1HCBcdTFTcSivIXLIt8BUfJFFMqQEJhaiSxMLUbIDEKbDdKiL7ydYJUv08X31JO4vyIuq80bb0ys+epj001/Ji86IXpvphHPoz/wDmPujXnRaFTTusa+f3Dmjc3+di9oKj5RDlP0sLd/F8Y3d4+A6UBKcsgd2XTcHreQnZKBmyu5zb2zNOjm94v2Gx4LXbZ7LCONlZTu5SmmAfE4DVubWzhwI6DuII4IviXwDF2qNHsziLeRa8nRoJ1OvSfh4rF7UYhJW1PJsuW5tPd4qup8QeIxGOnvP5+K3exGAsgBqpzYN1bfid1gOKTWx39DRe9V9S0YWYVhuX+8eCR0X4u3a208l55sDPnxaN/tTBx6dXA6npRnpHxSWeRrjcMeCYx9hpAFu03JPGw4Kq9H7rYlD+sZ7wrRj+m2LlLxpBHpWbbFqj7wWRW09LTf8A5afu+Kxtk7B7NGbMvGxq5ZPslZNFDLJJySJBqSckoQZZJPSUITtcU8PK66QcFGZFTqNuiYSp7Z0KCntKG1E3MOjnRLKlARBGRNS2kXUmECrPQka0phYmiFU2xLbpHX1pQ8mIOCI5BMkp7opRI3IE/SzkNPWudxSqaUhCp0Yx6oTKcujOkriSSYLEugriShB4kUjagoddQoNsMZUohlSqwJwcquJZSLqOpRUdSFnmyFSxznpVHjLqZog4FStgaVRR1ZRseI9ISnBoYpIPNACh5MMU9PiMfHRHwTxO3PCpckWpMzc+HOHBCRRls0d/bW6bTgjQgqj2lpsj4Da15D/pV45L4A4VyXnpdJy0bv8ABI8mfgvOM69k2xw5s8NLm4QAjvAWHq9kjvaq4MsVGmHNBuVoyedarYvHJBekdd8UgcQzUgO9Z2Ud17dR4lVNVgErOCBjEkMjZLEFj2vaegtII9y0S2zjQhOUJWa7ZvBjNX/JxoQXOv8AZG4jxC0e2OLxmVlLEeayXk9LWNtHm/TmuP2U7ZG7JnVLRz2YdPp9uKzWn95ju6yxlZSmOuhYb3s1xubm7iWnX9gLNV9eyNjdVXctPSuMstMBoBTAADcAMuio9hT/AE+I/aHvC0HpiZaam/5f/as7sN/Xou0e8K2L/H+v3Ezf6/0+xa+l3+1ZOtjT71i7rbemMWxR/wCqZ8Vh7p2D2aE5vXY66V026V04UOuuXXLpKEO3Sum3SuoQddJNSUISroK4E8BAKOJ7EwKUBBlkExouJyCa5TxElLaLoOCkaENE5TsdrqlNDEwprLrvyddgb0IqJwS2WRXSUwOhCqq7DCNQtd8mBF0LJARw0RjkaJKCZhXNI3ri02IYWHahZ6ogLDYrVCakZpQcSJJdSTChxdSSUIdCc1qanByBZDwxPEajD1a4Vg08+rG5WcXv5rO48e5LlJRVtjIx3OkV/JlT01NM82jYXHoaCVrKXAYYtXAzO+1dsYP3RqR2kIieokOgaA3cGsaGt7ABvWOWsXSKs2Q0b/c6Mx+iahpAcxo7SLjtCt6LBIiPnCb9DSAPEqWQSA2MZHbzferSnwTM0udK1p4Nbd57yNB4pE9RJrl15D46aC7WDN2eiPqOe3/qfyVVtRhz4hAS8uHK2Fze2n8lYSFrDYOkOuu4BVm0lRmbF61hMPWIPBHDObmrYM2OKg6R6PjBPIU1m5vmBcdSqz1Rkdj/AMQrpxIgpzYn5ncNdNFPBTskHqkHsWaeSnQyME1dGWnD/wDhuPbYoNsEbzaWPKOJI0txuVq8Rp3RNzMzdhCz9bmncBwA3Dd1lNxTcmUyQildF3g9cySWaRjQGci9rdPWDjzjY8Df39KqNtsL5WeKsY2xbMWzNGtmPOaNwPQCbftdSOwyBzA/Q6x2GnuVhh0+djmOGobxG9p3gj88VpUr6CHFpJmR9LlDJJLTlgBy0wzagb7br9iyGyLC2ujDhYgi47wV6/idAKsg5pWZI2tIjc7eL+sG+tpa1+lebVNIYcZEZJNjHqRYm7W7xbzQw5fC8T7JgniVrIvgSemT+0yf8FnvcsKvattNmBVVL3m+gY0Ea/VvqMhB3+0Fg8Y2GmjuY7OHRxTsGpxpbW6YrNp5t7kZFJPmhcxxa4EEbwUxbTG1QklxJQgkkklCCSSSUIThIpt11AI9ikDlCE8b0CyJ2lStJB3qBo4eKma0qjLE7XomM3F7oVo/O5TxWVGXQXDJbvR0QAaCNUHC5FxShJkMQdA49B8EcGgj1T16IGGRWUMoSmXRG/D7jcdfJUuLYIbXy+S1cUqKa8EaoKTQXGzxuto3RnqQ4K9bxHZ2KYaaHyWFx3ZWWEkhunVuWzHmUuGZp4muUZ8BKy4DY2KmDU4WlZCpIIXPcGMaXOJsANSU6Gnc94Yxpc5xAaBvJK9P2c2dZC0AAcoWfOyby61y7JmIDWDdc2vYXudFn1GpWJe9voh+DTyyy+C6sosG2Wjis+otI7hH9QH7Xtnq3dq1MVNJIC62Vjd7jYAdQvYDsJCMpqPUljbuHEk2F93QT28xp+0pHQxixeeUI9UaZB2NHMHZZy4+TJPI7mzsQxwxKooGoqSI62fMb2OUER6cC+4A/eKsOReNWRsjA4tJc7vyAD/Mq6uxCb+7LWAbtMzh2F17eCz9bDWS3u6WQdALiPAaIKG7uByB9oQeV51t+uUtBPdclExYnG2MNa8DpBu4+WipaqgljNnxObfdcWXYsNe4X0HaVpcIbUmxe6V8IJdVN4b+mwCrsenzNiGukzd5vwKKOHEWu8dduCg2ioWxxxua/N882/VoUzFsU1QvLvcHZ6Di9W6GjpntAuRlPZYlVdPtPKOA81f1EDZKOmDm3GUkDrA/mhWUcYFhGLnQGyxtxcqrkbH1bE+uknjGewB16yOH57Fyha1pPQpX09t/RopqGG+8aJ6qKpC3bZ1szSTa/qoHC6tvy2MA6OaWm/Xf8VcGFo3BUVa0R1UDh7WviEFJWGUfCy5xmJ7Gl8ZII9bLvIB17xw8F5zin9sMdynKZmxODzxBAsvW5A0ySN+0SOw6/FeT4/SiHGmtbuswtHRfUgdV7nvWjHUrl8GZpWqXxR6diUN6h5zPGjdGus31RqetBSWH89UVjAPKutxDNP2elU9UCBqfz2rl5G9zOhjj4UVW0WDwTscS0BwGh3LyaeLK4t6CQvVMRrmtY7XWy8vqblznEHUneF1v6e5U0+hz/wCoRiqrqQJLtkrLpHNGpLtklCHEl1JQg9dC4uqEH3XWlR3XQUA2ENkUjXoVpRMdO87mlUdLqMim+hMxyma9Ogw2Q77DzR0eFt+s7uCRLLBdzRHBN9gVtQpW1HWrCHDGAj5sm+7ObDwO/uBVpHROb7LB2Bvg5+W/cCs8tRHsPjpZd2VlO9xHNY49jSfNWVPHMRfk3ab9LAdt0bBSDe57zp9XMfc1o81ZRU0YHqOsd5eTbtPOcs09QPWmXvK+GGXi23a5v4oqNknsjdrzm8e9Eta32Ixb7p8eYETFUDddgvuyxjXz1SvTyL/28SCMv9m/YWnyuiGhxFiwkHha91IJyDq46dTh8VIyqb9Z5P3iBZT07A8CMvjex8E1yAYndIBt3hYqv2aqacklmdntMufFu8L2mmrWfVkae9u/x1UcOLNdVupmtdynJ52l/JsjtcWyvzOvxNsu5pPBacWrn06mfJpo9ehgtgMDJY6psOddjHHcGixeSRqBqBccLje4LZFhBsGknT7LiQbNzH6tuDGXLbb2m9zqjH6WNuWarpGm93CNxJvoTzWbtde22qZSy00sXLNJqY7Btos7NRpaSINu5tvaJ7OJTlcpy3s0YpKMdiAJG/VkmaNTaOMFxB+63Xj0a3RUNAwamGQj2pniJp7iQf8AKiI5ZCPm4Wwx23N5lus5BfxI7E+KI3tysTXXGYhoJ675iHa66m6TQxskgY0WyMiBv/dxyT9l3BrQPFPnlfbdL4xRDwJc5FCkDj68hB3WNxY9PNvw33TjRMjNxG0kjW7jY9PNOYX67IMpaPMtqqhrpbPYBbeeVe8+TQB4JlAxpbzGl37OniRr4q526kygNAjbfg1tz46e5ZuKvbGzV5HUOb8PinJXBUXTrqTYiXt3sAHWR8Fm8bqczGgkaStOnf8Aio8SxMOJtc9pJ95VVJNew6x71uwadqmzJnzpppHrtXW5KOm3+o/d080I/BY+Ua07r6m53Dp8FidoqgjD4XdBy/wq62YxImlZc2uzK5ZoYv3/ACLzycbPmaFsDpHlrAXHWzRqdOpTRwmO4ku228O0t233LGnH5IJeUY6xabghVWO7S1FWc0ryercOrQJscO5C3lpm0/8AcVO5+RjsxBsSBp4qPEosz4nC9rngdDcaFecUxc11x3r0bZXExKBHx6N9/wAlR4FHlFo5d6oua2cNqCfu/wAIXn+2JvjUZH/Ci+K9C2xwSWENmAzhzdQN4yjo46LyjEqzlMSif9hg06iVMONw3J+5lMkk1Fr3r7noW1zpzM1kD8l2NLjlLju4cAhzQtZGDKXF1uc577AnqbuCp/SbjM8E8bYpXMD4Gl2U2JI09bePFefS173G73ucelzi4+JKrDSOa3WXlqlDwm3xLEYG3Gh7/wAFj8VreU0DQAgzOSuGRbMWnWPky5dQ5qiDKuWUhKYVqMjSOWXLLq4oAVkkklAHU9kLjwVgyAIiGIHrSpZaNUdN7yvjoukoyGhb7JPuVhHB0Dx092qJbTN3l3RuAHmbnyWaedmqGniuwNTU/Q0DsBcfJHcmTbMbdFy1nv1UugAuDYe0SL9tzr4KRr8u4Bo7Ld97BZZZGzVGCQo4Abc3vDXu83kNRTIzbQWHWf8ASwD+JKNpcLtu6/sgu8wD7099DLfVmW/tEA9wufgktvuNVElMWtud+mtuaO8s18XFcFZb1Ggb7lo17y0dm8p9PR2N5HeAFx3vuQeyyLMEfBmbtLpNeou0VLj5h5AhO93E3vubqdfu3KPZTSEWyu7XENtfX6zh7kTTnpAGugvc6dQRbp2NGZ3NFt4AaL9JuVRy9yDyARUTr7wNOm57srfiiI6Ene7+IeTnH3IllYwuDcx51tbOI6rm1h48VPUcm0XLxpwdZoPDQ3IHmdEOQWCtw5tt/Zut3FoHvRFPh7DuGvY4g+KGOJgbi2w9kOdfqvzW+ab+nWlwDbknQC7NewBrh4vG9WUJAbLCryQxPlfYCNhcdGg2AvbWx13eAWKxyV1BSSykBtRXvfyYbzDFCQ0yEAbiPUB453ntvw3lzytaOTgjlu2Ij52WRmrdM5BGpFhoc2Y2Xn3pBxl1VVbgGxtDGgagaC7b9Vg3taTpey3aXH4q+ph1U3sszcbl7H6GXkxPB3ZtO8H/AGleM5SvQ/RjtS+KSOkOUMfIQb5W3uCQc5430txuOjXVq4OWPgzabIlKmeuYjUwMFngk/aNr9od6w7uxVzasHRjSBfQRsNtetwDfAplTKHAPiNNFcm/KPykakA80G99+8KqqcUY25lxanZbW0LQ52nBt3HXsC5OyUjpKUY9TQ8pIdC233nAeQv71BUyZQS+RrewfFxIWWftRhLdX1tXOeNuUaD+6GhAVO3OFD6PD5JT0yua2/aSXHyV1pZvsUeogu5Tbb4rAX2ZI6Qjecwt/k0WIlqSToLLY4ptxHICI8Npo9CATd5F+OgaFjKiVzjc2HU0WC6mnxOCpr+TFnzb+j/gjLj0pMOo7UwtT4Y7laTJy2bramti/RlPE0Xe97jf2Qwt/mhsGxmNzDG5waXAFgO7NaxAPQd9j0nqVdtDHlgpjcWtJ5kKkYy7e9ZMWOLx/N/n8GqcnvNHWMcXWP4Kekob9ABaN9yDrqer+W5ZqmqpWaNebdB1HgdFf0WJyG17G3V+BVpJxQYSUnyXT8IzC1tQNOnqcbXuN9jxVc0S0soc0kAG7SPf17lcUNQ51tQLAD1QbgLQU2A8uLPlIBvua2/5sFn9Mk+WPlC1wgzCdsPlTQ2R/OZuvbXsXne0LmnFmloABDd3EgnVX/pJ2PhoaOKpglmL3zCN2Zzcti0nQBoIPN6VhMPcflUWZxJsN6bBJpyT7MVKfCjXf/pqPS47+kQEf/X+IWBLivYNraVspbmAPzLRr3rz7F8DyXdHuG8fgjp8qUVFi8+Nt7kUAcV3MV1zVwNWsynC4rgcV0hdDUSDcxXCSpCm3UANuUkklCF8wD86qVs3QPz3XU8UDehFsaOhc2U0dlRYLFDI4gWy3I1doAOnj7lZR0wA+l1+y13vuB5KKnbcXva54WtvRUIGrbb997njv36JE5sZGJGYY72ufEN/gRtLE3Ne1jwJFyLbt+/vQr5MnqgDdwTaad0hsXWv7Nh70t7mrGcI0NLMBo55A7S3yaD71DUVUQ0D9RwF/dqqaSzDoL9brn+SPhZzAbnduHNHZzbJTh3LWOdUm12x8d7yGjz/BcNU92nKf9ttzftdoh5Km17NaOvLc+JuVXVVQ4loudTrqmRhYHKi+iOtyTpvzP5o/YF/Jdkr2xm7S0Hhkac3mUfs9gscjLuLzpuuLe5ZzavG3UMnJ08UQ+25he/tu428kYY3OW1C55VFNsuIRUzepFIb8XHIO8NtdRVELYP6xVU8PEtBzP/daC6/cvPq7aKrn+lqJCD9UOLWfuNsPJVdlthon3f0MU9d/qjf1O0mHxnmtmqXdLvmmdl3Xd5BDRekWeM2hp4I233BrnOIvuc9xvu00AWKCcnx0uNdr8zPLU5JdzQYrthWVP0klgM2QD6ubfYnjY2vvHCyo7pNCfl0TVGMeiKNyl1ZHqusjuulPjKLYEhzaZvEKRsDRwTgE4hUtjFFEZYBuC4XJ7goyoSjllx0QTrJzUbJQI+EqSgq3QvzAXHEHipwdV17AeCN3wym3m0Xwlp6oDNqQNxNnN7FAMByn5qQEey//AHD8FnJow3UImkxaVpDc1xf62vnvS3jaXhfBZZFfK5LN2Bvv6nhYjyR9Hg8gtzT4H4IikqnEX42Cs6WreOJWecpdB8UrsLwzC5PZPeCt1guFyWHN8ll6PEZRucVbQ43UW+kcskoX1HbmL05w5cIhuNRVt/gevHaRzHzxOj9lrXfeF7/Beq7RSGohyzkyNzXyvJcL9Njx61mcL2cgbKC0OHGwNxfvutWOcVAQ4tPk0uPR6t0/uWfFY+uuXZGtuSbAfngt7tGwPnii9UGJoJbodG9d1iNu5PkrWxw83lLh7tc5AG7Nwuk4221FDJPi2ef1As9w4B7gOwEqNSFqWVdUwUMSTl0IkGZVzKpCuDcoCiItSUrhokjYKP/Z)\n\nThis quiz is designed to test your knowledge of **general history concepts**. Whether you're a history buff or looking to explore the past, this quiz covers essential topics to broaden your historical understanding.\n\n## About the Quiz\n\nThis quiz is perfect for anyone interested in learning about historical events, figures, and civilizations. It covers a variety of topics including:\n- Ancient civilizations and empires\n- World wars and conflicts\n- Notable historical figures and events\n\nTest your knowledge and enhance your historical awareness with carefully crafted questions that span both theoretical understanding and practical application. Whether you're exploring history for educational purposes or personal interest, this quiz aims to broaden your horizons and deepen your appreciation of the past.\n\nAre you ready to embark on a journey through time? Let's get started!",
     "questions": [
       {
-        "question": "Which algorithm is used to find the shortest path between nodes in a graph?",
+        "question": "Identify the historical event depicted in the photo below.",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "![Historical Event Photo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFuvQ_pmeZNO11riQfcPIkhRtMo3aNDjDObA&s)",
+        "resultExplanation": "The photo depicts the fall of the Berlin Wall in November 1989. This event marked a pivotal moment in world history, symbolizing the end of the Cold War and the reunification of East and West Germany.",
+        "questionNotes": ["This event took place in 1989."],
+        "choices": {
+          "Fall of the Berlin Wall": true,
+          "D-Day (Normandy Invasion)": false,
+          "Signing of the Declaration of Independence": false,
+          "End of World War II": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Who was the first President of the United States?",
         "questionType": "SINGLE_CHOICE",
         "coefficient": 1,
         "answers": null,
         "paragraphToBeFilled": null,
         "additionalContext": null,
-        "resultExplanation": "Dijkstra's algorithm is widely used to find the shortest path between nodes in a graph. It works by exploring all possible paths from the starting node to the target node and selecting the path with the minimum total weight.",
+        "resultExplanation": "George Washington was the first President of the United States, serving from 1789 to 1797. He played a key role in the American Revolutionary War and is often referred to as the 'Father of His Country'.",
         "questionNotes": [],
         "choices": {
-          "Dijkstra's Algorithm": true,
-          "Merge Sort": false,
-          "Binary Search": false,
-          "Quick Sort": false
+          "Thomas Jefferson": false,
+          "John Adams": false,
+          "George Washington": true,
+          "James Madison": false
         },
         "orderedOptions": {},
         "optionMatches": {}
       },
       {
-        "question": "Which of the following sorting algorithms has an average time complexity of O(n log n)?",
-        "questionType": "MULTIPLE_CHOICE",
+        "question": "Which ancient civilization built the famous city of Machu Picchu in the Andes Mountains of Peru?",
+        "questionType": "SINGLE_CHOICE",
         "coefficient": 1,
         "answers": null,
         "paragraphToBeFilled": null,
         "additionalContext": null,
-        "resultExplanation": "Merge Sort and Quick Sort both have an average time complexity of O(n log n). Merge Sort is stable and guarantees O(n log n) time complexity in all cases, making it a preferred choice in many applications.",
+        "resultExplanation": "Machu Picchu was built by the Inca civilization in the 15th century. It is a renowned archaeological site and a UNESCO World Heritage Site, known for its sophisticated dry-stone construction and stunning mountain setting.",
         "questionNotes": [],
         "choices": {
-          "Bubble Sort": false,
-          "Insertion Sort": false,
-          "Merge Sort": true,
-          "Quick Sort": true
+          "Maya": false,
+          "Aztec": false,
+          "Inca": true,
+          "Egyptian": false
         },
         "orderedOptions": {},
         "optionMatches": {}
       },
       {
-            "question": "Which data structure is commonly used to implement a Last-In-First-Out (LIFO) order of elements?",
-            "questionType": "SINGLE_CHOICE",
-            "coefficient": 1,
-            "answers": null,
-            "paragraphToBeFilled": null,
-            "additionalContext": null,
-            "resultExplanation": "A Stack is a data structure that follows the Last-In-First-Out (LIFO) order, where elements are inserted and removed from the same end. It supports operations like push (insert) and pop (remove) in constant time.",
-            "questionNotes": [],
-            "choices": {
-            "Queue": false,
-            "Heap": false,
-            "Stack": true,
-            "Linked List": false
-            },
-            "orderedOptions": {},
-            "optionMatches": {}
-        },
-      {
-            "question": "What is the primary purpose of the Binary Search algorithm?",
-            "questionType": "SINGLE_CHOICE",
-            "coefficient": 1,
-            "answers": null,
-            "paragraphToBeFilled": null,
-            "additionalContext": null,
-            "resultExplanation": "The primary purpose of the Binary Search algorithm is to efficiently locate a target value within a sorted array or list. It works by repeatedly dividing the search interval in half until the target value is found or the interval is empty.",
-            "questionNotes": [],
-            "choices": {
-            "To sort a list of elements in ascending order": false,
-            "To find the shortest path between nodes in a graph": false,
-            "To locate a target value in a sorted array": true,
-            "To traverse a tree data structure in a breadth-first manner": false
-            },
-            "orderedOptions": {},
-            "optionMatches": {}
-        },
-      {
-            "question": "Which algorithm is used to sort elements by recursively dividing the array into two halves, sorting the halves, and merging them back together?",
-            "questionType": "SINGLE_CHOICE",
-            "coefficient": 1,
-            "answers": null,
-            "paragraphToBeFilled": null,
-            "additionalContext": null,
-            "resultExplanation": "Merge Sort is an efficient sorting algorithm that follows the divide-and-conquer approach. It recursively divides the array into two halves, sorts the halves, and merges them back together in sorted order.",
-            "questionNotes": [],
-            "choices": {
-            "Bubble Sort": false,
-            "Insertion Sort": false,
-            "Merge Sort": true,
-            "Quick Sort": false
-            },
-            "orderedOptions": {},
-            "optionMatches": {}
-        },
-      {
-        "question": "In computer science, the Greedy algorithm always guarantees an optimal solution for a given problem.",
-        "questionType": "TRUE_FALSE",
+        "question": "Which historical figure is known for leading the nonviolent resistance movement against British colonial rule in India?",
+        "questionType": "SINGLE_CHOICE",
         "coefficient": 1,
-        "answers": ["FALSE"],
+        "answers": null,
         "paragraphToBeFilled": null,
         "additionalContext": null,
-        "resultExplanation": "False. While Greedy algorithms often provide optimal solutions for many problems, they do not guarantee optimal solutions in all cases. Sometimes, a Greedy approach may lead to locally optimal solutions that are not globally optimal.",
+        "resultExplanation": "Mahatma Gandhi, also known as the 'Father of the Nation' in India, led the nonviolent resistance movement against British colonial rule. His philosophy of nonviolent civil disobedience inspired movements for civil rights and freedom across the world.",
         "questionNotes": [],
-        "choices": {},
+        "choices": {
+          "Nelson Mandela": false,
+          "Winston Churchill": false,
+          "Mahatma Gandhi": true,
+          "Martin Luther King Jr.": false,
+          "Mao Zedong": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Identify the historical event depicted in the photo below.",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "![Historical Event Photo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAWXoW3gaLLzXx8NfkanHTbWwT8cQFoDsTcQ&s)",
+        "resultExplanation": "The photo depicts the raising of the American flag on Iwo Jima during World War II. This iconic image was taken by Joe Rosenthal on February 23, 1945, and it symbolizes the hard-fought victory of the U.S. Marines over Japanese forces on the island.",
+        "questionNotes": ["This event took place during World War II."],
+        "choices": {
+          "Raising the Flag on Iwo Jima": true,
+          "Pearl Harbor Attack": false,
+          "D-Day (Normandy Invasion)": false,
+          "Signing of the Treaty of Versailles": false
+        },
         "orderedOptions": {},
         "optionMatches": {}
       }
