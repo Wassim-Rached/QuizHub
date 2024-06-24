@@ -14,12 +14,15 @@ import org.wa55death405.quizhub.dto.quiz.QuizGeneralInfoDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptResultDTO;
 import org.wa55death405.quizhub.dto.quizAttempt.QuizAttemptTakingDTO;
 import org.wa55death405.quizhub.entities.*;
+import org.wa55death405.quizhub.enums.QuizAccessType;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
 import org.wa55death405.quizhub.interfaces.services.IQuizLogicService;
 import org.wa55death405.quizhub.interfaces.services.IQuizService;
 import org.wa55death405.quizhub.repositories.*;
 import org.wa55death405.quizhub.utils.DBErrorExtractorUtils;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,7 +43,7 @@ public class QuizService implements IQuizService{
 
     @Override
     public StandardPageList<QuizGeneralInfoDTO> searchQuizzes(String title, int page, int size) {
-        Page<Quiz> quizzes = quizRepository.findAllByTitleContainingIgnoreCase(title,PageRequest.of(page, size));
+        Page<Quiz> quizzes = quizRepository.findAllByTitleContainingIgnoreCaseAndQuizAccessTypeEquals(title,PageRequest.of(page, size), QuizAccessType.PUBLIC);
         StandardPageList<QuizGeneralInfoDTO> standardPageList = new StandardPageList<>();
         standardPageList.setItems(quizzes.map(QuizGeneralInfoDTO::new).toList());
         standardPageList.setCurrentPage(quizzes.getNumber());
@@ -63,6 +66,7 @@ public class QuizService implements IQuizService{
         );
         QuizAttempt quizAttempt = new QuizAttempt();
         quizAttempt.setQuiz(quiz);
+        quizAttempt.setStartedAt(Instant.now());
         quizAttemptRepository.save(quizAttempt);
         return quizAttempt;
     }
@@ -146,6 +150,7 @@ public class QuizService implements IQuizService{
         QuizAttempt quizAttempt = quizAttemptRepository.findById(quizAttemptId).orElseThrow(
                 () -> new EntityNotFoundException("Quiz attempt with id " + quizAttemptId + " not found")
         );
+        quizAttempt.setFinishedAt(Instant.now());
         quizLogicService.processQuizAttempt(quizAttempt);
         return quizAttempt;
     }
@@ -167,5 +172,13 @@ public class QuizService implements IQuizService{
                 () -> new EntityNotFoundException("Quiz with id " + quizId + " not found")
         );
         return new QuizCreationDTO(quiz);
+    }
+
+    @Override
+    public QuizGeneralInfoDTO getQuizById(UUID quizId) {
+        Quiz quiz =  quizRepository.findById(quizId).orElseThrow(
+                () -> new EntityNotFoundException("Quiz with id " + quizId + " not found")
+        );
+        return new QuizGeneralInfoDTO(quiz);
     }
 }

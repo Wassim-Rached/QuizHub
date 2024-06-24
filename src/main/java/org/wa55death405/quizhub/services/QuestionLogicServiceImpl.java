@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.MultipleChoiceAlgorithmeType;
+import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
 import org.wa55death405.quizhub.interfaces.services.IQuestionLogicService;
 import org.wa55death405.quizhub.repositories.*;
 
@@ -12,11 +13,11 @@ import java.util.List;
 
 /*
     * This class is responsible for handling the logic of a question
-    * It determines if the user's answer is correct or not
+    * It determines if the user's answer is correct, or not
     * It sets the correctness percentage of the question attempt
     * It sets the correctness of the various answer attempts
     * Wherever the answer be [ChoiceAttempt, OrderedOptionAttempt,AnswerAttempt...]
-    * And lastly it saves the changes to the database
+    * And lastly, it saves the changes to the database
  */
 
 @Service
@@ -28,7 +29,7 @@ public class QuestionLogicServiceImpl implements IQuestionLogicService {
     private final OrderedOptionAttemptRepository orderedOptionAttemptRepository;
     private final OptionMatchAttemptRepository optionMatchAttemptRepository;
 
-    // this method is called when a user attempts a question
+    // this method is called when a user attempts a question,
     // its core responsibility is to determine if the user's answer is correct
     // therefor it sets the correctness percentage of the question attempt
     // additionally it sets the correctness of the various answer attempts
@@ -37,7 +38,7 @@ public class QuestionLogicServiceImpl implements IQuestionLogicService {
     public void handleQuestionAttempt(QuestionAttempt questionAttempt) {
         switch (questionAttempt.getQuestion().getQuestionType()) {
             // "MULTIPLE_CHOICE" and "SINGLE_CHOICE" are handled differently
-            // for performance reasons ,but they still share the same logic
+            // for performance reasons, but they still share the same logic
             case MULTIPLE_CHOICE:
                 handle_MULTIPLE_CHOICE(questionAttempt);
                 break;
@@ -242,7 +243,7 @@ public class QuestionLogicServiceImpl implements IQuestionLogicService {
 
     private void general_comparison(QuestionAttempt questionAttempt) {
         AnswerAttempt attempt = questionAttempt.getAnswerAttempt();
-        Answer answer = questionAttempt.getQuestion().getAnswer();
+        List<Answer> answers = questionAttempt.getQuestion().getAnswers();
 
         if (attempt == null) {
             questionAttempt.setCorrectnessPercentage(0F);
@@ -250,11 +251,20 @@ public class QuestionLogicServiceImpl implements IQuestionLogicService {
             return;
         }
 
-        if (answer == null) {
-            throw new IllegalArgumentException("Question with id " + questionAttempt.getQuestion().getId() + " has no answer");
+        if (answers == null || answers.isEmpty()) {
+            throw new IrregularBehaviorException("Question with id " + questionAttempt.getQuestion().getId() + " has no answer");
         }
-        
-        if (answer.compareAnswer(attempt.getAnswer())){
+
+        boolean isAttemptCorrect = false;
+
+        for (Answer answer : answers) {
+            if (answer.compareAnswer(attempt.getAnswer())) {
+                isAttemptCorrect = true;
+                break;
+            }
+        }
+
+        if (isAttemptCorrect) {
             questionAttempt.setCorrectnessPercentage(100F);
             attempt.setIsCorrect(true);
         } else {

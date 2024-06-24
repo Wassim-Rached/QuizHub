@@ -26,6 +26,7 @@ public class SeedDataLoaderImpl implements ISeedDataLoader {
         try {
              return objectMapper.readValue(inputStream, new TypeReference<>(){});
         }catch (IOException e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException("Failed to load seed data.");
         }
 

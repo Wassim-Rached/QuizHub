@@ -32,23 +32,23 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
         questionAttemptSubmissionDTO.setQuestion(question.getId());
         switch (question.getQuestionType()){
             case TRUE_FALSE,NUMERIC,SHORT_ANSWER,FILL_IN_THE_BLANK:
-                questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswer().getAnswer());
+                questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswers().get(0).getAnswer());
                 break;
             case MULTIPLE_CHOICE,SINGLE_CHOICE:
-                questionAttemptSubmissionDTO.setChoiceAttempts(question.getCorrectChoices().stream().map(Choice::getId).toList());
+                questionAttemptSubmissionDTO.setChoiceAttempts(question.getCorrectChoices().stream().map(Choice::getId).collect(Collectors.toSet()));
                 break;
             case OPTION_ORDERING: questionAttemptSubmissionDTO.setOrderedOptionAttempts((HashMap<Integer, UUID>) question.getOrderedOptions().stream()
                     .collect(Collectors.toMap(OrderedOption::getCorrectPosition,OrderedOption::getId)));
             break;
             case OPTION_MATCHING:
-                HashMap<UUID,List<UUID>> optionMatchAttempts = new HashMap<>();
+                HashMap<UUID,Set<UUID>> optionMatchAttempts = new HashMap<>();
                 question.getCorrectOptionMatches().forEach(correctOptionMatch -> {
                     UUID optionId = correctOptionMatch.getOption().getId();
                     UUID matchId = correctOptionMatch.getMatch().getId();
                     if (optionMatchAttempts.containsKey(optionId)) {
                         optionMatchAttempts.get(optionId).add(matchId);
                     } else {
-                        optionMatchAttempts.put(optionId, new ArrayList<>(List.of(matchId)));
+                        optionMatchAttempts.put(optionId, new HashSet<>(List.of(matchId)));
                     }
 //                    var optionMatchAttempt = optionMatchAttempts.computeIfAbsent(optionId, k -> new ArrayList<>());
 //                    optionMatchAttempt.add(matchId);
@@ -76,7 +76,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
             case TRUE_FALSE, NUMERIC, SHORT_ANSWER, FILL_IN_THE_BLANK:{
                 // one in 3 chance of getting the correct answer
                 if (Faker.instance().random().nextInt(1,5) == 1) {
-                    questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswer().getAnswer());
+                    questionAttemptSubmissionDTO.setAnswerAttempt(question.getAnswers().get(0).getAnswer());
                 } else {
                     questionAttemptSubmissionDTO.setAnswerAttempt(Faker.instance().lorem().word());
                 }
@@ -84,7 +84,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
             }
             case MULTIPLE_CHOICE, SINGLE_CHOICE:{
                 var questionChoices = question.getChoices();
-                var randomChoices = new ArrayList<UUID>();
+                Set<UUID> randomChoices = new HashSet<>();
                 for (Choice questionChoice : questionChoices) {
                     if (Faker.instance().bool().bool()) {
                         randomChoices.add(questionChoice.getId());
@@ -117,7 +117,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                 Collections.shuffle(randomizedMatchesIds);
 
                 // <optionId, List<matchId>>
-                var randomOptionMatchesAttempts = new HashMap<UUID,List<UUID>>();
+                var randomOptionMatchesAttempts = new HashMap<UUID,Set<UUID>>();
 
                 // loop through the number of option matches to make
                 for (int i = 0; i < numberOfOptionMatchesToMake; i++) {
@@ -128,7 +128,7 @@ public class FakeDataLogicalGeneratorImpl implements IFakeDataLogicalGenerator {
                     if (randomOptionMatchesAttempts.containsKey(optionId)) {
                         randomOptionMatchesAttempts.get(optionId).add(matchId);
                     } else {
-                        randomOptionMatchesAttempts.put(optionId, new ArrayList<>(List.of(matchId)));
+                        randomOptionMatchesAttempts.put(optionId, new HashSet<>(List.of(matchId)));
                     }
                 }
                 // set the option matches

@@ -1,107 +1,893 @@
 [
   {
-    "title": "Software Development Quiz",
+    "title": "Entry C++ Quiz",
+    "quizAccessType": "PUBLIC",
+    "timeLimit": 1800,
+    "description": "# Welcome to the Entry C++ Quiz!\n\n![C++ Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png)\n\nThis quiz is designed to test your knowledge of `entry-level concepts in C++`. Whether you're exploring `basic syntax`, understanding `fundamental data structures`, or learning about `introductory programming techniques`, this quiz provides a `foundational understanding` of C++ programming.\n\n## About the Quiz\n\nThis quiz is perfect for `beginners` looking to solidify their understanding of `C++ essentials`. It covers a variety of topics including:\n- `Basic syntax and control structures`\n- `Data types and variables`\n- `Functions and procedural programming concepts`\n\nTest your knowledge and enhance your skills with our carefully crafted questions that span both `theoretical understanding` and `practical application`. Whether you're `new to programming` or `transitioning to C++`, this quiz aims to build a `strong foundation` for your journey.\n\nAre you ready to embark on your `C++ learning adventure`? Let's get started!",
     "questions": [
       {
-        "question": "Version control systems help manage changes to source code over time.",
-        "questionType": "TRUE_FALSE",
-        "coefficient": 1.0,
-        "answer": "TRUE",
-        "choices": { },
-        "orderedOptions": { },
-        "optionMatches": { }
-      },
-      {
-        "question": "What does 'IDE' stand for in software development?",
-        "questionType": "SHORT_ANSWER",
-        "coefficient": 1.0,
-        "answer": "Integrated Development Environment",
-        "choices": { },
-        "orderedOptions": { },
-        "optionMatches": { }
-      },
-      {
-        "question": "How many bytes are in a kilobyte (KB)?",
-        "questionType": "NUMERIC",
-        "coefficient": 1.0,
-        "answer": "1024",
-        "choices": { },
-        "orderedOptions": { },
-        "optionMatches": { }
-      },
-      {
-        "question": "In Java, the (blank) keyword is used to define a class,and the (blank) keyword is used to create a new object of that class.",
-        "questionType": "FILL_IN_THE_BLANK",
-        "coefficient": 1.0,
-        "answer": "class(|)new",
-        "choices": { },
-        "orderedOptions": { },
-        "optionMatches": { }
-      },
-      {
-        "question": "Which of these is a programming language?\n",
+        "question": "Consider the following C++ code snippet. What is the output when executed?",
         "questionType": "SINGLE_CHOICE",
-        "coefficient": 1.0,
-        "answer": null,
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "```cpp\n#include <iostream>\n\nclass Base {\npublic:\n    virtual void print() const {\n        std::cout << \"Base\" << std::endl;\n    }\n};\n\nclass Derived : public Base {\npublic:\n    void print() const override {\n        std::cout << \"Derived\" << std::endl;\n    }\n};\n\nint main() {\n    Base b;\n    Derived d;\n    Base* ptr = &d;\n    ptr->print();\n    return 0;\n}\n```",
+        "resultExplanation": "The code snippet defines a base class `Base` with a virtual `print` method and a derived class `Derived` that overrides the `print` method. In the `main` function, a `Derived` object `d` is created, and a pointer `ptr` of type `Base` points to the `Derived` object. When `ptr->print()` is called, the `Derived` class's `print` method is invoked due to dynamic polymorphism, resulting in the output 'Derived'.",
+        "questionNotes": [
+          "In C++, when a base class pointer points to a derived class object, the function call is resolved at runtime based on the actual object type."
+        ],
         "choices": {
-          "Java": true,
-          "CSS": false,
-          "XML": false,
-          "HTML": false
+          "Derived": true,
+          "Undefined Behavior": false,
+          "Base": false,
+          "Compilation Error": false
         },
-        "orderedOptions": { },
-        "optionMatches": { }
+        "orderedOptions": {},
+        "optionMatches": {}
       },
       {
-        "question": "Which of the following are types of software testing?",
+        "question": "Examine the following C++ code snippet. What is the output when executed?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1,
+        "answers": [
+          "2234",
+          "2 2 3 4",
+          "2 2 3 4 "
+        ],
+        "paragraphToBeFilled": null,
+        "additionalContext": "```cpp\n#include <iostream>\n\nvoid func(int& x) {\n    x += 1;\n    std::cout << x << \" \";\n}\n\nvoid func(const int& x) {\n    std::cout << x << \" \";\n}\n\nint main() {\n    int a = 1;\n    const int b = 2;\n    func(a);\n    func(b);\n    func(3);\n    func(a + b);\n    return 0;\n}\n```",
+        "resultExplanation": "The code defines two overloaded versions of the `func` function: one that takes a non-const reference and another that takes a const reference. In the `main` function, `func(a)` calls the non-const reference version, modifying `a` to 2 and printing `2`. `func(b)` calls the const reference version, printing `2`. `func(3)` calls the const reference version, printing `3`. `func(a + b)` calls the const reference version, printing `4`. Therefore, the output is '2 2 3 4'.",
+        "questionNotes": [
+          "In C++, references to const and references to non-const are resolved differently in function overload resolution."
+        ],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which of the following statements about C++ templates is correct?",
         "questionType": "MULTIPLE_CHOICE",
-        "coefficient": 1.0,
-        "answer": null,
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Templates in C++ allow for the creation of generic algorithms and data structures that can operate with any data type. They facilitate compile-time polymorphism through template specialization and provide a way to achieve code reuse and efficiency. Therefore, statements 2 ('Templates allow for the implementation of generic algorithms and data structures') and 4 ('Templates facilitate compile-time polymorphism (static polymorphism)') are correct.",
+        "questionNotes": [
+          "C++ templates are powerful tools for writing generic code that can work with any data type."
+        ],
         "choices": {
-          "User Acceptance Testing": false,
-          "Performance Testing": false,
-          "Regression Testing": false,
-          "Unit Testing": true,
-          "Integration Testing": true
+          "Templates facilitate compile-time polymorphism (static polymorphism).": true,
+          "Templates in C++ can only accept one type parameter.": false,
+          "Templates can only be used with classes, not with functions.": false,
+          "Templates are a feature introduced in C++11 and are not available in earlier versions.": false,
+          "Templates allow for the implementation of generic algorithms and data structures.": true
         },
-        "orderedOptions": { },
-        "optionMatches": { }
+        "orderedOptions": {},
+        "optionMatches": {}
       },
       {
-        "question": "Match the following terms with their descriptions.",
+        "question": "Match the following characteristics to either runtime polymorphism or compile-time polymorphism in C++.",
         "questionType": "OPTION_MATCHING",
-        "coefficient": 1.0,
-        "answer": null,
-        "choices": { },
-        "orderedOptions": { },
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Runtime polymorphism (dynamic binding) relies on `virtual functions` and `function overriding`. It allows for the selection of the appropriate function implementation `based on the object type` at runtime. Compile-time polymorphism (static binding), on the other hand, is achieved through `function overloading`, where the function call is resolved by the compiler at compile time `based on the number and types of arguments`.",
+        "questionNotes": [
+          "Runtime polymorphism (dynamic binding) is achieved through virtual functions and involves resolving the function call at runtime based on the object type.",
+          "Compile-time polymorphism (static binding) includes function overloading and is resolved at compile time."
+        ],
+        "choices": {},
+        "orderedOptions": {},
         "optionMatches": {
-          "Kanban": [
-            "A method for managing work with an emphasis on visualizing the workflow."
+          "Resolved at compile time": [
+            "Compile-time polymorphism"
           ],
-          "Agile": [
-            "A software development methodology that emphasizes flexibility and customer collaboration."
+          "Involves virtual functions": [
+            "Runtime polymorphism"
           ],
-          "Scrum": [
-            "A framework for implementing Agile that includes roles, events, and artifacts."
+          "Occurs in object-oriented programming": [
+            "Runtime polymorphism"
+          ],
+          "Can be achieved through function overloading": [
+            "Compile-time polymorphism"
+          ],
+          "Relies on function overriding": [
+            "Runtime polymorphism"
+          ],
+          "Allows for late binding": [
+            "Runtime polymorphism"
           ]
         }
       },
       {
-        "question": "Arrange the following software development lifecycle phases in the correct order.",
+        "question": "Fill in the blanks in the following C++ statement about polymorphism and inheritance.",
+        "questionType": "FILL_IN_THE_BLANK",
+        "coefficient": 1,
+        "answers": [
+          "runtime(|)compile-time(|)multiple(|)single"
+        ],
+        "paragraphToBeFilled": "In C++, {{blank}} polymorphism is achieved through function overriding and virtual functions, while {{blank}} polymorphism is achieved through function overloading and templates. {{blank}} inheritance allows a class to inherit from multiple base classes, whereas {{blank}} inheritance involves a class inheriting from a single base class.",
+        "additionalContext": null,
+        "resultExplanation": null,
+        "questionNotes": [
+          "Separate Multi Words With '-'"
+        ],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "What is the output of the following C++ code snippet?",
+        "questionType": "NUMERIC",
+        "coefficient": 1,
+        "answers": [
+          "14"
+        ],
+        "paragraphToBeFilled": null,
+        "additionalContext": "```cpp\n#include <iostream>\n\nint square(int n) {\n    return n * n;\n}\n\nint main() {\n    int result = 0;\n    for (int i = 1; i <= 3; ++i) {\n        result += square(i);\n    }\n    std::cout << result << std::endl;\n    return 0;\n}\n```",
+        "resultExplanation": "The code defines a `square` function that returns the square of its argument. In the `main` function, a loop runs from 1 to 3, adding the square of each value to `result`. The squares are 1, 4, and 9, summing to 14. Therefore, the output of the code is `14`.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "In C++, a pure virtual function is a function that must be overridden in any derived class.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1,
+        "answers": [
+          "TRUE"
+        ],
+        "paragraphToBeFilled": null,
+        "additionalContext": "Pure virtual functions are declared by assigning 0 to the function declaration, making the containing class abstract.",
+        "resultExplanation": "A pure virtual function in C++ is a function that is declared by assigning 0 to the function declaration, indicating that any derived class must provide an implementation for this function. This makes the containing class an abstract class, meaning it cannot be instantiated directly.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Order the following steps involved in implementing and using polymorphism in C++.",
         "questionType": "OPTION_ORDERING",
-        "coefficient": 1.0,
-        "answer": null,
-        "choices": { },
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Implementing polymorphism in C++ involves several key steps: First, ``define a base class with at least one virtual function``. Second, ``derive one or more classes from the base class and override the virtual function(s)`` in each derived class. Third, ``create a pointer or reference of the base class type``. Fourth, ``assign an object of the derived class to the base class pointer or reference``. Finally, ``call the virtual function through the base class pointer or reference`` to invoke the overridden function specific to the derived class. This process allows C++ programs to achieve dynamic binding, where the appropriate function implementation is determined at runtime based on the object's actual type.",
+        "questionNotes": [],
+        "choices": {},
         "orderedOptions": {
-          "1": "Requirements Analysis",
-          "2": "Plan & Design",
-          "3": "Implementation",
-          "4": "Maintenance",
-          "5": "Deployment"
+          "1": "Define a base class with at least one virtual function.",
+          "2": "Derive one or more classes from the base class and override the virtual function(s).",
+          "3": "Create a pointer or reference of the base class type.",
+          "4": "Assign an object of the derived class to the base class pointer or reference.",
+          "5": "Call the virtual function through the base class pointer or reference."
         },
-        "optionMatches": { }
+        "optionMatches": {}
       }
     ]
+  },
+  {
+    "title": "Entry Docker Quiz",
+    "quizAccessType": "PUBLIC",
+    "timeLimit": 1800,
+    "description": "# Welcome to the Entry Docker Quiz!\n\n![Docker Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Docker_%28container_engine%29_logo.png/240px-Docker_%28container_engine%29_logo.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in Docker**. Whether you're new to containerization or looking to solidify your understanding of Docker basics, this quiz covers essential topics to get you started on your Docker journey.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about Docker essentials. It covers a variety of topics including:\n- Docker architecture and components\n- Dockerfile and Docker image creation\n- Docker containers and networking\n\nTest your knowledge and enhance your skills with carefully crafted questions that span both theoretical understanding and practical application. Whether you're exploring Docker for development, testing, or deployment purposes, this quiz aims to build a strong foundation for your Docker learning path.\n\nAre you ready to dive into the world of Docker containers? Let's get started!",
+    "questions": [
+      {
+        "question": "The following Mermaid diagram illustrates a valid Docker container setup.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1,
+        "answers": [
+          "FALSE"
+        ],
+        "paragraphToBeFilled": null,
+        "additionalContext": "```mermaid\ngraph LR;\n  A[Docker Host] --> B(Container 1);\n  A --> C(Container 2);\n  B --> D(Sub-container);\n```",
+        "resultExplanation": "The Mermaid diagram depicts containers and sub-containers connected to a Docker host. However, in Docker, containers are typically depicted as isolated units, not directly connected in this manner. Thus, the diagram is not illustrating a valid Docker container setup, making the statement FALSE.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which statement best describes Docker?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Docker is an open-source platform that enables developers to build, ship, and run applications inside containers. Containers allow applications to be packaged with their dependencies and configurations into a single unit, ensuring consistency and portability across different environments.",
+        "questionNotes": [],
+        "choices": {
+          "A virtualization platform for creating VMs": false,
+          "A platform for building microservices": false,
+          "An orchestration tool for managing Kubernetes clusters": false,
+          "A platform for containerization": true
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which of the following statements about Docker containers are correct?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Docker containers are lightweight and portable software units that package up code and all its dependencies, enabling applications to run reliably across different computing environments. They provide isolation and consistency, making it easier to develop, deploy, and manage applications.",
+        "questionNotes": [
+          "A hypervisor is a software layer that enables multiple virtual machines to run on a single physical host. It manages the virtualized hardware resources and allows for the isolation of guest operating systems.",
+          "A Bare-metal server refers to a physical server or computer without a hypervisor or additional software layer between the hardware and the operating system. Docker containers can run directly on bare-metal servers."
+        ],
+        "choices": {
+          "Docker containers share the host operating system's kernel.": true,
+          "Docker containers can be stopped and started quickly.": true,
+          "Docker containers are slower to start compared to virtual machines.": false,
+          "Docker containers require a hypervisor to run.": false,
+          "Docker containers are primarily used for bare-metal servers only.": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "What is the default port number that Docker uses for its daemon?",
+        "questionType": "NUMERIC",
+        "coefficient": 1,
+        "answers": [
+          "2375"
+        ],
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The default port number for the Docker daemon is 2375. This port is used for Docker's REST API and is typically used for communication between Docker clients and the daemon.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Order the following steps involved in creating and running a Docker container.",
+        "questionType": "OPTION_ORDERING",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Creating and running a Docker container involves several key steps. First, 'Install Docker on your machine' to set up the environment. Second, 'Write a Dockerfile' that defines the container's contents and behavior. Third, 'Build the Docker image' from the Dockerfile using the `docker build` command. Fourth, 'Run the Docker container' using the `docker run` command. Finally, 'Manage the running container' by using Docker commands such as `docker ps`, `docker stop`, `docker start`, etc.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {
+          "1": "Install Docker on your machine.",
+          "2": "Write a Dockerfile.",
+          "3": "Build the Docker image.",
+          "4": "Run the Docker container.",
+          "5": "Manage the running container."
+        },
+        "optionMatches": {}
+      },
+      {
+        "question": "Fill in the blanks in the following statement about Dockerfile instructions.",
+        "questionType": "FILL_IN_THE_BLANK",
+        "coefficient": 1,
+        "answers": [
+          "FROM(|)RUN(|)COPY(|)CMD"
+        ],
+        "paragraphToBeFilled": "In a Dockerfile, the `{{blank}}` instruction sets the base image for subsequent instructions, the `{{blank}}` instruction executes a command in the container, the `{{blank}}` instruction copies files from the host machine into the container, and the `{{blank}}` instruction specifies the command to run within the container when it starts.",
+        "additionalContext": null,
+        "resultExplanation": "The `FROM` instruction sets the base image, `RUN` executes a command, `COPY` copies files from the host to the container, and `CMD` specifies the command to run when the container starts.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "What is the default network mode used by Docker containers?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1,
+        "answers": [
+          "bridge"
+        ],
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The default network mode used by Docker containers is 'bridge'. This network mode provides isolation and allows containers to communicate with each other on the same host.",
+        "questionNotes": [
+          "Examples of network modes include 'bridge', 'host', 'overlay', and 'macvlan'."
+        ],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Examine the following Dockerfile snippet. What does this configuration achieve?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "```dockerfile\n# Dockerfile\n\n# Stage 1: Build the application\nFROM node:14 AS build\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nRUN npm run build\n\n# Stage 2: Serve the application\nFROM nginx:alpine\nCOPY --from=build /app/build /usr/share/nginx/html\nEXPOSE 80\nCMD [\"nginx\", \"-g\", \"daemon off;\"]\n```",
+        "resultExplanation": "The Dockerfile snippet demonstrates a multi-stage build process. In the first stage, it uses the Node.js image to build a Node.js application by installing dependencies and creating a production build. The second stage uses the lightweight Nginx image to serve the built static files from the first stage, effectively creating a smaller and more secure production-ready Docker image.",
+        "questionNotes": [
+          "The 'COPY --from=build' syntax in Dockerfile specifies copying artifacts from a previous build stage, enhancing image efficiency."
+        ],
+        "choices": {
+          "A Dockerfile for deploying a PostgreSQL database.": false,
+          "A Dockerfile for building a Python Flask web application.": false,
+          "A multi-stage Dockerfile for building and serving a Node.js application with Nginx.": true,
+          "A Dockerfile for deploying a Kubernetes Pod.": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      }
 
+    ]
+  },
+  {
+    "title": "HTTP Basics Quiz",
+    "quizAccessType": "PUBLIC",
+    "timeLimit": 1800,
+    "description": "# Welcome to the HTTP Basics Quiz!\n\n![Http Photo](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/HTTP_logo.svg/640px-HTTP_logo.svg.png)\n\nThis quiz tests your understanding of fundamental concepts related to HTTP (Hypertext Transfer Protocol). HTTP is the foundation of data communication on the World Wide Web, governing how web servers and clients interact. Explore key aspects such as request methods, status codes, headers, and more.\n\n## About the Quiz\n\nThis quiz covers essential topics including:\n- HTTP request methods and their purposes\n- HTTP status codes and their meanings\n- Headers and their role in HTTP communication\n\nEnhance your knowledge and grasp the core principles of HTTP with carefully crafted questions that bridge theoretical understanding with practical application.\n\nAre you ready to dive into the world of HTTP? Let's get started!",
+    "questions": [
+      {
+        "question": "Which HTTP method is used to request data from a server?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The HTTP `GET` method is used to `retrieve` data from a server. It is one of the `most commonly used HTTP methods`.",
+        "questionNotes": [],
+        "choices": {
+          "GET": true,
+          "POST": false,
+          "PUT": false,
+          "DELETE": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Identify the component responsible for handling HTTP requests in the following diagram:",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "```mermaid\ngraph LR\n    A[Client] --> B[Load Balancer]\n    B --> C[Web Server]\n    C --> D[Application Server]\n    D --> E[Database]\n```",
+        "resultExplanation": "In the diagram, the component responsible for distributing HTTP requests among multiple servers is the Load Balancer (B). Load balancers enhance the reliability and scalability of web applications by efficiently distributing incoming network traffic across multiple backend servers.",
+        "questionNotes": [
+          "An 'Application Server' (D) typically hosts application logic and business logic of a web application. It interacts with the web server (C) and the database (E) to process and respond to client requests."
+        ],
+        "choices": {
+          "Client (A)": false,
+          "Load Balancer (B)": true,
+          "Web Server (C)": false,
+          "Application Server (D)": false,
+          "Database (E)": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Identify the HTTP method used in the following request:",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "```\nGET /api/users HTTP/1.1\nHost: example.com\nAccept: application/json\n```",
+        "resultExplanation": "The request shown uses the HTTP method 'GET', which is typically used to retrieve data from a specified resource.",
+        "questionNotes": [
+          "HTTP requests consist of a method (GET, POST, PUT, DELETE, etc.) followed by the resource path and HTTP version."
+        ],
+        "choices": {
+          "GET": true,
+          "POST": false,
+          "PUT": false,
+          "DELETE": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "What does the following sequence diagram illustrate regarding HTTP browser caching?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "```mermaid\nsequenceDiagram\n    participant Client\n    participant Cache\n    participant Server\n    Client->>Cache: GET /api/data\n    alt Cache Hit\n        Cache-->>Client: HTTP/1.1 200 OK (from cache)\n        Note right of Cache: Data served from HTTP browser cache\n    else Cache Miss\n        Cache->>Server: GET /api/data\n        Server-->>Cache: HTTP/1.1 200 OK (from server)\n        Cache-->>Client: HTTP/1.1 200 OK (from server)\n        Note right of Cache: Data retrieved from server and cached in HTTP browser cache\n    end\n```",
+        "resultExplanation": "The diagram illustrates a scenario where a client requests data from an HTTP `browser cache`. If the data is found in the cache `(cache hit)`, the cache `responds directly` to the client. If the data is not in the cache `(cache miss)`, the cache `fetches the data from the server`, updates its cache, and then responds to the client.",
+        "questionNotes": [
+          "Sequence diagrams visualize the interactions between components in a system over time."
+        ],
+        "choices": {
+            "HTTP browser caching and cache hit": true,
+            "HTTP request and response handling": false,
+            "HTTP load balancing and server distribution": false,
+            "HTTP session management and cookies": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which HTTP header field provides information about the client application, operating system, and its version?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The `User-Agent` header field in HTTP provides information about the `client application`, `operating system`, and its `version`. This header helps servers tailor responses based on the capabilities and characteristics of the client software.",
+        "questionNotes": [
+          "HTTP headers are key-value pairs sent between the client and server to provide additional information about the request or response."
+        ],
+        "choices": {
+          "X-Forwarded-For": false,
+          "Cookie": false,
+          "User-Agent": true,
+          "Authorization": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "What does the HTTP status code 429 indicate?",
+        "questionType": "NUMERIC",
+        "coefficient": 1,
+        "answers": [
+          "429"
+        ],
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The HTTP status code `429` indicates 'Too Many Requests'. It is used when a client has sent too many requests in a given amount of time `(rate limiting)`. This status code helps servers control the rate of requests from a particular `client or user`, `preventing overload` and ensuring fair usage of server resources.",
+        "questionNotes": [
+          "Status codes provide a standardized way to communicate the result of an HTTP request, enabling clients and servers to understand and respond appropriately to different scenarios."
+        ],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      }
+    ]
+  },
+  {
+    "title": "Entry Design Patterns Quiz",
+    "quizAccessType": "PUBLIC",
+    "timeLimit": null,
+    "description": "# Welcome to the Entry Design Patterns Quiz!\n\n![Design Patterns](https://bgasparotto.com/wp-content/uploads/2016/11/design-patterns-logo-2.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in Design Patterns**. Whether you're new to software design patterns or looking to solidify your understanding of basic principles, this quiz covers essential topics to get you started on your journey of software architecture.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental design patterns. It covers a variety of topics including:\n- Creational, Structural, and Behavioral design patterns\n- Real-world applications and examples of each pattern\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring design patterns for software development, this quiz aims to build a strong foundation for your learning path.\n\nAre you ready to dive into the world of Design Patterns? Let's get started!",
+    "questions": [
+      {
+        "question": "Which design pattern is used to ensure a class has only one instance and provides a global point of access to that instance?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The Singleton pattern ensures a class has only one instance and provides a global access point to that instance. This is useful when only one instance of a class should exist, such as in logging, configuration settings, or database connections.",
+        "questionNotes": [],
+        "choices": {
+          "Adapter Pattern": false,
+          "Singleton Pattern": true,
+          "Observer Pattern": false,
+          "Facade Pattern": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Identify which design pattern is used to decouple abstraction from implementation so that the two can vary independently.",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The Bridge pattern decouples an abstraction from its implementation so that both can vary independently. It is useful when you want to avoid a permanent binding between an abstraction and its implementation.",
+        "questionNotes": [],
+        "choices": {
+          "Bridge Pattern": true,
+          "Factory Method Pattern": false,
+          "Decorator Pattern": false,
+          "Proxy Pattern": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which design pattern is used to allow an object to alter its behavior when its internal state changes?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The State pattern allows an object to alter its behavior when its internal state changes. It is particularly useful in scenarios where an object's behavior depends on its state and must change dynamically at runtime.",
+        "questionNotes": [],
+        "choices": {
+          "State Pattern": true,
+          "Strategy Pattern": false,
+          "Observer Pattern": false,
+          "Template Method Pattern": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Match the following design patterns to their respective categories: Creational, Structural, or Behavioral.",
+        "questionType": "OPTION_MATCHING",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Creational patterns focus on object creation mechanisms, Structural patterns deal with object composition, and Behavioral patterns are about object communication and responsibility delegation.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {
+          "Singleton Pattern": [
+            "Creational"
+          ],
+          "Adapter Pattern": [
+            "Structural"
+          ],
+          "Observer Pattern": [
+            "Behavioral"
+          ],
+          "Factory Method Pattern": [
+            "Creational"
+          ],
+          "Decorator Pattern": [
+            "Structural"
+          ],
+          "Strategy Pattern": [
+            "Behavioral"
+          ]
+        }
+      },
+      {
+        "question": "Fill in the blanks in the following statement about the Factory Method and Abstract Factory patterns.",
+        "questionType": "FILL_IN_THE_BLANK",
+        "coefficient": 1,
+        "answers": [
+          "creational(|)creational(|)Abstract(|)Factory(|)single(|)families"
+        ],
+        "paragraphToBeFilled": "In software design, the {{blank}} patterns are {{blank}} patterns that provide an interface for creating {{blank}} objects. The {{blank}} Method pattern allows a method to create objects, while the {{blank}} Factory pattern creates {{blank}} of related or dependent objects.",
+        "additionalContext": null,
+        "resultExplanation": null,
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "What design pattern is used to define a family of algorithms, encapsulate each one, and make them interchangeable?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The Strategy pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. This allows the algorithm to vary independently from clients that use it.",
+        "questionNotes": [],
+        "choices": {
+          "Strategy Pattern": true,
+          "Visitor Pattern": false,
+          "Facade Pattern": false,
+          "Observer Pattern": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "The Observer pattern is used to define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1,
+        "answers": [
+          "TRUE"
+        ],
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The Observer pattern establishes a one-to-many dependency between objects, where multiple observers (dependents) are notified and updated automatically when the observed object (subject) changes state. This promotes loose coupling between objects.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Order the following steps involved in using the Observer pattern.",
+        "questionType": "OPTION_ORDERING",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Using the Observer pattern involves several key steps: First, 'Define the subject interface and concrete subject'. Second, 'Define the observer interface and concrete observers'. Third, 'Implement registration and deregistration methods in the subject'. Fourth, 'Notify observers of state changes'. Finally, 'Update observers with new state'. This pattern allows objects to maintain consistency across changes.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {
+          "1": "Define the subject interface and concrete subject.",
+          "2": "Define the observer interface and concrete observers.",
+          "3": "Implement registration and deregistration methods in the subject.",
+          "4": "Notify observers of state changes.",
+          "5": "Update observers with new state."
+        },
+        "optionMatches": {}
+      },
+      {
+        "question": "What is the role of the Adapter pattern in software design?",
+        "questionType": "SHORT_ANSWER",
+        "coefficient": 1,
+        "answers": [
+          "The Adapter pattern converts the interface of a class into another interface clients expect. It allows incompatible interfaces to work together."
+        ],
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The Adapter pattern converts the interface of a class into another interface that clients expect. It allows classes with incompatible interfaces to work together, which otherwise would not be possible due to differing methods or structures.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      }
+    ]
+  },
+  {
+    "title": "Entry Algorithms Quiz",
+    "quizAccessType": "PUBLIC",
+    "timeLimit": 900,
+    "description": "# Welcome to the Entry Algorithms Quiz!\n\n![Algorithms](https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in Algorithms**. Whether you're new to algorithms or looking to solidify your understanding of basic principles, this quiz covers essential topics to get you started on your journey in computer science.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental algorithms. It covers a variety of topics including:\n- Sorting and Searching algorithms\n- Basic Data Structures\n- Algorithm complexity\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring algorithms for software development or academic purposes, this quiz aims to build a strong foundation for your learning path.\n\nAre you ready to dive into the world of Algorithms? Let's get started!",
+    "questions": [
+      {
+        "question": "Which algorithm is used to find the shortest path between nodes in a graph?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Dijkstra's algorithm is widely used to find the shortest path between nodes in a graph. It works by exploring all possible paths from the starting node to the target node and selecting the path with the minimum total weight.",
+        "questionNotes": [],
+        "choices": {
+          "Dijkstra's Algorithm": true,
+          "Merge Sort": false,
+          "Binary Search": false,
+          "Quick Sort": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which of the following sorting algorithms has an average time complexity of O(n log n)?",
+        "questionType": "MULTIPLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "Merge Sort and Quick Sort both have an average time complexity of O(n log n). Merge Sort is stable and guarantees O(n log n) time complexity in all cases, making it a preferred choice in many applications.",
+        "questionNotes": [],
+        "choices": {
+          "Bubble Sort": false,
+          "Insertion Sort": false,
+          "Merge Sort": true,
+          "Quick Sort": true
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+            "question": "Which data structure is commonly used to implement a Last-In-First-Out (LIFO) order of elements?",
+            "questionType": "SINGLE_CHOICE",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "A Stack is a data structure that follows the Last-In-First-Out (LIFO) order, where elements are inserted and removed from the same end. It supports operations like push (insert) and pop (remove) in constant time.",
+            "questionNotes": [],
+            "choices": {
+            "Queue": false,
+            "Heap": false,
+            "Stack": true,
+            "Linked List": false
+            },
+            "orderedOptions": {},
+            "optionMatches": {}
+        },
+      {
+            "question": "What is the primary purpose of the Binary Search algorithm?",
+            "questionType": "SINGLE_CHOICE",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "The primary purpose of the Binary Search algorithm is to efficiently locate a target value within a sorted array or list. It works by repeatedly dividing the search interval in half until the target value is found or the interval is empty.",
+            "questionNotes": [],
+            "choices": {
+            "To sort a list of elements in ascending order": false,
+            "To find the shortest path between nodes in a graph": false,
+            "To locate a target value in a sorted array": true,
+            "To traverse a tree data structure in a breadth-first manner": false
+            },
+            "orderedOptions": {},
+            "optionMatches": {}
+        },
+      {
+            "question": "Which algorithm is used to sort elements by recursively dividing the array into two halves, sorting the halves, and merging them back together?",
+            "questionType": "SINGLE_CHOICE",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "Merge Sort is an efficient sorting algorithm that follows the divide-and-conquer approach. It recursively divides the array into two halves, sorts the halves, and merges them back together in sorted order.",
+            "questionNotes": [],
+            "choices": {
+            "Bubble Sort": false,
+            "Insertion Sort": false,
+            "Merge Sort": true,
+            "Quick Sort": false
+            },
+            "orderedOptions": {},
+            "optionMatches": {}
+        },
+      {
+        "question": "In computer science, the Greedy algorithm always guarantees an optimal solution for a given problem.",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1,
+        "answers": ["FALSE"],
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "False. While Greedy algorithms often provide optimal solutions for many problems, they do not guarantee optimal solutions in all cases. Sometimes, a Greedy approach may lead to locally optimal solutions that are not globally optimal.",
+        "questionNotes": [],
+        "choices": {},
+        "orderedOptions": {},
+        "optionMatches": {}
+      }
+    ]
+  },
+  {
+        "title": "Entry Git Quiz",
+        "quizAccessType": "PUBLIC",
+        "timeLimit": 900,
+        "description": "# Welcome to the Entry Git Quiz!\n\n![Git Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/320px-Git-logo.svg.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in Git**. Whether you're new to version control or looking to solidify your understanding of basic Git operations, this quiz covers essential topics to get you started on your Git journey.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental Git concepts. It covers a variety of topics including:\n- Basic Git commands\n- Branching and Merging\n- Remote repositories and collaboration\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring Git for software development, version control, or collaboration purposes, this quiz aims to build a strong foundation for your Git learning path.\n\nAre you ready to dive into the world of Git? Let's get started!",
+        "questions": [
+          {
+            "question": "What Git command is used to create a new branch and switch to it?",
+            "questionType": "SHORT_ANSWER",
+            "coefficient": 1,
+            "answers": ["git checkout -b", "git switch -c"],
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "The 'git checkout -b' command creates a new branch and switches to it in Git. Alternatively, 'git switch -c' also creates a new branch and switches to it.",
+            "questionNotes": [],
+            "choices": {},
+            "orderedOptions": {},
+            "optionMatches": {}
+          },
+          {
+            "question": "How many parents does a merge commit typically have in Git?",
+            "questionType": "NUMERIC",
+            "coefficient": 1,
+            "answers": ["2"],
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "A merge commit in Git typically has two parents: the commit from the branch being merged into and the commit from the branch being merged.",
+            "questionNotes": [],
+            "choices": {},
+            "orderedOptions": {},
+            "optionMatches": {}
+          },
+          {
+            "question": "In Git, what command is used to view the commit history of a repository?",
+            "questionType": "SHORT_ANSWER",
+            "coefficient": 1,
+            "answers": ["git log", "git history"],
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "The 'git log' command in Git displays the commit history of a repository, showing all commits in reverse chronological order.",
+            "questionNotes": [],
+            "choices": {},
+            "orderedOptions": {},
+            "optionMatches": {}
+          },
+          {
+            "question": "Which Git command is used to create a new branch?",
+            "questionType": "SINGLE_CHOICE",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "The 'git branch' command is used to create a new branch in Git. It allows developers to work on new features or fixes without affecting the main branch until they are ready to merge their changes.",
+            "questionNotes": [],
+            "choices": {
+              "git clone": false,
+              "git pull": false,
+              "git branch": true,
+              "git push": false
+            },
+            "orderedOptions": {},
+            "optionMatches": {}
+          },
+          {
+            "question": "Arrange the following Git commands in the correct order to stage and commit and push changes in a new branch.",
+            "questionType": "OPTION_ORDERING",
+            "coefficient": 1,
+            "answers": null,
+            "paragraphToBeFilled": null,
+            "additionalContext": null,
+            "resultExplanation": "Staging and committing changes in Git involves several key steps. First, 'git add' is used to stage changes. Second, 'git commit' is used to commit the staged changes with a message describing the modifications.",
+            "questionNotes": [],
+            "choices": {},
+            "orderedOptions": {
+              "1": "get checkout -b new-branch",
+              "2": "git add .",
+              "3": "git commit -m 'Commit message'",
+              "4": "git push origin new-branch"
+            },
+            "optionMatches": {}
+            }
+        ]
+    },
+  {
+    "title": "Entry SQL Quiz",
+    "quizAccessType": "PUBLIC",
+    "timeLimit": 240,
+    "description": "# Welcome to the Entry SQL Quiz!\n\n![SQL Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Sql_data_base_with_logo.png/320px-Sql_data_base_with_logo.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in SQL (Structured Query Language)**. Whether you're new to databases or looking to solidify your understanding of basic SQL operations, this quiz covers essential topics to get you started on your SQL journey.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental SQL concepts. It covers a variety of topics including:\n- Basic SQL queries\n- Data manipulation and retrieval\n- Database design and normalization\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring SQL for database management, data analysis, or software development purposes, this quiz aims to build a strong foundation for your SQL learning path.\n\nAre you ready to dive into the world of SQL? Let's get started!",
+    "questions": [
+      {
+        "question": "Given the following database schema, which SQL query retrieves the names of all employees working in the 'HR' department?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "```mermaid\nclassDiagram\n  class Employee {\n    +int id\n    +String name\n    +int department_id\n  }\n  class Department {\n    +int id\n    +String name\n  }\n  Employee --> Department\n```\n",
+        "resultExplanation": "The correct query uses a JOIN operation between the Employee and Department tables and filters the results to include only those employees whose department name is 'HR'.",
+        "questionNotes": null,
+        "choices": {
+          "SELECT e.name FROM Employee e JOIN Department d ON e.department_id = d.id WHERE d.name = 'HR';": true,
+          "SELECT name FROM Employee WHERE department_id = 'HR';": false,
+          "SELECT Employee.name FROM Employee INNER JOIN Department ON Employee.id = Department.id;": false,
+          "SELECT * FROM Employee WHERE department = 'HR';": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Given the following database schema, is the SQL query provided correct for retrieving the names of all employees working in the 'HR' department?",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1,
+        "answers": ["TRUE"],
+        "paragraphToBeFilled": null,
+        "additionalContext": "```mermaid\nclassDiagram\n  class Employee {\n    +int id\n    +String name\n    +int department_id\n  }\n  class Department {\n    +int id\n    +String name\n  }\n  Employee --> Department\n```\n\n```sql\nSELECT name FROM Employee WHERE department_id = (SELECT id FROM Department WHERE name = 'HR');\n```\n",
+        "resultExplanation": "The query provided is correct. It uses a subquery to retrieve the department ID for 'HR' and then selects the names of employees who belong to that department.",
+        "questionNotes": [
+          "Note: Check if the subquery correctly retrieves the department ID for 'HR'.",
+          "Note: Verify if the main query correctly selects employee names based on the department ID."
+        ],
+        "choices":{},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which SQL statement is used to retrieve data from a database?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The SELECT statement is used to retrieve data from a database in SQL. It allows you to specify the columns to retrieve, the table to query, and optional conditions to filter the results.",
+        "questionNotes": [],
+        "choices": {
+          "SELECT": true,
+          "INSERT": false,
+          "UPDATE": false,
+          "DELETE": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which SQL clause is used to filter records based on a specified condition?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The WHERE clause is used to filter records based on a specified condition in SQL. It allows you to retrieve only the rows that meet the specified criteria.",
+        "questionNotes": [],
+        "choices": {
+          "GROUP BY": false,
+          "ORDER BY": false,
+          "HAVING": false,
+          "WHERE": true
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      }
+    ]
   }
 ]

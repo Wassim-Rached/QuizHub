@@ -27,3 +27,16 @@ services:
       - "172.17.0.1:7777:7777"
     volumes:
       - ./volumes/servers.json:/pgadmin4/servers.json
+
+  quizhub-api:
+    container_name: quizhub-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+#    environment:
+#      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "8080:8080"
+    depends_on:
+        - postgres

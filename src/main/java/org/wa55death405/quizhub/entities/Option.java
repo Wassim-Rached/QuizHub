@@ -1,9 +1,25 @@
 package org.wa55death405.quizhub.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.UUID;
+
+/*
+    * Option entity represents an option for a question.
+    * Used with types (OPTION_MATCHING)
+
+    @Rules
+    * Each option should be associated with a Question
+    * The options are unique for a question
+    * Each option should have a flag to indicate if it is correct
+
+    @Note
+    * the Option is the thing on the left (to not confuse with the 'Match')
+    * Not in any way related to 'OrderedOption' (which is used with types 'OPTION_ORDERING')
+    * The option generally not longs so it stays at 255 characters
+* */
 
 @Entity
 @Data
@@ -11,15 +27,19 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"option", "question_id"})
+})
 public class Option {
     @Id
     @GeneratedValue
     private UUID id;
     @Column(nullable = false)
+    @NotBlank
     private String option;
 
-    // TODO : option and question should be unique together
     @ManyToOne(optional = false)
+    @JoinColumn(name = "question_id")
     private Question question;
 
     @Override

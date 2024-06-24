@@ -8,15 +8,18 @@ import org.wa55death405.quizhub.dto.orderedOption.OrderedOptionGeneralDTO;
 import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptTakingDTO;
 import org.wa55death405.quizhub.entities.Question;
 import org.wa55death405.quizhub.entities.QuestionAttempt;
+import org.wa55death405.quizhub.entities.QuestionNote;
 import org.wa55death405.quizhub.enums.QuestionType;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /*
      * This class represents the taking of a question.
      * 'Taking' means the correct answer is not provided.
+     * Note: The choices, orderedOptions, matches, and options are shuffled.
  */
 @Data
 public class QuestionTakingDTO {
@@ -24,6 +27,11 @@ public class QuestionTakingDTO {
     private String question;
     private Float coefficient = 1f;
     private QuestionType questionType;
+    private String additionalContext;
+    private String[] questionNotes;
+
+    // For FILL_IN_THE_BLANK
+    private String paragraphToBeFilled;
 
     // For MULTIPLE_CHOICE and SINGLE_CHOICE
     private List<ChoiceGeneralDTO> choices;
@@ -43,28 +51,46 @@ public class QuestionTakingDTO {
         this.question = question.getQuestion();
         this.coefficient = question.getCoefficient();
         this.questionType = question.getQuestionType();
+        this.paragraphToBeFilled = question.getParagraphToBeFilled();
+        this.additionalContext = question.getAdditionalContext();
+
+        if (question.getQuestionNotes() != null && !question.getQuestionNotes().isEmpty()){
+            this.questionNotes = question.getQuestionNotes().stream()
+                .map(QuestionNote::getNote)
+                .toArray(String[]::new);
+        }
+
         if (questionAttempt != null){
             this.questionAttempt = new QuestionAttemptTakingDTO(questionAttempt);
         }
 
-        if (!question.getChoices().isEmpty())
+        if (!question.getChoices().isEmpty()){
             this.choices = question.getChoices().stream()
                 .map(ChoiceGeneralDTO::new)
-                .toList();
+                .collect(Collectors.toList());
+            Collections.shuffle(this.choices);
+        }
 
-        if (!question.getOrderedOptions().isEmpty())
+        if (!question.getOrderedOptions().isEmpty()){
             this.orderedOptions = question.getOrderedOptions().stream()
                 .map(OrderedOptionGeneralDTO::new)
-                .toList();
+                .collect(Collectors.toList());
+            Collections.shuffle(this.orderedOptions);
+        }
 
-        if (!question.getMatches().isEmpty())
+        if (!question.getMatches().isEmpty()){
             this.matches = question.getMatches().stream()
                 .map(MatchGeneralDTO::new)
-                .toList();
+                .collect(Collectors.toList());
+            Collections.shuffle(this.matches);
+        }
 
-        if (!question.getOptions().isEmpty())
+        if (!question.getOptions().isEmpty()){
             this.options = question.getOptions().stream()
                 .map(OptionGeneralDTO::new)
-                .toList();
+                .collect(Collectors.toList());
+            Collections.shuffle(this.options);
+        }
+
     }
 }

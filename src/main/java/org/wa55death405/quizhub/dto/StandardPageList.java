@@ -12,6 +12,7 @@ import java.util.List;
 public class StandardPageList<T>{
     private Integer currentPage;
     private Integer currentItemsSize;
+//    TODO: change 'totalItems' to 'totalItemsSize'
     private Long totalItems;
     private List<T> items;
 }

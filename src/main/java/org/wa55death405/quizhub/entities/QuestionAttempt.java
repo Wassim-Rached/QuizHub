@@ -8,6 +8,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+/*
+    * QuestionAttempt entity represents a question attempt made by a user for a quiz
+
+    @Rules
+    * Each question attempt should be associated with a Question
+    * Each question attempt should be associated with a QuizAttempt
+
+    @Note
+    * When first created, correctnessPercentage should be null it will be set later by the system algorithm
+    * Depending on the type of the question, the fields needed should be set (DTO .toEntity job)
+*/
+
 @Entity
 @Data
 @ToString
@@ -45,7 +57,6 @@ public class QuestionAttempt {
     public Float calculateScore() {
         return correctnessPercentage * question.getCoefficient();
     }
-
 
     @Override
     public int hashCode() {

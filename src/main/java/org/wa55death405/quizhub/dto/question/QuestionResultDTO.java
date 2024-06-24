@@ -11,6 +11,7 @@ import org.wa55death405.quizhub.dto.questionAttempt.QuestionAttemptResultDTO;
 import org.wa55death405.quizhub.entities.*;
 import org.wa55death405.quizhub.enums.QuestionType;
 import org.wa55death405.quizhub.exceptions.InputValidationException;
+import org.wa55death405.quizhub.exceptions.IrregularBehaviorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,12 @@ public class QuestionResultDTO {
     private String question;
     private Float coefficient = 1f;
     private QuestionType questionType;
+    private String additionalContext;
+    private String resultExplanation;
+    private String[] questionNotes;
+
+    // for FILL_IN_THE_BLANK
+    private String paragraphToBeFilled;
 
     // for TRUE_FALSE,SINGLE_CHOICE,SHORT_ANSWER,NUMERIC,FILL_IN_THE_BLANK,
     private AnswerResultDTO answer;
@@ -49,6 +56,14 @@ public class QuestionResultDTO {
         this.question = question.getQuestion();
         this.coefficient = question.getCoefficient();
         this.questionType = question.getQuestionType();
+        this.additionalContext = question.getAdditionalContext();
+        this.resultExplanation = question.getResultExplanation();
+
+        if (question.getQuestionNotes() != null && !question.getQuestionNotes().isEmpty()){
+            this.questionNotes = question.getQuestionNotes().stream()
+                .map(QuestionNote::getNote)
+                .toArray(String[]::new);
+        }
 
         if (questionAttempt != null){
             this.questionAttempt = new QuestionAttemptResultDTO(questionAttempt);
@@ -56,9 +71,13 @@ public class QuestionResultDTO {
 
         switch (this.questionType){
             case TRUE_FALSE,FILL_IN_THE_BLANK,NUMERIC,SHORT_ANSWER->{
-                if (question.getAnswer() == null)
-                    throw new InputValidationException("Answer is required for question of type " + this.questionType);
-                this.answer = new AnswerResultDTO(question.getAnswer());
+                if (question.getAnswers() == null || question.getAnswers().isEmpty())
+                    throw new IrregularBehaviorException("Answer is required for question of type " + this.questionType);
+                this.answer = new AnswerResultDTO(question.getAnswers().get(0));
+
+                if (this.questionType == QuestionType.FILL_IN_THE_BLANK){
+                    this.paragraphToBeFilled = question.getParagraphToBeFilled();
+                }
             }
             case MULTIPLE_CHOICE,SINGLE_CHOICE -> {
                 choices = new ArrayList<>();

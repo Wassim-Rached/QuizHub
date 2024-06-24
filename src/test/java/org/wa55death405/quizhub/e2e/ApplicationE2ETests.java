@@ -15,6 +15,7 @@ import org.wa55death405.quizhub.enums.QuestionType;
 import org.wa55death405.quizhub.enums.StandardApiStatus;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataLogicalGenerator;
 import org.wa55death405.quizhub.interfaces.utils.IFakeDataRandomGenerator;
+import org.wa55death405.quizhub.interfaces.utils.ISeedDataLoader;
 import org.wa55death405.quizhub.repositories.QuizRepository;
 
 import java.util.HashMap;
@@ -39,6 +40,8 @@ class ApplicationE2ETests {
     private ObjectMapper objectMapper;
     @Autowired
     private QuizRepository quizRepository;
+    @Autowired
+    private ISeedDataLoader seedDataLoader;
 
     @LocalServerPort
     private int port;
@@ -51,12 +54,13 @@ class ApplicationE2ETests {
         * This test method covers the complete lifecycle of a quiz attempt:
         * 1. Create a quiz.
         * 2. Search for the created quiz.
-        * 3. Start an attempt for the quiz.
-        * 4. Submit the quiz attempt.
-        * 5. Retrieve the attempt taking details.
-        * 6. Resubmit the attempt (if applicable).
-        * 7. Finish the attempt.
-        * 8. Retrieve the attempt result.
+        * 3. Get the quiz details by id.
+        * 4. Start an attempt for the quiz.
+        * 5. Submit the quiz attempt.
+        * 6. Retrieve the attempt taking details.
+        * 7. Resubmit the attempt (if applicable).
+        * 8. Finish the attempt.
+        * 9. Retrieve the attempt result.
     */
     // TODO: validation with json schema might be needed
     @Nested
@@ -65,6 +69,15 @@ class ApplicationE2ETests {
     class TestQuizLifecycle{
         private Quiz quiz;
         private UUID quizAttemptId;
+        private Quiz seedQuiz;
+
+        @BeforeAll
+        void setUp() {
+            // Reset the database
+            QuizCreationDTO quiz = seedDataLoader.getQuizCreationDTOs().get(0);
+            Quiz quizEntity = quiz.toEntity(null);
+            seedQuiz = quizRepository.save(quizEntity);
+        }
 
         // create quiz
         @Test
@@ -98,7 +111,7 @@ class ApplicationE2ETests {
         void testSearchQuiz() {
             // Search for the quiz
             HashMap<String, String> queryParams = new HashMap<>();
-            queryParams.put("title", quiz.getTitle().substring(1, 3));
+            queryParams.put("title", seedQuiz.getTitle().substring(1, 3));
             queryParams.put("page", "0");
             queryParams.put("size", "10");
             given()
@@ -114,12 +127,30 @@ class ApplicationE2ETests {
                     .body("data.currentItemsSize", equalTo(1))
                     .body("data.totalItems", equalTo(1))
                     .body("data.items", hasSize(equalTo(1)))
-                    .body("data.items[0].id", equalTo(this.quiz.getId().toString()))
-                    .body("data.items[0].title", equalTo(this.quiz.getTitle()));
+                    .body("data.items[0].id", equalTo(this.seedQuiz.getId().toString()))
+                    .body("data.items[0].title", equalTo(this.seedQuiz.getTitle()));
         }
 
+        // get the quiz details by id
         @Test
         @Order(3)
+        void testGetQuizById(){
+            // Get the quiz details by id
+            given()
+                    .when()
+                    .get(getBaseUrl() + "/quiz/" + this.quiz.getId())
+                    .then()
+                    .statusCode(200)
+                    .body("status", equalTo(StandardApiStatus.SUCCESS.toString()),
+                            "message", notNullValue(),
+                            "data", notNullValue(),
+                            "data.id", equalTo(this.quiz.getId().toString()),
+                            "data.title", equalTo(this.quiz.getTitle()));
+        }
+
+        // start the attempt
+        @Test
+        @Order(4)
         void testStartQuizAttempt() {
             // Start an attempt
             var startQuizResponse = given()
@@ -138,7 +169,7 @@ class ApplicationE2ETests {
 
         // Submit the attempt
         @Test
-        @Order(4)
+        @Order(5)
         void testSubmitQuizAttempt() throws JsonProcessingException {
             List<QuestionAttemptSubmissionDTO> questionAttemptSubmissionDTO = fakeDataLogicalGenerator.getRandomQuestionAttemptSubmissionDTOsForQuiz(this.quiz);
             String questionAttemptSubmissionRequestBody = objectMapper.writeValueAsString(questionAttemptSubmissionDTO);
@@ -157,7 +188,7 @@ class ApplicationE2ETests {
 
         // Get the attempt taking
         @Test
-        @Order(5)
+        @Order(6)
         void testGetQuizAttemptTaking() {
             given()
                 .when()
@@ -221,7 +252,7 @@ class ApplicationE2ETests {
 
         // Resubmit the attempt
         @Test
-        @Order(4)
+        @Order(7)
         void testReSubmitQuizAttempt() throws JsonProcessingException {
             this.quiz = quizRepository.findById(this.quiz.getId()).orElseThrow(() -> new EntityNotFoundException("Quiz not found"));
             List<QuestionAttemptSubmissionDTO> questionAttemptSubmissionDTO = fakeDataLogicalGenerator.getPerfectScoreQuestionAttemptSubmissionDTOsForQuiz(this.quiz);
@@ -241,7 +272,7 @@ class ApplicationE2ETests {
 
         // Finish the attempt
         @Test
-        @Order(6)
+        @Order(8)
         void testFinishQuizAttempt() {
             given()
                 .when()
@@ -257,7 +288,7 @@ class ApplicationE2ETests {
 
         // Get the attempt result
         @Test
-        @Order(7)
+        @Order(9)
         void testGetQuizAttemptResult() {
             given()
                     .when()
