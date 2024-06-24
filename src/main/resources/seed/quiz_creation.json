@@ -133,7 +133,7 @@
         "optionMatches": {}
       },
       {
-        "question": "True or False: In C++, a pure virtual function is a function that must be overridden in any derived class.",
+        "question": "In C++, a pure virtual function is a function that must be overridden in any derived class.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1,
         "answers": [
@@ -175,7 +175,7 @@
     "description": "# Welcome to the Entry Docker Quiz!\n\n![Docker Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Docker_%28container_engine%29_logo.png/240px-Docker_%28container_engine%29_logo.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in Docker**. Whether you're new to containerization or looking to solidify your understanding of Docker basics, this quiz covers essential topics to get you started on your Docker journey.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about Docker essentials. It covers a variety of topics including:\n- Docker architecture and components\n- Dockerfile and Docker image creation\n- Docker containers and networking\n\nTest your knowledge and enhance your skills with carefully crafted questions that span both theoretical understanding and practical application. Whether you're exploring Docker for development, testing, or deployment purposes, this quiz aims to build a strong foundation for your Docker learning path.\n\nAre you ready to dive into the world of Docker containers? Let's get started!",
     "questions": [
       {
-        "question": "True or False: The following Mermaid diagram illustrates a valid Docker container setup.",
+        "question": "The following Mermaid diagram illustrates a valid Docker container setup.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1,
         "answers": [
@@ -568,7 +568,7 @@
         "optionMatches": {}
       },
       {
-        "question": "True or False: The Observer pattern is used to define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.",
+        "question": "The Observer pattern is used to define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1,
         "answers": [
@@ -657,19 +657,6 @@
           "Merge Sort": true,
           "Quick Sort": true
         },
-        "orderedOptions": {},
-        "optionMatches": {}
-      },
-      {
-        "question": "What is the time complexity of the Depth-First Search (DFS) algorithm on a graph with V vertices and E edges in Big O notation? Provide the numerical representation of the coefficients. For example, for O(V^2), input 2.",
-        "questionType": "NUMERIC",
-        "coefficient": 1,
-        "answers": ["1"],
-        "paragraphToBeFilled": null,
-        "additionalContext": null,
-        "resultExplanation": "The time complexity of Depth-First Search (DFS) is O(V + E). In Big O notation, the coefficients for V and E are 1.",
-        "questionNotes": [],
-        "choices": {},
         "orderedOptions": {},
         "optionMatches": {}
       },
@@ -826,42 +813,81 @@
         ]
     },
   {
-        "title": "Entry JavaScript Quiz",
-        "quizAccessType": "PUBLIC",
-        "timeLimit": 900,
-        "description": "# Welcome to the Entry JavaScript Quiz!\n\n![JavaScript Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/320px-JavaScript-logo.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in JavaScript**. Whether you're new to JavaScript or looking to solidify your understanding of basic programming concepts, this quiz covers essential topics to get you started on your JavaScript journey.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental JavaScript concepts. It covers a variety of topics including:\n- JavaScript syntax and data types\n- Functions and control flow\n- DOM manipulation and event handling\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring JavaScript for web development, front-end programming, or scripting purposes, this quiz aims to build a strong foundation for your JavaScript learning path.\n\nAre you ready to dive into the world of JavaScript? Let's get started!",
-        "questions": [
-        {
-            "question": "Which keyword is used to declare a variable in JavaScript?",
-            "questionType": "SINGLE_CHOICE",
-            "coefficient": 1,
-            "answers": null,
-            "paragraphToBeFilled": null,
-            "additionalContext": null,
-            "resultExplanation": "The `var` keyword is used to declare a variable in JavaScript. Variables are used to store data values that can be referenced and manipulated in a program.",
-            "questionNotes": [],
-            "choices": {
-            "let": false,
-            "const": false,
-            "var": true,
-            "function": false
-            },
-            "orderedOptions": {},
-            "optionMatches": {}
+    "title": "Entry SQL Quiz",
+    "quizAccessType": "PUBLIC",
+    "timeLimit": 240,
+    "description": "# Welcome to the Entry SQL Quiz!\n\n![SQL Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Sql_data_base_with_logo.png/320px-Sql_data_base_with_logo.png)\n\nThis quiz is designed to test your knowledge of **entry-level concepts in SQL (Structured Query Language)**. Whether you're new to databases or looking to solidify your understanding of basic SQL operations, this quiz covers essential topics to get you started on your SQL journey.\n\n## About the Quiz\n\nThis quiz is perfect for beginners interested in learning about fundamental SQL concepts. It covers a variety of topics including:\n- Basic SQL queries\n- Data manipulation and retrieval\n- Database design and normalization\n\nTest your knowledge and enhance your skills with carefully crafted questions that bridge theoretical understanding with practical application. Whether you're exploring SQL for database management, data analysis, or software development purposes, this quiz aims to build a strong foundation for your SQL learning path.\n\nAre you ready to dive into the world of SQL? Let's get started!",
+    "questions": [
+      {
+        "question": "Given the following database schema, which SQL query retrieves the names of all employees working in the 'HR' department?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": "```mermaid\nclassDiagram\n  class Employee {\n    +int id\n    +String name\n    +int department_id\n  }\n  class Department {\n    +int id\n    +String name\n  }\n  Employee --> Department\n```\n",
+        "resultExplanation": "The correct query uses a JOIN operation between the Employee and Department tables and filters the results to include only those employees whose department name is 'HR'.",
+        "questionNotes": null,
+        "choices": {
+          "SELECT e.name FROM Employee e JOIN Department d ON e.department_id = d.id WHERE d.name = 'HR';": true,
+          "SELECT name FROM Employee WHERE department_id = 'HR';": false,
+          "SELECT Employee.name FROM Employee INNER JOIN Department ON Employee.id = Department.id;": false,
+          "SELECT * FROM Employee WHERE department = 'HR';": false
         },
-        {
-          "question": "What will be the output of the following JavaScript code snippet?",
-          "questionType": "SHORT_ANSWER",
-          "coefficient": 1,
-          "answers": ["6"],
-          "paragraphToBeFilled": null,
-          "additionalContext": "Consider the following JavaScript code:\n\n```javascript\nfunction foo() {\n  console.log(a);\n  var a = 6;\n}\nfoo();\n```",
-          "resultExplanation": "The output of the code snippet is 6. The 'a' variable is hoisted to the top of the function scope due to JavaScript's function scope hoisting behavior. Inside the function, 'a' is assigned a value of 6 before the console.log statement executes.",
-          "questionNotes": [],
-          "choices": {},
-          "orderedOptions": {},
-          "optionMatches": {}
-        }
-        ]
-    }
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Given the following database schema, is the SQL query provided correct for retrieving the names of all employees working in the 'HR' department?",
+        "questionType": "TRUE_FALSE",
+        "coefficient": 1,
+        "answers": ["TRUE"],
+        "paragraphToBeFilled": null,
+        "additionalContext": "```mermaid\nclassDiagram\n  class Employee {\n    +int id\n    +String name\n    +int department_id\n  }\n  class Department {\n    +int id\n    +String name\n  }\n  Employee --> Department\n```\n\n```sql\nSELECT name FROM Employee WHERE department_id = (SELECT id FROM Department WHERE name = 'HR');\n```\n",
+        "resultExplanation": "The query provided is correct. It uses a subquery to retrieve the department ID for 'HR' and then selects the names of employees who belong to that department.",
+        "questionNotes": [
+          "Note: Check if the subquery correctly retrieves the department ID for 'HR'.",
+          "Note: Verify if the main query correctly selects employee names based on the department ID."
+        ],
+        "choices":{},
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which SQL statement is used to retrieve data from a database?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The SELECT statement is used to retrieve data from a database in SQL. It allows you to specify the columns to retrieve, the table to query, and optional conditions to filter the results.",
+        "questionNotes": [],
+        "choices": {
+          "SELECT": true,
+          "INSERT": false,
+          "UPDATE": false,
+          "DELETE": false
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      },
+      {
+        "question": "Which SQL clause is used to filter records based on a specified condition?",
+        "questionType": "SINGLE_CHOICE",
+        "coefficient": 1,
+        "answers": null,
+        "paragraphToBeFilled": null,
+        "additionalContext": null,
+        "resultExplanation": "The WHERE clause is used to filter records based on a specified condition in SQL. It allows you to retrieve only the rows that meet the specified criteria.",
+        "questionNotes": [],
+        "choices": {
+          "GROUP BY": false,
+          "ORDER BY": false,
+          "HAVING": false,
+          "WHERE": true
+        },
+        "orderedOptions": {},
+        "optionMatches": {}
+      }
+    ]
+  }
 ]

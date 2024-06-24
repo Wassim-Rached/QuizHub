@@ -535,21 +535,6 @@
         }
       },
       {
-        "question": "Fill in the blanks in the following statement about the Factory Method and Abstract Factory patterns.",
-        "questionType": "FILL_IN_THE_BLANK",
-        "coefficient": 1,
-        "answers": [
-          "creational(|)creational(|)Abstract(|)Factory(|)single(|)families"
-        ],
-        "paragraphToBeFilled": "In software design, the {{blank}} patterns are {{blank}} patterns that provide an interface for creating {{blank}} objects. The {{blank}} Method pattern allows a method to create objects, while the {{blank}} Factory pattern creates {{blank}} of related or dependent objects.",
-        "additionalContext": null,
-        "resultExplanation": null,
-        "questionNotes": [],
-        "choices": {},
-        "orderedOptions": {},
-        "optionMatches": {}
-      },
-      {
         "question": "What design pattern is used to define a family of algorithms, encapsulate each one, and make them interchangeable?",
         "questionType": "SINGLE_CHOICE",
         "coefficient": 1,
@@ -568,7 +553,7 @@
         "optionMatches": {}
       },
       {
-        "question": "True or False: The Observer pattern is used to define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.",
+        "question": "The Observer pattern is used to define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.",
         "questionType": "TRUE_FALSE",
         "coefficient": 1,
         "answers": [
@@ -599,21 +584,6 @@
           "4": "Notify observers of state changes.",
           "5": "Update observers with new state."
         },
-        "optionMatches": {}
-      },
-      {
-        "question": "What is the role of the Adapter pattern in software design?",
-        "questionType": "SHORT_ANSWER",
-        "coefficient": 1,
-        "answers": [
-          "The Adapter pattern converts the interface of a class into another interface clients expect. It allows incompatible interfaces to work together."
-        ],
-        "paragraphToBeFilled": null,
-        "additionalContext": null,
-        "resultExplanation": "The Adapter pattern converts the interface of a class into another interface that clients expect. It allows classes with incompatible interfaces to work together, which otherwise would not be possible due to differing methods or structures.",
-        "questionNotes": [],
-        "choices": {},
-        "orderedOptions": {},
         "optionMatches": {}
       }
     ]
